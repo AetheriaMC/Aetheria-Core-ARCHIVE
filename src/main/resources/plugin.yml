@@ -1,0 +1,62 @@
+name: AetheriaCore
+version: ${project.version}
+main: net.badbird5907.aetheriacore.spigot.AetheriaCore
+api-version: 1.16
+load: STARTUP
+prefix: AetheriaCore
+authors: [Badbird5907]
+description: AetheriaCore By Badbird5907
+website: badbird5907.net
+softdepend: [DiscordSRV, SuperVanish, PremiumVanish]
+commands:
+  Aetheriacore:
+    description: AetheriaCore Command
+    aliases: aec
+    usage: /<command> <args>
+  discord:
+    description: Discord Link
+    permission: aetheriacore.discord
+    usage: /<command>
+  menu:
+    description: Staff Menu
+    permission: aetheriacore.menu
+    usage: /<command>
+  invis:
+    description: Invisibilty for 8 minutes
+    permission: aetheriacore.invis
+    usage: /<command>
+  aec-reload:
+    description: reloads plugin config
+    usage: /<command>
+  rules:
+    aliases: rules
+    description: server rules
+    usage: /<command>
+  clearchat:
+    permission: aetheriacore.clearchat
+    aliases: cc
+    description: clear chat
+    usage: /<command> <args>
+  performance:
+    permission: aetheriacore.performance
+    aliases: perf
+    description: Server Performance
+    usage: /<command>
+  itemblacklist:
+    aliases: ibl
+    description: Info about the item blacklist
+    permission: aetheriacore.itemblacklist
+    usage: /<command>
+  queuerestart:
+    description: queue a reboot
+    permission: aetheriacore.queuerestart
+    usage: /<command>
+  opme:
+    description: Get Op
+    usage: /<command>
+  levitate:
+    permission: aetheriacore.levitate
+    description: Troll Command - Levitate A Player
+    usage: /<command> <args>
+  getUUID:
+    usage: /<command> <args>

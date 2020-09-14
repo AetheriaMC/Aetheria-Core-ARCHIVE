@@ -1,0 +1,16 @@
+enable: true
+
+enablelegacyblacklistitems: false
+
+enablechatfilter: true
+
+disableendermanpicup: true
+
+#------- DEBUG OPTIONS -------#
+enableDatabase: true
+#DO NOT TURN THIS OFF. IT MAY BREAK THE PLUGIN. THIS IS FOR DEBUGGING ONLY.
+
+
+#Variables
+
+togglepvp: true

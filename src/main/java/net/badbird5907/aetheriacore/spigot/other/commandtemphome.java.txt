@@ -1,0 +1,39 @@
+package net.badbird5907.aetheriacore.spigot.commands;
+
+import net.badbird5907.aetheriacore.spigot.AetheriaCore;
+import org.bukkit.Location;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+public class commandtemphome implements CommandExecutor {
+
+    AetheriaCore plugin;
+    public commandtemphome(AetheriaCore plugin) {
+        this.plugin = plugin;
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (sender instanceof Player){
+            Player p = (Player) sender;
+
+
+            if(plugin.getConfig().getBoolean("enable")){
+                if(args.length == 1 && args[0].equalsIgnoreCase("set")){
+                    Location l = p.getLocation();
+                    plugin.getConfig().createSection("savedtemphomelocations." + p.getName());
+                    plugin.getConfig().set("savedtemphomelocations." + p.getName() + ".x", l.getX());
+                    plugin.getConfig().set("savedtemphomelocations." + p.getName() + ".y", l.getY());
+                    plugin.getConfig().set("savedtemphomelocations." + p.getName() + ".z", l.getZ());
+                    plugin.saveConfig();
+                }
+            }
+
+        }
+
+
+        return true;
+    }
+}

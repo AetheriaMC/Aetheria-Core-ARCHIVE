@@ -1,0 +1,4 @@
+name: AetheriaCore Bungee
+version: ${project.version}
+main: net.badbird5907.aetheriacore.bungee.AetheriaCoreBungee
+description: AetheriaCore Bungee Plugin
