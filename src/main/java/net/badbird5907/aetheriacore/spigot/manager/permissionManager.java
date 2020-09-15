@@ -16,6 +16,7 @@ public class permissionManager {
     public String flyothers = "aetheriacore.fly.others";
     public String CreateNpc = "aetheriacore.npc.create";
     public static String dupethis = "aetheriacore.dupethis";
+    public static String staffchat = "aetheriacore.staffchat";
 
     public static void permissionMessage(String perm){
         if(perm.contains("[usesender]")){
