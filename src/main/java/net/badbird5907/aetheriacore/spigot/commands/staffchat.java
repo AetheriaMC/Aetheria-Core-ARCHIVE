@@ -4,6 +4,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import javax.swing.text.Document;
+
 
 public class staffchat implements CommandExecutor {
 
