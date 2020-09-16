@@ -1,9 +1,9 @@
 package net.badbird5907.aetheriacore.spigot.commands;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
-import net.badbird5907.aetheriacore.spigot.manager.loggingManager;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 
+import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -18,25 +18,15 @@ public class clearchat implements CommandExecutor {
         this.plugin = plugin;
     }
 
-    loggingManager logger;
-    public clearchat(loggingManager logger) {
-        this.logger = logger;
-    }
-
-    permissionManager permM;
-    public clearchat(permissionManager permM) {
-        this.permM = permM;
-    }
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (sender instanceof Player) {
             if (command.getName().equalsIgnoreCase("clearchat")) {
                 if (args.length == 0) {
-                    if (sender.hasPermission("aetheriacore.clearchat")) {
+                    if (sender.hasPermission(permissionManager.ClearChat)) {
                         for (Player player : Bukkit.getOnlinePlayers()) {
-                            if (player.hasPermission("aetheriacore.bypass.clearchat")) {
+                            if (player.hasPermission(permissionManager.BypassClearChat)) {
                                 player.sendMessage(ChatColor.GREEN + "Chat was cleared but you are immune!");
                                 player.sendMessage(ChatColor.GREEN + sender.getName() + " Was the player who cleared the chat.");
                             } else {
@@ -47,18 +37,17 @@ public class clearchat implements CommandExecutor {
                                 player.sendMessage(ChatColor.GREEN + "Chat Was Cleared By" + ChatColor.RED + ChatColor.BOLD + player.getDisplayName() + ChatColor.GREEN + "!");
                                 player.sendMessage(ChatColor.BLUE + "" + ChatColor.BOLD + "-------------------------------------------------------");
                             }
-                            //clearchat
                         }
                     }
                     else{
-                        permM.permissionMessage("clearchat");
-                        logger.log(sender.getName() + " Was denied access to the command.");
+                        permissionManager.permissionMessage("clearchat");
+                        pluginManager.log(sender.getName() + " Was denied access to the command.");
                     }
                 }
                 else{
-                    if (sender.hasPermission("aetheriacore.clearchat")) {
+                    if (sender.hasPermission(permissionManager.ClearChat)) {
                         for (Player player : Bukkit.getOnlinePlayers()) {
-                            if (player.hasPermission("aetheriacore.bypass.clearchat")) {
+                            if (player.hasPermission(permissionManager.BypassClearChat)) {
                                 player.sendMessage(ChatColor.GREEN + "Chat was cleared but you are immune!");
                                 player.sendMessage(ChatColor.GREEN + sender.getName() + " Was the player who cleared the chat.");
                             } else {
@@ -79,7 +68,7 @@ public class clearchat implements CommandExecutor {
 
         } else {
             for (Player player : Bukkit.getOnlinePlayers()) {
-                if (player.hasPermission("aetheriacore.bypass.clearchat")) {
+                if (player.hasPermission(permissionManager.ClearChat)) {
                     player.sendMessage(ChatColor.GREEN + "Chat was cleared but you are immune!");
                 } else {
                     for (int x = 0; x < 300; x++) {

@@ -18,16 +18,6 @@ import java.util.List;
 import static org.bukkit.Bukkit.getServer;
 
 public class freezePlayer implements CommandExecutor{
-    permissionManager permM;
-    public freezePlayer(permissionManager permM) {
-        this.permM = permM;
-    }
-
-    pluginManager plM;
-    public freezePlayer(pluginManager plM) {
-        this.plM = plM;
-    }
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         List<String> frozen = new ArrayList<String>();
@@ -45,7 +35,7 @@ public class freezePlayer implements CommandExecutor{
                         sender.sendMessage(ChatColor.RED + "Player" + target.getDisplayName() + "is already frozen!");
                         return true;
                     } else {
-                        if(target.hasPermission("aetheriacore.bypass.freeze")){
+                        if(target.hasPermission(permissionManager.BypassFreeze)){
                             sender.sendMessage(ChatColor.RED + "Error: This player can't be frozen!");
                             return true;
                         }
@@ -63,7 +53,7 @@ public class freezePlayer implements CommandExecutor{
                 }
             }
         } else {
-            permM.permissionMessage("[usesender]freeze");
+            permissionManager.permissionMessage2("freeze");
         }
         return true;
     }

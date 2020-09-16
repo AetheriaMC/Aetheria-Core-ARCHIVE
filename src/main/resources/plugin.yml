@@ -60,7 +60,34 @@ commands:
   staffchat:
     aliases: sc
     usage: /<command>
-
+  permtest:
+    usage: /<command>
 permissions:
   aetheriacore.*:
     description: Access to all AetheriaCore commands
+  aetheriacore.clearchat:
+    description: Clear Chat
+  aetheriacore.staffchat:
+    description: Staff Chat
+  aetheriacore.gamemode.creative:
+    description: Creative Mode
+  aetheriacore.gamemode.survival:
+    description: Survival Mode
+  aetheriacore.gamemode.spectator:
+    description: Spectator Mode
+  aetheriacore.gamemode.adventure:
+    description: Adventure Mode
+  aetheriacore.god:
+    description: God Mode
+  aetheriacore.heal:
+    description: Heal Player
+  aetheriacore.fly:
+    description: Fly
+  aetheriacore.settings:
+    description: Server Settings
+  aetheriacore.discord:
+    description: Discord Link
+  aetheriacore.freeze:
+    description: Freeze Player
+  aetheriacore.bypass.freeze:
+    description: Bypass Freeze

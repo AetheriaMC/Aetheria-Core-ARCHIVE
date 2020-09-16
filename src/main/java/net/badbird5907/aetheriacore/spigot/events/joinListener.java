@@ -14,6 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class joinListener implements Listener {
+
     AetheriaCore plugin;
     public joinListener(AetheriaCore plugin) {
         this.plugin = plugin;
@@ -22,9 +23,11 @@ public class joinListener implements Listener {
     @EventHandler
     public void joinListener (PlayerJoinEvent event){
         Player player = event.getPlayer();
-        MongoClient mongoClient = MongoClients.create("mongodb+srv://AetheriaCorePlugin:AetheriaCorePlugin@aetheriacore-db1.jyi3w.gcp.mongodb.net/AetheriaCore-DB1?retryWrites=true&w=majority");
+        /*MongoClient mongoClient = MongoClients.create("mongodb+srv://AetheriaCorePlugin:AetheriaCorePlugin@aetheriacore-db1.jyi3w.gcp.mongodb.net/AetheriaCore-DB1?retryWrites=true&w=majority");
         MongoDatabase database = mongoClient.getDatabase("users");
         MongoCollection<Document> coll = database.getCollection(String.valueOf(player.getUniqueId()));
+         */
+
     }
 
 
