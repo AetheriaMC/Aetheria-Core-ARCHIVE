@@ -4,7 +4,7 @@ enablelegacyblacklistitems: false
 
 enablechatfilter: true
 
-disableendermanpicup: true
+disable-enderman-pickup: true
 
 #------- DEBUG OPTIONS -------#
 enableDatabase: true

@@ -1,7 +1,6 @@
 package net.badbird5907.aetheriacore.spigot.commands;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
-import net.badbird5907.aetheriacore.spigot.manager.importAll;
 import net.badbird5907.aetheriacore.spigot.manager.loggingManager;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 

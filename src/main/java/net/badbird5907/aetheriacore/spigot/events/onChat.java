@@ -1,13 +1,14 @@
 package net.badbird5907.aetheriacore.spigot.events;
 
+import net.badbird5907.aetheriacore.spigot.commands.staffchat;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
-import net.md_5.bungee.protocol.packet.Chat;
+import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
+import net.badbird5907.aetheriacore.spigot.commands.hush;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import net.badbird5907.aetheriacore.spigot.commands.staffchat;
 
 public class onChat implements Listener {
     public void ChatListener (AsyncPlayerChatEvent event){
@@ -15,7 +16,13 @@ public class onChat implements Listener {
             event.setCancelled(true);
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if(player.hasPermission(permissionManager.staffchat)){
-                    player.sendMessage(ChatColor.GOLD + "StaffChat" + ChatColor.DARK_GRAY + " » " + ChatColor.RESET + event.getPlayer().getDisplayName() + ": " + event.getMessage());
+                    if(hush.hush.contains(player.getName())){
+                        break;
+                    }
+                    else{
+                        player.sendMessage(ChatColor.GOLD + "StaffChat" + ChatColor.DARK_GRAY + " » " + ChatColor.RESET + event.getPlayer().getDisplayName() + ": " + event.getMessage());
+                        pluginManager.log("StaffChat » " + event.getPlayer().getDisplayName() + ": " + event.getMessage());
+                    }
                 }
                 else {
                     break;

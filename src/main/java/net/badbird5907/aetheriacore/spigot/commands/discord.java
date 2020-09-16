@@ -11,26 +11,20 @@ import org.bukkit.command.CommandSender;
 public class discord implements CommandExecutor {
 
     AetheriaCore plugin;
-
     public discord(AetheriaCore plugin) {
         this.plugin = plugin;
-    }
-
-    permissionManager permM;
-    public discord(permissionManager permM) {
-        this.permM = permM;
     }
 
     //method called on /discord
     @Override
     public boolean onCommand(CommandSender player, Command command, String label, String[] args) {
-        if(player.hasPermission("aetheriacore.discord")){
+        if(player.hasPermission(permissionManager.discord)){
             player.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "Join Our Discord For Announcements");
             player.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "On Game Updates And Giveaways!");
             player.sendMessage(ChatColor.BLUE + "https://discord.gg/TFbnNvy" /*+ plugin.getConfig().get()*/ );
         }
         else{
-            permM.permissionMessage("discord");
+            permissionManager.permissionMessage("discord");
         }
         return true;
     }

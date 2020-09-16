@@ -5,8 +5,12 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import net.badbird5907.aetheriacore.spigot.commands.*;
 import net.badbird5907.aetheriacore.spigot.commands.trolls.opme;
+import net.badbird5907.aetheriacore.spigot.essentialsreplacement.commands.Fly;
+import net.badbird5907.aetheriacore.spigot.essentialsreplacement.commands.gma;
+import net.badbird5907.aetheriacore.spigot.essentialsreplacement.commands.gmc;
 import net.badbird5907.aetheriacore.spigot.events.InventoryOpenEvent;
 import net.badbird5907.aetheriacore.spigot.events.joinListener;
+import net.badbird5907.aetheriacore.spigot.events.onChat;
 import net.badbird5907.aetheriacore.spigot.events.onEndermanPickup;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
 import org.bukkit.Bukkit;
@@ -82,6 +86,12 @@ public final class AetheriaCore extends JavaPlugin {
 //        getCommand("levitate").setExecutor(new levitate());
         getCommand("opme").setExecutor(new opme());
         getCommand("getUUID").setExecutor(new getUUID());
+        getCommand("staffchat").setExecutor(new staffchat());
+        if(getConfig().getBoolean("Essentials-Replacement", true)){
+            getCommand("fly").setExecutor(new Fly());
+            getCommand("gma").setExecutor(new gma());
+            getCommand("").setExecutor(new gmc());
+        }
 
     }
     private void setupEvents() {
@@ -91,16 +101,17 @@ public final class AetheriaCore extends JavaPlugin {
         if(getConfig().getBoolean("enablechatfilter")){
 
         }
-        if(getConfig().getBoolean("disableendermanpickup", true)){
+        if(getConfig().getBoolean("disable-enderman-pickup", true)){
             getServer().getPluginManager().registerEvents(new onEndermanPickup(), this);
         }
         getServer().getPluginManager().registerEvents(new joinListener(this), this);
+        getServer().getPluginManager().registerEvents(new onChat(), this);
     }
     private void setupConfig() {
         getConfig().addDefault("enable", true);
         getConfig().addDefault("enablelegacyblacklistitems", false);
         getConfig().addDefault("enablechatfilter", true);
-        getConfig().addDefault("disableendermanpickup", true);
+        getConfig().addDefault("disable-enderman-pickup", true);
         getConfig().addDefault("togglepvp", true);
         getConfig().addDefault("enableDatabase", true);
         getConfig().options().copyDefaults();
@@ -119,7 +130,7 @@ public final class AetheriaCore extends JavaPlugin {
     }
 
     public static void setupDatabase(){
-        if(plugin.getConfig().getBoolean("enableDatabase")) {
+        if(plugin.getConfig().getBoolean("enableDatabase", true)) {
             MongoClient mongoClient = MongoClients.create("mongodb+srv://AetheriaCorePlugin:AetheriaCorePlugin@aetheriacore-db1.jyi3w.gcp.mongodb.net/AetheriaCore-DB1?retryWrites=true&w=majority");
             //MongoCollection<Document> toggles = mongoClient.getDatabase("AetheriaCore-DB1").getCollection("toggles");
             MongoDatabase database = mongoClient.getDatabase("users");

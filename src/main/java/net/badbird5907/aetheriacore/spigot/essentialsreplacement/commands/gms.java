@@ -30,7 +30,7 @@ public class gms implements CommandExecutor {
             }
         }
         else{
-            player.sendMessage(ChatColor.RED + "You don't have the required permission node 'aetheriacore.gamemode.survival' to execute this command.");
+            permissionManager.permissionMessage2("gamemode.survival");
         }
         return true;
     }

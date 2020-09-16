@@ -11,11 +11,6 @@ import org.bukkit.entity.Player;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 
 public class gmc implements CommandExecutor {
-    permissionManager permM;
-    public gmc(permissionManager permM) {
-        this.permM = permM;
-    }
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player) sender;
@@ -35,7 +30,7 @@ public class gmc implements CommandExecutor {
             }
         }
         else{
-            permM.permissionMessage2("gmc");
+            permissionManager.permissionMessage2("gmc");
         }
         return true;
     }

@@ -11,10 +11,6 @@ import org.bukkit.entity.Player;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 
 public class gmsp implements CommandExecutor {
-    permissionManager permM;
-    public gmsp(permissionManager permM) {
-        this.permM = permM;
-    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -35,7 +31,7 @@ public class gmsp implements CommandExecutor {
             }
         }
         else{
-            permM.permissionMessage("gamemode.spectator");
+            permissionManager.permissionMessage2("gamemode.spectator");
         }
         return true;
     }

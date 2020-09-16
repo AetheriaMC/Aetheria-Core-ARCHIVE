@@ -6,12 +6,13 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 
 public class god implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player) sender;
-        if (sender.hasPermission("aetheriacore.god")){
+        if (sender.hasPermission(permissionManager.god)){
             Player target = Bukkit.getPlayerExact(args[0]);
             if(args.length == 0){
                 if (player.isInvulnerable()){
@@ -35,7 +36,8 @@ public class god implements CommandExecutor {
             }
         }
         else{
-            player.sendMessage(ChatColor.RED + "You don't have the required permission node 'aetheriacore.god' to execute this command.");
+            permissionManager.permissionMessage2("god");
+
         }
         return true;
     }

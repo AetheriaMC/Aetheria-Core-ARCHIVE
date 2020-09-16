@@ -1,5 +1,6 @@
 package net.badbird5907.aetheriacore.spigot.essentialsreplacement.commands;
 
+import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -11,18 +12,12 @@ import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 
 
 public class Fly implements CommandExecutor {
-
-    permissionManager permM;
-    public Fly(permissionManager permM) {
-        this.permM = permM;
-    }
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player) sender;
         if(args[0].isEmpty()){
             Player target = Bukkit.getPlayerExact(args[0]);
-            if (sender.hasPermission(new permissionManager().fly)){
+            if (sender.hasPermission(permissionManager.fly)){
                 if(player.isFlying() == false){
                     player.setFlying(true);
                     player.sendMessage(ChatColor.GOLD + "Flight: Enabled");
@@ -33,7 +28,7 @@ public class Fly implements CommandExecutor {
                 }
             }
             else{
-                permM.permissionMessage("[usesender]fly");
+                permissionManager.permissionMessage2("fly");
             }
             if(sender.hasPermission(new permissionManager().flyothers)) {
                 if(target instanceof Player){
@@ -44,7 +39,7 @@ public class Fly implements CommandExecutor {
                 }
             }
             else{
-                permM.permissionMessage2("fly.others");
+                permissionManager.permissionMessage2("fly.others");
             }
         }
         return true;

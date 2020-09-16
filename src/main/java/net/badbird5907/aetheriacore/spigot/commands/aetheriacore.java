@@ -63,7 +63,7 @@ public class aetheriacore implements CommandExecutor {
             }
 
             if(args[0].equalsIgnoreCase("settings")){
-                if(player.hasPermission(new permissionManager().settings)){
+                if(player.hasPermission(permissionManager.settings)){
 
                 }
 

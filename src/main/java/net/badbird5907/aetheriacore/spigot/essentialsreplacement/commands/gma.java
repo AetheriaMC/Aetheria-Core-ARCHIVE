@@ -13,11 +13,6 @@ import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 
 public class gma implements CommandExecutor {
 
-    permissionManager permM;
-    public gma(permissionManager permM) {
-        this.permM = permM;
-    }
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player) sender;
@@ -37,7 +32,7 @@ public class gma implements CommandExecutor {
         }
         else{
             player.sendMessage(ChatColor.RED + "You don't have the required permission node 'aetheriacore.gamemode.adventure' to execute this command.");
-            permM.permissionMessage2("gamemode.spectator");
+            permissionManager.permissionMessage2("gamemode.spectator");
         }
         return true;
     }

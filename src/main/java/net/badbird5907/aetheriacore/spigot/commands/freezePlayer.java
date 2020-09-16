@@ -33,7 +33,7 @@ public class freezePlayer implements CommandExecutor{
         List<String> frozen = new ArrayList<String>();
         Player player = (Player) sender;
 
-        if (sender.hasPermission(new permissionManager().freeze)) {
+        if (sender.hasPermission(permissionManager.freeze)) {
             Player target = Bukkit.getPlayerExact(args[0]);
 
             if (args[0].length() == 0) {

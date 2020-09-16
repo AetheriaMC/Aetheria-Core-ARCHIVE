@@ -10,7 +10,7 @@ import java.util.List;
 
 
 public class staffchat implements CommandExecutor {
-    public  static List <String> staffchatToggle = new ArrayList<String>();
+    public static List <String> staffchatToggle = new ArrayList<String>();
 
     @Override
     public boolean onCommand(CommandSender player, Command command, String label, String[] args) {

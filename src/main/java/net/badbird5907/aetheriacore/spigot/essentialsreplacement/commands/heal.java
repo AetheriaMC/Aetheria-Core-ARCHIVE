@@ -7,12 +7,13 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 
 public class heal implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player) sender;
-        if (sender.hasPermission("aetheriacore.heal")){
+        if (sender.hasPermission(permissionManager.heal)){
             Player target = Bukkit.getPlayerExact(args[0]);
             if(args.length == 0){
                 player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue());
@@ -29,7 +30,7 @@ public class heal implements CommandExecutor {
             }
         }
         else{
-            player.sendMessage(ChatColor.RED + "You don't have the required permission node 'aetheriacore.heal' to execute this command.");
+            permissionManager.permissionMessage2("heal");
         }
         return true;
     }
