@@ -12,7 +12,7 @@ commands:
   Aetheriacore:
     description: AetheriaCore Command
     aliases: aec
-    usage: /<command> <args>
+    usage: /<command> requiredParam
   discord:
     description: Discord Link
     permission: aetheriacore.discord
@@ -60,3 +60,7 @@ commands:
   staffchat:
     aliases: sc
     usage: /<command>
+
+permissions:
+  aetheriacore.*:
+    description: Access to all AetheriaCore commands

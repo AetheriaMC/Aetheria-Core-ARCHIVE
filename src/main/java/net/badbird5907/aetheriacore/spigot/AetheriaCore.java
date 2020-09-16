@@ -5,27 +5,18 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import net.badbird5907.aetheriacore.spigot.commands.*;
 import net.badbird5907.aetheriacore.spigot.commands.trolls.opme;
-import net.badbird5907.aetheriacore.spigot.essentialsreplacement.commands.Fly;
-import net.badbird5907.aetheriacore.spigot.essentialsreplacement.commands.gma;
-import net.badbird5907.aetheriacore.spigot.essentialsreplacement.commands.gmc;
 import net.badbird5907.aetheriacore.spigot.events.InventoryOpenEvent;
 import net.badbird5907.aetheriacore.spigot.events.joinListener;
 import net.badbird5907.aetheriacore.spigot.events.onChat;
 import net.badbird5907.aetheriacore.spigot.events.onEndermanPickup;
-import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.io.File;
 
 public final class AetheriaCore extends JavaPlugin {
 
     public double togglepvp;
-
 
     private static AetheriaCore plugin;
 
