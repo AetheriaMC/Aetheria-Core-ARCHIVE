@@ -39,6 +39,7 @@ public class aetheriacore implements CommandExecutor {
                 player.sendMessage(ChatColor.GOLD + "/AetheriaCore debug | Debug Info");
                 player.sendMessage(ChatColor.GOLD + "/discord | Shows Discord Link");
                 player.sendMessage(ChatColor.GOLD + "/rules | Shows Server Rules");
+                player.sendMessage(ChatColor.GOLD + "/getUUID | Get player UUID");
                 if(player.hasPermission("aetheriacore.liststaffcommands")){
                     player.sendMessage(ChatColor.GREEN + "Staff Commands:");
                     player.sendMessage(ChatColor.GOLD + "/itemblacklist or /ibl | Shows the Item Blacklist");
@@ -46,6 +47,17 @@ public class aetheriacore implements CommandExecutor {
                     player.sendMessage(ChatColor.GOLD + "" + ChatColor.STRIKETHROUGH + "/queuerestart | Staff Only | Queue A Server Restart");
                     player.sendMessage(ChatColor.GOLD + "/invis | Staff Only | Gives invisibility for 6 minutes NOT VANISH");
                     player.sendMessage(ChatColor.GOLD + "/performance or /perf | Staff Only | Server Performance");
+                    player.sendMessage(ChatColor.GOLD + "/staffchat or /sc | Staff Only | Staff Chat");
+                    if(plugin.getConfig().getBoolean("Essentials-Replacement", true)){
+                        player.sendMessage(ChatColor.GOLD + "/Fly | Fly");
+                        player.sendMessage(ChatColor.GOLD + "/GMC | Creative Mode");
+                        player.sendMessage(ChatColor.GOLD + "/GMS | Survival Mode");
+                        player.sendMessage(ChatColor.GOLD + "/GMSP | Spectator Mode");
+                        player.sendMessage(ChatColor.GOLD + "/GMA | Adventure Mode");
+                        player.sendMessage(ChatColor.GOLD + "/god | Be invincible");
+                        player.sendMessage(ChatColor.GOLD + "/heal | Heal to full HP");
+                    }
+                    player.sendMessage(ChatColor.GOLD + "" + ChatColor.STRIKETHROUGH + "/DupeThis | Duplicate Item");
                 }
                 else{
                     player.sendMessage(ChatColor.BLUE + "Staff commands are not shown because you are missing the permission node:");

@@ -6,6 +6,8 @@ enablechatfilter: true
 
 disable-enderman-pickup: true
 
+Essentials-Replacement: true
+
 #------- DEBUG OPTIONS -------#
 enableDatabase: true
 #DO NOT TURN THIS OFF. IT MAY BREAK THE PLUGIN. THIS IS FOR DEBUGGING ONLY.

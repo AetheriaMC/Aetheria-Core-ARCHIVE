@@ -8,15 +8,15 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class StaffChatMessage{
-    public static void sendmessage(String string){
+    public static void sendmessage(String sender, String message){
         for (Player player : Bukkit.getOnlinePlayers()) {
             if(player.hasPermission(permissionManager.staffchat)){
                 if(hush.hush.contains(player.getName())){
                     break;
                 }
                 else{
-                    player.sendMessage(ChatColor.GOLD + "StaffChat" + ChatColor.DARK_GRAY + " » " + ChatColor.RESET + "Alert: " + string);
-                    pluginManager.log("StaffChat » " + "Alert: " + string);
+                    player.sendMessage(ChatColor.GOLD + "StaffChat" + ChatColor.DARK_GRAY + " » " + ChatColor.RESET + sender +": " + message);
+                    pluginManager.log("StaffChat » " + sender + ": " + message);
                 }
             }
             else {

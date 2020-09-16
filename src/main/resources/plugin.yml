@@ -60,3 +60,6 @@ commands:
     usage: /<command> <args>
   getUUID:
     usage: /<command> <args>
+  staffchat:
+    aliases: sc
+    usage: /<command>
