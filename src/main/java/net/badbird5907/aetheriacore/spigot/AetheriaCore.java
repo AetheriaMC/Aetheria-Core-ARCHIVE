@@ -92,11 +92,14 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("opme").setExecutor(new opme());
         getCommand("getUUID").setExecutor(new getUUID());
         getCommand("staffchat").setExecutor(new staffchat());
-        if(getConfig().getBoolean("Essentials-Replacement", true)){
+/*        if(getConfig().getBoolean("Essentials-Replacement", true)){
             getCommand("fly").setExecutor(new Fly());
             getCommand("gma").setExecutor(new gma());
             getCommand("").setExecutor(new gmc());
+
+
         }
+        */
 
     }
     private void setupEvents() {
@@ -147,7 +150,7 @@ public final class AetheriaCore extends JavaPlugin {
     }
     public void DB(){
         this.plugin = plugin;
-        if (plugin.getConfig().getBoolean("enableDatabase", false)) {
+        if (!plugin.getConfig().getBoolean("enableDatabase", true)) {
             warn("'enableDatabase' is disabled in config. Plugin will not work correctly.");
         } else {
             MongoClient mongoClient = MongoClients.create("mongodb+srv://" + getConfig().getString("Database-Username") + ":" + getConfig().getString("Database-Password") + "@aetheriacore-db1.jyi3w.gcp.mongodb.net/AetheriaCore-DB1?retryWrites=true&w=majority");

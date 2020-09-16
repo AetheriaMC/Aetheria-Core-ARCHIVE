@@ -84,6 +84,7 @@ public class aetheriacore implements CommandExecutor {
             if(args[0].equalsIgnoreCase("reload")){
                 try{
                     plugin.reloadConfig();
+                    player.sendMessage(ChatColor.GREEN + "Config Reloaded!");
                 } catch (Exception e) {
                     e.printStackTrace();
                     player.sendMessage(ChatColor.RED + "ERROR: See console for more details");
