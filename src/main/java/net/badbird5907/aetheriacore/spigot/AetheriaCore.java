@@ -158,7 +158,7 @@ public final class AetheriaCore extends JavaPlugin {
             //MongoCollection<Document> toggles = mongoClient.getDatabase("AetheriaCore-DB1").getCollection("toggles");
             MongoDatabase database = mongoClient.getDatabase("users");
 
-        }//
+        }
     }
 
 }
