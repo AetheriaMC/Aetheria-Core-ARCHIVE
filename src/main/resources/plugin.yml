@@ -25,9 +25,6 @@ commands:
     description: Invisibilty for 8 minutes
     permission: aetheriacore.invis
     usage: /<command>
-  aec-reload:
-    description: reloads plugin config
-    usage: /<command>
   rules:
     aliases: rules
     description: server rules

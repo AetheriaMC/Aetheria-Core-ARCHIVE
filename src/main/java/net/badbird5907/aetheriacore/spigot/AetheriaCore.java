@@ -150,9 +150,10 @@ public final class AetheriaCore extends JavaPlugin {
     }
     public void DB(){
         this.plugin = plugin;
-        if (!plugin.getConfig().getBoolean("enableDatabase", true)) {
+        if (plugin.getConfig().getBoolean("enableDatabase", false)) {
             warn("'enableDatabase' is disabled in config. Plugin will not work correctly.");
-        } else {
+        }
+        else {
             MongoClient mongoClient = MongoClients.create("mongodb+srv://" + getConfig().getString("Database-Username") + ":" + getConfig().getString("Database-Password") + "@aetheriacore-db1.jyi3w.gcp.mongodb.net/AetheriaCore-DB1?retryWrites=true&w=majority");
             //MongoCollection<Document> toggles = mongoClient.getDatabase("AetheriaCore-DB1").getCollection("toggles");
             MongoDatabase database = mongoClient.getDatabase("users");
