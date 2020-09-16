@@ -8,6 +8,11 @@ disable-enderman-pickup: true
 
 Essentials-Replacement: true
 
+#Default Database. Don't Change
+Database-Username: AetheriaCorePlugin
+
+Database-Password: AetheriaCorePlugin
+
 #------- DEBUG OPTIONS -------#
 enableDatabase: true
 #DO NOT TURN THIS OFF. IT MAY BREAK THE PLUGIN. THIS IS FOR DEBUGGING ONLY.

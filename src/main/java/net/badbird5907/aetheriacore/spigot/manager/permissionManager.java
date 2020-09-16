@@ -18,6 +18,7 @@ public class permissionManager {
     public static String dupethis = "aetheriacore.dupethis";
     public static String staffchat = "aetheriacore.staffchat";
     public static String hush = "aetheriacore.staffchat.hush";
+    public static String StaffMode = "aetheriacore.staffmode";
 
     public static void permissionMessage(String perm){
         if(perm.contains("[usesender]")){

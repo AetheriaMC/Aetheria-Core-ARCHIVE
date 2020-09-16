@@ -7,10 +7,12 @@ import net.badbird5907.aetheriacore.spigot.commands.hush;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class onChat implements Listener {
+    @EventHandler
     public void ChatListener (AsyncPlayerChatEvent event){
         if(staffchat.staffchatToggle.contains(event.getPlayer().getName())){
             event.setCancelled(true);

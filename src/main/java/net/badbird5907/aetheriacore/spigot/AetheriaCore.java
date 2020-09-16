@@ -12,10 +12,15 @@ import net.badbird5907.aetheriacore.spigot.events.InventoryOpenEvent;
 import net.badbird5907.aetheriacore.spigot.events.joinListener;
 import net.badbird5907.aetheriacore.spigot.events.onChat;
 import net.badbird5907.aetheriacore.spigot.events.onEndermanPickup;
+import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
 
 public final class AetheriaCore extends JavaPlugin {
 
@@ -49,7 +54,7 @@ public final class AetheriaCore extends JavaPlugin {
 
             //load mongodb
             log("Connecting to mongodb database...");
-            setupDatabase();
+            DB();
             log("Connected! Expect some logs below");
             log("Configuring Database...");
             //Document document1 = new Document("test", "pickle").append("test", "test123");
@@ -114,12 +119,13 @@ public final class AetheriaCore extends JavaPlugin {
         getConfig().addDefault("disable-enderman-pickup", true);
         getConfig().addDefault("togglepvp", true);
         getConfig().addDefault("enableDatabase", true);
+        getConfig().addDefault("Database-Username", ""); //AetheriaCorePlugin
+        getConfig().addDefault("Database-Password", ""); //AetheriaCorePlugin
         getConfig().options().copyDefaults();
         saveDefaultConfig();
+        //FileConfiguration data = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "vars.yml"));
+
     }
-
-
-
 
     private void log(final String string) {
         Bukkit.getLogger().info(string);
@@ -129,16 +135,6 @@ public final class AetheriaCore extends JavaPlugin {
         Bukkit.getLogger().warning(string);
     }
 
-    public static void setupDatabase(){
-        if(plugin.getConfig().getBoolean("enableDatabase", true)) {
-            MongoClient mongoClient = MongoClients.create("mongodb+srv://AetheriaCorePlugin:AetheriaCorePlugin@aetheriacore-db1.jyi3w.gcp.mongodb.net/AetheriaCore-DB1?retryWrites=true&w=majority");
-            //MongoCollection<Document> toggles = mongoClient.getDatabase("AetheriaCore-DB1").getCollection("toggles");
-            MongoDatabase database = mongoClient.getDatabase("users");
-        }
-        else{
-            plugin.warn("'enableDatabase' is disabled in config. Plugin will not work correctly.");
-        }
-    }
     private void setupDependencies(){
         if (Bukkit.getPluginManager().isPluginEnabled("SuperVanish")) {
             log("SuperVanish Detected! Hooking into it.");
@@ -148,6 +144,17 @@ public final class AetheriaCore extends JavaPlugin {
 
         }
 
+    }
+    public void DB(){
+        this.plugin = plugin;
+        if (plugin.getConfig().getBoolean("enableDatabase", false)) {
+            warn("'enableDatabase' is disabled in config. Plugin will not work correctly.");
+        } else {
+            MongoClient mongoClient = MongoClients.create("mongodb+srv://" + getConfig().getString("Database-Username") + ":" + getConfig().getString("Database-Password") + "@aetheriacore-db1.jyi3w.gcp.mongodb.net/AetheriaCore-DB1?retryWrites=true&w=majority");
+            //MongoCollection<Document> toggles = mongoClient.getDatabase("AetheriaCore-DB1").getCollection("toggles");
+            MongoDatabase database = mongoClient.getDatabase("users");
+
+        }
     }
 
 }

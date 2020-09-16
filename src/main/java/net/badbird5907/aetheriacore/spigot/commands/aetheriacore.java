@@ -56,6 +56,7 @@ public class aetheriacore implements CommandExecutor {
                         player.sendMessage(ChatColor.GOLD + "/GMA | Adventure Mode");
                         player.sendMessage(ChatColor.GOLD + "/god | Be invincible");
                         player.sendMessage(ChatColor.GOLD + "/heal | Heal to full HP");
+                        player.sendMessage(ChatColor.GOLD + "/aec reload | Reload Config");
                     }
                     player.sendMessage(ChatColor.GOLD + "" + ChatColor.STRIKETHROUGH + "/DupeThis | Duplicate Item");
                 }
@@ -77,6 +78,15 @@ public class aetheriacore implements CommandExecutor {
             if(args[0].equalsIgnoreCase("settings")){
                 if(player.hasPermission(permissionManager.settings)){
 
+                }
+
+            }
+            if(args[0].equalsIgnoreCase("reload")){
+                try{
+                    plugin.reloadConfig();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    player.sendMessage(ChatColor.RED + "ERROR: See console for more details");
                 }
 
             }
