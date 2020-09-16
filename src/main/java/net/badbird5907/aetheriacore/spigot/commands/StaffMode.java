@@ -16,6 +16,8 @@ public class StaffMode implements CommandExecutor {
     public boolean onCommand(CommandSender player, Command command, String label, String[] args) {
         if(player.hasPermission(permissionManager.StaffMode)){
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "vanish " + player.getName());
+            staffchat.staffchatToggle.add(player.getName());
+            hush.hush.remove(player.getName());
         }
         return true;
     }
