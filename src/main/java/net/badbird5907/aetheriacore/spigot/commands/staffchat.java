@@ -18,12 +18,12 @@ public class staffchat implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender player, Command command, String label, String[] args) {
         if(!(player instanceof Player)){
-            player.sendMessage(ChatColor.RED + "You must be a player to toggle this. use /qc <text> instead.");
+            player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.GOLD + "AEC" + ChatColor.DARK_GRAY + "] " + ChatColor.RED + "You must be a player to toggle this. use /qc <text> instead.");
         }
         if(player.hasPermission(permissionManager.staffchat)){
             if(staffchatToggle.contains(player.getName())){
                 if(!StaffMode.StaffModeToggle.contains(player.getName())){
-                    player.sendMessage(ChatColor.GREEN + "StaffChat Turned Off");
+                    player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.GOLD + "AEC" + ChatColor.DARK_GRAY + "] " + ChatColor.GREEN + "StaffChat Turned Off");
                     staffchatToggle.remove(player.getName());
                 }
                 else{
@@ -32,7 +32,7 @@ public class staffchat implements CommandExecutor {
 
             }
             else{
-                player.sendMessage(ChatColor.GREEN + "StaffChat Turned On");
+                player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.GOLD + "AEC" + ChatColor.DARK_GRAY + "] " + ChatColor.GREEN + "StaffChat Turned On");
                 staffchatToggle.add(player.getName());
             }
         }

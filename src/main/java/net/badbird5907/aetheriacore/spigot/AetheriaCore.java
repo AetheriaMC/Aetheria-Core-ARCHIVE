@@ -93,6 +93,7 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("staffchat").setExecutor(new staffchat());
         getCommand("staffmode").setExecutor(new StaffMode());
         getCommand("hush").setExecutor(new hush());
+        getCommand("QuickChat").setExecutor(new QuickChat());
 /*        if(getConfig().getBoolean("Essentials-Replacement", true)){
             getCommand("fly").setExecutor(new Fly());
             getCommand("gma").setExecutor(new gma());
