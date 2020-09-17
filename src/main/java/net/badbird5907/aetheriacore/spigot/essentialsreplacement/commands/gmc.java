@@ -16,7 +16,7 @@ public class gmc implements CommandExecutor {
         Player player = (Player) sender;
         if (sender.hasPermission(permissionManager.gmc)){
             Player target = Bukkit.getPlayerExact(args[0]);
-            if(args[0].isEmpty()){
+            if(args.length == 0){
                 player.setGameMode(GameMode.CREATIVE);
             }
             else{

@@ -15,7 +15,7 @@ public class Fly implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player) sender;
-        if(args[0].isEmpty()){
+        if(args.length == 0){
             Player target = Bukkit.getPlayerExact(args[0]);
             if (sender.hasPermission(permissionManager.fly)){
                 if(player.isFlying() == false){
