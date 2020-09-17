@@ -62,6 +62,13 @@ commands:
     usage: /<command>
   permtest:
     usage: /<command>
+  staffmode:
+    usage: /<command>
+    aliases: sm
+    description: Staff Mode
+  hush:
+    usage: /<command>
+    description: Turn Off Staff Chat
 permissions:
   aetheriacore.*:
     description: Access to all AetheriaCore commands

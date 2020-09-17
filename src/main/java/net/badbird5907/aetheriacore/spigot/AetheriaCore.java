@@ -6,10 +6,7 @@ import com.mongodb.client.MongoDatabase;
 import net.badbird5907.aetheriacore.spigot.commands.*;
 import net.badbird5907.aetheriacore.spigot.commands.trolls.levitate;
 import net.badbird5907.aetheriacore.spigot.commands.trolls.opme;
-import net.badbird5907.aetheriacore.spigot.events.InventoryOpenEvent;
-import net.badbird5907.aetheriacore.spigot.events.joinListener;
-import net.badbird5907.aetheriacore.spigot.events.onChat;
-import net.badbird5907.aetheriacore.spigot.events.onEndermanPickup;
+import net.badbird5907.aetheriacore.spigot.events.*;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -57,6 +54,10 @@ public final class AetheriaCore extends JavaPlugin {
                 warn("MongoDB is set to off in config. Plugin may not work correctly.");
             }
 
+            //log("Setting Up Dependencys");
+            //setupDependencies();
+            //log("done!");
+
             //finished startup
             warn("Startup Finished!");
             log("INFO: do /AEC-debug for plugin info");
@@ -90,6 +91,8 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("opme").setExecutor(new opme());
         getCommand("getUUID").setExecutor(new getUUID());
         getCommand("staffchat").setExecutor(new staffchat());
+        getCommand("staffmode").setExecutor(new StaffMode());
+        getCommand("hush").setExecutor(new hush());
 /*        if(getConfig().getBoolean("Essentials-Replacement", true)){
             getCommand("fly").setExecutor(new Fly());
             getCommand("gma").setExecutor(new gma());
@@ -114,6 +117,7 @@ public final class AetheriaCore extends JavaPlugin {
         }
         getServer().getPluginManager().registerEvents(new joinListener(this), this);
         getServer().getPluginManager().registerEvents(new onChat(), this);
+        getServer().getPluginManager().registerEvents(new OnVanish(), this);
     }
 
     private void setupConfig() {
@@ -142,6 +146,9 @@ public final class AetheriaCore extends JavaPlugin {
     private void setupDependencies() {
         if (Bukkit.getPluginManager().isPluginEnabled("SuperVanish")) {
             log("SuperVanish Detected! Hooking into it.");
+        }
+        else{
+            warn("AAAAAA SUPERVANISH DOSENT WORK");
         }
         if (Bukkit.getPluginManager().isPluginEnabled("PremiumVanish")) {
             log("PremiumVanish Detected! Hooking into it.");

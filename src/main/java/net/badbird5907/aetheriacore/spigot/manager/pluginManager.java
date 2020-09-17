@@ -7,6 +7,7 @@ import java.util.List;
 
 public class pluginManager {
     public static List<String> OnlinePlayers = new ArrayList<String>();
+    public static List<String> VanishedPlayers = new ArrayList<String>();
     public static void log(String string){
         Bukkit.getLogger().info(string);
     }

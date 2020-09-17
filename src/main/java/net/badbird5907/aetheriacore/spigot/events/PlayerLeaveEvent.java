@@ -21,6 +21,7 @@ public class PlayerLeaveEvent implements Listener {
             pluginManager.OnlinePlayers.remove(player.getName());
         }
         else{
+
             pluginManager.warn("Array List \"OnlinePlayers\" does not contain " + player.getDisplayName() + "did the server reload?");
         }
     }

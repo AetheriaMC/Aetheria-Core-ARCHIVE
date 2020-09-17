@@ -7,6 +7,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import java.lang.management.ManagementFactory;
+
 public class performance implements CommandExecutor {
     Runtime r = Runtime.getRuntime();
     long memUsed = (r.totalMemory() - r.freeMemory()) / 1048576;
@@ -15,9 +17,9 @@ public class performance implements CommandExecutor {
         if(player.hasPermission("aetheriacore.performance")){
             player.sendMessage(ChatColor.GREEN + "Server: " + Bukkit.getServer().getName());
             player.sendMessage(ChatColor.GOLD + "Tps: " + Lag.getTPS());
-            player.sendMessage(ChatColor.GOLD + "Cpu Usage: " + "NOT CURRENTLY SUPPORTED");
+            player.sendMessage(ChatColor.GOLD + "Cpu Usage: " + ManagementFactory.getOperatingSystemMXBean().getSystemLoadAverage() + "(idk its broken)");
             player.sendMessage(ChatColor.GOLD + "RAM Usage: " + memUsed + "/" + r.totalMemory() / 1048576);
-            player.sendMessage(ChatColor.GOLD + "Players: " + Bukkit.getServer().getOnlinePlayers());
+            player.sendMessage(ChatColor.GOLD + "Players: " + Bukkit.getOnlinePlayers().size());
             player.sendMessage(ChatColor.GREEN + "NOTE: If the tps (" + Lag.getTPS() + ") is over 20, round it down to 20");
         }
         else{
