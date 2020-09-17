@@ -7,6 +7,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionType;
 
 
 import static org.bukkit.Bukkit.getServer;
@@ -20,12 +23,12 @@ public class levitate implements CommandExecutor {
         if (sender.hasPermission("aetheriacore.levitate")){
             Player target = Bukkit.getPlayerExact(args[0]);
 
-            if(args[0].length() == 0){
+            if(args.length == 0){
                 sender.sendMessage(ChatColor.RED + "Usage: /levitate <Player>");
             }
             else{
                 if(target instanceof Player){
-                    Bukkit.dispatchCommand(console, "effect give " + target.getDisplayName() + " minecraft:levitation 999999 127");
+                    target.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 2147483647, 1));
                 }
                 else{
                     sender.sendMessage(ChatColor.RED + "Error: " + target.getDisplayName() + " Is Not A Player!");

@@ -4,6 +4,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import net.badbird5907.aetheriacore.spigot.commands.*;
+import net.badbird5907.aetheriacore.spigot.commands.trolls.levitate;
 import net.badbird5907.aetheriacore.spigot.commands.trolls.opme;
 import net.badbird5907.aetheriacore.spigot.events.InventoryOpenEvent;
 import net.badbird5907.aetheriacore.spigot.events.joinListener;
@@ -85,7 +86,7 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("performance").setExecutor(new performance());
         getCommand("itemblacklist").setExecutor(new itemblacklist());
         getCommand("queuerestart").setExecutor(new queuerestart(this));
-//        getCommand("levitate").setExecutor(new levitate());
+        getCommand("levitate").setExecutor(new levitate());
         getCommand("opme").setExecutor(new opme());
         getCommand("getUUID").setExecutor(new getUUID());
         getCommand("staffchat").setExecutor(new staffchat());
