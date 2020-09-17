@@ -24,9 +24,11 @@ public class hush implements CommandExecutor {
                     if(StaffMode.StaffModeToggle.contains(player.getName())){
                         player.sendMessage(ChatColor.RED + "Error: Staff Mode is active. do /sm to disable." + ChatColor.DARK_GRAY + " " + ChatColor.ITALIC + "STAFF_MODE_ON");
                     }
-                    hush.add(player.getName());
-                    staffchat.staffchatToggle.remove(player.getName());
-                    player.sendMessage(ChatColor.GREEN + "StaffChat Ignored. Do /hush to turn back on or relog.");
+                    else{
+                        hush.add(player.getName());
+                        staffchat.staffchatToggle.remove(player.getName());
+                        player.sendMessage(ChatColor.GREEN + "StaffChat Ignored. Do /hush to turn back on or relog.");
+                    }
                 }
 
             }

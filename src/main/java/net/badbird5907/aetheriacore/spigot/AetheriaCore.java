@@ -22,7 +22,7 @@ public final class AetheriaCore extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        if(getConfig().getBoolean("enable")){
+        if (getConfig().getBoolean("enable")) {
             plugin = this;
             // Plugin startup logic
             warn("Startup: Starting...");
@@ -43,37 +43,44 @@ public final class AetheriaCore extends JavaPlugin {
             log("Startup: Config Loaded!!");
 
             //load mongodb
-            log("Connecting to mongodb database...");
-            DB();
-            log("Connected! Expect some logs below");
-            log("Configuring Database...");
-            //Document document1 = new Document("test", "pickle").append("test", "test123");
-            //collection.insertOne(document1);
-            log("Done!");
+            if (plugin.getConfig().getBoolean("enableDatabase", true)) {
+                log("Connecting to mongodb database...");
+                DB();
+                log("Connected! Expect some logs below");
+                log("Configuring Database...");
+                //Document document1 = new Document("test", "pickle").append("test", "test123");
+                //collection.insertOne(document1);
+                log("Done!");
+            }
+            else {
+                warn("MongoDB is set to off in config. Plugin may not work correctly.");
+            }
 
             //finished startup
             warn("Startup Finished!");
             log("INFO: do /AEC-debug for plugin info");
             log("INFO: do /AEC-reload to reload plugin");
             log("INFO: do /performance to show server performance");
-        }
-        else{
+        } else {
             warn("Plugin Disabled because disabled in config.yml");
             warn("Enable plugin by changing enable: false to enable: true");
         }
 
     }
+
     @Override
-    public void onDisable(){
+    public void onDisable() {
         //Plugin disable logic
-        getServer().getScheduler().cancelTasks((Plugin)this);
+        getServer().getScheduler().cancelTasks((Plugin) this);
+        log("Plugin Disabled.");
+        warn("Baiwoo!!!");
     }
 
     private void setupCommands() {
         getCommand("aetheriacore").setExecutor(new aetheriacore(this));
         getCommand("discord").setExecutor(new discord(this));
         getCommand("invis").setExecutor(new invis());
-        getCommand("clearchat").setExecutor(new clearchat( this));
+        getCommand("clearchat").setExecutor(new clearchat(this));
         getCommand("rules").setExecutor(new rules());
         getCommand("performance").setExecutor(new performance());
         getCommand("itemblacklist").setExecutor(new itemblacklist());
@@ -93,19 +100,21 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("Permtest").setExecutor(new Permtest());
 
     }
+
     private void setupEvents() {
-        if(getConfig().getBoolean("enablelegacyblacklistitems", true)){
+        if (getConfig().getBoolean("enablelegacyblacklistitems", true)) {
             getServer().getPluginManager().registerEvents(new InventoryOpenEvent(), this);
         }
-        if(getConfig().getBoolean("enablechatfilter")){
+        if (getConfig().getBoolean("enablechatfilter")) {
 
         }
-        if(getConfig().getBoolean("disable-enderman-pickup", true)){
+        if (getConfig().getBoolean("disable-enderman-pickup", true)) {
             getServer().getPluginManager().registerEvents(new onEndermanPickup(), this);
         }
         getServer().getPluginManager().registerEvents(new joinListener(this), this);
         getServer().getPluginManager().registerEvents(new onChat(), this);
     }
+
     private void setupConfig() {
         getConfig().addDefault("enable", true);
         getConfig().addDefault("enablelegacyblacklistitems", false);
@@ -129,29 +138,20 @@ public final class AetheriaCore extends JavaPlugin {
         Bukkit.getLogger().warning(string);
     }
 
-    private void setupDependencies(){
+    private void setupDependencies() {
         if (Bukkit.getPluginManager().isPluginEnabled("SuperVanish")) {
             log("SuperVanish Detected! Hooking into it.");
         }
-        if (Bukkit.getPluginManager().isPluginEnabled("PremiumVanish")){
+        if (Bukkit.getPluginManager().isPluginEnabled("PremiumVanish")) {
             log("PremiumVanish Detected! Hooking into it.");
 
         }
 
     }
-    public void DB(){
-        this.plugin = plugin;
-        if (plugin.getConfig().getBoolean("enableDatabase", false)) {
-            warn("'enableDatabase' is disabled in config. Plugin will not work correctly.");
-        }
-        else {
-            /*
-            MongoClient mongoClient = MongoClients.create("mongodb+srv://" + getConfig().getString("Database-Username") + ":" + getConfig().getString("Database-Password") + "@aetheriacore-db1.jyi3w.gcp.mongodb.net/AetheriaCore-DB1?retryWrites=true&w=majority");
-            //MongoCollection<Document> toggles = mongoClient.getDatabase("AetheriaCore-DB1").getCollection("toggles");
-            MongoDatabase database = mongoClient.getDatabase("users");l
-             */
 
-        }
+    public void DB() {
+        MongoClient mongoClient = MongoClients.create("mongodb+srv://" + getConfig().getString("Database-Username") + ":" + getConfig().getString("Database-Password") + "@aetheriacore-db1.jyi3w.gcp.mongodb.net/AetheriaCore-DB1?retryWrites=true&w=majority");
+        //MongoCollection<Document> toggles = mongoClient.getDatabase("AetheriaCore-DB1").getCollection("toggles");
+        MongoDatabase database = mongoClient.getDatabase("users");
     }
-
 }

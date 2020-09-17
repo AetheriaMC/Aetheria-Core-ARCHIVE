@@ -1,7 +1,8 @@
 package net.badbird5907.aetheriacore.spigot.events;
 
 import net.badbird5907.aetheriacore.spigot.commands.hush;
-import net.md_5.bungee.api.event.PlayerDisconnectEvent;
+import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -9,11 +10,18 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class PlayerLeaveEvent implements Listener {
     @EventHandler
     public void LeaveEvent (PlayerQuitEvent event){
-        if(hush.hush.contains(event.getPlayer().getName())){
-            hush.hush.remove(event.getPlayer().getName());
+        Player player = event.getPlayer();
+        if(hush.hush.contains(player.getName())){
+            hush.hush.remove(player.getName());
         }
         else{
             return;
+        }
+        if(pluginManager.OnlinePlayers.contains(player.getName())){
+            pluginManager.OnlinePlayers.remove(player.getName());
+        }
+        else{
+            pluginManager.warn("Array List \"OnlinePlayers\" does not contain " + player.getDisplayName() + "did the server reload?");
         }
     }
 }
