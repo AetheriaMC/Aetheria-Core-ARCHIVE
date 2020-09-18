@@ -31,8 +31,7 @@ public class gma implements CommandExecutor {
             }
         }
         else{
-            player.sendMessage(ChatColor.RED + "You don't have the required permission node 'aetheriacore.gamemode.adventure' to execute this command.");
-            permissionManager.permissionMessage2("gamemode.spectator");
+            sender.sendMessage(permissionManager.PermissionMessage);
         }
         return true;
     }

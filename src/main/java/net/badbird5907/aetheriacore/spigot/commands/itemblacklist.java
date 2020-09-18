@@ -22,7 +22,7 @@ public class itemblacklist implements CommandExecutor {
             return true;
         }
         else{
-            permissionManager.permissionMessage("itemblacklist.list");
+            player.sendMessage(permissionManager.PermissionMessage);
         }
         return true;
     }

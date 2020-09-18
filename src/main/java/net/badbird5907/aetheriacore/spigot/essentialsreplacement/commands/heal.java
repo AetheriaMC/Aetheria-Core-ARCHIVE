@@ -30,7 +30,7 @@ public class heal implements CommandExecutor {
             }
         }
         else{
-            permissionManager.permissionMessage2("heal");
+            player.sendMessage(permissionManager.PermissionMessage);
         }
         return true;
     }

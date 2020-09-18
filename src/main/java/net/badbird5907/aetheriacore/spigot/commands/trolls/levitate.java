@@ -1,5 +1,6 @@
 package net.badbird5907.aetheriacore.spigot.commands.trolls;
 
+import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -20,7 +21,7 @@ public class levitate implements CommandExecutor {
         Player player = (Player) sender;
         ConsoleCommandSender console = getServer().getConsoleSender();
 
-        if (sender.hasPermission("aetheriacore.levitate")){
+        if (sender.hasPermission(permissionManager.Levitate)){
             Player target = Bukkit.getPlayerExact(args[0]);
 
             if(args.length == 0){
@@ -36,7 +37,7 @@ public class levitate implements CommandExecutor {
             }
         }
         else{
-            sender.sendMessage(ChatColor.RED + "You don't have the required permission node 'aetheriacore.levitate' to execute this command.");
+            sender.sendMessage(permissionManager.PermissionMessage);
         }
         return true;
     }

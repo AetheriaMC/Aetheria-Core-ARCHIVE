@@ -16,6 +16,9 @@ public class DupeThis implements CommandExecutor {
             ItemStack item = Bukkit.getPlayer(sender.getName()).getInventory().getItemInMainHand();
             player.getInventory().addItem(item);
         }
+        else{
+            player.sendMessage(permissionManager.PermissionMessage);
+        }
         return true;
     }
 }

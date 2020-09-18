@@ -1,6 +1,7 @@
 package net.badbird5907.aetheriacore.spigot.commands;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
+import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -43,7 +44,7 @@ public class queuerestart implements CommandExecutor {
 
             }
             else{
-                player.sendMessage(ChatColor.RED + "You don't have the required permission node 'aetheriacore.restart' to execute this command.");
+                player.sendMessage(permissionManager.PermissionMessage);
             }
         }
         else{

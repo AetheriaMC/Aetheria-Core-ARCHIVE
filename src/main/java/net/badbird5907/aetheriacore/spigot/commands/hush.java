@@ -36,7 +36,7 @@ public class hush implements CommandExecutor {
 
             }
             else{
-                permissionManager.permissionMessage("staffchat.hush");
+                player.sendMessage(permissionManager.PermissionMessage);
             }
 
         }

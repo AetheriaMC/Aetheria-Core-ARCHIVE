@@ -1,8 +1,5 @@
 package net.badbird5907.aetheriacore.spigot.manager;
 
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-
 public class permissionManager {
     public static String teleportparticles = "aetheriacore.cosmetic.teleportparticles";
     public static String gmc = "aetheriacore.gamemode.creative";
@@ -17,8 +14,8 @@ public class permissionManager {
     public static String BypassFreeze = "aetheriacore.bypass.freeze";
     public static String rpt = "aetheriacore.teleport.random.toplayer";
     public static String fly = "aetheriacore.fly";
-    public String flyothers = "aetheriacore.fly.others";
-    public String CreateNpc = "aetheriacore.npc.create";
+    public static String flyothers = "aetheriacore.fly.others";
+    public static String CreateNpc = "aetheriacore.npc.create";
     public static String dupethis = "aetheriacore.dupethis";
     public static String staffchat = "aetheriacore.staffchat";
     public static String hush = "aetheriacore.staffchat.hush";
@@ -26,24 +23,11 @@ public class permissionManager {
     public static String ClearChat = "aetheriacore.clearchat";
     public static String BypassClearChat = "aetheriacore.bypass.clearchat";
     public static String ItemBlacklistList = "aetheriacore.itemblacklist.list";
+    public static String Performance = "aetheriacore.performance";
+    public static String DelPlayerData = "aetheriacore.admin.delplayerdata";
+    public static String ListStaffcmds = "aetheriacore.liststaffcmds";
+    public static String Levitate = "aetheriacore.levitate";
 
-    public static void permissionMessage(String perm){
-        if(perm.contains("[usesender]")){
-            String perm2 = perm.replace("[usesender]", "");
-            /*
-            do not use. only here so other stuff doesn't break
-            use permissionMessage2
-            */
-            String permissionmessage = "sender.sendMessage(ChatColor.RED + You do not have the required permission node aetheriacore." + perm2 + " to execute this command.);";
-        }
-        else{
-            String permissionmessage = "player.sendMessage(ChatColor.RED + \"You do not have the required permission node 'aetheriacore." + perm + "' to execute this command.\");";
-        }
-    }
-    public static void permissionMessage2(String perm){
-        Player sender = Bukkit.getPlayer(perm);
-        String permissionmessage2 = "sender.sendMessage(ChatColor.RED + \"You do not have the required permission node 'aetheriacore.'" + perm + "' to execute this command.\");";
-
-    }
+    public static String PermissionMessage = "ChatColor.RED + \"You don't have the required permissions to execute this command.\" + ChatColor.DARK_GREY + \" NO_PERMISSIONS\" ";
 
 }

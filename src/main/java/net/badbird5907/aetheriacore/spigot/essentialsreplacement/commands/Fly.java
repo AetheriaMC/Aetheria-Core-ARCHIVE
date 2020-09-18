@@ -28,18 +28,25 @@ public class Fly implements CommandExecutor {
                 }
             }
             else{
-                permissionManager.permissionMessage2("fly");
+                sender.sendMessage(permissionManager.PermissionMessage);
             }
-            if(sender.hasPermission(new permissionManager().flyothers)) {
+            if(sender.hasPermission(permissionManager.flyothers)) {
                 if(target instanceof Player){
-
+                    if(target.isFlying() == true){
+                        target.setFlying(false);
+                        return true;
+                    }
+                    else{
+                        target.setFlying(true);
+                        return true;
+                    }
                 }
                 else{
-
+                    player.sendMessage(ChatColor.RED + "Error: " + target + "is not a player." + ChatColor.DARK_GRAY + " " + ChatColor.ITALIC + "INVALID_ARGUMENTS");
                 }
             }
             else{
-                permissionManager.permissionMessage2("fly.others");
+                sender.sendMessage(permissionManager.PermissionMessage);
             }
         }
         return true;

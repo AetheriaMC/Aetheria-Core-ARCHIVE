@@ -36,8 +36,7 @@ public class god implements CommandExecutor {
             }
         }
         else{
-            permissionManager.permissionMessage2("god");
-
+            player.sendMessage(permissionManager.PermissionMessage);
         }
         return true;
     }

@@ -1,5 +1,6 @@
 package net.badbird5907.aetheriacore.spigot.commands;
 
+import net.badbird5907.aetheriacore.spigot.api.StaffChatMessage;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import org.bukkit.Bukkit;
@@ -18,9 +19,9 @@ import java.util.List;
 import static org.bukkit.Bukkit.getServer;
 
 public class freezePlayer implements CommandExecutor{
+    public static List <String> frozen = new ArrayList<String>();
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        List<String> frozen = new ArrayList<String>();
         Player player = (Player) sender;
 
         if (sender.hasPermission(permissionManager.freeze)) {
@@ -44,6 +45,7 @@ public class freezePlayer implements CommandExecutor{
                             sender.sendMessage(ChatColor.GREEN + target.getDisplayName() + "Is now frozen!");
                             sender.sendMessage(ChatColor.DARK_GRAY + "The player will me messaged that they are frozen");
                             sender.sendMessage(ChatColor.DARK_GRAY + "If they are in the air, they will be spammed.");
+                            StaffChatMessage.sendmessage("Aetheria Core", sender + " Has frozen " + target + " at coords: " + target.getLocation().toString());
                             return true;
                         }
                     }
@@ -53,7 +55,7 @@ public class freezePlayer implements CommandExecutor{
                 }
             }
         } else {
-            permissionManager.permissionMessage2("freeze");
+            player.sendMessage(permissionManager.PermissionMessage);
         }
         return true;
     }

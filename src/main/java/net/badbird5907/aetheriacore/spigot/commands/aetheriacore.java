@@ -58,7 +58,7 @@ public class aetheriacore implements CommandExecutor {
                     player.sendMessage(ChatColor.GOLD + "/discord | Shows Discord Link");
                     player.sendMessage(ChatColor.GOLD + "/rules | Shows Server Rules");
                     player.sendMessage(ChatColor.GOLD + "/getUUID | Get player UUID");
-                    if(player.hasPermission("aetheriacore.liststaffcommands")){
+                    if(player.hasPermission(permissionManager.ListStaffcmds)){
                         player.sendMessage(ChatColor.GREEN + "Staff Commands:");
                         player.sendMessage(ChatColor.GOLD + "/itemblacklist or /ibl | Shows the Item Blacklist");
                         player.sendMessage(ChatColor.GOLD + "/clearchat or /cc | Staff Only | Clears Chat");
@@ -80,7 +80,7 @@ public class aetheriacore implements CommandExecutor {
                     }
                     else{
                         player.sendMessage(ChatColor.BLUE + "Staff commands are not shown because you are missing the permission node:");
-                        player.sendMessage(ChatColor.BLUE + "'aetheriacore.liststaffcommands'");
+                        player.sendMessage(ChatColor.BLUE + "'aetheriacore.liststaffcmds'");
                     }
                     player.sendMessage(ChatColor.BLUE + "----------------------------------");
                     player.sendMessage(ChatColor.RED + "Commands with a " + ChatColor.STRIKETHROUGH + "Strikethrough" + ChatColor.RESET + "" + ChatColor.RED + " means that it is not finished.");

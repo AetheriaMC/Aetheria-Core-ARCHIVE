@@ -30,7 +30,7 @@ public class gmc implements CommandExecutor {
             }
         }
         else{
-            permissionManager.permissionMessage2("gmc");
+            sender.sendMessage(permissionManager.PermissionMessage);
         }
         return true;
     }

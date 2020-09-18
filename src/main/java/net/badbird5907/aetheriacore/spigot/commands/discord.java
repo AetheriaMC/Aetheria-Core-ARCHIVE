@@ -24,7 +24,7 @@ public class discord implements CommandExecutor {
             player.sendMessage(ChatColor.BLUE + "https://discord.gg/TFbnNvy" /*+ plugin.getConfig().get()*/ );
         }
         else{
-            permissionManager.permissionMessage("discord");
+            player.sendMessage(permissionManager.PermissionMessage);
         }
         return true;
     }

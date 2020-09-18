@@ -37,7 +37,7 @@ public class staffchat implements CommandExecutor {
             }
         }
         else{
-            permissionManager.permissionMessage("staffchat");
+            player.sendMessage(permissionManager.PermissionMessage);
         }
         return true;
     }

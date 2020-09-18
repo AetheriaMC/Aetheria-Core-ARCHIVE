@@ -30,7 +30,7 @@ public class gms implements CommandExecutor {
             }
         }
         else{
-            permissionManager.permissionMessage2("gamemode.survival");
+            player.sendMessage(permissionManager.PermissionMessage);
         }
         return true;
     }

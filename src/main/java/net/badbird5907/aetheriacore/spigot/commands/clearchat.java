@@ -40,7 +40,7 @@ public class clearchat implements CommandExecutor {
                         }
                     }
                     else{
-                        permissionManager.permissionMessage("clearchat");
+                        sender.sendMessage(permissionManager.PermissionMessage);
                         pluginManager.log(sender.getName() + " Was denied access to the command.");
                     }
                 }

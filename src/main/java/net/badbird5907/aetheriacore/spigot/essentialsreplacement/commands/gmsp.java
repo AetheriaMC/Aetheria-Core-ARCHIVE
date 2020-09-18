@@ -31,7 +31,7 @@ public class gmsp implements CommandExecutor {
             }
         }
         else{
-            permissionManager.permissionMessage2("gamemode.spectator");
+            sender.sendMessage(permissionManager.PermissionMessage);
         }
         return true;
     }

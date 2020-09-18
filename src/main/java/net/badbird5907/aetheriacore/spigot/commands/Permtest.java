@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 public class Permtest implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        permissionManager.permissionMessage2("test");
+        sender.sendMessage(permissionManager.PermissionMessage);
         return true;
     }
 }

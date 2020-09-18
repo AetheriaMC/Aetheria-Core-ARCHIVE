@@ -1,5 +1,6 @@
 package net.badbird5907.aetheriacore.spigot.commands;
 
+import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -21,7 +22,7 @@ public class invis implements CommandExecutor {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 9650, 1));
             }
             else{
-                player.sendMessage(ChatColor.RED + "You don't have the required permission node 'aetheriacore.invis' to execute this command.");
+                player.sendMessage(permissionManager.PermissionMessage);
             }
         }
         return true;

@@ -23,6 +23,7 @@ public class StaffMode implements CommandExecutor {
             staffchat.staffchatToggle.add(player.getName());
             hush.hush.remove(player.getName());
             VanishAPI.hidePlayer((Player) player);
+            player.sendMessage(permissionManager.PermissionMessage);
         }
         return true;
     }
