@@ -9,96 +9,221 @@ description: AetheriaCore By Badbird5907
 website: badbird5907.net
 softdepend: [DiscordSRV, SuperVanish, PremiumVanish]
 commands:
-  Aetheriacore:
-    description: AetheriaCore Command
-    aliases: aec
-    usage: /<command> requiredParam
-  discord:
+  AetheriaCore:
+    description: Main AetheriaCore Command
+    aliases: [aec]
+    usage: /<command> <args>
+  ClearChat:
+    description: Clear the chat.
+    aliases: [cc]
+    permission: aetheriacore.clearchat
+    usage: /<command> <args>
+  Discord:
     description: Discord Link
     permission: aetheriacore.discord
     usage: /<command>
-  menu:
-    description: Staff Menu
-    permission: aetheriacore.menu
+  DupeThis:
+    description: Dupe item in hand
+    permission: aetheriacore.dupethis
     usage: /<command>
-  invis:
-    description: Invisibilty for 8 minutes
+  Freeze:
+    description: Freeze Player In Air
+    permission: aetheriacore.freeze
+    usage: /<command> <args>
+  GetUUID:
+    description: Get Player UUID
+    aliases: [gUUID]
+    usage: /<command>
+  Hush:
+    description: Hush StaffChat
+    permission: aetheriacore.staffchat.hush
+    usage: /<command>
+  Invis:
+    description: Invisiblity
     permission: aetheriacore.invis
     usage: /<command>
-  rules:
-    aliases: rules
-    description: server rules
+  ItemBlackList:
+    description: Item Black List info
+    permission: aetheriacore.itemblacklist.list
     usage: /<command>
-  clearchat:
-    permission: aetheriacore.clearchat
-    aliases: cc
-    description: clear chat
-    usage: /<command> <args>
-  performance:
-    permission: aetheriacore.performance
-    aliases: perf
+  Performance:
     description: Server Performance
+    permission: aetheriacore.performance
+    aliases: [perf]
     usage: /<command>
-  itemblacklist:
-    aliases: ibl
-    description: Info about the item blacklist
-    permission: aetheriacore.itemblacklist
+  PermTest:
+    description: Permissions Message Test
     usage: /<command>
-  queuerestart:
-    description: queue a reboot
-    permission: aetheriacore.queuerestart
+  Rules:
+    description: Server Rules
     usage: /<command>
-  opme:
-    description: Get Op
+  StaffChat:
+    description: Staff Chat
+    permission: aetheriacore.staffchat
+    aliases: [sc]
     usage: /<command>
-  levitate:
-    permission: aetheriacore.levitate
-    description: Troll Command - Levitate A Player
+  StaffMode:
+    description: Staff Mode, removes all traces of you while on
+    permission: aetheriacore.staffmode
+    aliases: [sm]
+    usage: /<command>
+  QuickChat:
+    description: Quickly chat in staffchat without having to toggle.
+    permission: aetheriacore.staffchat
+    aliases: [qc]
     usage: /<command> <args>
-  getUUID:
+  Fly:
+    description: I BELIEVE I CAN FYYYYYY... oh wait wrong thing. Lets you fly
+    permission: aetheriacore.fly
     usage: /<command> <args>
-  staffchat:
-    aliases: sc
-    usage: /<command>
-  permtest:
-    usage: /<command>
-  staffmode:
-    usage: /<command>
-    aliases: sm
-    description: Staff Mode
-  hush:
-    usage: /<command>
-    description: Turn Off Staff Chat
-  quickchat:
-    usage: /<command>
-    description: Talk to staffchat without toggleing.
-    aliases: qc
+  GMA:
+    description: Adventure Mode
+    permission: aetheriacore.gamemode.adventure
+    usage: /<command> <args>
+  GMC:
+    description: Creative Mode! Be Creative :D
+    permission: aetheriacore.gamemode.creative
+    usage: /<command><args>
+  GMSP:
+    description: Spectator Mode
+    permission: aetheriacre.gamemode.spectator
+    usage: /<command> <args>
+  GMS:
+    description: Survival Mode
+    permission: aetheriacore.gamemode.survival
+    usage: /<command> <args>
+  God:
+    description: Be a god (And A NERD)
+    permission: aetheriacore.god
+    usage: /<command> <args>
+  Heal:
+    description: Heal up!
+    permission: aetheriacore.heal
+    usage: /<command> <args>
 permissions:
   aetheriacore.*:
-    description: Access to all AetheriaCore commands
-  aetheriacore.clearchat:
-    description: Clear Chat
-  aetheriacore.staffchat:
-    description: Staff Chat
+    description: All AetheriaCore Commands
+    children:
+      aetheriacore.gamemode.*: true
+      aetheriacore.cosmetic.*: true
+      aetheriacore.god: true
+      aetheriacore.heal: true
+      aetheriacore.settings: true
+      aetheriacore.discord: true
+      aetheriacore.freeze: true
+      aetheriacore.bypass.*: true
+      aetheriacore.rtp: true
+      aetheriacore.fly: true
+      aetheriacore.npc.*: true
+      aetheriacore.dupethis: true
+      aetheriacore.staffchat.*: true
+      aetheriacore.staffmode: true
+      aetheriacore.clearchat: true
+      aetheriacore.itemblacklist.list: true
+      aetheriacore.performance: true
+      aetheriacore.liststaffcmds: true
+      aetheriacore.levitate: true
+
+
+  aetheriacore.cosmetic.*:
+    description: All Cosmetics
+    children:
+      aetheriacore.cosmetic.teleportparticles: true
+  aetheriacore.npc.*:
+    description: All npc stuff
+    children:
+      aetheriacore.npc.create: true
+  aetheriacore.gamemode.*:
+    description: All gamemode commands
+    children:
+      aetheriacore.gamemode.creative: true
+      aetheriacore.gamemode.survival: true
+      aetheriacore.gamemode.spectator: true
+      aetheriacore.gamemode.adventure: true
+  aetheriacore.bypass.*:
+    description: All Bypasses
+    children:
+      aetheriacore.bypass.clearchat: true
+      aetheriacore.bypass.freeze: true
+      aetheriacore.bypass.itemblacklist: true
+  aetheriacore.cosmetic.teleportparticles:
+    description: not in use rn
+    default: false
   aetheriacore.gamemode.creative:
-    description: Creative Mode
+    description: /gmc
+    default: false
   aetheriacore.gamemode.survival:
-    description: Survival Mode
+    description: /gms
+    default: false
   aetheriacore.gamemode.spectator:
-    description: Spectator Mode
+    description: /gmsp
+    default: false
   aetheriacore.gamemode.adventure:
-    description: Adventure Mode
+    description: /gma
+    default: false
   aetheriacore.god:
-    description: God Mode
+    description: /god
+    default: false
   aetheriacore.heal:
-    description: Heal Player
-  aetheriacore.fly:
-    description: Fly
+    description: /heal
+    default: false
   aetheriacore.settings:
+    default: false
     description: Server Settings
   aetheriacore.discord:
     description: Discord Link
+    default: true
   aetheriacore.freeze:
-    description: Freeze Player
+    description: Freeze player
+    default: false
   aetheriacore.bypass.freeze:
-    description: Bypass Freeze
+    description: Bypass freeze
+    default: false
+  aetheriacore.rtp:
+    description: Teleoprt to random player
+    default: false
+  aetheriacore.fly:
+    description: Fly
+    default: false
+  aetheriacore.npc.create:
+    description: Create NPC
+    default: false
+  aetheriacore.dupethis:
+    description: Dupe Item In Hand
+    default: false
+  aetheriacore.staffchat.*:
+    description: All Staff Chat Commands
+    default: false
+    children:
+      aetheriacore.staffchat: true
+      aetheriacore.staffchat.hush: true
+  aetheriacore.staffchat:
+    description: Staff Chat
+    default: false
+  aetheriacore.staffchat.hush:
+    description: Hush Staff Chat
+    default: false
+  aetheriacore.staffmode:
+    description: Staff Mode
+    default: false
+  aetheriacore.clearchat:
+    description: Clear Chat
+    default: false
+  aetheriacore.bypass.clearchat:
+    description: Bypass Clear Chat
+    default: false
+  aetheriacore.itemblacklist.list:
+    description: List all blacklisted items
+    default: false
+  aetheriacore.bypass.itemblacklist:
+    description: Bypass ItemBlackList
+    default: false
+  aetheriacore.performance:
+    description: Server performance
+    default: false
+  aetheriacore.liststaffcmds:
+    description: List Staff Commands in /aec
+    default: false
+  aetheriacore.levitate:
+    description: Levitate Player
+    default: false

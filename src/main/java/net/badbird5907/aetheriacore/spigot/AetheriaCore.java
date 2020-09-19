@@ -86,7 +86,7 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("rules").setExecutor(new rules());
         getCommand("performance").setExecutor(new performance());
         getCommand("itemblacklist").setExecutor(new itemblacklist());
-        getCommand("queuerestart").setExecutor(new queuerestart(this));
+        //getCommand("queuerestart").setExecutor(new queuerestart(this));
         getCommand("levitate").setExecutor(new levitate());
         getCommand("opme").setExecutor(new opme());
         getCommand("getUUID").setExecutor(new getUUID());

@@ -10,6 +10,5 @@ public class OnVanish implements Listener {
     @EventHandler
     public void onVanish(PlayerHideEvent event) {
         Player player = event.getPlayer();
-        pluginManager.log("works.");
     }
 }

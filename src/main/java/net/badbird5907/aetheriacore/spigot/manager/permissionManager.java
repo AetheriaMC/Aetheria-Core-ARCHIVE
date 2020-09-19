@@ -1,6 +1,7 @@
 package net.badbird5907.aetheriacore.spigot.manager;
 
 public class permissionManager {
+    //only here because i need a list of permissions and stuff dosent get mixed up
     public static String teleportparticles = "aetheriacore.cosmetic.teleportparticles";
     public static String gmc = "aetheriacore.gamemode.creative";
     public static String gms = "aetheriacore.gamemode.survival";
@@ -12,7 +13,7 @@ public class permissionManager {
     public static String discord = "aetheriacore.discord";
     public static String freeze = "aetheriacore.freeze";
     public static String BypassFreeze = "aetheriacore.bypass.freeze";
-    public static String rpt = "aetheriacore.teleport.random.toplayer";
+    public static String rpt = "aetheriacore.rtp";
     public static String fly = "aetheriacore.fly";
     public static String flyothers = "aetheriacore.fly.others";
     public static String CreateNpc = "aetheriacore.npc.create";
