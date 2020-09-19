@@ -22,6 +22,7 @@ public class PlayerJoinEvent implements Listener {
         else{
             pluginManager.VanishedPlayers.add(player.getName());
             pluginManager.OnlinePlayers.add(player.getName());
+            pluginManager.warn("player is vanished.");
         }
 
     }
