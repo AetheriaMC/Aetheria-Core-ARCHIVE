@@ -8,6 +8,8 @@ disable-enderman-pickup: true
 
 Essentials-Replacement: true
 
+discord-link:
+
 #Default Database. Don't Change
 Database-Username: AetheriaCorePlugin
 

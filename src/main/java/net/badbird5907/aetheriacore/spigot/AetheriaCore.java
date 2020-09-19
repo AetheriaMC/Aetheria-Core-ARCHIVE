@@ -7,6 +7,7 @@ import net.badbird5907.aetheriacore.spigot.commands.*;
 import net.badbird5907.aetheriacore.spigot.commands.trolls.levitate;
 import net.badbird5907.aetheriacore.spigot.commands.trolls.opme;
 import net.badbird5907.aetheriacore.spigot.events.*;
+import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -23,35 +24,35 @@ public final class AetheriaCore extends JavaPlugin {
         if (getConfig().getBoolean("enable")) {
             plugin = this;
             // Plugin startup logic
-            warn("Startup: Starting...");
+            warn(pluginManager.prefix + "Startup: Starting...");
 
             //register commands
-            log("Startup: initializing Commands");
+            log(pluginManager.prefix + "Startup: initializing Commands");
             this.setupCommands();
 
             //register events
-            log("Startup: Registering Events...");
+            log(pluginManager.prefix + "Startup: Registering Events...");
             this.setupEvents();
-            log("All Events Registered!");
+            log(pluginManager.prefix + "All Events Registered!");
             Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Lag(), 100L, 1L);
 
             //get config
-            log("Startup: Loading Config...");
+            log(pluginManager.prefix + "Startup: Loading Config...");
             this.setupConfig();
-            log("Startup: Config Loaded!!");
+            log(pluginManager.prefix + "Startup: Config Loaded!!");
 
             //load mongodb
             if (plugin.getConfig().getBoolean("enableDatabase", true)) {
-                log("Connecting to mongodb database...");
+                log(pluginManager.prefix + "Connecting to mongodb database...");
                 DB();
-                log("Connected! Expect some logs below");
-                log("Configuring Database...");
+                log(pluginManager.prefix + "Connected! Expect some logs below");
+                log(pluginManager.prefix + "Configuring Database...");
                 //Document document1 = new Document("test", "pickle").append("test", "test123");
                 //collection.insertOne(document1);
-                log("Done!");
+                log(pluginManager.prefix + "Done!");
             }
             else {
-                warn("MongoDB is set to off in config. Plugin may not work correctly.");
+                warn(pluginManager.prefix + "MongoDB is set to off in config. Plugin may not work correctly.");
             }
 
             //log("Setting Up Dependencys");
@@ -59,13 +60,13 @@ public final class AetheriaCore extends JavaPlugin {
             //log("done!");
 
             //finished startup
-            warn("Startup Finished!");
-            log("INFO: do /AEC-debug for plugin info");
-            log("INFO: do /AEC-reload to reload plugin");
-            log("INFO: do /performance to show server performance");
+            warn(pluginManager.prefix + "Startup Finished!");
+            log( pluginManager.prefix +"INFO: do /AEC debug for plugin info");
+            log(pluginManager.prefix + "INFO: do /AEC reload to reload plugin config");
+            log( pluginManager.prefix +"INFO: do /performance to show server performance");
         } else {
-            warn("Plugin Disabled because disabled in config.yml");
-            warn("Enable plugin by changing enable: false to enable: true");
+            warn( pluginManager.prefix +"Plugin Disabled because disabled in config.yml");
+            warn( pluginManager.prefix +"Enable plugin by changing enable: false to enable: true");
         }
 
     }
@@ -74,8 +75,8 @@ public final class AetheriaCore extends JavaPlugin {
     public void onDisable() {
         //Plugin disable logic
         getServer().getScheduler().cancelTasks((Plugin) this);
-        log("Plugin Disabled.");
-        warn("Baiwoo!!!");
+        log(pluginManager.prefix + "Plugin Disabled.");
+        warn(pluginManager.prefix + "Baiwoo!!!");
     }
 
     private void setupCommands() {
@@ -130,6 +131,7 @@ public final class AetheriaCore extends JavaPlugin {
         getConfig().addDefault("enableDatabase", true);
         getConfig().addDefault("Database-Username", ""); //AetheriaCorePlugin
         getConfig().addDefault("Database-Password", ""); //AetheriaCorePlugin
+        getConfig().addDefault("discord-link", "");
         getConfig().options().copyDefaults();
         saveDefaultConfig();
         //FileConfiguration data = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "vars.yml"));

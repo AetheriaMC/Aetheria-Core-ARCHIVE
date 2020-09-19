@@ -1,6 +1,7 @@
 package net.badbird5907.aetheriacore.spigot.commands;
 
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
+import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -29,7 +30,7 @@ public class hush implements CommandExecutor {
                     else{
                         hush.add(player.getName());
                         staffchat.staffchatToggle.remove(player.getName());
-                        player.sendMessage(ChatColor.GREEN + "StaffChat Ignored. Do /hush to turn back on or relog.");
+                        player.sendMessage(pluginManager.prefix + ChatColor.GREEN + "StaffChat Ignored. Do /hush to turn back on or relog.");
                         return true;
                     }
                 }

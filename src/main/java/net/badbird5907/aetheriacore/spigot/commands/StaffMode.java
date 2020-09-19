@@ -2,6 +2,7 @@ package net.badbird5907.aetheriacore.spigot.commands;
 
 import de.myzelyam.api.vanish.VanishAPI;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
+import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -18,7 +19,7 @@ public class StaffMode implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender player, Command command, String label, String[] args) {
         if(player.hasPermission(permissionManager.StaffMode)){
-            player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.GOLD + "AEC" + ChatColor.DARK_GRAY + "] " + ChatColor.GREEN + "Staff Mode Turned On.");
+            player.sendMessage(pluginManager.prefix + ChatColor.GREEN + "Staff Mode Turned On.");
             //Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "vanish " + player.getName());
             staffchat.staffchatToggle.add(player.getName());
             hush.hush.remove(player.getName());

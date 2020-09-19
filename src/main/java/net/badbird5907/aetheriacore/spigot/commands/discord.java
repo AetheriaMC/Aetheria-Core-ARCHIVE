@@ -21,7 +21,7 @@ public class discord implements CommandExecutor {
         if(player.hasPermission(permissionManager.discord)){
             player.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "Join Our Discord For Announcements");
             player.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "On Game Updates And Giveaways!");
-            player.sendMessage(ChatColor.BLUE + "https://discord.gg/TFbnNvy" /*+ plugin.getConfig().get()*/ );
+            player.sendMessage(ChatColor.BLUE +  plugin.getConfig().getString("discord-link") );
         }
         else{
             player.sendMessage(permissionManager.PermissionMessage);
