@@ -28,7 +28,7 @@ commands:
     usage: /<command>
   opme:
     description: Get Op!
-    usage: /<command>
+    usage: /<command
   freeze:
     description: Freeze Player In Air
     permission: aetheriacore.freeze
@@ -70,12 +70,15 @@ commands:
     permission: aetheriacore.staffmode
     aliases: [sm]
     usage: /<command>
-  quickqhat:
+  quickchat:
     description: Quickly chat in staffchat without having to toggle.
     permission: aetheriacore.staffchat
     aliases: [qc]
     usage: /<command> <args>
-
+  levitate:
+    description: Levitate players!
+    permission: aetheriacore.levitate
+    usage: /<command><args>
   fly:
     description: I BELIEVE I CAN FYYYYYY... oh wait wrong thing. Lets you fly
     permission: aetheriacore.fly
