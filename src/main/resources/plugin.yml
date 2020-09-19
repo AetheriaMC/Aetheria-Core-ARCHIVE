@@ -9,16 +9,16 @@ description: AetheriaCore By Badbird5907
 website: badbird5907.net
 softdepend: [DiscordSRV, SuperVanish, PremiumVanish]
 commands:
-  AetheriaCore:
+  aetheriacore:
     description: Main AetheriaCore Command
     aliases: [aec]
     usage: /<command> <args>
-  ClearChat:
+  clearchat:
     description: Clear the chat.
     aliases: [cc]
     permission: aetheriacore.clearchat
     usage: /<command> <args>
-  Discord:
+  discord:
     description: Discord Link
     permission: aetheriacore.discord
     usage: /<command>
@@ -26,77 +26,81 @@ commands:
     description: Dupe item in hand
     permission: aetheriacore.dupethis
     usage: /<command>
-  Freeze:
+  opme:
+    description: Get Op!
+    usage: /<command>
+  freeze:
     description: Freeze Player In Air
     permission: aetheriacore.freeze
     usage: /<command> <args>
-  GetUUID:
+  getuuid:
     description: Get Player UUID
     aliases: [gUUID]
     usage: /<command>
-  Hush:
+  hush:
     description: Hush StaffChat
     permission: aetheriacore.staffchat.hush
     usage: /<command>
-  Invis:
+  invis:
     description: Invisiblity
     permission: aetheriacore.invis
     usage: /<command>
-  ItemBlackList:
+  itemblacklist:
     description: Item Black List info
     permission: aetheriacore.itemblacklist.list
     usage: /<command>
-  Performance:
+  performance:
     description: Server Performance
     permission: aetheriacore.performance
     aliases: [perf]
     usage: /<command>
-  PermTest:
+  permtest:
     description: Permissions Message Test
     usage: /<command>
-  Rules:
+  rules:
     description: Server Rules
     usage: /<command>
-  StaffChat:
+  staffchat:
     description: Staff Chat
     permission: aetheriacore.staffchat
     aliases: [sc]
     usage: /<command>
-  StaffMode:
+  staffmode:
     description: Staff Mode, removes all traces of you while on
     permission: aetheriacore.staffmode
     aliases: [sm]
     usage: /<command>
-  QuickChat:
+  quickqhat:
     description: Quickly chat in staffchat without having to toggle.
     permission: aetheriacore.staffchat
     aliases: [qc]
     usage: /<command> <args>
-  Fly:
+
+  fly:
     description: I BELIEVE I CAN FYYYYYY... oh wait wrong thing. Lets you fly
     permission: aetheriacore.fly
     usage: /<command> <args>
-  GMA:
+  gma:
     description: Adventure Mode
     permission: aetheriacore.gamemode.adventure
     usage: /<command> <args>
-  GMC:
+  gmc:
     description: Creative Mode! Be Creative :D
     permission: aetheriacore.gamemode.creative
     usage: /<command><args>
-  GMSP:
+  gmsp:
     description: Spectator Mode
     permission: aetheriacre.gamemode.spectator
     usage: /<command> <args>
-  GMS:
+  gms:
     description: Survival Mode
     permission: aetheriacore.gamemode.survival
     usage: /<command> <args>
-  God:
+  god:
     description: Be a god (And A NERD)
     permission: aetheriacore.god
     usage: /<command> <args>
-  Heal:
+  heal:
     description: Heal up!
     permission: aetheriacore.heal
     usage: /<command> <args>
