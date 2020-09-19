@@ -24,13 +24,15 @@ public class StaffMode implements CommandExecutor {
                     StaffModeToggle.remove(player.getName());
                     VanishAPI.showPlayer((Player) player);
                     player.sendMessage(pluginManager.prefix + ChatColor.WHITE + "Staff Mode Toggled " + ChatColor.RED + "OFF");
+                    return true;
                 }
                 else{
                     player.sendMessage(pluginManager.prefix + ChatColor.WHITE + "Staff Mode Turned " + ChatColor.GREEN + "ON");
-                    //Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "vanish " + player.getName());
                     staffchat.staffchatToggle.add(player.getName());
+                    StaffModeToggle.add(player.getName());
                     hush.hush.remove(player.getName());
                     VanishAPI.hidePlayer((Player) player);
+                    return true;
                 }
 
             } else {
