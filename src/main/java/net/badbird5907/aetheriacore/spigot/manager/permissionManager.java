@@ -29,6 +29,6 @@ public class permissionManager {
     public static String ListStaffcmds = "aetheriacore.liststaffcmds";
     public static String Levitate = "aetheriacore.levitate";
 
-    public static String PermissionMessage = "ChatColor.RED + \"You don't have the required permissions to execute this command.\" + ChatColor.DARK_GREY + \" NO_PERMISSIONS\" ";
+    public static String PermissionMessage = "§cYou don't have the required permissions to execute this command. §o§8 NO_PERMISSIONS ";
 
 }
