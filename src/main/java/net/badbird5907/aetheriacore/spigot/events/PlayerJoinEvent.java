@@ -4,16 +4,17 @@ import de.myzelyam.api.vanish.VanishAPI;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 
 public class PlayerJoinEvent implements Listener {
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void JoinEvent(PlayerLoginEvent event){
         Player player = event.getPlayer();
-        if(VanishAPI.isInvisible(player) == false){
+        if(VanishAPI.getAllInvisiblePlayers().contains(player)){
             if(pluginManager.OnlineVisiblePlayers.contains(event.getPlayer().getName())){
-                pluginManager.warn(pluginManager.prefix + "Array List \"OnlinePlayers\" already contains " + event.getPlayer().getDisplayName());
+                pluginManager.warn(pluginManager.prefix + "Array List \"OnlineVisiblePlayers\" already contains " + event.getPlayer().getDisplayName() + "please report this to Badbird.");
             }
             else{
                 pluginManager.OnlineVisiblePlayers.add(event.getPlayer().getName());

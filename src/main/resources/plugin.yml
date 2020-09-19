@@ -110,6 +110,7 @@ commands:
 permissions:
   aetheriacore.*:
     description: All AetheriaCore Commands
+    default: op
     children:
       aetheriacore.gamemode.*: true
       aetheriacore.cosmetic.*: true

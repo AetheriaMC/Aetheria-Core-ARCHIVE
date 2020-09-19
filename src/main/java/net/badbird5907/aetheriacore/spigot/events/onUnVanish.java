@@ -4,10 +4,11 @@ import de.myzelyam.api.vanish.PlayerShowEvent;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
 public class onUnVanish implements Listener {
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onVanish(PlayerShowEvent event) {
         Player player = event.getPlayer();
         if(pluginManager.VanishedPlayers.contains(player.getName())){

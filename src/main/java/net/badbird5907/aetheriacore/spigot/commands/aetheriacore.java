@@ -2,6 +2,7 @@ package net.badbird5907.aetheriacore.spigot.commands;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
+import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -36,7 +37,8 @@ public class aetheriacore implements CommandExecutor {
                 if(args[0].equalsIgnoreCase("reload")){
                     try{
                         plugin.reloadConfig();
-                        player.sendMessage(ChatColor.GREEN + "Config Reloaded!");
+                        player.sendMessage(pluginManager.prefix + ChatColor.GREEN + "Config Reloaded!");
+                        player.sendMessage(pluginManager.prefix + ChatColor.RED + "This is not supported. please restart the server when you can.");
                     } catch (Exception e) {
                         e.printStackTrace();
                         player.sendMessage(ChatColor.RED + "ERROR: See console for more details");

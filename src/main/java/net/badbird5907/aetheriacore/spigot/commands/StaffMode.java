@@ -18,16 +18,27 @@ public class StaffMode implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender player, Command command, String label, String[] args) {
-        if(player.hasPermission(permissionManager.StaffMode)){
-            player.sendMessage(pluginManager.prefix + ChatColor.GREEN + "Staff Mode Turned On.");
-            //Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "vanish " + player.getName());
-            staffchat.staffchatToggle.add(player.getName());
-            hush.hush.remove(player.getName());
-            VanishAPI.hidePlayer((Player) player);
+        if(player instanceof Player) {
+            if (player.hasPermission(permissionManager.StaffMode)) {
+                if(StaffModeToggle.contains(player.getName())){
+                    StaffModeToggle.remove(player.getName());
+                    VanishAPI.showPlayer((Player) player);
+                    player.sendMessage(pluginManager.prefix + ChatColor.WHITE + "Staff Mode Toggled " + ChatColor.RED + "OFF");
+                }
+                else{
+                    player.sendMessage(pluginManager.prefix + ChatColor.WHITE + "Staff Mode Turned " + ChatColor.GREEN + "ON");
+                    //Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "vanish " + player.getName());
+                    staffchat.staffchatToggle.add(player.getName());
+                    hush.hush.remove(player.getName());
+                    VanishAPI.hidePlayer((Player) player);
+                }
 
+            } else {
+                player.sendMessage(permissionManager.PermissionMessage);
+            }
         }
         else{
-            player.sendMessage(permissionManager.PermissionMessage);
+            player.sendMessage(pluginManager.prefix + ChatColor.RED + "You must be a player to use this.");
         }
         return true;
     }
