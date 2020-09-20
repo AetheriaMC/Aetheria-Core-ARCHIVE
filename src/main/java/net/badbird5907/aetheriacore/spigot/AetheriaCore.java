@@ -15,7 +15,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class AetheriaCore extends JavaPlugin {
-
+    //This is a change by Dom as a test. :D
     public double togglepvp;
 
     private static AetheriaCore plugin;
