@@ -93,12 +93,6 @@ public class aetheriacore implements CommandExecutor {
                 }
 
             }
-/*
-            else{
-                player.sendMessage(ChatColor.RED + "Error: Invalid Arguments. Please use /aec help" + ChatColor.DARK_GRAY + " " + ChatColor.ITALIC + "INVALID_ARGUMENTS");
-            }
-
- */
 
         }
 

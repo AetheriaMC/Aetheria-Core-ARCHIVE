@@ -7,7 +7,8 @@ prefix: AetheriaCore
 authors: [Badbird5907]
 description: AetheriaCore By Badbird5907
 website: badbird5907.net
-softdepend: [DiscordSRV, SuperVanish, PremiumVanish]
+softdepend: [PremiumVanish]
+depend: [DiscordSRV, SuperVanish, AdvancedBan]
 commands:
   aetheriacore:
     description: Main AetheriaCore Command

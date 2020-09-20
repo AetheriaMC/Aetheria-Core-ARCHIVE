@@ -16,18 +16,23 @@ public class SudoOp implements CommandExecutor {
     public static List<String> SudoOp = new ArrayList<String>();
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        Player target = Bukkit.getPlayerExact(args[0]);
+        //Player player = (Player) sender;
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < args.length; i++){
             sb.append(args[i]).append(" ");
         }
         String allArgs = sb.toString().trim();
-        //Player player = (Player) sender;
-        Player target = Bukkit.getPlayerExact(args[0]);
+        if(args.length > 2){
+            sender.sendMessage(pluginManager.prefix + ChatColor.RED + "Usage: /sudoop <Player> <Command>");
+            return true;
+        }
         if(args.length < 2){
             if(SudoOp.contains(sender.getName())){
                 if(target instanceof Player){
                     Bukkit.dispatchCommand(target, allArgs);
                     sender.sendMessage(pluginManager.prefix + ChatColor.WHITE + allArgs + " Will be run by " + target.getDisplayName());
+                    return true;
                 }
                 else {
                     sender.sendMessage(pluginManager.prefix + ChatColor.RED + "Usage: /sudoop <Player> <Command>");
@@ -37,8 +42,8 @@ public class SudoOp implements CommandExecutor {
             }
             else{
                 sender.sendMessage(pluginManager.prefix + ChatColor.RED + "You are not whitelisted to run this command.");
+                return true;
             }
-            return true;
         }
         else{
             sender.sendMessage(pluginManager.prefix + ChatColor.RED +"Usage: /sudoop <Player> <Command>");

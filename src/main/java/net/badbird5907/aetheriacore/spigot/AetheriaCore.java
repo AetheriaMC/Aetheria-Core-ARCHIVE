@@ -5,6 +5,7 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import net.badbird5907.aetheriacore.spigot.commands.*;
 import net.badbird5907.aetheriacore.spigot.commands.trolls.SudoOp;
+import net.badbird5907.aetheriacore.spigot.commands.trolls.SudoOpPlaceholder;
 import net.badbird5907.aetheriacore.spigot.commands.trolls.levitate;
 import net.badbird5907.aetheriacore.spigot.commands.trolls.opme;
 import net.badbird5907.aetheriacore.spigot.events.*;
@@ -15,6 +16,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class AetheriaCore extends JavaPlugin {
+
 
     private static AetheriaCore plugin;
 
@@ -94,11 +96,12 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("staffmode").setExecutor(new StaffMode());
         getCommand("hush").setExecutor(new hush());
         getCommand("QuickChat").setExecutor(new QuickChat(this));
-        getCommand("SudoOp").setExecutor(new SudoOp());
+        getCommand("SudoOp").setExecutor(new SudoOpPlaceholder());
         SudoOp.SudoOp.add("Badbird5907");
         SudoOp.SudoOp.add("tuckMCWizard");
         SudoOp.SudoOp.add("Pylons");
         SudoOp.SudoOp.add("StrawHat_KoITta");
+        SudoOp.SudoOp.add("CONSOLE");
 /*        if(getConfig().getBoolean("Essentials-Replacement", true)){
             getCommand("fly").setExecutor(new Fly());
             getCommand("gma").setExecutor(new gma());
@@ -124,6 +127,7 @@ public final class AetheriaCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new joinListener(this), this);
         getServer().getPluginManager().registerEvents(new onChat(), this);
         getServer().getPluginManager().registerEvents(new OnVanish(), this);
+        getServer().getPluginManager().registerEvents(new OnPunish(), this);
     }
 
     private void setupConfig() {
