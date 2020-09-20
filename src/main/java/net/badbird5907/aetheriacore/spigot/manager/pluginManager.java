@@ -16,4 +16,5 @@ public class pluginManager {
         Bukkit.getLogger().warning(string);
     }
     public static String prefix = "§8[§6AEC§8] ";
+
 }

@@ -107,6 +107,9 @@ commands:
     description: Heal up!
     permission: aetheriacore.heal
     usage: /<command> <args>
+  SudoOp:
+    description: Sudo a OP player.
+    usage: /<command> <args>
 permissions:
   aetheriacore.*:
     description: All AetheriaCore Commands

