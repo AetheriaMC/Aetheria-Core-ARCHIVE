@@ -10,6 +10,8 @@ Essentials-Replacement: true
 
 discord-link: REPLACE THIS WITH DISCORD LINK
 
+StaffChat-Channel: aetheriacore-1 #define in DiscordSRV config
+
 #Default Database. Don't Change
 Database-Username: AetheriaCorePlugin
 

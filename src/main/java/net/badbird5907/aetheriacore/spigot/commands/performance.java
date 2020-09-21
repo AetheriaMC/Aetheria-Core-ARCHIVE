@@ -4,6 +4,7 @@ import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.StructureType;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -11,12 +12,14 @@ import org.bukkit.command.CommandSender;
 import java.lang.management.ManagementFactory;
 
 public class performance implements CommandExecutor {
+    public static double cpuUsage = ManagementFactory.getOperatingSystemMXBean().getSystemLoadAverage();
     Runtime r = Runtime.getRuntime();
     long memUsed = (r.totalMemory() - r.freeMemory()) / 1048576;
     @Override
     public boolean onCommand(CommandSender player, Command command, String label, String[] args) {
         if(player.hasPermission(permissionManager.Performance)){
             player.sendMessage(ChatColor.GREEN + "Server: " + Bukkit.getServer().getName());
+            player.sendMessage(ChatColor.GREEN + "OS: " + System.getProperty("os.name"));
             player.sendMessage(ChatColor.GOLD + "Tps: " + Lag.getTPS());
             player.sendMessage(ChatColor.GOLD + "Cpu Usage: " + ManagementFactory.getOperatingSystemMXBean().getSystemLoadAverage() + "(idk its broken)");
             player.sendMessage(ChatColor.GOLD + "RAM Usage: " + memUsed + "/" + r.totalMemory() / 1048576);

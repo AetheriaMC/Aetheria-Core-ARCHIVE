@@ -9,6 +9,7 @@ description: AetheriaCore By Badbird5907
 website: badbird5907.net
 softdepend: [PremiumVanish]
 depend: [DiscordSRV, SuperVanish, AdvancedBan]
+loadbefore: [DiscordSRV, AdvancedBan]
 commands:
   aetheriacore:
     description: Main AetheriaCore Command

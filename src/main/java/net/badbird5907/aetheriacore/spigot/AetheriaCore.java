@@ -3,10 +3,10 @@ package net.badbird5907.aetheriacore.spigot;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
+import github.scarsz.discordsrv.DiscordSRV;
 import net.badbird5907.aetheriacore.spigot.commands.*;
 import net.badbird5907.aetheriacore.spigot.commands.trolls.SudoOp;
 import net.badbird5907.aetheriacore.spigot.commands.trolls.SudoOpPlaceholder;
-import net.badbird5907.aetheriacore.spigot.commands.trolls.levitate;
 import net.badbird5907.aetheriacore.spigot.commands.trolls.opme;
 import net.badbird5907.aetheriacore.spigot.events.*;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
@@ -19,10 +19,12 @@ public final class AetheriaCore extends JavaPlugin {
 
 
     private static AetheriaCore plugin;
+    private OnDiscordMessageRecieved discordsrvListener = new OnDiscordMessageRecieved(this);
 
     @Override
     public void onEnable() {
         if (getConfig().getBoolean("enable")) {
+            DiscordSRV.api.subscribe(discordsrvListener);
             plugin = this;
             // Plugin startup logic
             warn(pluginManager.prefix + "Startup: Starting...");
@@ -76,6 +78,7 @@ public final class AetheriaCore extends JavaPlugin {
     public void onDisable() {
         //Plugin disable logic
         getServer().getScheduler().cancelTasks((Plugin) this);
+        DiscordSRV.api.unsubscribe(discordsrvListener);
         log(pluginManager.prefix + "Plugin Disabled.");
         warn(pluginManager.prefix + "Baiwoo!!!");
     }
@@ -140,6 +143,7 @@ public final class AetheriaCore extends JavaPlugin {
         getConfig().addDefault("Database-Username", ""); //AetheriaCorePlugin
         getConfig().addDefault("Database-Password", ""); //AetheriaCorePlugin
         getConfig().addDefault("discord-link", "");
+        getConfig().addDefault("StaffChat-Channel", "");
         getConfig().options().copyDefaults();
         saveDefaultConfig();
         //FileConfiguration data = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "vars.yml"));
@@ -155,6 +159,7 @@ public final class AetheriaCore extends JavaPlugin {
     }
 
     private void setupDependencies() {
+        /*
         if (Bukkit.getPluginManager().isPluginEnabled("SuperVanish")) {
             log("SuperVanish Detected! Hooking into it.");
         }
@@ -165,6 +170,7 @@ public final class AetheriaCore extends JavaPlugin {
             log("PremiumVanish Detected! Hooking into it.");
 
         }
+         */
 
     }
 
