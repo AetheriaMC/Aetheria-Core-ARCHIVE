@@ -97,6 +97,7 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("staffmode").setExecutor(new StaffMode());
         getCommand("hush").setExecutor(new hush());
         getCommand("QuickChat").setExecutor(new QuickChat(this));
+        getCommand("ClearFloorDrops").setExecutor(new ClearFloorDrops());
         getCommand("SudoOp").setExecutor(new SudoOpPlaceholder());
         SudoOp.SudoOp.add("Badbird5907");
         SudoOp.SudoOp.add("tuckMCWizard");

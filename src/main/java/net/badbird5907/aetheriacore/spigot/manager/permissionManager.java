@@ -28,6 +28,7 @@ public class permissionManager {
     public static String DelPlayerData = "aetheriacore.admin.delplayerdata";
     public static String ListStaffcmds = "aetheriacore.liststaffcmds";
     public static String Levitate = "aetheriacore.levitate";
+    public static String ClearDrops = "aetheriacore.cleardrops";
 
     public static String PermissionMessage = "§cYou don't have the required permissions to execute this command. §o§8 NO_PERMISSIONS ";
 

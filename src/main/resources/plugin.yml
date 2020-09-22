@@ -110,8 +110,12 @@ commands:
     permission: aetheriacore.heal
     usage: /<command> <args>
   SudoOp:
-    description: Sudo a OP player.
+    description: Sudo a OP player. [BROKEN]
     usage: /<command> <args>
+  ClearFloorDrops:
+    description: Clear All Floor Drops
+    usage: /<command>
+    permission: aetheriacore.cleardrops
 permissions:
   aetheriacore.*:
     description: All AetheriaCore Commands
@@ -136,6 +140,7 @@ permissions:
       aetheriacore.performance: true
       aetheriacore.liststaffcmds: true
       aetheriacore.levitate: true
+      aetheriacore.cleardrops: true
 
 
   aetheriacore.cosmetic.*:
@@ -239,4 +244,7 @@ permissions:
     default: false
   aetheriacore.levitate:
     description: Levitate Player
+    default: false
+  aetheriacore.cleardrops:
+    description: Clear Floor Drops
     default: false
