@@ -4,10 +4,8 @@ import github.scarsz.discordsrv.api.Subscribe;
 import github.scarsz.discordsrv.api.events.DiscordGuildMessagePreProcessEvent;
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.api.StaffChatMessage;
-import org.bukkit.event.Listener;
-import org.jetbrains.annotations.NotNull;
 
-public class OnDiscordMessageRecieved implements @NotNull Listener {
+public class OnDiscordMessageRecieved{
     AetheriaCore plugin;
     public OnDiscordMessageRecieved(AetheriaCore plugin) {
         this.plugin = plugin;
