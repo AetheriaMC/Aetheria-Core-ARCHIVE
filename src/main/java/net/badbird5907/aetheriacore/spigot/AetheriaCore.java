@@ -84,6 +84,7 @@ public final class AetheriaCore extends JavaPlugin {
 
     private void setupCommands() {
         getCommand("aetheriacore").setExecutor(new aetheriacore(this));
+        getCommand("aetheriacore").setTabCompleter(new TabComplete());
         getCommand("discord").setExecutor(new discord(this));
         getCommand("invis").setExecutor(new invis());
         getCommand("clearchat").setExecutor(new clearchat(this));
@@ -92,6 +93,7 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("itemblacklist").setExecutor(new itemblacklist());
         //getCommand("queuerestart").setExecutor(new queuerestart(this));
         //getCommand("levitate").setExecutor(new levitate());
+        getCommand("dupethis").setExecutor(new DupeThis());
         getCommand("opme").setExecutor(new opme());
         getCommand("getUUID").setExecutor(new getUUID());
         getCommand("staffchat").setExecutor(new staffchat());
@@ -100,6 +102,7 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("QuickChat").setExecutor(new QuickChat(this));
         getCommand("ClearFloorDrops").setExecutor(new ClearFloorDrops());
         getCommand("SudoOp").setExecutor(new SudoOpPlaceholder());
+        getCommand("freeze").setExecutor(new freezePlayer());
         SudoOp.SudoOp.add("Badbird5907");
         SudoOp.SudoOp.add("tuckMCWizard");
         SudoOp.SudoOp.add("Pylons");

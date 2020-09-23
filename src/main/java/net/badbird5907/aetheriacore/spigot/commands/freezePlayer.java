@@ -30,7 +30,7 @@ public class freezePlayer implements CommandExecutor{
             if (args[0].length() == 0) {
                 sender.sendMessage(ChatColor.RED + "Usage: /freeze <Player>");
                 return true;
-            } else {
+            } else if(args.length == 1){
                 if (target instanceof Player) {
                     if (frozen.contains(target.getName())) {
                         sender.sendMessage(ChatColor.RED + "Player" + target.getDisplayName() + "is already frozen!");

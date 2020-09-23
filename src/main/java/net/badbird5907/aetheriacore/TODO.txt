@@ -1,3 +1,2 @@
 restart countdown
-Clear Chat - /cc
-Staff Chat
+Tab complete

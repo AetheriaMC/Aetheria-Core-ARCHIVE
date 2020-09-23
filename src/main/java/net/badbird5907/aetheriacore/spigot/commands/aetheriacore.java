@@ -3,6 +3,7 @@ package net.badbird5907.aetheriacore.spigot.commands;
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -24,7 +25,13 @@ public class aetheriacore implements CommandExecutor {
             PluginDescriptionFile pdf = plugin.getDescription(); //Gets plugin.yml
 
             if(args.length == 0){
-                player.sendMessage(ChatColor.RED + "Error: Invalid Arguments. Please use /aec help" + ChatColor.DARK_GRAY + " " + ChatColor.ITALIC + "INVALID_ARGUMENTS");
+                player.sendMessage(ChatColor.DARK_GRAY + "------------------------------------");
+                player.sendMessage(ChatColor.GOLD + "AetheriaCore Version " + pdf.getVersion());
+                player.sendMessage(ChatColor.GOLD + "Made By: Badbird5907");
+                player.sendMessage(ChatColor.WHITE + "");
+                player.sendMessage(ChatColor.WHITE + "The Aetheria Server's Core and API");
+                player.sendMessage(ChatColor.WHITE + "use /aec help for a list of commands.");
+                player.sendMessage(ChatColor.DARK_GRAY + "------------------------------------");
                 return true;
             }
             if(args.length == 1){
@@ -90,8 +97,13 @@ public class aetheriacore implements CommandExecutor {
                 }
                 else{
                     player.sendMessage(ChatColor.RED + "Error: Invalid Arguments. Please use /aec help" + ChatColor.DARK_GRAY + " " + ChatColor.ITALIC + "INVALID_ARGUMENTS");
+                    return true;
                 }
 
+            }
+            else{
+                player.sendMessage(ChatColor.RED + "Error: Invalid Arguments. Please use /aec help" + ChatColor.DARK_GRAY + " " + ChatColor.ITALIC + "INVALID_ARGUMENTS");
+                return true;
             }
 
         }
