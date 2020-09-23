@@ -19,12 +19,12 @@ public class hush implements CommandExecutor {
             if(player.hasPermission(permissionManager.hush)){
                 if(hush.contains(player.getName())){
                     hush.remove(player.getName());
-                    player.sendMessage(ChatColor.GREEN + "You can now see the Staff Chat.");
+                    player.sendMessage(pluginManager.prefix + ChatColor.GREEN + "You can now see the Staff Chat.");
                     return true;
                 }
                 else{
                     if(StaffMode.StaffModeToggle.contains(player.getName())){
-                        player.sendMessage(ChatColor.RED + "Error: Staff Mode is active. do /sm to disable." + ChatColor.DARK_GRAY + " " + ChatColor.ITALIC + "STAFF_MODE_ON");
+                        player.sendMessage(pluginManager.prefix + ChatColor.RED + "Error: Staff Mode is active. do /sm to disable." + ChatColor.DARK_GRAY + " " + ChatColor.ITALIC + "STAFF_MODE_ON");
                         return true;
                     }
                     else{

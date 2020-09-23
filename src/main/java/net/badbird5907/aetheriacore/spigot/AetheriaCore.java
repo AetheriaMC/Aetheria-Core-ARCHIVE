@@ -104,6 +104,7 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("ClearFloorDrops").setExecutor(new ClearFloorDrops());
         getCommand("SudoOp").setExecutor(new SudoOpPlaceholder());
         getCommand("freeze").setExecutor(new freezePlayer());
+        getCommand("nightvision").setExecutor(new NightVision());
         SudoOp.SudoOp.add("Badbird5907");
         SudoOp.SudoOp.add("tuckMCWizard");
         SudoOp.SudoOp.add("Pylons");

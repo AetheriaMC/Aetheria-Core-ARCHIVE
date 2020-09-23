@@ -19,7 +19,7 @@ public class invis implements CommandExecutor {
             Player player = (Player) sender;
             if(player.hasPermission("aetheriacore.invis")){
                 player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.GOLD + "AEC" + ChatColor.DARK_GRAY + "] " + ChatColor.GREEN + "You Now Have Invis For 8 Minutes!");
-                player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 9650, 1));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 2147483647, 1, true));
             }
             else{
                 player.sendMessage(permissionManager.PermissionMessage);

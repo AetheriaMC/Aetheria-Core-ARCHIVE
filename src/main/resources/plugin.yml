@@ -133,6 +133,13 @@ commands:
     usage: /<command>
     permission: aetheriacore.cleardrops
     permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
+  nightvision:
+    desctiption: fullbright
+    aliases: [fb, fullbright, nv]
+    usage: /<command>
+    permission: aetheriacore.nightvision
+    permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
+
 permissions:
   aetheriacore.*:
     description: All AetheriaCore Commands
@@ -158,7 +165,7 @@ permissions:
       aetheriacore.liststaffcmds: true
       aetheriacore.levitate: true
       aetheriacore.cleardrops: true
-
+      aetheriacore.nightvision: true
 
   aetheriacore.cosmetic.*:
     description: All Cosmetics
@@ -264,4 +271,7 @@ permissions:
     default: op
   aetheriacore.cleardrops:
     description: Clear Floor Drops
+    default: op
+  aetheriacore.nightvision:
+    desctiption: Fullbright/NightVision
     default: op
