@@ -9,6 +9,7 @@ import net.badbird5907.aetheriacore.spigot.commands.trolls.*;
 import net.badbird5907.aetheriacore.spigot.events.*;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
+import net.badbird5907.aetheriacore.spigot.essentialsreplacement.commands.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -104,14 +105,13 @@ public final class AetheriaCore extends JavaPlugin {
         SudoOp.SudoOp.add("Pylons");
         SudoOp.SudoOp.add("StrawHat_KoITta");
         SudoOp.SudoOp.add("CONSOLE");
-/*        if(getConfig().getBoolean("Essentials-Replacement", true)){
+        if(getConfig().getBoolean("Essentials-Replacement", true)){
             getCommand("fly").setExecutor(new Fly());
             getCommand("gma").setExecutor(new gma());
-            getCommand("").setExecutor(new gmc());
+            getCommand("gmsp").setExecutor(new gmc());
 
 
         }
-        */
         getCommand("Permtest").setExecutor(new Permtest());
 
     }

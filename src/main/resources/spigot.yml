@@ -85,22 +85,22 @@ commands:
     description: I BELIEVE I CAN FYYYYYY... oh wait wrong thing. Lets you fly
     permission: aetheriacore.fly
     usage: /<command> <args>
-  gma:
-    description: Adventure Mode
-    permission: aetheriacore.gamemode.adventure
-    usage: /<command> <args>
-  gmc:
-    description: Creative Mode! Be Creative :D
-    permission: aetheriacore.gamemode.creative
-    usage: /<command><args>
-  gmsp:
-    description: Spectator Mode
-    permission: aetheriacre.gamemode.spectator
-    usage: /<command> <args>
-  gms:
-    description: Survival Mode
-    permission: aetheriacore.gamemode.survival
-    usage: /<command> <args>
+#  gma:
+#    description: Adventure Mode
+#    permission: aetheriacore.gamemode.adventure
+#    usage: /<command> <args>
+#  gmc:
+#    description: Creative Mode! Be Creative :D
+#    permission: aetheriacore.gamemode.creative
+#    usage: /<command> <args>
+#  gmsp:
+#    description: Spectator Mode
+#    permission: aetheriacre.gamemode.spectator
+#    usage: /<command> <args>
+#  gms:
+#    description: Survival Mode
+#    permission: aetheriacore.gamemode.survival
+#    usage: /<command> <args>
   god:
     description: Be a god (And A NERD)
     permission: aetheriacore.god

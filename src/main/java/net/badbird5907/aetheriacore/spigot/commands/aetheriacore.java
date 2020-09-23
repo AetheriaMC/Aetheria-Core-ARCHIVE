@@ -21,7 +21,7 @@ public class aetheriacore implements CommandExecutor {
     public boolean onCommand(CommandSender player, Command command, String label, String[] args) {
         if(command.getName().equalsIgnoreCase("aetheriacore")){
 
-            PluginDescriptionFile pdf = plugin.getDescription(); //Gets plugin.yml
+            PluginDescriptionFile pdf = plugin.getDescription(); //Gets spigot.yml
 
             if(args.length == 0){
                 player.sendMessage(ChatColor.RED + "Error: Invalid Arguments. Please use /aec help" + ChatColor.DARK_GRAY + " " + ChatColor.ITALIC + "INVALID_ARGUMENTS");

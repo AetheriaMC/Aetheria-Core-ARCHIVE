@@ -17,10 +17,10 @@ public class gmc implements CommandExecutor {
         if (sender.hasPermission(permissionManager.gmc)){
             Player target = Bukkit.getPlayerExact(args[0]);
             if(args.length == 0){
-                player.setGameMode(GameMode.CREATIVE);
+                target.setGameMode(GameMode.CREATIVE);
             }
             else{
-                if (target instanceof Player){
+                if (sender instanceof Player){
                     player.setGameMode(GameMode.CREATIVE);
 
                 }

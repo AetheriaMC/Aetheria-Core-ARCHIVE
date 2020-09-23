@@ -15,6 +15,9 @@ public class ClearFloorDrops implements CommandExecutor {
             player.sendMessage(pluginManager.prefix + ChatColor.WHITE + "Drops Cleared!");
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "minecraft:kill @e[type=item]");
         }
+        else{
+            player.sendMessage(permissionManager.PermissionMessage);
+        }
         return true;
     }
 }
