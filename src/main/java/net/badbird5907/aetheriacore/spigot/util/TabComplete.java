@@ -1,5 +1,6 @@
 package net.badbird5907.aetheriacore.spigot.util;
 
+import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -13,24 +14,24 @@ import java.util.List;
 public class TabComplete implements TabCompleter {
 
     @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        if (command.getName() == "aetheriacore" && args.length == 1){
-            List<String> aecarg1 = new ArrayList<>();
-            aecarg1.add("help");
-            pluginManager.log("works");
-            return aecarg1;
-        }
-        /*
-        if (args.length == 1) {
-            List<String> playerNames = new ArrayList<>();
-            Player[] players = new Player[Bukkit.getServer().getOnlinePlayers().size()];
-            Bukkit.getServer().getOnlinePlayers().toArray(players);
-            for (int i = 0; i < players.length; i++){
-                playerNames.add(players[i].getName());
+    public List<String> onTabComplete (CommandSender sender, Command cmd, String label, String[] args){
+        List<String> l = new ArrayList<String>();
+        if(cmd.getName().equalsIgnoreCase("aetheriacore") && args.length >= 0){
+            if(sender instanceof Player){
+                Player player = (Player) sender;
+                l.add("help");
+                l.add("debug");
+                if(player.hasPermission(permissionManager.reload)) {
+                    l.add("reload");
+                }
             }
-            return playerNames;
+            else {
+                l.add("reload");
+                l.add("help");
+                l.add("debug");
+            }
+            return l;
         }
-         */
         return null;
     }
 }

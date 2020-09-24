@@ -25,19 +25,70 @@ public class staffchat implements CommandExecutor {
             if (player.hasPermission(permissionManager.staffchat)) {
                 if (staffchatToggle.contains(player.getName())) {
                     if (!StaffMode.StaffModeToggle.contains(player.getName())) {
-                        player.sendMessage(pluginManager.prefix + ChatColor.GREEN + "StaffChat Turned Off");
+                        player.sendMessage(pluginManager.prefix + ChatColor.WHITE + "StaffChat turned " + ChatColor.RED + "OFF");
                         staffchatToggle.remove(player.getName());
                     } else {
                         player.sendMessage(pluginManager.prefix + ChatColor.RED + "Error: Staff Mode is active. do /sm to disable." + ChatColor.DARK_GRAY + " " + ChatColor.ITALIC + "STAFF_MODE_ON");
                     }
 
                 } else {
-                    player.sendMessage(pluginManager.prefix + ChatColor.GREEN + "StaffChat Turned On");
+                    player.sendMessage(pluginManager.prefix + ChatColor.WHITE + "StaffChat turned " + ChatColor.GREEN + "ON");
                     staffchatToggle.add(player.getName());
                 }
             } else {
-                player.sendMessage(permissionManager.PermissionMessage);
+                if(staffchatToggle.contains(player.getName())){
+                    staffchatToggle.remove(player.getName());
+                    return true;
+                }
+                else {
+                    player.sendMessage(permissionManager.PermissionMessage);
+                    return true;
+                }
             }
+            /*
+            if(args.length == 1){
+                if(args[0].equalsIgnoreCase("on")){
+                    if(player.hasPermission(permissionManager.staffchat)){
+                        if(StaffMode.StaffModeToggle.contains(player.getName())){
+                            player.sendMessage(pluginManager.prefix + ChatColor.RED + "Error: Staff Mode is active. do /sm to disable." + ChatColor.DARK_GRAY + " " + ChatColor.ITALIC + "STAFF_MODE_ON");
+                            return true;
+                        }else {
+                            if (staffchatToggle.contains(player.getName())) {
+                                player.sendMessage(pluginManager.prefix + ChatColor.RED + "Staff Chat is already on!" + ChatColor.DARK_GRAY + " " + ChatColor.ITALIC + "STAFFCHAT_ALREADY_ENABLED");
+                                return true;
+                            } else {
+                                staffchatToggle.add(player.getName());
+                                player.sendMessage(pluginManager.prefix + ChatColor.WHITE + "StaffChat turned " + ChatColor.GREEN + "ON");
+                                return true;
+                            }
+                        }
+                    }
+                    else{
+                        player.sendMessage(permissionManager.PermissionMessage);
+                    }
+                }
+                if(args[0].equalsIgnoreCase("off")){
+                    if(player.hasPermission(permissionManager.staffchat)){
+                        if(StaffMode.StaffModeToggle.contains(player.getName())){
+                            player.sendMessage(pluginManager.prefix + ChatColor.RED + "Error: Staff Mode is active. do /sm to disable." + ChatColor.DARK_GRAY + " " + ChatColor.ITALIC + "STAFF_MODE_ON");
+                            return true;
+                        }else {
+                            if (!staffchatToggle.contains(player.getName())) {
+                                player.sendMessage(pluginManager.prefix + ChatColor.RED + "Staff Chat is already off!" + ChatColor.DARK_GRAY + " " + ChatColor.ITALIC + "STAFFCHAT_ALREADY_ENABLED");
+                                return true;
+                            } else {
+                                staffchatToggle.remove(player.getName());
+                                player.sendMessage(pluginManager.prefix + ChatColor.WHITE + "StaffChat turned " + ChatColor.RED + "OFF");
+                                return true;
+                            }
+                        }
+                    }
+                    else{
+                        player.sendMessage(permissionManager.PermissionMessage);
+                    }
+                }
+            }
+             */
         }
         return true;
     }

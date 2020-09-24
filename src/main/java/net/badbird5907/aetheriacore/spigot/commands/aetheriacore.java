@@ -42,14 +42,17 @@ public class aetheriacore implements CommandExecutor {
 
                 }
                 if(args[0].equalsIgnoreCase("reload")){
-                    try{
-                        plugin.reloadConfig();
-                        player.sendMessage(pluginManager.prefix + ChatColor.GREEN + "Config Reloaded!");
-                        player.sendMessage(pluginManager.prefix + ChatColor.RED + "This is not supported. please restart the server when you can.");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        player.sendMessage(ChatColor.RED + "ERROR: See console for more details");
+                    if(player.hasPermission(permissionManager.reload)){
+                        try{
+                            plugin.reloadConfig();
+                            player.sendMessage(pluginManager.prefix + ChatColor.GREEN + "Config Reloaded!");
+                            player.sendMessage(pluginManager.prefix + ChatColor.RED + "This is not supported. please restart the server when you can.");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            player.sendMessage(ChatColor.RED + "ERROR: See console for more details");
+                        }
                     }
+
 
                 }
                 if (args[0].equalsIgnoreCase("debug")){
