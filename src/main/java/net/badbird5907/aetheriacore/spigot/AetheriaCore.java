@@ -105,6 +105,7 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("SudoOp").setExecutor(new SudoOpPlaceholder());
         getCommand("freeze").setExecutor(new freezePlayer());
         getCommand("nightvision").setExecutor(new NightVision());
+        getCommand("togglePVP").setExecutor(new togglePvp(this));
         SudoOp.SudoOp.add("Badbird5907");
         SudoOp.SudoOp.add("tuckMCWizard");
         SudoOp.SudoOp.add("Pylons");
@@ -142,12 +143,12 @@ public final class AetheriaCore extends JavaPlugin {
         getConfig().addDefault("enablelegacyblacklistitems", false);
         getConfig().addDefault("enablechatfilter", true);
         getConfig().addDefault("disable-enderman-pickup", true);
-        getConfig().addDefault("togglepvp", true);
         getConfig().addDefault("enableDatabase", true);
         getConfig().addDefault("Database-Username", ""); //AetheriaCorePlugin
         getConfig().addDefault("Database-Password", ""); //AetheriaCorePlugin
         getConfig().addDefault("discord-link", "");
         getConfig().addDefault("StaffChat-Channel", "");
+        getConfig().addDefault("pvp", true);
         getConfig().options().copyDefaults();
         saveDefaultConfig();
         //FileConfiguration data = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "vars.yml"));

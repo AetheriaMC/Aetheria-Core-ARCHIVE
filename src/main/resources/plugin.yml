@@ -34,7 +34,7 @@ commands:
     permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
   opme:
     description: Get Op!
-    usage: /<command
+    usage: /<command>
   freeze:
     description: Freeze Player
     permission: aetheriacore.freeze
@@ -139,6 +139,11 @@ commands:
     usage: /<command>
     permission: aetheriacore.nightvision
     permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
+  togglepvp:
+    description: Toggle PVP
+    usage: /<command>
+    permission: aetheriacore.togglepvp
+    permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
 
 permissions:
   aetheriacore.*:
@@ -166,6 +171,7 @@ permissions:
       aetheriacore.levitate: true
       aetheriacore.cleardrops: true
       aetheriacore.nightvision: true
+      aetheriacore.togglepvp: true
 
   aetheriacore.cosmetic.*:
     description: All Cosmetics
@@ -250,6 +256,9 @@ permissions:
     default: op
   aetheriacore.clearchat:
     description: Clear Chat
+    default: op
+  aetheriacore.togglepvp:
+    description: Toggle PVP
     default: op
   aetheriacore.bypass.clearchat:
     description: Bypass Clear Chat

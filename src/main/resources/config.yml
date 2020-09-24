@@ -20,3 +20,6 @@ Database-Password: AetheriaCorePlugin
 #------- DEBUG OPTIONS -------#
 enableDatabase: true
 #DO NOT TURN THIS OFF. IT MAY BREAK THE PLUGIN. THIS IS FOR DEBUGGING ONLY.
+
+#vars
+pvp: true

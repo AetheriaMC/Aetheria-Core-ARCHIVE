@@ -24,12 +24,14 @@ public class permissionManager {
     public static String ClearChat = "aetheriacore.clearchat";
     public static String BypassClearChat = "aetheriacore.bypass.clearchat";
     public static String ItemBlacklistList = "aetheriacore.itemblacklist.list";
+    public static String BypassItemBlacklist = "aetheriacore.bypass.blacklistitems";
     public static String Performance = "aetheriacore.performance";
     public static String DelPlayerData = "aetheriacore.admin.delplayerdata";
     public static String ListStaffcmds = "aetheriacore.liststaffcmds";
     public static String Levitate = "aetheriacore.levitate";
     public static String ClearDrops = "aetheriacore.cleardrops";
     public static String NightVision = "aetheriacore.nightvision";
+    public static String togglepvp = "aetheriacore.togglepvp";
 
     public static String PermissionMessage = "§cYou don't have the required permissions to execute this command. §o§8 NO_PERMISSIONS ";
 
