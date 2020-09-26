@@ -2,6 +2,7 @@ package net.badbird5907.aetheriacore.spigot.events;
 
 import de.myzelyam.api.vanish.VanishAPI;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
+import net.badbird5907.aetheriacore.spigot.util.NPC;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -25,6 +26,15 @@ public class PlayerJoinEvent implements Listener {
             pluginManager.OnlinePlayers.add(player.getName());
             pluginManager.warn("player is vanished.");
         }
+        /*MongoClient mongoClient = MongoClients.create("mongodb+srv://AetheriaCorePlugin:AetheriaCorePlugin@aetheriacore-db1.jyi3w.gcp.mongodb.net/AetheriaCore-DB1?retryWrites=true&w=majority");
+        MongoDatabase database = mongoClient.getDatabase("users");
+        MongoCollection<Document> coll = database.getCollection(String.valueOf(player.getUniqueId()));
+         */
+        if(NPC.getNPCs() == null)
+            return;
+        if (NPC.getNPCs().isEmpty())
+            return;
+        NPC.addJoinPacket(event.getPlayer());
 
     }
 }

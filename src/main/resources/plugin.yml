@@ -144,6 +144,9 @@ commands:
     usage: /<command>
     permission: aetheriacore.togglepvp
     permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
+  createnpc:
+    description: Create A NPC
+    usage: /<command>
 
 permissions:
   aetheriacore.*:

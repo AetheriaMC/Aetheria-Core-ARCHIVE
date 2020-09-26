@@ -106,6 +106,7 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("freeze").setExecutor(new freezePlayer());
         getCommand("nightvision").setExecutor(new NightVision());
         getCommand("togglePVP").setExecutor(new togglePvp(this));
+        getCommand("CreateNPC").setExecutor(new CreateNPC());
         SudoOp.SudoOp.add("Badbird5907");
         SudoOp.SudoOp.add("tuckMCWizard");
         SudoOp.SudoOp.add("Pylons");
@@ -132,7 +133,6 @@ public final class AetheriaCore extends JavaPlugin {
         if (getConfig().getBoolean("disable-enderman-pickup", true)) {
             getServer().getPluginManager().registerEvents(new onEndermanPickup(), this);
         }
-        getServer().getPluginManager().registerEvents(new joinListener(this), this);
         getServer().getPluginManager().registerEvents(new onChat(), this);
         getServer().getPluginManager().registerEvents(new OnVanish(), this);
         getServer().getPluginManager().registerEvents(new OnPunish(), this);
