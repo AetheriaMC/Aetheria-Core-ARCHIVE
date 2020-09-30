@@ -20,6 +20,7 @@ public class PlayerMoveEvent implements Listener {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You are currently frozen by a staff member.");
         }
+        /*
         Material[] bannedItems = {Material.COMMAND_BLOCK, Material.COMMAND_BLOCK_MINECART, Material.CHAIN_COMMAND_BLOCK, Material.REPEATING_COMMAND_BLOCK, Material.BEDROCK, Material.BARRIER, Material.STRUCTURE_BLOCK, Material.SPAWNER, Material.DEBUG_STICK, Material.JIGSAW};
         for (Material m : bannedItems) { //Loop thru all elements
             if (player.getInventory().contains(m, 1)) { //Check if in inventory
@@ -39,9 +40,9 @@ public class PlayerMoveEvent implements Listener {
                     StaffChatMessage.sendmessage("ItemBlacklist", "Blacklisted item (" + m + ") detected & deleted in " + player + "'s inventory");
                     return;
                 }
-
-
             }
         }
+
+         */
     }
 }

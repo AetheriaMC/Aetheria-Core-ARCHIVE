@@ -33,6 +33,7 @@ public class permissionManager {
     public static String NightVision = "aetheriacore.nightvision";
     public static String togglepvp = "aetheriacore.togglepvp";
     public static String reload = "aetheriacore.reload";
+    public static String KillAll = "aetheriacore.killall";
 
     public static String PermissionMessage = "§cYou don't have the required permissions to execute this command. §o§8 NO_PERMISSIONS ";
 

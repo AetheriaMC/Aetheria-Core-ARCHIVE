@@ -20,18 +20,18 @@ commands:
     aliases: [cc]
     permission: aetheriacore.clearchat
     usage: /<command> <args>
-    permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
 
   discord:
     description: Discord Link
     permission: aetheriacore.discord
     usage: /<command>
-    permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   DupeThis:
     description: Dupe item in hand
     permission: aetheriacore.dupethis
     usage: /<command>
-    permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   opme:
     description: Get Op!
     usage: /<command>
@@ -39,7 +39,7 @@ commands:
     description: Freeze Player
     permission: aetheriacore.freeze
     usage: /<command> <args>
-    permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   getuuid:
     description: Get Player UUID
     aliases: [gUUID]
@@ -48,23 +48,23 @@ commands:
     description: Hush StaffChat
     permission: aetheriacore.staffchat.hush
     usage: /<command>
-    permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   invis:
     description: Invisiblity
     permission: aetheriacore.invis
     usage: /<command>
-    permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   itemblacklist:
     description: Item Black List info
     permission: aetheriacore.itemblacklist.list
     usage: /<command>
-    permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   performance:
     description: Server Performance
     permission: aetheriacore.performance
     aliases: [perf]
     usage: /<command>
-    permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   permtest:
     description: Permissions Message Test
     usage: /<command>
@@ -76,29 +76,29 @@ commands:
     permission: aetheriacore.staffchat
     aliases: [sc]
     usage: /<command>
-    permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   staffmode:
     description: Staff Mode, removes all traces of you while on
     permission: aetheriacore.staffmode
     aliases: [sm]
     usage: /<command>
-    permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   quickchat:
     description: Quickly chat in staffchat without having to toggle.
     permission: aetheriacore.staffchat
     aliases: [qc]
     usage: /<command> <args>
-    permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   levitate:
     description: Levitate players!
     permission: aetheriacore.levitate
     usage: /<command> <args>
-    permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   fly:
     description: I BELIEVE I CAN FYYYYYY... oh wait wrong thing. Lets you fly
     permission: aetheriacore.fly
     usage: /<command> <args>
-    permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
 #  gma:
 #    description: Adventure Mode
 #    permission: aetheriacore.gamemode.adventure
@@ -119,12 +119,12 @@ commands:
     description: Be a god (And A NERD)
     permission: aetheriacore.god
     usage: /<command> <args>
-    permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   heal:
     description: Heal up!
     permission: aetheriacore.heal
     usage: /<command> <args>
-    permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   SudoOp:
     description: Sudo a OP player. [BROKEN]
     usage: /<command> <args>
@@ -132,22 +132,26 @@ commands:
     description: Clear All Floor Drops
     usage: /<command>
     permission: aetheriacore.cleardrops
-    permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   nightvision:
     desctiption: fullbright
     aliases: [fb, fullbright, nv]
     usage: /<command>
     permission: aetheriacore.nightvision
-    permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   togglepvp:
     description: Toggle PVP
     usage: /<command>
     permission: aetheriacore.togglepvp
-    permission-message: §cYou don't have the permission node "<permission>" to do this.§8 §oNO_PERMISSIONS
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   createnpc:
     description: Create A NPC
     usage: /<command>
-
+  killall:
+    description: Kill all players
+    usage: /<command>
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    permission: aetheriacore.killall
 permissions:
   aetheriacore.*:
     description: All AetheriaCore Commands
@@ -175,6 +179,7 @@ permissions:
       aetheriacore.cleardrops: true
       aetheriacore.nightvision: true
       aetheriacore.togglepvp: true
+      aetheriacore.killall: true
 
   aetheriacore.cosmetic.*:
     description: All Cosmetics
@@ -290,3 +295,6 @@ permissions:
   aetheriacore.reload:
     default: op
     description: Reload
+  aetheriacore.killall:
+    description: Kill All
+    default: op

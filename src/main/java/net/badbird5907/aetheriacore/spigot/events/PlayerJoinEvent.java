@@ -13,6 +13,11 @@ public class PlayerJoinEvent implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void JoinEvent(PlayerLoginEvent event){
         Player player = event.getPlayer();
+        if(NPC.getNPCs() == null)
+            return;
+        if (NPC.getNPCs().isEmpty())
+            return;
+        NPC.addJoinPacket(event.getPlayer());
         if(VanishAPI.getAllInvisiblePlayers().contains(player)){
             if(pluginManager.OnlineVisiblePlayers.contains(event.getPlayer().getName())){
                 pluginManager.warn(pluginManager.prefix + "Array List \"OnlineVisiblePlayers\" already contains " + event.getPlayer().getDisplayName() + "please report this to Badbird.");
@@ -30,11 +35,7 @@ public class PlayerJoinEvent implements Listener {
         MongoDatabase database = mongoClient.getDatabase("users");
         MongoCollection<Document> coll = database.getCollection(String.valueOf(player.getUniqueId()));
          */
-        if(NPC.getNPCs() == null)
-            return;
-        if (NPC.getNPCs().isEmpty())
-            return;
-        NPC.addJoinPacket(event.getPlayer());
+
 
     }
 }

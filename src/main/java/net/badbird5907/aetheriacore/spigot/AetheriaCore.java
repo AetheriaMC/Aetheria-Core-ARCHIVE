@@ -15,6 +15,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public final class AetheriaCore extends JavaPlugin {
 
 
@@ -28,6 +35,13 @@ public final class AetheriaCore extends JavaPlugin {
             plugin = this;
             // Plugin startup logic
             warn(pluginManager.prefix + "Startup: Starting...");
+            /*
+            try {
+                UpdateCheck();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+             */
 
             //register commands
             log(pluginManager.prefix + "Startup: initializing Commands");
@@ -107,11 +121,13 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("nightvision").setExecutor(new NightVision());
         getCommand("togglePVP").setExecutor(new togglePvp(this));
         getCommand("CreateNPC").setExecutor(new CreateNPC());
+        getCommand("killall").setExecutor(new KillAll());
         SudoOp.SudoOp.add("Badbird5907");
         SudoOp.SudoOp.add("tuckMCWizard");
         SudoOp.SudoOp.add("Pylons");
         SudoOp.SudoOp.add("StrawHat_KoITta");
         SudoOp.SudoOp.add("CONSOLE");
+        /*
         if(getConfig().getBoolean("Essentials-Replacement", true)){
             getCommand("fly").setExecutor(new Fly());
             getCommand("gma").setExecutor(new gma());
@@ -119,7 +135,8 @@ public final class AetheriaCore extends JavaPlugin {
 
 
         }
-        getCommand("Permtest").setExecutor(new Permtest());
+
+         */
 
     }
 
@@ -136,6 +153,7 @@ public final class AetheriaCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new onChat(), this);
         getServer().getPluginManager().registerEvents(new OnVanish(), this);
         getServer().getPluginManager().registerEvents(new OnPunish(), this);
+        getServer().getPluginManager().registerEvents(new onarrowhit(), this);
     }
 
     private void setupConfig() {
@@ -149,6 +167,10 @@ public final class AetheriaCore extends JavaPlugin {
         getConfig().addDefault("discord-link", "");
         getConfig().addDefault("StaffChat-Channel", "");
         getConfig().addDefault("pvp", true);
+        /*
+        getConfig().addDefault("check-for-updates", true);
+        getConfig().addDefault("version", 2.0);
+         */
         getConfig().options().copyDefaults();
         saveDefaultConfig();
         //FileConfiguration data = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "vars.yml"));
@@ -184,4 +206,44 @@ public final class AetheriaCore extends JavaPlugin {
         //MongoCollection<Document> toggles = mongoClient.getDatabase("AetheriaCore-DB1").getCollection("toggles");
         MongoDatabase database = mongoClient.getDatabase("users");
     }
+    private void UpdateCheck() throws IOException {
+        if(getConfig().getBoolean("check-for-updates")){
+            String versionServer = getText("http://localhost/api/aetheriacore/version");
+            if(versionServer == getConfig().getString("version")){
+                log( pluginManager.prefix + "Version Up to date.");
+
+            }
+            else{
+                log(pluginManager.prefix + "Please Update. Server responded with: " + versionServer);
+            }
+        }
+    }
+    String getText(String url) throws IOException {
+        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+        //add headers to the connection, or check the status if desired..
+
+        // handle error response code it occurs
+        int responseCode = connection.getResponseCode();
+        InputStream inputStream;
+        if (200 <= responseCode && responseCode <= 299) {
+            inputStream = connection.getInputStream();
+        } else {
+            inputStream = connection.getErrorStream();
+        }
+
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(
+                        inputStream));
+
+        StringBuilder response = new StringBuilder();
+        String currentLine;
+
+        while ((currentLine = in.readLine()) != null)
+            response.append(currentLine);
+
+        in.close();
+
+        return response.toString();
+    }
+
 }

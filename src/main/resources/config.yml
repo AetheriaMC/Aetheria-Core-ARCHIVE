@@ -6,11 +6,16 @@ enablechatfilter: true
 
 disable-enderman-pickup: true
 
-Essentials-Replacement: true
+#NOT IN USE
+#Essentials-Replacement: true
+
+#NOT IN USE
+#check-for-updates: true
 
 discord-link: REPLACE THIS WITH DISCORD LINK
 
 StaffChat-Channel: aetheriacore-1 #define in DiscordSRV config
+
 
 #Default Database. Don't Change
 Database-Username: AetheriaCorePlugin
@@ -20,6 +25,11 @@ Database-Password: AetheriaCorePlugin
 #------- DEBUG OPTIONS -------#
 enableDatabase: true
 #DO NOT TURN THIS OFF. IT MAY BREAK THE PLUGIN. THIS IS FOR DEBUGGING ONLY.
+
+#Plugin Version
+#uses a GET request on https://badbird5907.net/api/aetheriacore/version
+#change check-for-updates: true to check-for-updates: false to disable update checking
+version: 2.0
 
 #vars
 pvp: true

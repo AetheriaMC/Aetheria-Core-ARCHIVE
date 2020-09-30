@@ -8,6 +8,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class StaffChatMessage{
+    /**
+     *
+     * @param sender Shows the sender of the message
+     * @param message The message
+     */
     public static void sendmessage(String sender, String message){
         for (Player player : Bukkit.getOnlinePlayers()) {
             if(player.hasPermission(permissionManager.staffchat)){

@@ -28,7 +28,7 @@ public class onarrowhit implements Listener {
             return;
 
         Player shooter = (Player) src;
-        shooter.sendMessage(ChatColor.RED + target.getName() + ChatColor.GOLD + "Is At" + ChatColor.BOLD + "" + ChatColor.RED + target.getHealth() + ChatColor.RESET + "" + ChatColor.GOLD + "Hp" );
+        shooter.sendMessage(ChatColor.RED + target.getName() + ChatColor.GOLD + " Is At " + ChatColor.BOLD + "" + ChatColor.GREEN + target.getHealth() + ChatColor.RESET + "" + ChatColor.GOLD + "Hp" );
         target.sendMessage(ChatColor.RED + "You were shot by " + shooter.getName() );
         shooter.playSound(shooter.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP	, 7, 1);
     }

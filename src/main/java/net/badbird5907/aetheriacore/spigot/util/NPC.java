@@ -23,6 +23,7 @@ public class NPC {
         npc.setLocation(player.getLocation().getX(), player.getLocation().getBlockY(), player.getLocation().getZ(), player.getLocation().getYaw(), player.getLocation().getPitch());
 
         addNPCPacket(npc);
+        NPC.add(npc);
     }
     public static void addNPCPacket(EntityPlayer npc){
         for(Player player : Bukkit.getOnlinePlayers()){

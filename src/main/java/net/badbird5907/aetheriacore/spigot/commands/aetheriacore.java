@@ -78,6 +78,7 @@ public class aetheriacore implements CommandExecutor {
                         player.sendMessage(ChatColor.GOLD + "/invis | Staff Only | Gives invisibility for 6 minutes NOT VANISH");
                         player.sendMessage(ChatColor.GOLD + "/performance or /perf | Staff Only | Server Performance");
                         player.sendMessage(ChatColor.GOLD + "/staffchat or /sc | Staff Only | Staff Chat");
+                        player.sendMessage(ChatColor.GOLD + "/createnpc " + ChatColor.RED + "EXPERMENTAL. MAY CRASH SERVER");
                         if(plugin.getConfig().getBoolean("Essentials-Replacement", true)){
                             player.sendMessage(ChatColor.GOLD + "/Fly | Fly");
                             player.sendMessage(ChatColor.GOLD + "/GMC | Creative Mode");
