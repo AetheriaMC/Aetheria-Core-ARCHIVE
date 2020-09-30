@@ -7,10 +7,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+/**
+ * The type Staff chat message.
+ */
 public class StaffChatMessage{
     /**
+     * Sendmessage.
      *
-     * @param sender Shows the sender of the message
+     * @param sender  Shows the sender of the message
      * @param message The message
      */
     public static void sendmessage(String sender, String message){
