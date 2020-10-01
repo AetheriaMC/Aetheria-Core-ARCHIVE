@@ -147,11 +147,19 @@ commands:
   createnpc:
     description: Create A NPC
     usage: /<command>
+    permission: aetheriacore.createnpc
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   killall:
     description: Kill all players
     usage: /<command>
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
     permission: aetheriacore.killall
+  systeminfo:
+    aliases: [system, sysinfo]
+    description: In-Depth System Info
+    usage: /<command>
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    permission: aetheriacore.sysinfo
 permissions:
   aetheriacore.*:
     description: All AetheriaCore Commands
@@ -180,6 +188,7 @@ permissions:
       aetheriacore.nightvision: true
       aetheriacore.togglepvp: true
       aetheriacore.killall: true
+      aetheriacore.sysinfo: true
 
   aetheriacore.cosmetic.*:
     description: All Cosmetics
@@ -297,4 +306,7 @@ permissions:
     description: Reload
   aetheriacore.killall:
     description: Kill All
+    default: op
+  aetheriacore.sysinfo:
+    description: System Info
     default: op

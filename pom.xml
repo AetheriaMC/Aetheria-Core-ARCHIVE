@@ -121,6 +121,13 @@
             <version>1.19.1</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.oshi</groupId>
+            <artifactId>oshi-core</artifactId>
+            <scope>system</scope>
+            <systemPath>${basedir}/oshi-core-5.2.5.jar</systemPath>
+            <version>5.2.5</version>
+        </dependency>
         <!--
         <dependency>
             <groupId>com.comphenix.protocol</groupId>

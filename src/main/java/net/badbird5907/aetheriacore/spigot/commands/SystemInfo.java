@@ -1,0 +1,46 @@
+package net.badbird5907.aetheriacore.spigot.commands;
+
+import net.badbird5907.aetheriacore.spigot.AetheriaCore;
+import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
+import net.md_5.bungee.protocol.packet.Chat;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import oshi.hardware.CentralProcessor;
+import oshi.hardware.HardwareAbstractionLayer;
+import oshi.software.os.OperatingSystem;
+
+import java.lang.management.ManagementFactory;
+import java.lang.management.OperatingSystemMXBean;
+
+public class SystemInfo implements CommandExecutor {
+    AetheriaCore plugin;
+    public SystemInfo(AetheriaCore plugin) {
+        this.plugin = plugin;
+    }
+
+    @Override
+    public boolean onCommand( CommandSender sender, Command command, String s, String[] args) {
+        oshi.SystemInfo si = new oshi.SystemInfo();
+        HardwareAbstractionLayer hal = si.getHardware();
+        CentralProcessor cpu = hal.getProcessor();
+        OperatingSystemMXBean osBean = ManagementFactory.getOperatingSystemMXBean();
+        OperatingSystem osInfo = si.getOperatingSystem();
+        if(sender.hasPermission(permissionManager.SysInfo)){
+            sender.sendMessage(ChatColor.GOLD + "OS INFO:");
+            sender.sendMessage(ChatColor.GOLD + "OS Name: " + System.getProperty("os.name"));
+            sender.sendMessage(ChatColor.GOLD + "OS Family: " + osInfo.getFamily());
+            sender.sendMessage(ChatColor.GOLD + "OS Version: " + osInfo.getVersionInfo().toString());
+            sender.sendMessage(ChatColor.GOLD + "OS Manufacturer: " + osInfo.getManufacturer());
+            sender.sendMessage(ChatColor.GOLD + "SYSTEM INFO:");
+            sender.sendMessage(ChatColor.GOLD + "Total Processes: " + String.valueOf(osInfo.getProcessCount()));
+            sender.sendMessage(ChatColor.GOLD + "Thread Count: " +  String.valueOf(osInfo.getThreadCount()));
+            sender.sendMessage(ChatColor.GOLD + "CPU INFO:");
+            sender.sendMessage(ChatColor.GOLD + "Max Frequency: " + cpu.getMaxFreq());
+            sender.sendMessage(ChatColor.GOLD + "Cores: " + cpu.getPhysicalProcessorCount());
+
+        }
+        return true;
+    }
+}

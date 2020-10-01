@@ -11,7 +11,6 @@ import org.bukkit.command.CommandSender;
 import java.lang.management.ManagementFactory;
 
 public class performance implements CommandExecutor {
-    public static double cpuUsage = ManagementFactory.getOperatingSystemMXBean().getSystemLoadAverage();
     Runtime r = Runtime.getRuntime();
     long memUsed = (r.totalMemory() - r.freeMemory()) / 1048576;
 
@@ -27,6 +26,7 @@ public class performance implements CommandExecutor {
             else{
                 double roundOff = Math.round(Lag.getTPS() * 100.0) / 100.0;
                 player.sendMessage(ChatColor.GOLD + "Tps: " + roundOff);
+
             }
             if(cpuUsageBoolean() == true){
                 player.sendMessage(ChatColor.GOLD + "Cpu Usage: " + ManagementFactory.getOperatingSystemMXBean().getSystemLoadAverage());
