@@ -41,6 +41,17 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <!--
+                            <archive>
+                                <manifestFile>src/main/META-INF/MANIFEST.MF</manifestFile>
+                                <manifest>
+                                    <addClasspath>true</addClasspath>
+                                </manifest>
+                                <manifestEntries>
+                                    <Built-By>Badbird5907</Built-By>
+                                </manifestEntries>
+                            </archive>
+                            -->
                         </configuration>
                     </execution>
                 </executions>
@@ -53,6 +64,7 @@
             </resource>
         </resources>
     </build>
+
 
     <repositories>
         <repository>
@@ -125,9 +137,23 @@
             <groupId>com.github.oshi</groupId>
             <artifactId>oshi-core</artifactId>
             <scope>system</scope>
-            <systemPath>${basedir}/oshi-core-5.2.5.jar</systemPath>
+            <systemPath>${basedir}/lib/oshi-core-5.2.5.jar</systemPath>
             <version>5.2.5</version>
         </dependency>
+        <dependency>
+            <groupId>com.sun.jna</groupId>
+            <artifactId>jna</artifactId>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/jna-5.6.0.jar</systemPath>
+            <version>3.0.9</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.0-alpha1</version>
+        </dependency>
+
         <!--
         <dependency>
             <groupId>com.comphenix.protocol</groupId>

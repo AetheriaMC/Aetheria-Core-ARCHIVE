@@ -122,7 +122,7 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("togglePVP").setExecutor(new togglePvp(this));
         getCommand("CreateNPC").setExecutor(new CreateNPC());
         getCommand("killall").setExecutor(new KillAll());
-        getCommand("systeminfo").setExecutor(new SystemInfo(this));
+        //getCommand("systeminfo").setExecutor(new SystemInfo(this));
         SudoOp.SudoOp.add("Badbird5907");
         SudoOp.SudoOp.add("tuckMCWizard");
         SudoOp.SudoOp.add("Pylons");
