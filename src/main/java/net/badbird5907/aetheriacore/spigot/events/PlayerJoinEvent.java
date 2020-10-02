@@ -29,7 +29,7 @@ public class PlayerJoinEvent implements Listener {
         else{
             pluginManager.VanishedPlayers.add(player.getName());
             pluginManager.OnlinePlayers.add(player.getName());
-            pluginManager.warn("player is vanished.");
+            pluginManager.warn(player.getDisplayName() + " is vanished.");
         }
         /*MongoClient mongoClient = MongoClients.create("mongodb+srv://AetheriaCorePlugin:AetheriaCorePlugin@aetheriacore-db1.jyi3w.gcp.mongodb.net/AetheriaCore-DB1?retryWrites=true&w=majority");
         MongoDatabase database = mongoClient.getDatabase("users");

@@ -12,19 +12,19 @@ import net.badbird5907.aetheriacore.spigot.other.Lag;
 import net.badbird5907.aetheriacore.spigot.essentialsreplacement.commands.*;
 import net.badbird5907.aetheriacore.spigot.util.TabComplete;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 public final class AetheriaCore extends JavaPlugin {
-
-
+    private File customConfigFile;
+    private FileConfiguration customConfig;
     private static AetheriaCore plugin;
     private OnDiscordMessageRecieved discordsrvListener = new OnDiscordMessageRecieved(this);
 
@@ -56,6 +56,7 @@ public final class AetheriaCore extends JavaPlugin {
             //get config
             log(pluginManager.prefix + "Startup: Loading Config...");
             this.setupConfig();
+            createCustomConfig();
             log(pluginManager.prefix + "Startup: Config Loaded!!");
 
             //load mongodb
@@ -241,10 +242,27 @@ public final class AetheriaCore extends JavaPlugin {
 
         while ((currentLine = in.readLine()) != null)
             response.append(currentLine);
-
         in.close();
-
         return response.toString();
+    }
+    public FileConfiguration getDataFile() {
+        return this.customConfig;
+    }
+    private void createCustomConfig() {
+        log(pluginManager.prefix + "Checking Data File");
+        customConfigFile = new File(getDataFolder(), "data.yml");
+        if (!customConfigFile.exists()) {
+            warn(pluginManager.prefix + "Data file does not exist. Creating new file");
+            customConfigFile.getParentFile().mkdirs();
+            saveResource("data.yml", false);
+        }
+
+        customConfig = new YamlConfiguration();
+        try {
+            customConfig.load(customConfigFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
     }
 
 }

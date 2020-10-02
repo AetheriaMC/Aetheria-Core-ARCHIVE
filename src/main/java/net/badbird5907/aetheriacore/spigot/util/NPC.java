@@ -3,7 +3,6 @@ package net.badbird5907.aetheriacore.spigot.util;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.server.v1_16_R2.*;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.craftbukkit.v1_16_R2.CraftServer;
 import org.bukkit.craftbukkit.v1_16_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_16_R2.entity.CraftPlayer;
@@ -15,10 +14,10 @@ import java.util.UUID;
 
 public class NPC {
     private static List<EntityPlayer> NPC = new ArrayList<EntityPlayer>();
-    public static void createNPC(Player player){
+    public static void createNPC(Player player, String name){
         MinecraftServer server = ((CraftServer) Bukkit.getServer()).getServer();
         WorldServer world = ((CraftWorld) Bukkit.getWorld(player.getWorld().getName())).getHandle();
-        GameProfile gameProfile = new GameProfile(UUID.randomUUID(), ChatColor.AQUA + "" + ChatColor.BOLD + "Badbird5907");
+        GameProfile gameProfile = new GameProfile(UUID.randomUUID(), name);
         EntityPlayer npc = new EntityPlayer(server, world, gameProfile, new PlayerInteractManager(world));
         npc.setLocation(player.getLocation().getX(), player.getLocation().getBlockY(), player.getLocation().getZ(), player.getLocation().getYaw(), player.getLocation().getPitch());
 
