@@ -21,12 +21,12 @@ commands:
     permission: aetheriacore.clearchat
     usage: /<command> <args>
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
-
-  discord:
-    description: Discord Link
-    permission: aetheriacore.discord
-    usage: /<command>
-    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+#
+#  discord:
+#    description: Discord Link
+#    permission: aetheriacore.discord
+#    usage: /<command>
+#    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   DupeThis:
     description: Dupe item in hand
     permission: aetheriacore.dupethis
@@ -160,6 +160,9 @@ commands:
     usage: /<command>
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
     permission: aetheriacore.sysinfo
+  link:
+    description: Passes through to /discordsrv link
+    usage: /<command>
 permissions:
   aetheriacore.*:
     description: All AetheriaCore Commands
@@ -170,7 +173,7 @@ permissions:
       aetheriacore.god: true
       aetheriacore.heal: true
       aetheriacore.settings: true
-      aetheriacore.discord: true
+#      aetheriacore.discord: true
       aetheriacore.freeze: true
       aetheriacore.bypass.*: true
       aetheriacore.rtp: true
@@ -235,9 +238,9 @@ permissions:
   aetheriacore.settings:
     default: false
     description: Server Settings
-  aetheriacore.discord:
-    description: Discord Link
-    default: true
+#  aetheriacore.discord:
+#    description: Discord Link
+#    default: true
   aetheriacore.freeze:
     description: Freeze player
     default: false

@@ -12,7 +12,7 @@ disable-enderman-pickup: true
 #NOT IN USE
 #check-for-updates: true
 
-discord-link: REPLACE THIS WITH DISCORD LINK
+#discord-link: REPLACE THIS WITH DISCORD LINK
 
 StaffChat-Channel: aetheriacore-1 #define in DiscordSRV config
 

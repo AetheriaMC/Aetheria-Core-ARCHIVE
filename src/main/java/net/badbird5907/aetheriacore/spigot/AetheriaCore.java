@@ -101,7 +101,6 @@ public final class AetheriaCore extends JavaPlugin {
     private void setupCommands() {
         getCommand("aetheriacore").setExecutor(new aetheriacore(this));
         getCommand("aetheriacore").setTabCompleter(new TabComplete());
-        getCommand("discord").setExecutor(new discord(this));
         getCommand("invis").setExecutor(new invis());
         getCommand("clearchat").setExecutor(new clearchat(this));
         getCommand("rules").setExecutor(new rules());
@@ -123,6 +122,7 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("togglePVP").setExecutor(new togglePvp(this));
         getCommand("CreateNPC").setExecutor(new CreateNPC());
         getCommand("killall").setExecutor(new KillAll());
+        getCommand("link").setExecutor(new link());
         //getCommand("systeminfo").setExecutor(new SystemInfo(this));
         SudoOp.SudoOp.add("Badbird5907");
         SudoOp.SudoOp.add("tuckMCWizard");
@@ -166,7 +166,7 @@ public final class AetheriaCore extends JavaPlugin {
         getConfig().addDefault("enableDatabase", true);
         getConfig().addDefault("Database-Username", ""); //AetheriaCorePlugin
         getConfig().addDefault("Database-Password", ""); //AetheriaCorePlugin
-        getConfig().addDefault("discord-link", "");
+//        getConfig().addDefault("discord-link", "");
         getConfig().addDefault("StaffChat-Channel", "");
         getConfig().addDefault("pvp", true);
         /*
