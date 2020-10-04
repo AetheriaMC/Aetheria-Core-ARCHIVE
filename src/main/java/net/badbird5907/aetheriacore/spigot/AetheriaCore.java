@@ -27,10 +27,15 @@ public final class AetheriaCore extends JavaPlugin {
     private FileConfiguration customConfig;
     private static AetheriaCore plugin;
     private OnDiscordMessageRecieved discordsrvListener = new OnDiscordMessageRecieved(this);
-
+    private static final String[] SUPPORTED_VERSIONS = new String[] {
+            "1.16.3", "1.16.2"
+    };
     @Override
     public void onEnable() {
         if (getConfig().getBoolean("enable")) {
+            if(Bukkit.getServer().getVersion().equalsIgnoreCase(SUPPORTED_VERSIONS[1])){
+
+            }
             DiscordSRV.api.subscribe(discordsrvListener);
             plugin = this;
             // Plugin startup logic
