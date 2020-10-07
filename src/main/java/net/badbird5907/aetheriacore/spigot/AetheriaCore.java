@@ -12,9 +12,12 @@ import net.badbird5907.aetheriacore.spigot.other.Lag;
 import net.badbird5907.aetheriacore.spigot.essentialsreplacement.commands.*;
 import net.badbird5907.aetheriacore.spigot.util.TabComplete;
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -99,6 +102,22 @@ public final class AetheriaCore extends JavaPlugin {
         //Plugin disable logic
         getServer().getScheduler().cancelTasks((Plugin) this);
         DiscordSRV.api.unsubscribe(discordsrvListener);
+        log("Killing All Custom Hostile Mobs.");
+        // Iterate through every world on the server
+        int removed_entities = 0;
+        for(World w : Bukkit.getWorlds()){
+
+            // Iterate through every entity in that world
+            for(Entity e : w.getEntities()){
+
+                //If Entity has custom Hostile AI as defined by MetaData, remove
+                if(e.hasMetadata("Hostile_AI")){
+                    removed_entities++;
+                    e.remove();
+                }
+            }
+        }
+        log(new StringBuilder().append(removed_entities).append(" Custom Hostile Entites Removed.").toString());
         log( "Plugin Disabled.");
         warn( "Baiwoo!!!");
     }
