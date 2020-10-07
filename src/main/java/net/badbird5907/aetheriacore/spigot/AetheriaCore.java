@@ -39,7 +39,7 @@ public final class AetheriaCore extends JavaPlugin {
             DiscordSRV.api.subscribe(discordsrvListener);
             plugin = this;
             // Plugin startup logic
-            warn(pluginManager.prefix + "Startup: Starting...");
+            warn("Startup: Starting...");
             /*
             try {
                 UpdateCheck();
@@ -49,33 +49,33 @@ public final class AetheriaCore extends JavaPlugin {
              */
 
             //register commands
-            log(pluginManager.prefix + "Startup: initializing Commands");
+            log("Startup: initializing Commands");
             this.setupCommands();
 
             //register events
-            log(pluginManager.prefix + "Startup: Registering Events...");
+            log( "Startup: Registering Events...");
             this.setupEvents();
-            log(pluginManager.prefix + "All Events Registered!");
+            log( "All Events Registered!");
             Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Lag(), 100L, 1L);
 
             //get config
-            log(pluginManager.prefix + "Startup: Loading Config...");
+            log( "Startup: Loading Config...");
             this.setupConfig();
             createCustomConfig();
-            log(pluginManager.prefix + "Startup: Config Loaded!!");
+            log("Startup: Config Loaded!!");
 
             //load mongodb
             if (plugin.getConfig().getBoolean("enableDatabase", true)) {
-                log(pluginManager.prefix + "Connecting to mongodb database...");
+                log( "Connecting to mongodb database...");
                 DB();
-                log(pluginManager.prefix + "Connected! Expect some logs below");
-                log(pluginManager.prefix + "Configuring Database...");
+                log( "Connected! Expect some logs below");
+                log( "Configuring Database...");
                 //Document document1 = new Document("test", "pickle").append("test", "test123");
                 //collection.insertOne(document1);
-                log(pluginManager.prefix + "Done!");
+                log( "Done!");
             }
             else {
-                warn(pluginManager.prefix + "MongoDB is set to off in config. Plugin may not work correctly.");
+                warn( "MongoDB is set to off in config. Plugin may not work correctly.");
             }
 
             //log("Setting Up Dependencys");
@@ -83,13 +83,13 @@ public final class AetheriaCore extends JavaPlugin {
             //log("done!");
 
             //finished startup
-            warn(pluginManager.prefix + "Startup Finished!");
-            log( pluginManager.prefix +"INFO: do /AEC debug for plugin info");
-            log(pluginManager.prefix + "INFO: do /AEC reload to reload plugin config");
-            log( pluginManager.prefix +"INFO: do /performance to show server performance");
+            warn( "Startup Finished!");
+            log( "INFO: do /AEC debug for plugin info");
+            log( "INFO: do /AEC reload to reload plugin config");
+            log( "INFO: do /performance to show server performance");
         } else {
-            warn( pluginManager.prefix +"Plugin Disabled because disabled in config.yml");
-            warn( pluginManager.prefix +"Enable plugin by changing enable: false to enable: true");
+            warn( "Plugin Disabled because disabled in config.yml");
+            warn( "Enable plugin by changing enable: false to enable: true");
         }
 
     }
@@ -99,8 +99,8 @@ public final class AetheriaCore extends JavaPlugin {
         //Plugin disable logic
         getServer().getScheduler().cancelTasks((Plugin) this);
         DiscordSRV.api.unsubscribe(discordsrvListener);
-        log(pluginManager.prefix + "Plugin Disabled.");
-        warn(pluginManager.prefix + "Baiwoo!!!");
+        log( "Plugin Disabled.");
+        warn( "Baiwoo!!!");
     }
 
     private void setupCommands() {
@@ -186,11 +186,11 @@ public final class AetheriaCore extends JavaPlugin {
     }
 
     private void log(final String string) {
-        Bukkit.getLogger().info(string);
+        Bukkit.getLogger().info(pluginManager.prefix + string);
     }
 
     private void warn(final String string) {
-        Bukkit.getLogger().warning(string);
+        Bukkit.getLogger().warning(pluginManager.prefix + string        );
     }
 
     private void setupDependencies() {
@@ -218,11 +218,11 @@ public final class AetheriaCore extends JavaPlugin {
         if(getConfig().getBoolean("check-for-updates")){
             String versionServer = getText("http://localhost/api/aetheriacore/version");
             if(versionServer == getConfig().getString("version")){
-                log( pluginManager.prefix + "Version Up to date.");
+                log(  "Version Up to date.");
 
             }
             else{
-                log(pluginManager.prefix + "Please Update. Server responded with: " + versionServer);
+                log( "Please Update. Server responded with: " + versionServer);
             }
         }
     }
@@ -255,10 +255,10 @@ public final class AetheriaCore extends JavaPlugin {
         return this.customConfig;
     }
     private void createCustomConfig() {
-        log(pluginManager.prefix + "Checking Data File");
+        log( "Checking Data File");
         customConfigFile = new File(getDataFolder(), "data.yml");
         if (!customConfigFile.exists()) {
-            warn(pluginManager.prefix + "Data file does not exist. Creating new file");
+            warn( "Data file does not exist. Creating new file");
             customConfigFile.getParentFile().mkdirs();
             saveResource("data.yml", false);
         }
