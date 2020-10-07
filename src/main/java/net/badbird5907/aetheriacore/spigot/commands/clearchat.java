@@ -20,7 +20,6 @@ public class clearchat implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
         if (sender instanceof Player) {
             if (command.getName().equalsIgnoreCase("clearchat")) {
                 if (args.length == 0) {
@@ -77,7 +76,6 @@ public class clearchat implements CommandExecutor {
                     player.sendMessage(ChatColor.GREEN + "Chat Was Cleared By " + ChatColor.RED + ChatColor.BOLD + "Console" + ChatColor.GREEN + "!");
                 }
             }
-
         }
         return true;
     }

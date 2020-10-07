@@ -20,7 +20,6 @@ public class CommandClass extends Command {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-
         if (args.length < 2) {
             sender.sendMessage(new TextComponent(ChatColor.RED + "Usage: /gexecute <server>|all <command>"));
             return;

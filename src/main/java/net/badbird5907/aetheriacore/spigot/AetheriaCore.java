@@ -174,6 +174,7 @@ public final class AetheriaCore extends JavaPlugin {
 //        getConfig().addDefault("discord-link", "");
         getConfig().addDefault("StaffChat-Channel", "");
         getConfig().addDefault("pvp", true);
+        getConfig().addDefault("version", 1.0);
         /*
         getConfig().addDefault("check-for-updates", true);
         getConfig().addDefault("version", 2.0);

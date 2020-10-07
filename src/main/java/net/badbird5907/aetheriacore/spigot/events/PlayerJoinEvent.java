@@ -17,7 +17,9 @@ public class PlayerJoinEvent implements Listener {
             return;
         if (NPC.getNPCs().isEmpty())
             return;
-        NPC.addJoinPacket(event.getPlayer());
+        else {
+            NPC.addJoinPacket(event.getPlayer());
+        }
         if(VanishAPI.getAllInvisiblePlayers().contains(player)){
             if(pluginManager.OnlineVisiblePlayers.contains(event.getPlayer().getName())){
                 pluginManager.warn(pluginManager.prefix + "Array List \"OnlineVisiblePlayers\" already contains " + event.getPlayer().getDisplayName() + "please report this to Badbird.");
