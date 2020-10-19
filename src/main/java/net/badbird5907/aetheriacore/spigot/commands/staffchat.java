@@ -11,10 +11,11 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 public class staffchat implements CommandExecutor {
-    public static List <String> staffchatToggle = new ArrayList<String>();
+    public static List <UUID> staffchatToggle = new ArrayList<UUID>();
 
     @Override
     public boolean onCommand(CommandSender player, Command command, String label, String[] args) {
@@ -23,21 +24,21 @@ public class staffchat implements CommandExecutor {
         }
         else {
             if (player.hasPermission(permissionManager.staffchat)) {
-                if (staffchatToggle.contains(player.getName())) {
-                    if (!StaffMode.StaffModeToggle.contains(player.getName())) {
+                if (staffchatToggle.contains(((Player) player).getUniqueId())) {
+                    if (!StaffMode.StaffModeToggle.contains(((Player) player).getUniqueId())) {
                         player.sendMessage(pluginManager.prefix + ChatColor.WHITE + "StaffChat turned " + ChatColor.RED + "OFF");
-                        staffchatToggle.remove(player.getName());
+                        staffchatToggle.remove(((Player) player).getUniqueId());
                     } else {
                         player.sendMessage(pluginManager.prefix + ChatColor.RED + "Error: Staff Mode is active. do /sm to disable." + ChatColor.DARK_GRAY + " " + ChatColor.ITALIC + "STAFF_MODE_ON");
                     }
 
                 } else {
                     player.sendMessage(pluginManager.prefix + ChatColor.WHITE + "StaffChat turned " + ChatColor.GREEN + "ON");
-                    staffchatToggle.add(player.getName());
+                    staffchatToggle.add(((Player) player).getUniqueId());
                 }
             } else {
-                if(staffchatToggle.contains(player.getName())){
-                    staffchatToggle.remove(player.getName());
+                if(staffchatToggle.contains(((Player) player).getUniqueId())){
+                    staffchatToggle.remove(((Player) player).getUniqueId());
                     return true;
                 }
                 else {

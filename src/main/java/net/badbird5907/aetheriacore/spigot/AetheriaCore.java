@@ -5,11 +5,13 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import github.scarsz.discordsrv.DiscordSRV;
 import net.badbird5907.aetheriacore.spigot.commands.*;
-import net.badbird5907.aetheriacore.spigot.commands.trolls.*;
+import net.badbird5907.aetheriacore.spigot.commands.trolls.KillAll;
+import net.badbird5907.aetheriacore.spigot.commands.trolls.SudoOp;
+import net.badbird5907.aetheriacore.spigot.commands.trolls.SudoOpPlaceholder;
+import net.badbird5907.aetheriacore.spigot.commands.trolls.opme;
 import net.badbird5907.aetheriacore.spigot.events.*;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
-import net.badbird5907.aetheriacore.spigot.essentialsreplacement.commands.*;
 import net.badbird5907.aetheriacore.spigot.util.TabComplete;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -17,27 +19,31 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class AetheriaCore extends JavaPlugin {
+
     private File customConfigFile;
     private FileConfiguration customConfig;
     private static AetheriaCore plugin;
     private OnDiscordMessageRecieved discordsrvListener = new OnDiscordMessageRecieved(this);
-    private static final String[] SUPPORTED_VERSIONS = new String[] {
-            "1.16.3", "1.16.2"
-    };
+    public static List<String> SUPPORTED_VERSIONS = new ArrayList<String>();
+
     @Override
     public void onEnable() {
-        if (getConfig().getBoolean("enable")) {
-            if(Bukkit.getServer().getVersion().equalsIgnoreCase(SUPPORTED_VERSIONS[1])){
 
+        if (getConfig().getBoolean("enable")) {
+            SUPPORTED_VERSIONS.add("1.16.3");
+            SUPPORTED_VERSIONS.add("1.16.2");
+            if (!SUPPORTED_VERSIONS.contains(Bukkit.getServer().getVersion())) {
+                warn("SERVER IS VERSION: " + Bukkit.getServer().getVersion() + "ONLY " + SUPPORTED_VERSIONS.toString() + " IS SUPPORTED.");
             }
             DiscordSRV.api.subscribe(discordsrvListener);
             plugin = this;
@@ -56,43 +62,42 @@ public final class AetheriaCore extends JavaPlugin {
             this.setupCommands();
 
             //register events
-            log( "Startup: Registering Events...");
+            log("Startup: Registering Events...");
             this.setupEvents();
-            log( "All Events Registered!");
+            log("All Events Registered!");
             Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Lag(), 100L, 1L);
 
             //get config
-            log( "Startup: Loading Config...");
+            log("Startup: Loading Config...");
             this.setupConfig();
             createCustomConfig();
             log("Startup: Config Loaded!!");
 
             //load mongodb
             if (plugin.getConfig().getBoolean("enableDatabase", true)) {
-                log( "Connecting to mongodb database...");
+                log("Connecting to mongodb database...");
                 DB();
-                log( "Connected! Expect some logs below");
-                log( "Configuring Database...");
+                log("Connected! Expect some logs below");
+                log("Configuring Database...");
                 //Document document1 = new Document("test", "pickle").append("test", "test123");
                 //collection.insertOne(document1);
-                log( "Done!");
-            }
-            else {
-                warn( "MongoDB is set to off in config. Plugin may not work correctly.");
+                log("Done!");
+            } else {
+                warn("MongoDB is set to off in config. Plugin may not work correctly.");
             }
 
-            //log("Setting Up Dependencys");
-            //setupDependencies();
-            //log("done!");
+            log("Setting Up Dependencies");
+            setupDependencies();
+            log("done!");
 
             //finished startup
-            warn( "Startup Finished!");
-            log( "INFO: do /AEC debug for plugin info");
-            log( "INFO: do /AEC reload to reload plugin config");
-            log( "INFO: do /performance to show server performance");
+            warn("Startup Finished!");
+            log("INFO: do /AEC debug for plugin info");
+            log("INFO: do /AEC reload to reload plugin config");
+            log("INFO: do /performance to show server performance");
         } else {
-            warn( "Plugin Disabled because disabled in config.yml");
-            warn( "Enable plugin by changing enable: false to enable: true");
+            warn("Plugin Disabled because disabled in config.yml");
+            warn("Enable plugin by changing enable: false to enable: true");
         }
 
     }
@@ -105,21 +110,21 @@ public final class AetheriaCore extends JavaPlugin {
         log("Killing All Custom Hostile Mobs.");
         // Iterate through every world on the server
         int removed_entities = 0;
-        for(World w : Bukkit.getWorlds()){
+        for (World w : Bukkit.getWorlds()) {
 
             // Iterate through every entity in that world
-            for(Entity e : w.getEntities()){
+            for (Entity e : w.getEntities()) {
 
                 //If Entity has custom Hostile AI as defined by MetaData, remove
-                if(e.hasMetadata("Hostile_AI")){
+                if (e.hasMetadata("Hostile_AI")) {
                     removed_entities++;
                     e.remove();
                 }
             }
         }
-        log(new StringBuilder().append(removed_entities).append(" Custom Hostile Entites Removed.").toString());
-        log( "Plugin Disabled.");
-        warn( "Baiwoo!!!");
+        log(removed_entities + " Custom Hostile Entites Removed.");
+        log("Plugin Disabled.");
+        warn("Baiwoo!!!");
     }
 
     private void setupCommands() {
@@ -180,6 +185,7 @@ public final class AetheriaCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new OnVanish(), this);
         getServer().getPluginManager().registerEvents(new OnPunish(), this);
         getServer().getPluginManager().registerEvents(new onarrowhit(), this);
+        getServer().getPluginManager().registerEvents(new PlayerMoveEvent(), this);
     }
 
     private void setupConfig() {
@@ -209,22 +215,23 @@ public final class AetheriaCore extends JavaPlugin {
     }
 
     private void warn(final String string) {
-        Bukkit.getLogger().warning(pluginManager.prefix + string        );
+        Bukkit.getLogger().warning(pluginManager.prefix + string);
     }
 
     private void setupDependencies() {
-        /*
+
         if (Bukkit.getPluginManager().isPluginEnabled("SuperVanish")) {
             log("SuperVanish Detected! Hooking into it.");
         }
-        else{
-            warn("AAAAAA SUPERVANISH DOSENT WORK");
-        }
         if (Bukkit.getPluginManager().isPluginEnabled("PremiumVanish")) {
             log("PremiumVanish Detected! Hooking into it.");
-
         }
-         */
+        if (Bukkit.getPluginManager().isPluginEnabled("AetheriaMinigames")) {
+            log("AetheriaMinigames Is Running On This Server!");
+        }
+        if (Bukkit.getPluginManager().isPluginEnabled("AetheriaCheat")) {
+            log("AetheriaAntiCheat Is Running On This Server!");
+        }
 
     }
 
@@ -233,15 +240,15 @@ public final class AetheriaCore extends JavaPlugin {
         //MongoCollection<Document> toggles = mongoClient.getDatabase("AetheriaCore-DB1").getCollection("toggles");
         MongoDatabase database = mongoClient.getDatabase("users");
     }
-    private void UpdateCheck() throws IOException {
-        if(getConfig().getBoolean("check-for-updates")){
-            String versionServer = getText("http://localhost/api/aetheriacore/version");
-            if(versionServer == getConfig().getString("version")){
-                log(  "Version Up to date.");
 
-            }
-            else{
-                log( "Please Update. Server responded with: " + versionServer);
+    private void UpdateCheck() throws IOException {
+        if (getConfig().getBoolean("check-for-updates")) {
+            String versionServer = getText("http://localhost/api/aetheriacore/version");
+            if (versionServer == getConfig().getString("version")) {
+                log("Version Up to date.");
+
+            } else {
+                log("Please Update. Server responded with: " + versionServer);
             }
         }
     }
@@ -270,14 +277,16 @@ public final class AetheriaCore extends JavaPlugin {
         in.close();
         return response.toString();
     }
+
     public FileConfiguration getDataFile() {
         return this.customConfig;
     }
+
     private void createCustomConfig() {
-        log( "Checking Data File");
+        log("Checking Data File");
         customConfigFile = new File(getDataFolder(), "data.yml");
         if (!customConfigFile.exists()) {
-            warn( "Data file does not exist. Creating new file");
+            warn("Data file does not exist. Creating new file");
             customConfigFile.getParentFile().mkdirs();
             saveResource("data.yml", false);
         }
@@ -289,5 +298,4 @@ public final class AetheriaCore extends JavaPlugin {
             e.printStackTrace();
         }
     }
-
 }

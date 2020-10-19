@@ -2,24 +2,20 @@ package net.badbird5907.aetheriacore.spigot.commands;
 
 import net.badbird5907.aetheriacore.spigot.api.StaffChatMessage;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
-import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.bukkit.Bukkit.getServer;
+import java.util.UUID;
 
 public class freezePlayer implements CommandExecutor{
-    public static List <String> frozen = new ArrayList<String>();
+    public static List<UUID> frozen = new ArrayList<>();
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player) sender;
@@ -32,7 +28,7 @@ public class freezePlayer implements CommandExecutor{
                 return true;
             } else if(args.length == 1){
                 if (target instanceof Player) {
-                    if (frozen.contains(target.getName())) {
+                    if (frozen.contains(target.getUniqueId())) {
                         sender.sendMessage(ChatColor.RED + "Player" + target.getDisplayName() + "is already frozen!");
                         return true;
                     } else {
@@ -41,7 +37,7 @@ public class freezePlayer implements CommandExecutor{
                             return true;
                         }
                         else {
-                            frozen.add(target.getName());
+                            frozen.add(target.getUniqueId());
                             sender.sendMessage(ChatColor.GREEN + target.getDisplayName() + "Is now frozen!");
                             sender.sendMessage(ChatColor.DARK_GRAY + "The player will me messaged that they are frozen");
                             sender.sendMessage(ChatColor.DARK_GRAY + "If they are in the air, they will be spammed.");

@@ -7,7 +7,7 @@ prefix: AetheriaCore
 authors: [Badbird5907]
 description: AetheriaCore By Badbird5907
 website: badbird5907.net
-softdepend: [PremiumVanish]
+softdepend: [PremiumVanish, AetheriaMinigames, AetheriaCheat]
 depend: [DiscordSRV, SuperVanish, AdvancedBan]
 loadbefore: [DiscordSRV, AdvancedBan]
 commands:
@@ -55,6 +55,7 @@ commands:
     usage: /<command>
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   itemblacklist:
+    aliases: [ibl]
     description: Item Black List info
     permission: aetheriacore.itemblacklist.list
     usage: /<command>

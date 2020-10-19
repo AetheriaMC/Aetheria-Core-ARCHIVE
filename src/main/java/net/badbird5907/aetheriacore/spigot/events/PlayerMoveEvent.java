@@ -1,12 +1,7 @@
 package net.badbird5907.aetheriacore.spigot.events;
 
-import net.badbird5907.aetheriacore.spigot.api.StaffChatMessage;
 import net.badbird5907.aetheriacore.spigot.commands.freezePlayer;
-import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,7 +11,7 @@ public class PlayerMoveEvent implements Listener {
     @EventHandler
     public void playerFrozen(org.bukkit.event.player.PlayerMoveEvent event) {
         Player player = event.getPlayer();
-        if (freezePlayer.frozen.contains(player)) {
+        if (freezePlayer.frozen.contains(player.getUniqueId())) {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You are currently frozen by a staff member.");
         }

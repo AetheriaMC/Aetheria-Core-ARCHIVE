@@ -16,7 +16,14 @@ public class pluginManager {
     public static List<String> OnlinePlayers = new ArrayList<String>();
     public static List<String> OnlineVisiblePlayers = new ArrayList<String>();
     public static List<String> VanishedPlayers = new ArrayList<String>();
-
     public static String prefix = "§8[§6AEC§8] ";
+    public static void log(final String string) {
+        Bukkit.getLogger().info(pluginManager.prefix + string);
+    }
+
+    public static void warn(final String string) {
+        Bukkit.getLogger().warning(pluginManager.prefix + string        );
+    }
+
 
 }

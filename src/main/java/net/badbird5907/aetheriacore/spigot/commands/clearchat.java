@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 public class clearchat implements CommandExecutor {
 
     AetheriaCore plugin;
+
     public clearchat(AetheriaCore plugin) {
         this.plugin = plugin;
     }
@@ -37,13 +38,11 @@ public class clearchat implements CommandExecutor {
                                 player.sendMessage(ChatColor.BLUE + "" + ChatColor.BOLD + "-------------------------------------------------------");
                             }
                         }
-                    }
-                    else{
+                    } else {
                         sender.sendMessage(permissionManager.PermissionMessage);
                         pluginManager.log(sender.getName() + " Was denied access to the command.");
                     }
-                }
-                else{
+                } else {
                     if (sender.hasPermission(permissionManager.ClearChat)) {
                         for (Player player : Bukkit.getOnlinePlayers()) {
                             if (player.hasPermission(permissionManager.BypassClearChat)) {

@@ -10,26 +10,27 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class hush implements CommandExecutor {
-    public static List<String> hush = new ArrayList<String>();
+    public static List<UUID> hush = new ArrayList<UUID>();
     @Override
     public boolean onCommand(CommandSender player, Command command, String label, String[] args) {
         if(player instanceof Player){
             if(player.hasPermission(permissionManager.hush)){
-                if(hush.contains(player.getName())){
-                    hush.remove(player.getName());
+                if(hush.contains(((Player) player).getUniqueId())){
+                    hush.remove(((Player) player).getUniqueId());
                     player.sendMessage(pluginManager.prefix + ChatColor.GREEN + "You can now see the Staff Chat.");
                     return true;
                 }
                 else{
-                    if(StaffMode.StaffModeToggle.contains(player.getName())){
+                    if(StaffMode.StaffModeToggle.contains(((Player) player).getUniqueId())){
                         player.sendMessage(pluginManager.prefix + ChatColor.RED + "Error: Staff Mode is active. do /sm to disable." + ChatColor.DARK_GRAY + " " + ChatColor.ITALIC + "STAFF_MODE_ON");
                         return true;
                     }
                     else{
-                        hush.add(player.getName());
-                        staffchat.staffchatToggle.remove(player.getName());
+                        hush.add(((Player) player).getUniqueId());
+                        staffchat.staffchatToggle.remove(((Player) player).getUniqueId());
                         player.sendMessage(pluginManager.prefix + ChatColor.GREEN + "StaffChat Ignored. Do /hush to turn back on or relog.");
                         return true;
                     }
