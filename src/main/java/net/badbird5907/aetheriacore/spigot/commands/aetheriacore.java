@@ -12,7 +12,6 @@ import org.bukkit.plugin.PluginDescriptionFile;
 
 public class aetheriacore implements CommandExecutor {
     AetheriaCore plugin;
-
     public aetheriacore(AetheriaCore plugin) {
         this.plugin = plugin;
     }
@@ -21,6 +20,7 @@ public class aetheriacore implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender player, Command command, String label, String[] args) {
         if(command.getName().equalsIgnoreCase("aetheriacore")){
+
 
             PluginDescriptionFile pdf = plugin.getDescription(); //Gets plugin.yml
 
@@ -31,6 +31,13 @@ public class aetheriacore implements CommandExecutor {
                 player.sendMessage(ChatColor.WHITE + "");
                 player.sendMessage(ChatColor.WHITE + "The Aetheria Server's Core and API");
                 player.sendMessage(ChatColor.WHITE + "use /aec help for a list of commands.");
+                player.sendMessage(ChatColor.WHITE + "Connected Supported Plugins: ");
+                if(Bukkit.getServer().getPluginManager().isPluginEnabled("AetheriaAntiCheat"))
+                    player.sendMessage(ChatColor.GREEN + "Aetheria-Anti-Cheat");
+                if(Bukkit.getServer().getPluginManager().isPluginEnabled("AetheriaMinigames"))
+                    player.sendMessage(ChatColor.GREEN + "Aetheria-Minigames");
+                else
+                    player.sendMessage(ChatColor.RED + "None");
                 player.sendMessage(ChatColor.DARK_GRAY + "------------------------------------");
                 return true;
             }

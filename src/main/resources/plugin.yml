@@ -40,6 +40,11 @@ commands:
     permission: aetheriacore.freeze
     usage: /<command> <args>
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+  unfreeze:
+    description: Unfreeze Player
+    permission: aetheriacore.freeze
+    usage: /<command> <args>
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   getuuid:
     description: Get Player UUID
     aliases: [gUUID]

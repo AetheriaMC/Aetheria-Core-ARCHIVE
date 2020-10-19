@@ -20,7 +20,7 @@ public class StaffChatMessage{
     public static void sendmessage(String sender, String message){
         for (Player player : Bukkit.getOnlinePlayers()) {
             if(player.hasPermission(permissionManager.staffchat)){
-                if(hush.hush.contains(player.getName())){
+                if(hush.hush.contains(player.getUniqueId())){
                     break;
                 }
                 else{

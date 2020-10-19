@@ -147,6 +147,7 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("ClearFloorDrops").setExecutor(new ClearFloorDrops());
         getCommand("SudoOp").setExecutor(new SudoOpPlaceholder());
         getCommand("freeze").setExecutor(new freezePlayer());
+        getCommand("unfreeze").setExecutor(new Unfreeze());
         getCommand("nightvision").setExecutor(new NightVision());
         getCommand("togglePVP").setExecutor(new togglePvp(this));
         getCommand("CreateNPC").setExecutor(new CreateNPC());
