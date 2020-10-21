@@ -2,6 +2,7 @@ package net.badbird5907.aetheriacore.spigot.manager;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import org.bukkit.Bukkit;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,6 @@ public class pluginManager {
     public static void warn(final String string) {
         Bukkit.getLogger().warning(pluginManager.prefix + string        );
     }
-
+    public static String ServerType = Bukkit.getServer().getPluginManager().getPlugin("AetheriaCore").getConfig().getString("Server-Type");
 
 }

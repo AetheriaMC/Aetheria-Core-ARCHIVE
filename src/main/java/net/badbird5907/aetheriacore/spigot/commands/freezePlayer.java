@@ -24,12 +24,12 @@ public class freezePlayer implements CommandExecutor{
         if(sender instanceof Player) {
             Player player = (Player) sender;
             if (sender.hasPermission(permissionManager.freeze)) {
-                Player target = Bukkit.getPlayerExact(args[0]);
 
                 if (args.length == 0) {
                     sender.sendMessage(ChatColor.RED + "Usage: /freeze <Player>");
                     return true;
                 } else if (args.length <= 1) {
+                    Player target = Bukkit.getPlayerExact(args[0]);
                     if (target instanceof Player) {
                         if (frozen.contains(target.getUniqueId())) {
                             sender.sendMessage(ChatColor.RED + "Player " + target.getDisplayName() + " is already frozen!");
@@ -62,12 +62,12 @@ public class freezePlayer implements CommandExecutor{
             }
         }
         else{
-            Player target = Bukkit.getPlayerExact(args[0]);
 
             if (args.length == 0) {
                 sender.sendMessage(ChatColor.RED + "Usage: /freeze <Player>");
                 return true;
             } else if (args.length <= 1) {
+                Player target = Bukkit.getPlayerExact(args[0]);
                 if (target instanceof Player) {
                     if (frozen.contains(target.getUniqueId())) {
                         sender.sendMessage(ChatColor.RED + "Player " + target.getDisplayName() + " is already frozen!");

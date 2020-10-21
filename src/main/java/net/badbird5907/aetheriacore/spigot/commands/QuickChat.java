@@ -19,7 +19,6 @@ public class QuickChat implements CommandExecutor {
         for (int i = 0; i < args.length; i++){
             sb.append(args[i]).append(" ");
         }
-
         String allArgs = sb.toString().trim();
         if(player.hasPermission(permissionManager.staffchat)){
             StaffChatMessage.sendmessage(player.getName(), allArgs);

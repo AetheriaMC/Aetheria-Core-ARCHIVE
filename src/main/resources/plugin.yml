@@ -136,7 +136,7 @@ commands:
     usage: /<command> <args>
   ClearFloorDrops:
     description: Clear All Floor Drops
-    usage: /<command>
+    usage: /<command> <args>
     permission: aetheriacore.cleardrops
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   nightvision:

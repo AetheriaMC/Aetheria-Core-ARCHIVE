@@ -38,7 +38,6 @@ public final class AetheriaCore extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
         if (getConfig().getBoolean("enable")) {
             SUPPORTED_VERSIONS.add("1.16.3");
             SUPPORTED_VERSIONS.add("1.16.2");
@@ -107,7 +106,7 @@ public final class AetheriaCore extends JavaPlugin {
         //Plugin disable logic
         getServer().getScheduler().cancelTasks((Plugin) this);
         DiscordSRV.api.unsubscribe(discordsrvListener);
-        log("Killing All Custom Hostile Mobs.");
+        log("Killing All Custom Hostile Mobs. (as Colbite wanted)");
         // Iterate through every world on the server
         int removed_entities = 0;
         for (World w : Bukkit.getWorlds()) {
@@ -299,4 +298,5 @@ public final class AetheriaCore extends JavaPlugin {
             e.printStackTrace();
         }
     }
+    public String ServerType = this.getConfig().getString("Server-Type").toLowerCase();
 }
