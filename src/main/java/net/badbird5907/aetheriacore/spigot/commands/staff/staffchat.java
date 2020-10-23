@@ -1,8 +1,7 @@
-package net.badbird5907.aetheriacore.spigot.commands;
+package net.badbird5907.aetheriacore.spigot.commands.staff;
 
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
-import net.md_5.bungee.protocol.packet.Chat;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

@@ -1,4 +1,4 @@
-package net.badbird5907.aetheriacore.spigot.commands;
+package net.badbird5907.aetheriacore.spigot.commands.management;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;

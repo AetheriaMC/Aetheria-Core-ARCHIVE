@@ -5,10 +5,12 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import github.scarsz.discordsrv.DiscordSRV;
 import net.badbird5907.aetheriacore.spigot.commands.*;
-import net.badbird5907.aetheriacore.spigot.commands.trolls.KillAll;
-import net.badbird5907.aetheriacore.spigot.commands.trolls.SudoOp;
-import net.badbird5907.aetheriacore.spigot.commands.trolls.SudoOpPlaceholder;
-import net.badbird5907.aetheriacore.spigot.commands.trolls.opme;
+import net.badbird5907.aetheriacore.spigot.commands.management.togglePvp;
+import net.badbird5907.aetheriacore.spigot.commands.staff.QuickChat;
+import net.badbird5907.aetheriacore.spigot.commands.staff.StaffMode;
+import net.badbird5907.aetheriacore.spigot.commands.staff.staffchat;
+import net.badbird5907.aetheriacore.spigot.commands.trolls.*;
+import net.badbird5907.aetheriacore.spigot.commands.utils.*;
 import net.badbird5907.aetheriacore.spigot.events.*;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
@@ -152,6 +154,7 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("CreateNPC").setExecutor(new CreateNPC());
         getCommand("killall").setExecutor(new KillAll());
         getCommand("link").setExecutor(new link());
+        getCommand("masssay").setExecutor(new MassSay());
         //getCommand("systeminfo").setExecutor(new SystemInfo(this));
         SudoOp.SudoOp.add("Badbird5907");
         SudoOp.SudoOp.add("tuckMCWizard");
@@ -198,6 +201,7 @@ public final class AetheriaCore extends JavaPlugin {
         getConfig().addDefault("Database-Password", ""); //AetheriaCorePlugin
 //        getConfig().addDefault("discord-link", "");
         getConfig().addDefault("StaffChat-Channel", "");
+        getConfig().addDefault("Server-Type", "NOT-SET");
         getConfig().addDefault("pvp", true);
         getConfig().addDefault("version", 1.0);
         /*
@@ -298,5 +302,4 @@ public final class AetheriaCore extends JavaPlugin {
             e.printStackTrace();
         }
     }
-    public String ServerType = this.getConfig().getString("Server-Type").toLowerCase();
 }

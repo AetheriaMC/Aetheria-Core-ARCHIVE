@@ -1,6 +1,6 @@
 package net.badbird5907.aetheriacore.spigot.events;
 
-import net.badbird5907.aetheriacore.spigot.commands.freezePlayer;
+import net.badbird5907.aetheriacore.spigot.commands.utils.freezePlayer;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

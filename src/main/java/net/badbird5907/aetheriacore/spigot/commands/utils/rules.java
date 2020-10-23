@@ -1,4 +1,4 @@
-package net.badbird5907.aetheriacore.spigot.commands;
+package net.badbird5907.aetheriacore.spigot.commands.utils;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

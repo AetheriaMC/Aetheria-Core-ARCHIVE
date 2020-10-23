@@ -1,4 +1,4 @@
-package net.badbird5907.aetheriacore.spigot.commands;
+package net.badbird5907.aetheriacore.spigot.commands.utils;
 
 import net.badbird5907.aetheriacore.spigot.api.StaffChatMessage;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;

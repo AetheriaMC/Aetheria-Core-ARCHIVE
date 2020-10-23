@@ -1,9 +1,9 @@
 package net.badbird5907.aetheriacore.spigot.events;
 
-import net.badbird5907.aetheriacore.spigot.commands.staffchat;
+import net.badbird5907.aetheriacore.spigot.commands.staff.staffchat;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
-import net.badbird5907.aetheriacore.spigot.commands.hush;
+import net.badbird5907.aetheriacore.spigot.commands.utils.hush;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

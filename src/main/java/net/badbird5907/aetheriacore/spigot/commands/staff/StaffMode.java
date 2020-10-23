@@ -1,6 +1,7 @@
-package net.badbird5907.aetheriacore.spigot.commands;
+package net.badbird5907.aetheriacore.spigot.commands.staff;
 
 import de.myzelyam.api.vanish.VanishAPI;
+import net.badbird5907.aetheriacore.spigot.commands.utils.hush;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import org.bukkit.ChatColor;

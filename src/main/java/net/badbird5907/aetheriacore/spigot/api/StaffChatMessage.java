@@ -1,6 +1,6 @@
 package net.badbird5907.aetheriacore.spigot.api;
 
-import net.badbird5907.aetheriacore.spigot.commands.hush;
+import net.badbird5907.aetheriacore.spigot.commands.utils.hush;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import org.bukkit.Bukkit;

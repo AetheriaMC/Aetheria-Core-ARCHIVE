@@ -47,7 +47,7 @@ public class PlayerJoinEvent implements Listener {
         player.sendMessage(ChatColor.WHITE + "-----------------------------------");
         player.sendMessage(ChatColor.GOLD + "");
         player.sendMessage(ChatColor.GOLD + "Welcome To Aetheria!");
-        player.sendMessage(ChatColor.GOLD + "You are connected to the " + plugin.ServerType + " Server!");
+        player.sendMessage(ChatColor.GOLD + "You are connected to the " + plugin.getConfig().getString("Server-Type") + " Server!");
         player.sendMessage(ChatColor.GOLD + "Please Read the rules! " + ChatColor.GREEN + "" + ChatColor.BOLD + "(/rules)");
         player.sendMessage(ChatColor.GOLD + "There Are " + Visible_Players + " Online");
         if(player.hasPermission(permissionManager.SeeVanishedPlayers))

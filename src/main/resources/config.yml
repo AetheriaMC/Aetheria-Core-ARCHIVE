@@ -1,5 +1,7 @@
 Config-Version: 1.0
 
+Server-Type: NOT-SET
+
 enable: true
 
 enablelegacyblacklistitems: false

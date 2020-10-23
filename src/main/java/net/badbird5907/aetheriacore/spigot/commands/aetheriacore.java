@@ -67,6 +67,11 @@ public class aetheriacore implements CommandExecutor {
                     player.sendMessage(ChatColor.GREEN + "AEC Version: " + ChatColor.BOLD + pdf.getVersion() );
                     player.sendMessage(ChatColor.GREEN + "Do /AEC");
                 }
+                if(args[0].equalsIgnoreCase("info")){
+                    player.sendMessage(ChatColor.GREEN + "Aetheria Core Version: " + pdf.getVersion());
+                    player.sendMessage(ChatColor.GREEN + "Server Version: " + Bukkit.getServer().getVersion());
+                    player.sendMessage(ChatColor.GREEN + "Server Type In Config: " + plugin.getConfig().getString("Server-Type"));
+                }
                 if (args[0].equalsIgnoreCase("help")){
                     player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "AetheriaCore");
                     player.sendMessage(ChatColor.BLUE + "Version:" + pdf.getVersion());

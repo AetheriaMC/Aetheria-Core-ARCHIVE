@@ -169,6 +169,11 @@ commands:
   link:
     description: Passes through to /discordsrv link
     usage: /<command>
+  masssay:
+    description: sudo all to say
+    usage: /<command>
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    permission: aetheriacore.masssay
 permissions:
   aetheriacore.*:
     description: All AetheriaCore Commands
@@ -198,6 +203,8 @@ permissions:
       aetheriacore.togglepvp: true
       aetheriacore.killall: true
       aetheriacore.sysinfo: true
+      aetheriacore.masssay: true
+      aetheriacore.seevanished: true
 
   aetheriacore.cosmetic.*:
     description: All Cosmetics
@@ -318,4 +325,10 @@ permissions:
     default: op
   aetheriacore.sysinfo:
     description: System Info
+    default: op
+  aetheriacore.masssay:
+    description: /masssay command perm
+    default: op
+  aetheriacore.seevanished:
+    description: see vanished players
     default: op
