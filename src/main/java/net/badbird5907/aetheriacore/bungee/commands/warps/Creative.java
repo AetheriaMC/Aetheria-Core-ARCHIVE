@@ -1,4 +1,4 @@
-package net.badbird5907.aetheriacore.bungee.commands;
+package net.badbird5907.aetheriacore.bungee.commands.warps;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
@@ -8,9 +8,9 @@ import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
-public class Vanilla extends Command {
-    public Vanilla() {
-        super("vanilla", "permission.vanilla");
+public class Creative extends Command {
+    public Creative() {
+        super("creative", "aetheriacore.creative");
     }
 
     @Override
@@ -20,11 +20,11 @@ public class Vanilla extends Command {
             return;
         }
         ProxiedPlayer player = (ProxiedPlayer) sender;
-        if (player.getServer().getInfo().getName().equalsIgnoreCase("vanilla")) {
-            player.sendMessage(new ComponentBuilder("You are already connected to Survival!").color(ChatColor.RED).create());
+        if (player.getServer().getInfo().getName().equalsIgnoreCase("creative")) {
+            player.sendMessage(new ComponentBuilder("You are already connected Creative!").color(ChatColor.RED).create());
             return;
         }
-        ServerInfo target = ProxyServer.getInstance().getServerInfo("Vanilla");
+        ServerInfo target = ProxyServer.getInstance().getServerInfo("Creative");
         player.connect(target);
     }
 

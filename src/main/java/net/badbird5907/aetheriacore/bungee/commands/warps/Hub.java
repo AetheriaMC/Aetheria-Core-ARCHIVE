@@ -1,4 +1,4 @@
-package net.badbird5907.aetheriacore.bungee.commands;
+package net.badbird5907.aetheriacore.bungee.commands.warps;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
@@ -8,9 +8,9 @@ import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
-public class Survival extends Command {
-    public Survival() {
-        super("survival", "permission.survival");
+public class Hub extends Command {
+    public Hub() {
+        super("hub", "aetheriacore.hub");
     }
 
     @Override
@@ -20,11 +20,11 @@ public class Survival extends Command {
             return;
         }
         ProxiedPlayer player = (ProxiedPlayer) sender;
-        if (player.getServer().getInfo().getName().equalsIgnoreCase("survival")) {
-            player.sendMessage(new ComponentBuilder("You are already connected to Survival!").color(ChatColor.RED).create());
+        if (player.getServer().getInfo().getName().equalsIgnoreCase("hub")) {
+            player.sendMessage(new ComponentBuilder("You are already connected to the Hub!").color(ChatColor.RED).create());
             return;
         }
-        ServerInfo target = ProxyServer.getInstance().getServerInfo("Survival");
+        ServerInfo target = ProxyServer.getInstance().getServerInfo("Hub");
         player.connect(target);
     }
 
