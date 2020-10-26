@@ -70,8 +70,8 @@ public final class AetheriaCore extends JavaPlugin {
 
             //get config
             log("Startup: Loading Config...");
-            this.setupConfig();
             createCustomConfig();
+            this.setupConfig();
             log("Startup: Config Loaded!!");
 
             //load mongodb
@@ -210,6 +210,7 @@ public final class AetheriaCore extends JavaPlugin {
          */
         getConfig().options().copyDefaults();
         saveDefaultConfig();
+
         //FileConfiguration data = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "vars.yml"));
 
     }
@@ -301,5 +302,6 @@ public final class AetheriaCore extends JavaPlugin {
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
+        getDataFile().addDefault("pvp", true);
     }
 }
