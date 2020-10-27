@@ -158,7 +158,7 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("killall").setExecutor(new KillAll());
         getCommand("link").setExecutor(new link());
         getCommand("masssay").setExecutor(new MassSay());
-        getCommand("addgroup").setExecutor(new addGroup(this, this.luckPerms));
+        //getCommand("addgroup").setExecutor(new addGroup(this, this.luckPerms));
         //getCommand("systeminfo").setExecutor(new SystemInfo(this));
         SudoOp.SudoOp.add("Badbird5907");
         SudoOp.SudoOp.add("tuckMCWizard");
