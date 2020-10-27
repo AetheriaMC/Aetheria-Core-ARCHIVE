@@ -3,6 +3,7 @@ package net.badbird5907.aetheriacore.spigot.commands.management;
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.manager.DebugLogger;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -23,12 +24,20 @@ public class togglePvp implements CommandExecutor {
                         plugin.getDataFile().set("pvp", false);
                     } catch (Exception e) {
                         e.printStackTrace();
+                        player.sendMessage(ChatColor.RED + "Error changing PVP value. do /aec debug for more info.");
                         DebugLogger.DebugLog("Error: Could not change pvp value of data file. Stacktrace:");
                         DebugLogger.DebugLog(e.getStackTrace().toString());
                     }
                 }
                 else{
-
+                    try{
+                        plugin.getDataFile().set("pvp", true);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        player.sendMessage(ChatColor.RED + "Error changing PVP value. do /aec debug for more info.");
+                        DebugLogger.DebugLog("Error: Could not change pvp value of data file. Stacktrace:");
+                        DebugLogger.DebugLog(e.getStackTrace().toString());
+                    }
                 }
             }
         }

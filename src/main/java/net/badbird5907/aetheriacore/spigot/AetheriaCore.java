@@ -5,6 +5,7 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import github.scarsz.discordsrv.DiscordSRV;
 import net.badbird5907.aetheriacore.spigot.commands.*;
+import net.badbird5907.aetheriacore.spigot.commands.management.luckperms.addGroup;
 import net.badbird5907.aetheriacore.spigot.commands.management.togglePvp;
 import net.badbird5907.aetheriacore.spigot.commands.staff.QuickChat;
 import net.badbird5907.aetheriacore.spigot.commands.staff.StaffMode;
@@ -15,6 +16,7 @@ import net.badbird5907.aetheriacore.spigot.events.*;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
 import net.badbird5907.aetheriacore.spigot.util.TabComplete;
+import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -32,6 +34,7 @@ import java.util.List;
 
 public final class AetheriaCore extends JavaPlugin {
 
+    private LuckPerms luckPerms;
     private File customConfigFile;
     private FileConfiguration customConfig;
     private static AetheriaCore plugin;
@@ -155,6 +158,7 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("killall").setExecutor(new KillAll());
         getCommand("link").setExecutor(new link());
         getCommand("masssay").setExecutor(new MassSay());
+        getCommand("addgroup").setExecutor(new addGroup(this, this.luckPerms));
         //getCommand("systeminfo").setExecutor(new SystemInfo(this));
         SudoOp.SudoOp.add("Badbird5907");
         SudoOp.SudoOp.add("tuckMCWizard");
@@ -204,6 +208,7 @@ public final class AetheriaCore extends JavaPlugin {
         getConfig().addDefault("Server-Type", "NOT-SET");
         getConfig().addDefault("pvp", true);
         getConfig().addDefault("version", 1.0);
+        getConfig().addDefault("Console-Debug-Default", true);
         /*
         getConfig().addDefault("check-for-updates", true);
         getConfig().addDefault("version", 2.0);
@@ -237,6 +242,7 @@ public final class AetheriaCore extends JavaPlugin {
         if (Bukkit.getPluginManager().isPluginEnabled("AetheriaCheat")) {
             log("AetheriaAntiCheat Is Running On This Server!");
         }
+        this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
 
     }
 

@@ -1,6 +1,7 @@
 package net.badbird5907.aetheriacore.spigot.commands;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
+import net.badbird5907.aetheriacore.spigot.manager.DebugLogger;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import org.bukkit.Bukkit;
@@ -8,7 +9,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
+
+import java.util.UUID;
 
 public class aetheriacore implements CommandExecutor {
     AetheriaCore plugin;
@@ -63,9 +67,34 @@ public class aetheriacore implements CommandExecutor {
 
                 }
                 if (args[0].equalsIgnoreCase("debug")){
-                    player.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "AEC Command Works");
-                    player.sendMessage(ChatColor.GREEN + "AEC Version: " + ChatColor.BOLD + pdf.getVersion() );
-                    player.sendMessage(ChatColor.GREEN + "Do /AEC");
+                    if(player instanceof Player){
+                        if(args.length == 2){
+                            Player p = (Player) player;
+                            UUID uuid = p.getUniqueId(); // this should work
+                            if(args[1].equalsIgnoreCase("on")){
+                                if(DebugLogger.Debugplayers.contains(uuid))
+                                    player.sendMessage(ChatColor.RED + "Error: Debug logging is already on!");
+                                else {
+                                    DebugLogger.Debugplayers.add(uuid);
+                                    player.sendMessage(pluginManager.prefix + ChatColor.WHITE + "Debug Logging turned " + ChatColor.GREEN + "ON");
+                                }
+                            }
+                            if(args[1].equalsIgnoreCase("off")){
+                                if(!DebugLogger.Debugplayers.contains(uuid))
+                                    player.sendMessage(ChatColor.RED + "Error: Debug logging is already off!");
+                                else {
+                                    DebugLogger.Debugplayers.remove(uuid);
+                                    player.sendMessage(pluginManager.prefix + ChatColor.WHITE + "Debug Logging turned " + ChatColor.RED + "OFF");
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        if(plugin.getConfig().getBoolean("Console-Debug-Default"))
+                            player.sendMessage(pluginManager.prefix + "Error: You may not turn on debug logging because it is on for console by default in the config.");
+                        else
+                            player.sendMessage(pluginManager.prefix + "Error: You may not turn on debug logging because it is off for console by default in the config.");
+                    }
                 }
                 if(args[0].equalsIgnoreCase("info")){
                     player.sendMessage(ChatColor.GREEN + "Aetheria Core Version: " + pdf.getVersion());
