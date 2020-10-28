@@ -26,7 +26,6 @@ public class ClearFloorDrops implements CommandExecutor {
                     for (World w : Bukkit.getWorlds()) {
                         // Iterate through every entity in that world
                         for (Entity e : w.getEntities()) {
-                            //If Entity has custom Hostile AI as defined by MetaData, remove
                             if(e.getType().equals("Item")){
                                 e.remove();
                                 removed_entities++;

@@ -1,7 +1,6 @@
 package net.badbird5907.aetheriacore.spigot.commands.utils;
 
 import net.badbird5907.aetheriacore.spigot.api.StaffChatMessage;
-import net.badbird5907.aetheriacore.spigot.commands.utils.freezePlayer;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

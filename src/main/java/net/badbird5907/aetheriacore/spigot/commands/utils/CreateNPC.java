@@ -21,7 +21,7 @@ public class CreateNPC implements CommandExecutor {
                 return true;
             }
             Player player = (Player) sender;
-            if(args.length < 1){
+            if(args.length == 1){
                 String allArgsColors = allArgs.replace("&", "§");
                 NPC.createNPC(player, allArgsColors);
                 player.sendMessage("NPC Created!");

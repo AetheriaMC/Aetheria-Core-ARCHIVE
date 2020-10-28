@@ -7,7 +7,6 @@ import net.badbird5907.aetheriacore.bungee.commands.warps.*;
 import net.badbird5907.aetheriacore.bungee.manager.log;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
-//test commit
 
 public final class AetheriaCoreBungee extends Plugin implements Listener {
 

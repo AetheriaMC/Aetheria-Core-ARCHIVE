@@ -4,8 +4,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import github.scarsz.discordsrv.DiscordSRV;
-import net.badbird5907.aetheriacore.spigot.commands.*;
-import net.badbird5907.aetheriacore.spigot.commands.management.luckperms.addGroup;
+import net.badbird5907.aetheriacore.spigot.commands.aetheriacore;
 import net.badbird5907.aetheriacore.spigot.commands.management.togglePvp;
 import net.badbird5907.aetheriacore.spigot.commands.staff.QuickChat;
 import net.badbird5907.aetheriacore.spigot.commands.staff.StaffMode;
@@ -193,6 +192,9 @@ public final class AetheriaCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new OnPunish(), this);
         getServer().getPluginManager().registerEvents(new onarrowhit(), this);
         getServer().getPluginManager().registerEvents(new PlayerMoveEvent(), this);
+        getServer().getPluginManager().registerEvents(new BlockBreakEvent(), this);
+        getServer().getPluginManager().registerEvents(new BlockPlaceEvent(), this);
+
     }
 
     private void setupConfig() {
