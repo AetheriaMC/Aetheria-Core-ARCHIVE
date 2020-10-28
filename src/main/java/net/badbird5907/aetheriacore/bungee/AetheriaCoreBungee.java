@@ -4,6 +4,8 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import net.badbird5907.aetheriacore.bungee.commands.warps.*;
+import net.badbird5907.aetheriacore.bungee.manager.log;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
 
@@ -13,17 +15,17 @@ public final class AetheriaCoreBungee extends Plugin implements Listener {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        getLogger().info("Starting...");
+        log.Log("Starting...");
 
-        getLogger().info("Registering Commands...");
+        log.Log( "Registering Commands...");
         getProxy().getPluginManager().registerCommand(this, new Hub());
         getProxy().getInstance().getPluginManager().registerCommand(this, new Beta());
         getProxy().getInstance().getPluginManager().registerCommand(this, new Creative());
         getProxy().getInstance().getPluginManager().registerCommand(this, new Survival());
         getProxy().getInstance().getPluginManager().registerCommand(this, new Vanilla());
 
-        getLogger().info("Registering Events...");
-        getLogger().info("Startup Finished!!!");
+        log.Log("Registering Events...");
+        log.Log("Startup Finished!!!");
     }
 
 /*
@@ -37,7 +39,6 @@ public final class AetheriaCoreBungee extends Plugin implements Listener {
         //MongoCollection<Document> toggles = mongoClient.getDatabase("AetheriaCore-DB1").getCollection("toggles");
         MongoDatabase database = mongoClient.getDatabase("users");
     }
-
 }
 
 

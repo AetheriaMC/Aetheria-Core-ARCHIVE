@@ -14,8 +14,8 @@ public class NightVision implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        Player player = (Player) sender;
         if(sender instanceof Player){
+            Player player = (Player) sender;
             if(player.hasPermission(permissionManager.NightVision)){
                 if(player.hasPotionEffect(PotionEffectType.NIGHT_VISION)){
                     player.removePotionEffect(PotionEffectType.NIGHT_VISION);
@@ -29,7 +29,7 @@ public class NightVision implements CommandExecutor {
 
         }
         else{
-            player.sendMessage(pluginManager.prefix + ChatColor.RED +  "You Must be a player to do this!");
+            sender.sendMessage(pluginManager.prefix + ChatColor.RED +  "You Must be a player to do this!");
         }
 
         return true;

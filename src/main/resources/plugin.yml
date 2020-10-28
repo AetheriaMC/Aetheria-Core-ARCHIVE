@@ -174,11 +174,11 @@ commands:
     usage: /<command>
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
     permission: aetheriacore.masssay
-  givegroup:
-    description: Give Player a Group
-    usage: /<command>
-    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
-    permission: aetheriacore.luckperms.givegroup
+#  givegroup:
+#    description: Give Player a Group
+#    usage: /<command>
+#    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+#    permission: aetheriacore.luckperms.givegroup
 permissions:
   aetheriacore.*:
     description: All AetheriaCore Commands
@@ -210,6 +210,7 @@ permissions:
       aetheriacore.sysinfo: true
       aetheriacore.masssay: true
       aetheriacore.seevanished: true
+      aetheriacore.luckperms.*: true
   aetheriacore.luckperms.*:
     description: All Aetheria Luckperms Commands
     children:
