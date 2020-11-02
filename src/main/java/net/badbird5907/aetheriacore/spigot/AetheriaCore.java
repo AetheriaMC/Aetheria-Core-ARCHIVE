@@ -39,17 +39,16 @@ public final class AetheriaCore extends JavaPlugin {
     private static AetheriaCore plugin;
     private OnDiscordMessageRecieved discordsrvListener = new OnDiscordMessageRecieved(this);
     public static List<String> SUPPORTED_VERSIONS = new ArrayList<String>();
+
     @Override
     public void onEnable() {
         if (getConfig().getBoolean("enable")) {
-            SUPPORTED_VERSIONS.add("1.16.3");
-            SUPPORTED_VERSIONS.add("1.16.2");
-            if (!SUPPORTED_VERSIONS.contains(Bukkit.getServer().getVersion())) {
+            boolean mc1163 = Bukkit.getServer().getClass().getPackage().getName().contains("1.16.3");
+            if(!mc1163)
                 warn("SERVER IS VERSION: " + Bukkit.getServer().getVersion() + "ONLY " + SUPPORTED_VERSIONS.toString() + " IS SUPPORTED.");
-            }
             DiscordSRV.api.subscribe(discordsrvListener);
             plugin = this;
-            // Plugin startup logic
+
             warn("Startup: Starting...");
             /*
             try {
@@ -77,15 +76,7 @@ public final class AetheriaCore extends JavaPlugin {
 
             //load mongodb
             if (plugin.getConfig().getBoolean("enableDatabase", true)) {
-                log("Connecting to mongodb database...");
-                DB();
-                log("Connected! Expect some logs below");
-                log("Configuring Database...");
-                //Document document1 = new Document("test", "pickle").append("test", "test123");
-                //collection.insertOne(document1);
-                log("Done!");
             } else {
-                warn("MongoDB is set to off in config. Plugin may not work correctly.");
             }
 
             log("Setting Up Dependencies");
@@ -106,8 +97,8 @@ public final class AetheriaCore extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        //Plugin disable logic
-        getServer().getScheduler().cancelTasks((Plugin) this);
+
+        getServer().getScheduler().cancelTasks(this);
         DiscordSRV.api.unsubscribe(discordsrvListener);
         log("Killing All Custom Hostile Mobs. (as Colbite wanted)");
         // Iterate through every world on the server
@@ -184,7 +175,7 @@ public final class AetheriaCore extends JavaPlugin {
 
         }
         if (getConfig().getBoolean("disable-enderman-pickup", true)) {
-            getServer().getPluginManager().registerEvents(new onEndermanPickup(), this);
+            getServer().getPluginManager().registerEvents(new onEndermanPickup(this), this);
         }
         getServer().getPluginManager().registerEvents(new onChat(), this);
         getServer().getPluginManager().registerEvents(new OnVanish(), this);
@@ -255,7 +246,7 @@ public final class AetheriaCore extends JavaPlugin {
 
     private void UpdateCheck() throws IOException {
         if (getConfig().getBoolean("check-for-updates")) {
-            String versionServer = getText("http://localhost/api/aetheriacore/version");
+            String versionServer = getText("https://badbird5907.net/api/aetheriacore/version");
             if (versionServer == getConfig().getString("version")) {
                 log("Version Up to date.");
 
