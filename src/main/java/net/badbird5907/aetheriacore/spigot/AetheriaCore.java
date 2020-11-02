@@ -39,7 +39,7 @@ public final class AetheriaCore extends JavaPlugin {
     private static AetheriaCore plugin;
     private OnDiscordMessageRecieved discordsrvListener = new OnDiscordMessageRecieved(this);
     public static List<String> SUPPORTED_VERSIONS = new ArrayList<String>();
-
+    //git dev branch
     @Override
     public void onEnable() {
         if (getConfig().getBoolean("enable")) {
