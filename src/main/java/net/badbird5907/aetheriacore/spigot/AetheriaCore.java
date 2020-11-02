@@ -22,7 +22,6 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
@@ -30,6 +29,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.*;
 
 public final class AetheriaCore extends JavaPlugin {
 
@@ -39,6 +39,9 @@ public final class AetheriaCore extends JavaPlugin {
     private static AetheriaCore plugin;
     private OnDiscordMessageRecieved discordsrvListener = new OnDiscordMessageRecieved(this);
     public static List<String> SUPPORTED_VERSIONS = new ArrayList<String>();
+    private Connection connection;
+    private String host, database, username, password;
+    private int port;
 
     @Override
     public void onEnable() {
@@ -74,10 +77,8 @@ public final class AetheriaCore extends JavaPlugin {
             this.setupConfig();
             log("Startup: Config Loaded!!");
 
-            //load mongodb
-            if (plugin.getConfig().getBoolean("enableDatabase", true)) {
-            } else {
-            }
+            //load DB
+            SetupDatabase();
 
             log("Setting Up Dependencies");
             setupDependencies();
@@ -195,6 +196,10 @@ public final class AetheriaCore extends JavaPlugin {
         getConfig().addDefault("enableDatabase", true);
         getConfig().addDefault("Database-Username", ""); //AetheriaCorePlugin
         getConfig().addDefault("Database-Password", ""); //AetheriaCorePlugin
+        getConfig().addDefault("Database-Url", "");
+        getConfig().addDefault("Database-port", "");
+        getConfig().addDefault("Custom-DB-port", false);
+        getConfig().addDefault("Database-Name", "");
 //        getConfig().addDefault("discord-link", "");
         getConfig().addDefault("StaffChat-Channel", "");
         getConfig().addDefault("Server-Type", "NOT-SET");
@@ -301,5 +306,42 @@ public final class AetheriaCore extends JavaPlugin {
             e.printStackTrace();
         }
         getDataFile().addDefault("pvp", true);
+    }
+    public void SetupDatabase(){
+        if (plugin.getConfig().getBoolean("enableDatabase", true)) {
+            log("Setting Up Database");
+            if(plugin.getConfig().getBoolean("Custom-DB-port"))
+                port = plugin.getConfig().getInt("Database-port");
+            else
+                port = 3306;
+
+            host = plugin.getConfig().getString("Database-Url");
+            database = plugin.getConfig().getString("Database-Name");
+            username = plugin.getConfig().getString("Database-Username");
+            password = plugin.getConfig().getString("Database-Password");
+            try{
+                openConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            warn("Database is not enabled. Plugin may not work as expected");
+        }
+    }
+    public void openConnection() throws SQLException, ClassNotFoundException {
+        if (connection != null && !connection.isClosed()) {
+            return;
+        }
+
+        synchronized (this) {
+            if (connection != null && !connection.isClosed()) {
+                return;
+            }
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://" + this.host+ ":" + this.port + "/" + this.database, this.username, this.password);
+        }
     }
 }
