@@ -79,10 +79,10 @@
             <id>spigotmc-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
-                    <repository>
-                        <id>jitpack.io</id>
-                        <url>https://jitpack.io</url>
-                    </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
         <repository>
             <id>Scarsz-Nexus</id>
             <url>https://nexus.scarsz.me/content/groups/public/</url>
@@ -109,15 +109,7 @@
         <dependency>
             <groupId>net.md-5</groupId>
             <artifactId>bungeecord-api</artifactId>
-            <version>1.16-R0.3-SNAPSHOT</version>
-            <type>jar</type>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.md-5</groupId>
-            <artifactId>bungeecord-api</artifactId>
-            <version>1.16-R0.3-SNAPSHOT</version>
-            <type>javadoc</type>
+            <version>1.16-R0.3</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -137,6 +129,7 @@
             <version>1.19.1</version>
             <scope>provided</scope>
         </dependency>
+        <!--
         <dependency>
             <groupId>com.github.oshi</groupId>
             <artifactId>oshi-core</artifactId>
@@ -144,6 +137,7 @@
             <systemPath>${basedir}/lib/oshi-core-5.2.5.jar</systemPath>
             <version>5.2.5</version>
         </dependency>
+        -->
         <dependency>
             <groupId>net.luckperms</groupId>
             <artifactId>api</artifactId>
