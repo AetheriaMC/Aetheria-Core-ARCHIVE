@@ -76,15 +76,7 @@ public final class AetheriaCore extends JavaPlugin {
 
             //load mongodb
             if (plugin.getConfig().getBoolean("enableDatabase", true)) {
-                log("Connecting to mongodb database...");
-                DB();
-                log("Connected! Expect some logs below");
-                log("Configuring Database...");
-                //Document document1 = new Document("test", "pickle").append("test", "test123");
-                //collection.insertOne(document1);
-                log("Done!");
             } else {
-                warn("MongoDB is set to off in config. Plugin may not work correctly.");
             }
 
             log("Setting Up Dependencies");
@@ -183,7 +175,7 @@ public final class AetheriaCore extends JavaPlugin {
 
         }
         if (getConfig().getBoolean("disable-enderman-pickup", true)) {
-            getServer().getPluginManager().registerEvents(new onEndermanPickup(), this);
+            getServer().getPluginManager().registerEvents(new onEndermanPickup(this), this);
         }
         getServer().getPluginManager().registerEvents(new onChat(), this);
         getServer().getPluginManager().registerEvents(new OnVanish(), this);
