@@ -20,12 +20,14 @@ disable-enderman-pickup: true
 
 StaffChat-Channel: aetheriacore-1 #define in DiscordSRV config
 
+#db
+Database-Username: DEFAULT-CHANGE-THIS
+Database-Password: DEFAULT-CHANGE-THIS
+Database-Url: DEFAULT-CHANGE-THIS
+Database-Name: DEFAULT-CHANGE-THIS
 
-#Default Database. Don't Change
-Database-Username: AetheriaCorePlugin
-
-Database-Password: AetheriaCorePlugin
-
+Custom-DB-port: false
+Database-port: 3306
 #------- DEBUG OPTIONS -------#
 enableDatabase: true
 #DO NOT TURN THIS OFF. IT MAY BREAK THE PLUGIN. THIS IS FOR DEBUGGING ONLY.
