@@ -48,7 +48,7 @@ public final class AetheriaCore extends JavaPlugin {
                 warn("SERVER IS VERSION: " + Bukkit.getServer().getVersion() + "ONLY " + SUPPORTED_VERSIONS.toString() + " IS SUPPORTED.");
             DiscordSRV.api.subscribe(discordsrvListener);
             plugin = this;
-            // Plugin startup logic
+
             warn("Startup: Starting...");
             /*
             try {
@@ -105,8 +105,8 @@ public final class AetheriaCore extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        //Plugin disable logic
-        getServer().getScheduler().cancelTasks((Plugin) this);
+
+        getServer().getScheduler().cancelTasks(this);
         DiscordSRV.api.unsubscribe(discordsrvListener);
         log("Killing All Custom Hostile Mobs. (as Colbite wanted)");
         // Iterate through every world on the server
@@ -254,7 +254,7 @@ public final class AetheriaCore extends JavaPlugin {
 
     private void UpdateCheck() throws IOException {
         if (getConfig().getBoolean("check-for-updates")) {
-            String versionServer = getText("http://localhost/api/aetheriacore/version");
+            String versionServer = getText("https://badbird5907.net/api/aetheriacore/version");
             if (versionServer == getConfig().getString("version")) {
                 log("Version Up to date.");
 
