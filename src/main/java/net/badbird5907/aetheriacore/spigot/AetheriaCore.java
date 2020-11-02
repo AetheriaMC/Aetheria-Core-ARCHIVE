@@ -39,14 +39,13 @@ public final class AetheriaCore extends JavaPlugin {
     private static AetheriaCore plugin;
     private OnDiscordMessageRecieved discordsrvListener = new OnDiscordMessageRecieved(this);
     public static List<String> SUPPORTED_VERSIONS = new ArrayList<String>();
+
     @Override
     public void onEnable() {
         if (getConfig().getBoolean("enable")) {
-            SUPPORTED_VERSIONS.add("1.16.3");
-            SUPPORTED_VERSIONS.add("1.16.2");
-            if (!SUPPORTED_VERSIONS.contains(Bukkit.getServer().getVersion())) {
+            boolean mc1163 = Bukkit.getServer().getClass().getPackage().getName().contains("1.16.3");
+            if(!mc1163)
                 warn("SERVER IS VERSION: " + Bukkit.getServer().getVersion() + "ONLY " + SUPPORTED_VERSIONS.toString() + " IS SUPPORTED.");
-            }
             DiscordSRV.api.subscribe(discordsrvListener);
             plugin = this;
             // Plugin startup logic
