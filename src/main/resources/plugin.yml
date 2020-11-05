@@ -8,7 +8,7 @@ authors: [Badbird5907]
 description: AetheriaCore By Badbird5907
 website: badbird5907.net
 softdepend: [PremiumVanish, AetheriaMinigames, AetheriaCheat]
-depend: [DiscordSRV, SuperVanish, AdvancedBan, ProtocolLib, luckperms]
+depend: [DiscordSRV, SuperVanish, AdvancedBan, ProtocolLib, LuckPerms]
 loadbefore: [DiscordSRV, AdvancedBan]
 commands:
   aetheriacore:
@@ -184,7 +184,11 @@ commands:
     usage: /<command> <player>
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
     permission: aetheriacore.getclientbrand
-
+  item:
+    description: Give item
+    usage: /<command> <item> <ammount>
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    permission: aetheriacore.item
 #  givegroup:
 #    description: Give Player a Group
 #    usage: /<command>
@@ -225,6 +229,7 @@ permissions:
       aetheriacore.getviewdistance: true
       aetheriacore.getclientbrand: true
       aetheriacore.nick: true
+      aetheriacore.item: true
   aetheriacore.luckperms.*:
     description: All Aetheria Luckperms Commands
     children:
@@ -380,3 +385,6 @@ permissions:
   aetheriacore.getviewdistance:
     default: op
     description: Get client's view distance
+  aetheriacore.item:
+    default: op
+    description: Give item

@@ -15,7 +15,7 @@ public class GetViewDist implements CommandExecutor {
         if(args.length == 1){
             Player target = Bukkit.getPlayerExact(args[0]);
             if(sender.hasPermission(permissionManager.getviewdist))
-                sender.sendMessage(target.getDisplayName() + "'s render distance is " + target.getViewDistance());
+                sender.sendMessage(target.getDisplayName() + "'s render distance is " + String.valueOf(target.getViewDistance()));
             else
                 sender.sendMessage(permissionManager.PermissionMessage);
             return true;

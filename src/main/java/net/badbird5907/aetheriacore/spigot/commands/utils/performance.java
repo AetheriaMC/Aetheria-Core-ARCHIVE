@@ -7,6 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import net.minecraft.server.v1_16_R3.MinecraftServer;
 
 import java.lang.management.ManagementFactory;
 
@@ -23,10 +24,9 @@ public class performance implements CommandExecutor {
             if(Lag.getTPS() > 20){
                 player.sendMessage(ChatColor.GOLD + "Tps: 20.00");
             }
-            else{
+            else {
                 double roundOff = Math.round(Lag.getTPS() * 100.0) / 100.0;
                 player.sendMessage(ChatColor.GOLD + "Tps: " + roundOff);
-
             }
             if(cpuUsageBoolean() == true){
                 player.sendMessage(ChatColor.GOLD + "Cpu Usage: " + ManagementFactory.getOperatingSystemMXBean().getSystemLoadAverage());

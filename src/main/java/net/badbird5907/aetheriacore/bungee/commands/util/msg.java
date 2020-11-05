@@ -3,8 +3,8 @@ package net.badbird5907.aetheriacore.bungee.commands.util;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.plugin.Command;
 
-public class spy extends Command{
-    public spy() {
+public class msg extends Command{
+    public msg() {
         super("spy", "aetheriacore.message.spy", "messagespy");
     }
 

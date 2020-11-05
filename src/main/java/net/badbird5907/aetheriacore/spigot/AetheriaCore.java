@@ -156,6 +156,8 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("masssay").setExecutor(new MassSay());
         getCommand("getclientbrand").setExecutor(new GetClientBrand());
         getCommand("getviewdistance").setExecutor(new GetViewDist());
+        getCommand("item").setExecutor(new item());
+        getCommand("item").setTabCompleter(new TabComplete());
         //getCommand("nick").setExecutor(new nick());
         //getCommand("addgroup").setExecutor(new addGroup(this, this.luckPerms));
         //getCommand("systeminfo").setExecutor(new SystemInfo(this));
