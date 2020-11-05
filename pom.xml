@@ -95,11 +95,20 @@
     </repositories>
 
     <dependencies>
+        <!--
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.16.4-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        -->
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
-            <version>1.16.3-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
+            <version>1.16.4-R0.1-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/paper_1.16.4.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.mongodb</groupId>
@@ -129,82 +138,16 @@
             <version>1.19.1</version>
             <scope>provided</scope>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>com.github.oshi</groupId>
-            <artifactId>oshi-core</artifactId>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/oshi-core-5.2.5.jar</systemPath>
-            <version>5.2.5</version>
-        </dependency>
-        -->
         <dependency>
             <groupId>net.luckperms</groupId>
             <artifactId>api</artifactId>
             <version>5.1</version>
             <scope>provided</scope>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>com.sun.jna</groupId>
-            <artifactId>jna</artifactId>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/jna-5.6.0.jar</systemPath>
-            <version>3.0.9</version>
-        </dependency>-->
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-        <!--
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>2.0.0-alpha1</version>
-        </dependency>
-        -->
-        <!--
-        <dependency>
-            <groupId>net.java.dev.jna</groupId>
-            <artifactId>jna</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.java.dev.jna</groupId>
-            <artifactId>jna-platform</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.8.0-alpha2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>2.0.0-alpha1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
-            <version>4.9</version>
-            <systemPath>${basedir}/lib/junit-4.9.jar<systemPath>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>guru.nidi</groupId>
-            <artifactId>code-assert</artifactId>
-            <version>0.9.9</version>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>com.comphenix.protocol</groupId>
             <artifactId>ProtocolLib</artifactId>
             <version>4.5.0</version>
         </dependency>
-        -->
-        <!--        <dependency>
-                    <groupId>org.spigotmc</groupId>
-                    <artifactId>spigot</artifactId>
-                    <version>1.16-R0.1-SNAPSHOT</version>
-                </dependency>
-                -->
-
     </dependencies>
 </project>

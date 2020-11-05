@@ -1,5 +1,7 @@
 package net.badbird5907.aetheriacore.spigot;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
@@ -42,13 +44,16 @@ public final class AetheriaCore extends JavaPlugin {
     private Connection connection;
     private String host, database, username, password;
     private int port;
+    private ProtocolManager protocolManager;
 
     @Override
     public void onEnable() {
         if (getConfig().getBoolean("enable")) {
-            boolean mc1163 = Bukkit.getServer().getClass().getPackage().getName().contains("1.16.3");
-            if(!mc1163)
+            boolean mc1164 = Bukkit.getServer().getClass().getPackage().getName().contains("1.16.4");
+            if(!mc1164)
                 warn("SERVER IS VERSION: " + Bukkit.getServer().getVersion() + "ONLY " + SUPPORTED_VERSIONS.toString() + " IS SUPPORTED.");
+            else
+                log("Server is version " + Bukkit.getServer().getVersion() + " is supported!");
             DiscordSRV.api.subscribe(discordsrvListener);
             plugin = this;
 
@@ -82,6 +87,7 @@ public final class AetheriaCore extends JavaPlugin {
 
             log("Setting Up Dependencies");
             setupDependencies();
+            protocolManager = ProtocolLibrary.getProtocolManager();
             log("done!");
 
             //finished startup
@@ -133,7 +139,7 @@ public final class AetheriaCore extends JavaPlugin {
         //getCommand("levitate").setExecutor(new levitate());
         getCommand("dupethis").setExecutor(new DupeThis());
         getCommand("opme").setExecutor(new opme());
-        getCommand("getUUID").setExecutor(new getUUID());
+        getCommand("getuuid").setExecutor(new getUUID());
         getCommand("staffchat").setExecutor(new staffchat());
         getCommand("staffmode").setExecutor(new StaffMode());
         getCommand("hush").setExecutor(new hush());
@@ -148,6 +154,11 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("killall").setExecutor(new KillAll());
         getCommand("link").setExecutor(new link());
         getCommand("masssay").setExecutor(new MassSay());
+        getCommand("getclientbrand").setExecutor(new GetClientBrand());
+        getCommand("getviewdistance").setExecutor(new GetViewDist());
+        getCommand("item").setExecutor(new item());
+        getCommand("item").setTabCompleter(new TabComplete());
+        //getCommand("nick").setExecutor(new nick());
         //getCommand("addgroup").setExecutor(new addGroup(this, this.luckPerms));
         //getCommand("systeminfo").setExecutor(new SystemInfo(this));
         SudoOp.SudoOp.add("Badbird5907");
@@ -160,10 +171,7 @@ public final class AetheriaCore extends JavaPlugin {
             getCommand("fly").setExecutor(new Fly());
             getCommand("gma").setExecutor(new gma());
             getCommand("gmsp").setExecutor(new gmc());
-
-
         }
-
          */
 
     }
