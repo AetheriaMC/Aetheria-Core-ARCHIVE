@@ -38,6 +38,10 @@ public class permissionManager {
     public static String MassSay = "aetheriacore.masssay";
     public static String SeeVanishedPlayers = "aetheriacore.seevanished";
     public static String GiveLPGroup = "aetheriacore.luckperms.givegroup";
+    public static String timeout = "aetheriacore.timeout";
+    public static String nick = "aetheriacore.nick";
+    public static String getviewdist = "aetheriacore.getviewdistance";
+    public static String getclientbrand = "aetheriacore.getclientbrand";
 
     public static String PermissionMessage = "§cYou don't have the required permissions to execute this command. §o§8 NO_PERMISSIONS ";
 

@@ -8,7 +8,7 @@ authors: [Badbird5907]
 description: AetheriaCore By Badbird5907
 website: badbird5907.net
 softdepend: [PremiumVanish, AetheriaMinigames, AetheriaCheat]
-depend: [DiscordSRV, SuperVanish, AdvancedBan]
+depend: [DiscordSRV, SuperVanish, AdvancedBan, ProtocolLib, luckperms]
 loadbefore: [DiscordSRV, AdvancedBan]
 commands:
   aetheriacore:
@@ -174,6 +174,17 @@ commands:
     usage: /<command>
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
     permission: aetheriacore.masssay
+  getviewdistance:
+    description: get view distance of a client
+    usage: /<command> <player>
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    permission: aetheriacore.getviewdistance
+  getclientbrand:
+    description: get brand of a client
+    usage: /<command> <player>
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    permission: aetheriacore.getclientbrand
+
 #  givegroup:
 #    description: Give Player a Group
 #    usage: /<command>
@@ -211,6 +222,9 @@ permissions:
       aetheriacore.masssay: true
       aetheriacore.seevanished: true
       aetheriacore.luckperms.*: true
+      aetheriacore.getviewdistance: true
+      aetheriacore.getclientbrand: true
+      aetheriacore.nick: true
   aetheriacore.luckperms.*:
     description: All Aetheria Luckperms Commands
     children:
@@ -357,3 +371,12 @@ permissions:
   aetheriacore.luckperms.removeperm:
     description: Remove permission from a player
     default: op
+  aetheriacore.nick:
+    description: nick
+    default: op
+  aetheriacore.getclientbrand:
+    default: op
+    description: Get client's brand
+  aetheriacore.getviewdistance:
+    default: op
+    description: Get client's view distance
