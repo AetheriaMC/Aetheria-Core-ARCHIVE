@@ -16,14 +16,20 @@ import net.badbird5907.aetheriacore.spigot.commands.utils.*;
 import net.badbird5907.aetheriacore.spigot.events.*;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
+import net.badbird5907.aetheriacore.spigot.util.SignGUI;
 import net.badbird5907.aetheriacore.spigot.util.TabComplete;
+import net.badbird5907.aetheriacore.spigot.util.inventories.ClickListener;
+import net.badbird5907.aetheriacore.spigot.util.inventories.itemmenuinv;
+import net.badbird5907.aetheriacore.spigot.util.itemtypes;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
@@ -45,10 +51,12 @@ public final class AetheriaCore extends JavaPlugin {
     private String host, database, username, password;
     private int port;
     private ProtocolManager protocolManager;
+    SignGUI signGui;
 
     @Override
     public void onEnable() {
         if (getConfig().getBoolean("enable")) {
+            signGui = new SignGUI(this);
             boolean mc1164 = Bukkit.getServer().getClass().getPackage().getName().contains("1.16.4");
             if(!mc1164)
                 warn("SERVER IS VERSION: " + Bukkit.getServer().getVersion() + "ONLY " + SUPPORTED_VERSIONS.toString() + " IS SUPPORTED.");
@@ -58,6 +66,7 @@ public final class AetheriaCore extends JavaPlugin {
             plugin = this;
 
             warn("Startup: Starting...");
+            doStuff();
             /*
             try {
                 UpdateCheck();
@@ -158,6 +167,7 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("getviewdistance").setExecutor(new GetViewDist());
         getCommand("item").setExecutor(new item());
         getCommand("item").setTabCompleter(new TabComplete());
+        getCommand("itemmenu").setExecutor(new itemmenu());
         //getCommand("nick").setExecutor(new nick());
         //getCommand("addgroup").setExecutor(new addGroup(this, this.luckPerms));
         //getCommand("systeminfo").setExecutor(new SystemInfo(this));
@@ -193,6 +203,7 @@ public final class AetheriaCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerMoveEvent(), this);
         getServer().getPluginManager().registerEvents(new BlockBreakEvent(), this);
         getServer().getPluginManager().registerEvents(new BlockPlaceEvent(), this);
+        getServer().getPluginManager().registerEvents(new ClickListener(), this);
 
     }
 
@@ -350,6 +361,15 @@ public final class AetheriaCore extends JavaPlugin {
             }
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://" + this.host+ ":" + this.port + "/" + this.database, this.username, this.password);
+        }
+    }
+    private void doStuff(){
+        for (Material material : Material.values()) {
+            itemtypes.allitems.add(material.name().toString());
+            if(material.isBlock())
+                itemtypes.blocks.add(material.name().toString());
+            if(material.isItem())
+                itemtypes.items.add(material.name().toString());
         }
     }
 }

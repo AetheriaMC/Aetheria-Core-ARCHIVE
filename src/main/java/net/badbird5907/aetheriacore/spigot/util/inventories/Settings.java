@@ -1,4 +1,4 @@
-package net.badbird5907.aetheriacore.spigot.util.inventorys;
+package net.badbird5907.aetheriacore.spigot.util.inventories;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

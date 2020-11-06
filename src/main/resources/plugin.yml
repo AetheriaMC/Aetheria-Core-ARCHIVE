@@ -189,6 +189,11 @@ commands:
     usage: /<command> <item> <ammount>
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
     permission: aetheriacore.item
+  itemmenu:
+    description: Give item BUT IN A MENU
+    usage: /<command>
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    permission: aetheriacore.item
 #  givegroup:
 #    description: Give Player a Group
 #    usage: /<command>

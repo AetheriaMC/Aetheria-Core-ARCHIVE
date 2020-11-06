@@ -1,4 +1,4 @@
-package net.badbird5907.aetheriacore.spigot.util.inventorys;
+package net.badbird5907.aetheriacore.spigot.util.inventories;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -14,25 +14,24 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
 
-public class settings1 implements Listener {
-    private Inventory inv;
+public class itemmenuinv implements Listener {
+    public static Inventory inv;
 
-    public void ExampleGui() {
+    public void createinv() {
         // Create a new inventory, with no owner (as this isn't a real inventory), a size of nine, called example
-        inv = Bukkit.createInventory(null, 9, "Settings");
+        inv = Bukkit.createInventory(null, 53, "Items");
 
         // Put the items into the inventory
         initializeItems();
     }
 
-    public settings1(Inventory inv) {
+    public itemmenuinv(Inventory inv) {
         this.inv = inv;
     }
 
     // You can call this whenever you want to put the items in
     public void initializeItems() {
         inv.addItem(createGuiItem(Material.DIAMOND_SWORD, "§c§lEnable PVP", "§cAllow Players To Fight", "§7aetheriacore.togglepvp"));
-        inv.addItem(createGuiItem(Material.WOODEN_SWORD, "§a§lDisable PVP", "§aDisAllow Players To Fight", "§7aetheriacore.togglepvp"));
     }
 
     // Nice little method to create a gui item with a custom name, and description
@@ -52,37 +51,10 @@ public class settings1 implements Listener {
     }
 
     // You can open the inventory with this
-    public void openInventory(final HumanEntity ent) {
-        ent.openInventory(inv);
+    public void openInventory(final Player p) {
+        p.openInventory(inv);
     }
 
     // Check for clicks on items
-    @EventHandler
-    public void onInventoryClick(final InventoryClickEvent e) {
-        if (e.getInventory() != inv) return;
 
-        e.setCancelled(true);
-
-        final ItemStack clickedItem = e.getCurrentItem();
-
-        // verify current item is not null
-        if (clickedItem == null || clickedItem.getType() == Material.AIR) return;
-
-        final Player p = (Player) e.getWhoClicked();
-
-        // Using slots click is a best option for your inventory click's
-        if(clickedItem.getType() == Material.DIAMOND_SWORD) {
-            if(p.hasPermission("aetheriacore.togglepvp")){
-
-            }
-        }
-    }
-
-    // Cancel dragging in our inventory
-    @EventHandler
-    public void onInventoryClick(final InventoryDragEvent e) {
-        if (e.getInventory() == inv) {
-            e.setCancelled(true);
-        }
-    }
 }

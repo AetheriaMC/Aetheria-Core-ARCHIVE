@@ -60,7 +60,6 @@ public class SignGUI {
 
     public void open(Player player, String[] defaultText, SignGUIListener response) {
         List<PacketContainer> packets = new ArrayList<PacketContainer>();
-
         int x = 0, y = 0, z = 0;
         if (defaultText != null) {
             x = player.getLocation().getBlockX();
