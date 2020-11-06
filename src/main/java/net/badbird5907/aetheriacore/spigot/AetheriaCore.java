@@ -16,7 +16,7 @@ import net.badbird5907.aetheriacore.spigot.commands.utils.*;
 import net.badbird5907.aetheriacore.spigot.events.*;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
-import net.badbird5907.aetheriacore.spigot.util.SignGUI;
+//import net.badbird5907.aetheriacore.spigot.util.SignGUI;
 import net.badbird5907.aetheriacore.spigot.util.TabComplete;
 import net.badbird5907.aetheriacore.spigot.util.inventories.ClickListener;
 import net.badbird5907.aetheriacore.spigot.util.inventories.itemmenuinv;
@@ -51,12 +51,12 @@ public final class AetheriaCore extends JavaPlugin {
     private String host, database, username, password;
     private int port;
     private ProtocolManager protocolManager;
-    SignGUI signGui;
+    //SignGUI signGui;
 
     @Override
     public void onEnable() {
         if (getConfig().getBoolean("enable")) {
-            signGui = new SignGUI(this);
+            //signGui = new SignGUI(this);
             boolean mc1164 = Bukkit.getServer().getClass().getPackage().getName().contains("1.16.4");
             if(!mc1164)
                 warn("SERVER IS VERSION: " + Bukkit.getServer().getVersion() + "ONLY " + SUPPORTED_VERSIONS.toString() + " IS SUPPORTED.");
