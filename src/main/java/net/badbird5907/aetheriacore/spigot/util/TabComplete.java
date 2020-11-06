@@ -42,8 +42,15 @@ public class TabComplete implements TabCompleter {
             return l;
         }
         if (cmd.getName().equalsIgnoreCase("item")) {
-
-            if(args.length == 0)
+            if(!args[0].equalsIgnoreCase("")){
+                for(String a : item.names){
+                    if(a.toUpperCase().startsWith(args[0].toUpperCase())){
+                        l.add(a.toString());
+                    }
+                }
+                return l;
+            }
+            if(args.length == 0 )
                 return item.names;
             if(args.length == 1)
                 return item.names;
