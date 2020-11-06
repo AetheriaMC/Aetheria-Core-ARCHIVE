@@ -26,38 +26,42 @@ public class item implements CommandExecutor {
         }
          */
         if(sender.hasPermission(permissionManager.item)){
-            if(args.length == 0)
-                sender.sendMessage(ChatColor.RED + "USAGE: /item <ITEM> <AMMOUNT> \n " + ChatColor.GREEN + "You can also do /itemmenu");
+            if(sender instanceof  Player){
+                if(args.length == 0)
+                    sender.sendMessage(ChatColor.RED + "USAGE: /item <ITEM> <AMMOUNT> \n " + ChatColor.GREEN + "You can also do /itemmenu");
 
-            if (args.length == 1){
-                String item1 = args[0].toUpperCase();
-                if (itemtypes.allitems.contains(item1)){
-                    Player player = Bukkit.getPlayerExact(sender.getName());
-                    Material m = Material.matchMaterial(item1);
-                    ItemStack item = new ItemStack(m, 1);
-                    player.getInventory().addItem(item);
-                    return true;
-                }
-                else
-                    sender.sendMessage(ChatColor.RED + args[0] + " is not a valid itemstack.");
-            }
-            if (args.length == 2){
-                String item1 = args[0].toUpperCase();
-                if (itemtypes.allitems.contains(item1)){
-                    if(IsInt.Check(args[1])){
-                        int amount = Integer.parseInt(args[1]);
+                if (args.length == 1){
+                    String item1 = args[0].toUpperCase();
+                    if (itemtypes.allitems.contains(item1)){
                         Player player = Bukkit.getPlayerExact(sender.getName());
                         Material m = Material.matchMaterial(item1);
-                        ItemStack item = new ItemStack(m, amount);
+                        ItemStack item = new ItemStack(m, 1);
                         player.getInventory().addItem(item);
                         return true;
                     }
                     else
-                        sender.sendMessage(ChatColor.RED + args[1] + " is not a integer.");
+                        sender.sendMessage(ChatColor.RED + args[0] + " is not a valid itemstack.");
+                }
+                if (args.length == 2){
+                    String item1 = args[0].toUpperCase();
+                    if (itemtypes.allitems.contains(item1)){
+                        if(IsInt.Check(args[1])){
+                            int amount = Integer.parseInt(args[1]);
+                            Player player = Bukkit.getPlayerExact(sender.getName());
+                            Material m = Material.matchMaterial(item1);
+                            ItemStack item = new ItemStack(m, amount);
+                            player.getInventory().addItem(item);
+                            return true;
+                        }
+                        else
+                            sender.sendMessage(ChatColor.RED + args[1] + " is not a integer.");
 
+                    }
+                    else
+                        sender.sendMessage(ChatColor.RED + args[0] + " is not a valid itemstack.");
                 }
                 else
-                    sender.sendMessage(ChatColor.RED + args[0] + " is not a valid itemstack.");
+                    sender.sendMessage(ChatColor.RED + "You must be a player to execute this!");
             }
         }
         return true;

@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 
 public class itemmenu implements CommandExecutor {
@@ -30,7 +31,7 @@ public class itemmenu implements CommandExecutor {
             if(sender instanceof Player){
                 if(args.length == 0){
                     sender.sendMessage(ChatColor.GREEN + "Attempting To Open The GUI...");
-                    inv.openInventory((Player) sender);
+                    inv.openInventory((HumanEntity) sender);
                 }
             }
             else

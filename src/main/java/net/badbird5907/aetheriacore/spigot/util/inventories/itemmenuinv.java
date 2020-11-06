@@ -51,8 +51,8 @@ public class itemmenuinv implements Listener {
     }
 
     // You can open the inventory with this
-    public void openInventory(final Player p) {
-        p.openInventory(inv);
+    public void openInventory(final HumanEntity ent) {
+        ent.openInventory(inv);
     }
 
     // Check for clicks on items
