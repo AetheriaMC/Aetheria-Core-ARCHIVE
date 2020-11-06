@@ -19,7 +19,6 @@ import net.badbird5907.aetheriacore.spigot.other.Lag;
 //import net.badbird5907.aetheriacore.spigot.util.SignGUI;
 import net.badbird5907.aetheriacore.spigot.util.TabComplete;
 import net.badbird5907.aetheriacore.spigot.util.inventories.ClickListener;
-import net.badbird5907.aetheriacore.spigot.util.inventories.itemmenuinv;
 import net.badbird5907.aetheriacore.spigot.util.itemtypes;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
@@ -29,7 +28,6 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
@@ -204,7 +202,6 @@ public final class AetheriaCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BlockBreakEvent(), this);
         getServer().getPluginManager().registerEvents(new BlockPlaceEvent(), this);
         getServer().getPluginManager().registerEvents(new ClickListener(), this);
-
     }
 
     private void setupConfig() {
