@@ -25,7 +25,7 @@ public class item implements CommandExecutor {
         if(sender.hasPermission(permissionManager.item)){
             if (args.length == 1){
                 String item1 = args[0].toUpperCase();
-                if (names.contains(args[0])){
+                if (names.contains(item1)){
                     Player player = Bukkit.getPlayerExact(sender.getName());
                     Material m = Material.matchMaterial(item1);
                     ItemStack item = new ItemStack(m, 1);
