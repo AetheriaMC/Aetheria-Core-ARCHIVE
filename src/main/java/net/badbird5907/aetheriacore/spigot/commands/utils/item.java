@@ -2,6 +2,7 @@ package net.badbird5907.aetheriacore.spigot.commands.utils;
 
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 import net.badbird5907.aetheriacore.spigot.util.IsInt;
+import net.md_5.bungee.protocol.packet.Chat;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -23,6 +24,9 @@ public class item implements CommandExecutor {
             names.add(material.name().toString());
         }
         if(sender.hasPermission(permissionManager.item)){
+            if(args.length == 0)
+                sender.sendMessage(ChatColor.RED + "USAGE: /item <ITEM> <AMMOUNT> \n " + ChatColor.GREEN + "You can also do /itemmenu");
+
             if (args.length == 1){
                 String item1 = args[0].toUpperCase();
                 if (names.contains(item1)){
@@ -30,6 +34,7 @@ public class item implements CommandExecutor {
                     Material m = Material.matchMaterial(item1);
                     ItemStack item = new ItemStack(m, 1);
                     player.getInventory().addItem(item);
+                    return true;
                 }
                 else
                     sender.sendMessage(ChatColor.RED + args[0] + " is not a valid itemstack.");
@@ -43,6 +48,7 @@ public class item implements CommandExecutor {
                         Material m = Material.matchMaterial(item1);
                         ItemStack item = new ItemStack(m, amount);
                         player.getInventory().addItem(item);
+                        return true;
                     }
                     else
                         sender.sendMessage(ChatColor.RED + args[1] + " is not a integer.");

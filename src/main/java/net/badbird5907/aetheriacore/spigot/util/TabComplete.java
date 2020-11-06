@@ -50,10 +50,14 @@ public class TabComplete implements TabCompleter {
                 }
                 return l;
             }
+            /*
             if(args.length == 0 )
                 return item.names;
+             */
+
             if(args.length == 1)
                 return item.names;
+
             if(args.length == 2){
                 l.add("1");
                 l.add("10");
