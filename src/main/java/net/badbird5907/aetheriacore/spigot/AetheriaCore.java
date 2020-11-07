@@ -2,9 +2,6 @@ package net.badbird5907.aetheriacore.spigot;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoDatabase;
 import github.scarsz.discordsrv.DiscordSRV;
 import net.badbird5907.aetheriacore.spigot.commands.aetheriacore;
 import net.badbird5907.aetheriacore.spigot.commands.management.togglePvp;
@@ -260,9 +257,11 @@ public final class AetheriaCore extends JavaPlugin {
     }
 
     public void DB() {
+        /*
         MongoClient mongoClient = MongoClients.create("mongodb+srv://" + getConfig().getString("Database-Username") + ":" + getConfig().getString("Database-Password") + "@aetheriacore-db1.jyi3w.gcp.mongodb.net/AetheriaCore-DB1?retryWrites=true&w=majority");
         //MongoCollection<Document> toggles = mongoClient.getDatabase("AetheriaCore-DB1").getCollection("toggles");
         MongoDatabase database = mongoClient.getDatabase("users");
+         */
     }
 
     private void UpdateCheck() throws IOException {
