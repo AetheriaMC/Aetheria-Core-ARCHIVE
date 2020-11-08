@@ -50,7 +50,7 @@ public class item implements CommandExecutor {
                 if(IsInt.Check(ammount)){
                     int a1 = Integer.parseInt(ammount);
                     sender.sendMessage(ChatColor.GREEN + "Gave " + player.getName() + " " + ammount + " of " + item1 );
-                    for(int i=a1; i>1; i--){
+                    for(int i=a1; i>0; i--){
                         player.getInventory().addItem(itemtypes.customitems.get(item1));
                     }
                 }
