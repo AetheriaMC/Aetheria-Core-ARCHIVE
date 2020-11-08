@@ -34,9 +34,9 @@ public class item implements CommandExecutor {
                 if (args.length == 2){
                     giveitem(player, args[0], args[1], player);
                 }
-                else
-                    sender.sendMessage(ChatColor.RED + "You must be a player to execute this!");
             }
+            else
+                sender.sendMessage(ChatColor.RED + "You must be a player to execute this!");
         }
         return true;
     }
@@ -47,7 +47,12 @@ public class item implements CommandExecutor {
             DebugLogger.DebugLog(item1 + " is a valid item. Checking if custom");
             if(iscustom(item1)){
                 DebugLogger.DebugLog(item1 + " is an custom item. ");
-                player.getInventory().addItem(itemtypes.customitems.get(item1));
+                if(IsInt.Check(ammount)){
+                    int a1 = Integer.parseInt(ammount);
+                    for(int i=a1; i>1; i--){
+                        player.getInventory().addItem(itemtypes.customitems.get(item1));
+                    }
+                }
             }
             else{
                 if(IsInt.Check(ammount)){

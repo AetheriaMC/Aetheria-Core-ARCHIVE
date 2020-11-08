@@ -10,6 +10,8 @@ enablechatfilter: true
 
 disable-enderman-pickup: true
 
+Console-Debug-Default: true
+
 #NOT IN USE
 #Essentials-Replacement: true
 

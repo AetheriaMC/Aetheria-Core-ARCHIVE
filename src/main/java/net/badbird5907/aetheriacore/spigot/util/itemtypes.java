@@ -12,6 +12,7 @@ public class itemtypes {
     public static List<String> blocks = new ArrayList<>();
     public static List<String> allitems = new ArrayList<>();
     public static List<String> items = new ArrayList<>();
+
     public static HashMap<String, ItemStack> customitems = new HashMap<>();
 
     public static void additems(){
@@ -24,5 +25,16 @@ public class itemtypes {
         i1.setItemMeta(i1meta);
         customitems.put("LIGHTNING_ROD", i1);
         allitems.add("LIGHTNING_ROD");
+
+        ItemStack i2 = new ItemStack(Material.IRON_SWORD);
+        ItemMeta i2meta = i1.getItemMeta();
+        ArrayList<String> lore2 = new ArrayList<>();
+        lore2.add("Item Ability: Throw");
+        lore2.add("Right click to throw this at mobs!");
+        i2meta.setDisplayName("Dagger");
+        i2.setItemMeta(i2meta);
+        customitems.put("DAGGER", i2);
+        allitems.add("DAGGER");
     }
+    
 }
