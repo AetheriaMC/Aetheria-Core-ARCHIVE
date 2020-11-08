@@ -12,7 +12,7 @@ public class itemtypes {
     public static List<String> blocks = new ArrayList<>();
     public static List<String> allitems = new ArrayList<>();
     public static List<String> items = new ArrayList<>();
-
+    public static List<Material> blacklisted_items = new ArrayList<>();
     public static HashMap<String, ItemStack> customitems = new HashMap<>();
 
     public static void additems(){

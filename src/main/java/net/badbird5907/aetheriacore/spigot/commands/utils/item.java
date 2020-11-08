@@ -49,6 +49,7 @@ public class item implements CommandExecutor {
                 DebugLogger.DebugLog(item1 + " is an custom item. ");
                 if(IsInt.Check(ammount)){
                     int a1 = Integer.parseInt(ammount);
+                    sender.sendMessage(ChatColor.GREEN + "Gave " + player.getName() + " " + ammount + " of " + item1 );
                     for(int i=a1; i>1; i--){
                         player.getInventory().addItem(itemtypes.customitems.get(item1));
                     }
@@ -61,7 +62,7 @@ public class item implements CommandExecutor {
                     Material m = Material.matchMaterial(item1);
                     ItemStack itemStack = new ItemStack(m, amount);
                     player1.getInventory().addItem(itemStack);
-                    sender.sendMessage(ChatColor.GREEN + "Gave " + player.getName() + " " + item + " of " + ammount );
+                    sender.sendMessage(ChatColor.GREEN + "Gave " + player.getName() + " " + ammount + " of " + item1 );
                 }
                 else
                     sender.sendMessage(ChatColor.RED + ammount + " is not a integer.");

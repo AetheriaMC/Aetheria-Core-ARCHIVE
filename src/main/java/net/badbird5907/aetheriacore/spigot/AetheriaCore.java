@@ -48,6 +48,14 @@ public final class AetheriaCore extends JavaPlugin {
     //protocolib
     private ProtocolManager protocolManager;
     //SignGUI signGui;
+    public static AetheriaCore instance;
+    public AetheriaCore() {
+        instance = this;
+    }
+    public static AetheriaCore getInstance() {
+        return instance;
+    }
+
 
     @Override
     public void onEnable() {
@@ -367,7 +375,8 @@ public final class AetheriaCore extends JavaPlugin {
                 itemtypes.blocks.add(material.name().toString());
             if(material.isItem())
                 itemtypes.items.add(material.name().toString());
-
+            if(material.toString().contains("SPAWN_EGG"))
+                itemtypes.blacklisted_items.add(material);
         }
         itemtypes.additems();
     }
