@@ -35,16 +35,17 @@ import java.util.List;
 import java.sql.*;
 
 public final class AetheriaCore extends JavaPlugin {
-
     private LuckPerms luckPerms;
     private File customConfigFile;
     private FileConfiguration customConfig;
     private static AetheriaCore plugin;
     private OnDiscordMessageRecieved discordsrvListener = new OnDiscordMessageRecieved(this);
     public static List<String> SUPPORTED_VERSIONS = new ArrayList<String>();
+    //sql
     private Connection connection;
     private String host, database, username, password;
     private int port;
+    //protocolib
     private ProtocolManager protocolManager;
     //SignGUI signGui;
 
