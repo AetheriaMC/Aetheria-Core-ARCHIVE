@@ -367,6 +367,8 @@ public final class AetheriaCore extends JavaPlugin {
                 itemtypes.blocks.add(material.name().toString());
             if(material.isItem())
                 itemtypes.items.add(material.name().toString());
+
         }
+        itemtypes.additems();
     }
 }
