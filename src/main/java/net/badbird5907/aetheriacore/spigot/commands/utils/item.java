@@ -20,45 +20,17 @@ public class item implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender,  Command command,  String s,  String[] args) {
-        /*
-        for (Material material : Material.values()) {
-            itemtypes.allitems.add(material.name().toString());
-        }
-         */
         if(sender.hasPermission(permissionManager.item)){
             if(sender instanceof  Player){
+                Player player = ((Player) sender).getPlayer();
                 if(args.length == 0)
                     sender.sendMessage(ChatColor.RED + "USAGE: /item <ITEM> <AMMOUNT> \n " + ChatColor.GREEN + "You can also do /itemmenu");
 
                 if (args.length == 1){
-                    String item1 = args[0].toUpperCase();
-                    if (itemtypes.allitems.contains(item1)){
-                        Player player = Bukkit.getPlayerExact(sender.getName());
-                        Material m = Material.matchMaterial(item1);
-                        ItemStack item = new ItemStack(m, 1);
-                        player.getInventory().addItem(item);
-                        return true;
-                    }
-                    else
-                        sender.sendMessage(ChatColor.RED + args[0] + " is not a valid itemstack.");
+                    giveitem(player, args[0], "1", player);
                 }
                 if (args.length == 2){
-                    String item1 = args[0].toUpperCase();
-                    if (itemtypes.allitems.contains(item1)){
-                        if(IsInt.Check(args[1])){
-                            int amount = Integer.parseInt(args[1]);
-                            Player player = Bukkit.getPlayerExact(sender.getName());
-                            Material m = Material.matchMaterial(item1);
-                            ItemStack item = new ItemStack(m, amount);
-                            player.getInventory().addItem(item);
-                            return true;
-                        }
-                        else
-                            sender.sendMessage(ChatColor.RED + args[1] + " is not a integer.");
-
-                    }
-                    else
-                        sender.sendMessage(ChatColor.RED + args[0] + " is not a valid itemstack.");
+                    giveitem(player, args[0], args[1], player);
                 }
                 else
                     sender.sendMessage(ChatColor.RED + "You must be a player to execute this!");
@@ -66,4 +38,22 @@ public class item implements CommandExecutor {
         }
         return true;
     }
+    public static void giveitem(Player sender, String item, String ammount, Player player){
+        String item1 = item.toUpperCase();
+        if (itemtypes.allitems.contains(item1)){
+            if(IsInt.Check(ammount)){
+                int amount = Integer.parseInt(ammount);
+                Player player1 = Bukkit.getPlayerExact(sender.getName());
+                Material m = Material.matchMaterial(item1);
+                ItemStack itemStack = new ItemStack(m, amount);
+                player1.getInventory().addItem(itemStack);
+            }
+            else
+                sender.sendMessage(ChatColor.RED + ammount + " is not a integer.");
+
+        }
+        else
+            sender.sendMessage(ChatColor.RED + item + " is not a valid itemstack.");
+    }
+
 }
