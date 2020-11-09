@@ -56,6 +56,7 @@ public class item implements CommandExecutor {
                 }
             }
             else{
+                DebugLogger.DebugLog(item1 + " is not an custom item. ");
                 if(IsInt.Check(ammount)){
                     int amount = Integer.parseInt(ammount);
                     Player player1 = Bukkit.getPlayerExact(sender.getName());

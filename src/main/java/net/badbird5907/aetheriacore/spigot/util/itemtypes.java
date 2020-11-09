@@ -1,6 +1,8 @@
 package net.badbird5907.aetheriacore.spigot.util;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -16,22 +18,15 @@ public class itemtypes {
     public static HashMap<String, ItemStack> customitems = new HashMap<>();
 
     public static void additems(){
-        ItemStack i1 = new ItemStack(Material.STICK);
-        ItemMeta i1meta = i1.getItemMeta();
-        ArrayList<String> lore1 = new ArrayList<>();
-        lore1.add("Item Ability: Strike!!!");
-        lore1.add("Aim this weapon at your opponent and right click to strke them with lightning!");
-        i1meta.setDisplayName("Lightning Rod");
-        i1.setItemMeta(i1meta);
-        customitems.put("LIGHTNING_ROD", i1);
-        allitems.add("LIGHTNING_ROD");
+
 
         ItemStack i2 = new ItemStack(Material.IRON_SWORD);
-        ItemMeta i2meta = i1.getItemMeta();
-        ArrayList<String> lore2 = new ArrayList<>();
+        ItemMeta i2meta = i2.getItemMeta();
+        ArrayList<String> lore2 = new ArrayList<String>();
         lore2.add("Item Ability: Throw");
         lore2.add("Right click to throw this at mobs!");
-        i2meta.setDisplayName("Dagger");
+        i2meta.setDisplayName(ChatColor.YELLOW + "Dagger");
+        i2.setLore(lore2);
         i2.setItemMeta(i2meta);
         customitems.put("DAGGER", i2);
         allitems.add("DAGGER");
