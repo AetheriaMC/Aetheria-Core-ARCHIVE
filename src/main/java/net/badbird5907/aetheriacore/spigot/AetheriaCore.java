@@ -10,12 +10,9 @@ import net.badbird5907.aetheriacore.spigot.commands.staff.StaffMode;
 import net.badbird5907.aetheriacore.spigot.commands.staff.staffchat;
 import net.badbird5907.aetheriacore.spigot.commands.trolls.*;
 import net.badbird5907.aetheriacore.spigot.commands.utils.*;
-import net.badbird5907.aetheriacore.spigot.customitems.LIGHTNING_ROD.LIGHTNING_ROD;
-import net.badbird5907.aetheriacore.spigot.customitems.LIGHTNING_ROD.Lightning_Rod_Listener;
 import net.badbird5907.aetheriacore.spigot.events.*;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
-//import net.badbird5907.aetheriacore.spigot.util.SignGUI;
 import net.badbird5907.aetheriacore.spigot.util.TabComplete;
 import net.badbird5907.aetheriacore.spigot.util.inventories.ClickListener;
 import net.badbird5907.aetheriacore.spigot.util.itemtypes;
@@ -32,9 +29,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.*;
+
+//import net.badbird5907.aetheriacore.spigot.util.SignGUI;
 
 public final class AetheriaCore extends JavaPlugin {
     private LuckPerms luckPerms;
@@ -210,7 +211,6 @@ public final class AetheriaCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BlockBreakEvent(), this);
         getServer().getPluginManager().registerEvents(new BlockPlaceEvent(), this);
         getServer().getPluginManager().registerEvents(new ClickListener(), this);
-        getServer().getPluginManager().registerEvents(new Lightning_Rod_Listener(), this);
     }
 
     private void setupConfig() {
@@ -381,8 +381,5 @@ public final class AetheriaCore extends JavaPlugin {
             if(material.toString().contains("SPAWN_EGG"))
                 itemtypes.blacklisted_items.add(material);
         }
-        itemtypes.additems();
-        //Setup custom items and stuff
-        LIGHTNING_ROD.itemstack();
     }
 }

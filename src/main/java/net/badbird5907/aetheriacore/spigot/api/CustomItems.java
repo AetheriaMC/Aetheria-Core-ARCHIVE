@@ -10,5 +10,6 @@ public class CustomItems {
     }
     public void put(String str, ItemStack itemStack){
         itemtypes.customitems.put(str, itemStack);
+        itemtypes.allitems.add(str);
     }
 }
