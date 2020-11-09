@@ -1,6 +1,7 @@
 package net.badbird5907.aetheriacore.spigot.essentialsreplacement.commands;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
+import net.badbird5907.aetheriacore.spigot.manager.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -17,7 +18,7 @@ public class Fly implements CommandExecutor {
         Player player = (Player) sender;
         if(args.length == 0){
             Player target = Bukkit.getPlayerExact(args[0]);
-            if (sender.hasPermission(permissionManager.fly)){
+            if (sender.hasPermission(Permission.FLY.node)){
                 if(player.isFlying() == false){
                     player.setFlying(true);
                     player.sendMessage(ChatColor.GOLD + "Flight: Enabled");

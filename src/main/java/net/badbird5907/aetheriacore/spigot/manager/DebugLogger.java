@@ -23,13 +23,7 @@ public class DebugLogger {
                 break;
             }
         }
-        if(DebugLogger.IsConsoleDebug())
-            pluginManager.log(pluginManager.Debugprefix + string);
+        pluginManager.log(pluginManager.Debugprefix + string);
     }
-    public static Boolean IsConsoleDebug() {
-        if(plugin.getConfig().getBoolean("Console-Debug-Default"))
-            return true;
-        else
-            return false;
-    }
+
 }

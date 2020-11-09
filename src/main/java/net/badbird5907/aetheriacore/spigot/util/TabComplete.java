@@ -42,11 +42,22 @@ public class TabComplete implements TabCompleter {
             return l;
         }
         if (cmd.getName().equalsIgnoreCase("item")) {
+            if(args.length == 1){
+                for(String a : itemtypes.allitems){
+                    if(a.toUpperCase().startsWith(args[0].toUpperCase())){
+                        l.add(a.toString());
+                    }
+                }
+                return l;
+            }
+            /*
+            if(args.length == 0 )
+                return itemtypes.allitems;
+             */
 
-            if(args.length == 0)
-                return item.names;
             if(args.length == 1)
-                return item.names;
+                return itemtypes.allitems;
+
             if(args.length == 2){
                 l.add("1");
                 l.add("10");
@@ -58,7 +69,7 @@ public class TabComplete implements TabCompleter {
             else
                 return l;
 
-            //return item.names;
+            //return itemtypes.allitems;
         }
 
         return null;

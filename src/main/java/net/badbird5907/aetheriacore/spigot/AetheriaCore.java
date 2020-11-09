@@ -2,9 +2,6 @@ package net.badbird5907.aetheriacore.spigot;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoDatabase;
 import github.scarsz.discordsrv.DiscordSRV;
 import net.badbird5907.aetheriacore.spigot.commands.aetheriacore;
 import net.badbird5907.aetheriacore.spigot.commands.management.togglePvp;
@@ -17,8 +14,11 @@ import net.badbird5907.aetheriacore.spigot.events.*;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
 import net.badbird5907.aetheriacore.spigot.util.TabComplete;
+import net.badbird5907.aetheriacore.spigot.util.inventories.ClickListener;
+import net.badbird5907.aetheriacore.spigot.util.itemtypes;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -29,26 +29,41 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.*;
+
+//import net.badbird5907.aetheriacore.spigot.util.SignGUI;
 
 public final class AetheriaCore extends JavaPlugin {
-
     private LuckPerms luckPerms;
     private File customConfigFile;
     private FileConfiguration customConfig;
     private static AetheriaCore plugin;
     private OnDiscordMessageRecieved discordsrvListener = new OnDiscordMessageRecieved(this);
     public static List<String> SUPPORTED_VERSIONS = new ArrayList<String>();
+    //sql
     private Connection connection;
     private String host, database, username, password;
     private int port;
+    //protocolib
     private ProtocolManager protocolManager;
+    //SignGUI signGui;
+    public static AetheriaCore instance;
+    public AetheriaCore() {
+        instance = this;
+    }
+    public static AetheriaCore getInstance() {
+        return instance;
+    }
+
 
     @Override
     public void onEnable() {
         if (getConfig().getBoolean("enable")) {
+            //signGui = new SignGUI(this);
             boolean mc1164 = Bukkit.getServer().getClass().getPackage().getName().contains("1.16.4");
             if(!mc1164)
                 warn("SERVER IS VERSION: " + Bukkit.getServer().getVersion() + "ONLY " + SUPPORTED_VERSIONS.toString() + " IS SUPPORTED.");
@@ -58,6 +73,7 @@ public final class AetheriaCore extends JavaPlugin {
             plugin = this;
 
             warn("Startup: Starting...");
+            doStuff();
             /*
             try {
                 UpdateCheck();
@@ -158,6 +174,7 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("getviewdistance").setExecutor(new GetViewDist());
         getCommand("item").setExecutor(new item());
         getCommand("item").setTabCompleter(new TabComplete());
+        getCommand("itemmenu").setExecutor(new itemmenu());
         //getCommand("nick").setExecutor(new nick());
         //getCommand("addgroup").setExecutor(new addGroup(this, this.luckPerms));
         //getCommand("systeminfo").setExecutor(new SystemInfo(this));
@@ -193,7 +210,7 @@ public final class AetheriaCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerMoveEvent(), this);
         getServer().getPluginManager().registerEvents(new BlockBreakEvent(), this);
         getServer().getPluginManager().registerEvents(new BlockPlaceEvent(), this);
-
+        getServer().getPluginManager().registerEvents(new ClickListener(), this);
     }
 
     private void setupConfig() {
@@ -252,9 +269,11 @@ public final class AetheriaCore extends JavaPlugin {
     }
 
     public void DB() {
+        /*
         MongoClient mongoClient = MongoClients.create("mongodb+srv://" + getConfig().getString("Database-Username") + ":" + getConfig().getString("Database-Password") + "@aetheriacore-db1.jyi3w.gcp.mongodb.net/AetheriaCore-DB1?retryWrites=true&w=majority");
         //MongoCollection<Document> toggles = mongoClient.getDatabase("AetheriaCore-DB1").getCollection("toggles");
         MongoDatabase database = mongoClient.getDatabase("users");
+         */
     }
 
     private void UpdateCheck() throws IOException {
@@ -350,6 +369,17 @@ public final class AetheriaCore extends JavaPlugin {
             }
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://" + this.host+ ":" + this.port + "/" + this.database, this.username, this.password);
+        }
+    }
+    private void doStuff(){
+        for (Material material : Material.values()) {
+            itemtypes.allitems.add(material.name().toString());
+            if(material.isBlock())
+                itemtypes.blocks.add(material.name().toString());
+            if(material.isItem())
+                itemtypes.items.add(material.name().toString());
+            if(material.toString().contains("SPAWN_EGG"))
+                itemtypes.blacklisted_items.add(material);
         }
     }
 }

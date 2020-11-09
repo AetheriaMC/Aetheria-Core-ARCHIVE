@@ -1,6 +1,7 @@
 package net.badbird5907.aetheriacore.spigot.events;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
+import net.badbird5907.aetheriacore.spigot.manager.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -10,17 +11,18 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
-public class Blacklisteditems implements Listener {
+public class LegacyBlacklisteditems implements Listener {
     AetheriaCore plugin;
 
-    public Blacklisteditems(AetheriaCore plugin) {
+    public LegacyBlacklisteditems(AetheriaCore plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-
-
+        /**
+         * @Deceprecated Do not use, causes insane lag as it loops through all items and for each player.
+         */
         Material[] bannedItems = { Material.COMMAND_BLOCK, Material.COMMAND_BLOCK_MINECART, Material.CHAIN_COMMAND_BLOCK, Material.REPEATING_COMMAND_BLOCK, Material.BEDROCK, Material.BARRIER,
                 Material.STRUCTURE_BLOCK, Material.SPAWNER, Material.DEBUG_STICK, Material.JIGSAW, Material.BAT_SPAWN_EGG, Material.BEE_SPAWN_EGG, Material.BLAZE_SPAWN_EGG, Material.CAT_SPAWN_EGG, Material.CAVE_SPIDER_SPAWN_EGG,
                 Material.CHICKEN_SPAWN_EGG, Material.COD_SPAWN_EGG, Material.COW_SPAWN_EGG, Material.CREEPER_SPAWN_EGG, Material.DOLPHIN_SPAWN_EGG, Material.DONKEY_SPAWN_EGG, Material.DROWNED_SPAWN_EGG,
@@ -37,7 +39,7 @@ public class Blacklisteditems implements Listener {
         for(Material m : bannedItems) { //Loop thru all elements
             if(player.getInventory().contains(m, 1)){ //Check if in inventory
                 //Check for perms; if no, remove
-                if(player.hasPermission("aetheriacore.bypass.blacklistitems")){
+                if(player.hasPermission(Permission.BYPASS_ITEM_BLACKLIST.node)){
                     break;
                 }
                 else {
