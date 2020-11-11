@@ -14,7 +14,7 @@ public final class AetheriaCoreBungee extends Plugin implements Listener {
     public void onEnable() {
         // Plugin startup logic
         log.Log("Starting...");
-
+        getProxy().registerChannel("aetheriacore:messaging");
         log.Log( "Registering Commands...");
         getProxy().getPluginManager().registerCommand(this, new Hub());
         getProxy().getInstance().getPluginManager().registerCommand(this, new Beta());

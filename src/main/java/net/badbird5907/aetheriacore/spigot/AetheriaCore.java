@@ -5,6 +5,7 @@ import com.comphenix.protocol.ProtocolManager;
 import github.scarsz.discordsrv.DiscordSRV;
 import net.badbird5907.aetheriacore.spigot.commands.aetheriacore;
 import net.badbird5907.aetheriacore.spigot.commands.management.togglePvp;
+import net.badbird5907.aetheriacore.spigot.commands.staff.Lockdown;
 import net.badbird5907.aetheriacore.spigot.commands.staff.QuickChat;
 import net.badbird5907.aetheriacore.spigot.commands.staff.StaffMode;
 import net.badbird5907.aetheriacore.spigot.commands.staff.staffchat;
@@ -24,7 +25,9 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -39,8 +42,8 @@ import java.util.List;
 
 public final class AetheriaCore extends JavaPlugin {
     private LuckPerms luckPerms;
-    private File customConfigFile;
-    private FileConfiguration customConfig;
+    public File customConfigFile;
+    public FileConfiguration customConfig;
     private static AetheriaCore plugin;
     private OnDiscordMessageRecieved discordsrvListener = new OnDiscordMessageRecieved(this);
     public static List<String> SUPPORTED_VERSIONS = new ArrayList<String>();
@@ -94,7 +97,7 @@ public final class AetheriaCore extends JavaPlugin {
 
             //get config
             log("Startup: Loading Config...");
-            createCustomConfig();
+            DataFile();
             this.setupConfig();
             log("Startup: Config Loaded!!");
 
@@ -175,6 +178,10 @@ public final class AetheriaCore extends JavaPlugin {
         getCommand("item").setExecutor(new item());
         getCommand("item").setTabCompleter(new TabComplete());
         getCommand("itemmenu").setExecutor(new itemmenu());
+        getCommand("broadcast").setExecutor(new Broadcast());
+        getCommand("mutechat").setExecutor(new mutechat(this));
+        getCommand("kickallnonstaff").setExecutor(new KickAllNonStaff());
+        getCommand("lockdown").setExecutor(new Lockdown());
         //getCommand("nick").setExecutor(new nick());
         //getCommand("addgroup").setExecutor(new addGroup(this, this.luckPerms));
         //getCommand("systeminfo").setExecutor(new SystemInfo(this));
@@ -203,7 +210,7 @@ public final class AetheriaCore extends JavaPlugin {
         if (getConfig().getBoolean("disable-enderman-pickup", true)) {
             getServer().getPluginManager().registerEvents(new onEndermanPickup(this), this);
         }
-        getServer().getPluginManager().registerEvents(new onChat(), this);
+        getServer().getPluginManager().registerEvents(new onChat(this), this);
         getServer().getPluginManager().registerEvents(new OnVanish(), this);
         getServer().getPluginManager().registerEvents(new OnPunish(), this);
         getServer().getPluginManager().registerEvents(new onarrowhit(), this);
@@ -317,7 +324,7 @@ public final class AetheriaCore extends JavaPlugin {
         return this.customConfig;
     }
 
-    private void createCustomConfig() {
+    public void DataFile() {
         log("Checking Data File");
         customConfigFile = new File(getDataFolder(), "data.yml");
         if (!customConfigFile.exists()) {
@@ -333,7 +340,10 @@ public final class AetheriaCore extends JavaPlugin {
             e.printStackTrace();
         }
         getDataFile().addDefault("pvp", true);
+        getDataFile().addDefault("mutechatstatis", false);
+
     }
+
     public void SetupDatabase(){
         if (plugin.getConfig().getBoolean("enableDatabase", true)) {
             log("Setting Up Database");
@@ -381,5 +391,6 @@ public final class AetheriaCore extends JavaPlugin {
             if(material.toString().contains("SPAWN_EGG"))
                 itemtypes.blacklisted_items.add(material);
         }
+        this.getServer().getMessenger().registerOutgoingPluginChannel(this, "aetheriacore:messaging");
     }
 }

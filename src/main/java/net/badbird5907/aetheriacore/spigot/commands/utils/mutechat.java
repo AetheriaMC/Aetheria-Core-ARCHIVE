@@ -2,6 +2,7 @@ package net.badbird5907.aetheriacore.spigot.commands.utils;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.manager.DebugLogger;
+import net.badbird5907.aetheriacore.spigot.manager.Permission;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,14 +13,15 @@ public class mutechat implements CommandExecutor {
     public mutechat(AetheriaCore plugin) {
         this.plugin = plugin;
     }
-
     @Override
     public boolean onCommand( CommandSender sender,  Command command,  String s,  String[] args) {
-        if(sender.hasPermission(permissionManager.mutechat)){
+        if(sender.hasPermission(Permission.MUTE_CHAT.node)){
             if(args.length == 0){
+
                 if(plugin.getDataFile().getBoolean("mutechatstatus")) {
                     try{
                         plugin.getDataFile().set("mutechatstatus", false);
+                        plugin.getDataFile().save(plugin.customConfigFile);
                     } catch (Exception e) {
                         e.printStackTrace();
                         DebugLogger.DebugLog(e.toString());
@@ -28,6 +30,7 @@ public class mutechat implements CommandExecutor {
                 if(!plugin.getDataFile().getBoolean("mutechatstatus")) {
                     try{
                         plugin.getDataFile().set("mutechatstatus", true);
+                        plugin.getDataFile().save(plugin.customConfigFile);
                     } catch (Exception e) {
                         e.printStackTrace();
                         DebugLogger.DebugLog(e.toString());
@@ -38,5 +41,11 @@ public class mutechat implements CommandExecutor {
             }
         }
         return true;
+    }
+    public static boolean IsChatMuted(){
+        if(AetheriaCore.getInstance().getDataFile().getBoolean("mutechatstatus"))
+            return true;
+        else
+            return false;
     }
 }

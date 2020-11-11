@@ -194,6 +194,27 @@ commands:
     usage: /<command>
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
     permission: aetheriacore.item
+  broadcast:
+    description: Broadcast a message to the whole server
+    usage: /<command> <message>
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    permission: aetheriacore.broadcast
+  mutechat:
+    description: Mute the chat
+    usage: /<command>
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    permission: aetheriacore.mutechat
+  lockdown:
+    description: Lockdown the server
+    usage: /<command> <low/medium/high> <server/network>
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    permission: aetheriacore.lockdown
+  kickallnonstaff:
+    description: Kick all players without the perm aetheriacore.staff
+    usage: /<command> <reason>
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    permission: aetheriacore.kickall
+
 #  givegroup:
 #    description: Give Player a Group
 #    usage: /<command>
@@ -235,6 +256,24 @@ permissions:
       aetheriacore.getclientbrand: true
       aetheriacore.nick: true
       aetheriacore.item: true
+      aetheriacore.broadcast: true
+      aetheriacore.mutechat: true
+      aetheriacore.admin: true
+      aetheriacore.kickall: true
+      aetheriacore.staff: true
+      aetheriacore.staff.trial.builder: false
+      aetheriacore.staff.trial.dev: false
+      aetheriacore.staff.trial.lm: false
+      aetheriacore.staff.builder: false
+      aetheriacore.staff.dev: false
+      aetheriacore.staff.lm: false
+      aetheriacore.staff.owner: false
+      aetheriacore.staff.lead.builder: false
+      aetheriacore.staff.lead.lm: false
+      aetheriacore.staff.lead.dev: false
+      aetheriacore.staff.mod: false
+      aetheriacore.staff.helper: false
+
   aetheriacore.luckperms.*:
     description: All Aetheria Luckperms Commands
     children:
@@ -393,3 +432,46 @@ permissions:
   aetheriacore.item:
     default: op
     description: Give item
+  aetheriacore.broadcast:
+    description: Broadcast a message to the whole server
+    default: op
+  aetheriacore.mutechat:
+    description: Mute the chat
+    default: op
+  aetheriacore.kickall:
+    description: kick all
+    default: op
+  aetheriacore.staff:
+    description: Staff role
+    default: op
+  aetheriacore.staff.trial.buider:
+    description: Trial Builder
+  aetheriacore.staff.trial.lm:
+    description: Trial LM
+  aetheriacore.staff.trial.dev:
+    description: Trial Dev
+  aetheriacore.staff.buider:
+    description: Builder
+  aetheriacore.staff.dev:
+    description: Dev
+  aetheriacore.staff.lm:
+    description: Lore Master
+  aetheriacore.staff.helper:
+    description: Helper
+  aetheriacore.staff.mod:
+    description: Mod
+  aetheriacore.staff.admin:
+    description: Admin
+  aetheriacore.staff.owner:
+    description: Owner
+  aetheriacore.staff.lead.lm:
+    description: Lead LM
+  aetheriacore.staff.lead.dev:
+    description: Lead Dev
+  aetheriacore.staff.lead.builder:
+    description: Lead Builder
+
+
+
+
+
