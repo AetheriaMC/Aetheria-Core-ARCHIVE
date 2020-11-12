@@ -97,7 +97,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
 
     private static LinkedList<Song> songs;
     private static Map<String, Song> fileNames;
-    private static Map<String, Song> internalNames;
+    public static Map<String, Song> internalNames;
     private static Playlist playlist;
 
     public static int maxPage;
@@ -180,8 +180,11 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
             protocolManager = ProtocolLibrary.getProtocolManager();
             log("done!");
             log("Starting jukebox...");
+            //initAll();
             if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) Placeholders.registerPlaceholders();
             getLogger().info("This JukeBox version requires NoteBlockAPI version 1.5.0 or more. Please ensure you have the right version before using JukeBox (you are using NBAPI ver. " + getPlugin(NoteBlockAPI.class).getDescription().getVersion() + ")");
+            saveDefaultConfig();
+            initAll();
             //finished startup
             warn("Startup Finished!");
             log("INFO: do /AEC debug for plugin info");
@@ -256,7 +259,8 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
         getCommand("mutechat").setExecutor(new mutechat(this));
         getCommand("kickallnonstaff").setExecutor(new KickAllNonStaff());
         getCommand("lockdown").setExecutor(new Lockdown());
-        this.getCommand("shopkeeper").setExecutor(new GuiMaker());
+        getCommand("shopkeeper").setExecutor(new GuiMaker());
+
         //getCommand("nick").setExecutor(new nick());
         //getCommand("addgroup").setExecutor(new addGroup(this, this.luckPerms));
         //getCommand("systeminfo").setExecutor(new SystemInfo(this));
@@ -576,9 +580,10 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
     }
 
     private void finishEnabling(){
+
         getCommand("music").setExecutor(new CommandMusic());
         getCommand("adminmusic").setExecutor(new CommandAdmin());
-
+        getCommand("adminmusic").setTabCompleter(new TabComplete());
         getServer().getPluginManager().registerEvents(this, this);
 
         radioEnabled = radioEnabled && !songs.isEmpty();

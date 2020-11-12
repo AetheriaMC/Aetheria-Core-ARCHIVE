@@ -223,13 +223,13 @@ commands:
     aliases: [jukebox]
     permission: aetheriacore.music
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
-    usage: /<command>
+#    usage: /<command>
   adminmusic:
     description: Admin command for musics
     aliases: [amusic]
     permission: aetheriacore.music.admin
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
-    usage: /<command>
+#    usage: /<command>
 
 #  givegroup:
 #    description: Give Player a Group

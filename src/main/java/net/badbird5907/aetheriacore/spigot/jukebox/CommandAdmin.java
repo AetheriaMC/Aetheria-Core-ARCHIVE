@@ -31,7 +31,7 @@ public class CommandAdmin implements CommandExecutor {
 
         if (args.length == 0){
             sender.sendMessage(Lang.INCORRECT_SYNTAX);
-            return false;
+            return true;
         }
 
         switch (args[0]){
@@ -42,7 +42,7 @@ public class CommandAdmin implements CommandExecutor {
                     AetheriaCore.getInstance().disableAll();
                     AetheriaCore.getInstance().initAll();
                 }catch (Exception ex){
-                    sender.sendMessage("§cError while reloading. Please check the console and send the stacktrace to SkytAsul on SpigotMC.");
+                    sender.sendMessage("§cError while reloading. Please check the console   .");
                     ex.printStackTrace();
                 }
                 sender.sendMessage(Lang.RELOAD_FINISH);
@@ -51,12 +51,12 @@ public class CommandAdmin implements CommandExecutor {
             case "player":
                 if (args.length < 2){
                     sender.sendMessage(Lang.INCORRECT_SYNTAX);
-                    return false;
+                    return true;
                 }
                 OfflinePlayer pp = Bukkit.getOfflinePlayer(args[1]);
                 if (pp == null){
                     sender.sendMessage("§cUnknown player.");
-                    return false;
+                    return true;
                 }
                 PlayerData pdata = AetheriaCore.getInstance().datas.getDatas(pp.getUniqueId());
                 String s = Lang.MUSIC_PLAYING + " ";
@@ -76,7 +76,7 @@ public class CommandAdmin implements CommandExecutor {
             case "play":
                 if (args.length < 3){
                     sender.sendMessage(Lang.INCORRECT_SYNTAX);
-                    return false;
+                    return true;
                 }
                 if (args[1].equals("@a")){
                     for (Player p : Bukkit.getOnlinePlayers()){
@@ -93,7 +93,7 @@ public class CommandAdmin implements CommandExecutor {
             case "stop":
                 if (args.length < 2){
                     sender.sendMessage(Lang.INCORRECT_SYNTAX);
-                    return false;
+                    return true;
                 }
                 if (args[1].equals("@a")){
                     for (Player p : Bukkit.getOnlinePlayers()){
@@ -103,7 +103,7 @@ public class CommandAdmin implements CommandExecutor {
                     Player cp = Bukkit.getPlayer(args[1]);
                     if (cp == null){
                         sender.sendMessage("§cUnknown player.");
-                        return false;
+                        return true;
                     }
                     sender.sendMessage(stop(cp));
                 }
@@ -112,7 +112,7 @@ public class CommandAdmin implements CommandExecutor {
             case "toggle":
                 if (args.length < 2) {
                     sender.sendMessage(Lang.INCORRECT_SYNTAX);
-                    return false;
+                    return true;
                 }
                 if (args[1].equals("@a")) {
                     for (Player p : Bukkit.getOnlinePlayers()) {
@@ -122,7 +122,7 @@ public class CommandAdmin implements CommandExecutor {
                     Player cp = Bukkit.getPlayer(args[1]);
                     if (cp == null) {
                         sender.sendMessage("§cUnknown player.");
-                        return false;
+                        return true;
                     }
                     toggle(cp);
                 }
@@ -131,7 +131,7 @@ public class CommandAdmin implements CommandExecutor {
             case "setitem":
                 if (!(sender instanceof Player)){
                     sender.sendMessage("§cYou have to be a player to do that.");
-                    return false;
+                    return true;
                 }
                 ItemStack is = ((Player) sender).getInventory().getItemInHand();
                 if (is == null || is.getType() == Material.AIR){
@@ -143,7 +143,7 @@ public class CommandAdmin implements CommandExecutor {
             case "download":
                 if (args.length < 3){
                     sender.sendMessage(Lang.INCORRECT_SYNTAX);
-                    return false;
+                    return true;
                 }
                 try {
                     File file = new File(AetheriaCore.songsFolder, args[2] + ".nbs");
@@ -171,7 +171,7 @@ public class CommandAdmin implements CommandExecutor {
             case "shuffle":
                 if (args.length < 2){
                     sender.sendMessage(Lang.INCORRECT_SYNTAX);
-                    return false;
+                    return true;
                 }
                 if (args[1].equals("@a")){
                     for (Player p : Bukkit.getOnlinePlayers()){
@@ -181,7 +181,7 @@ public class CommandAdmin implements CommandExecutor {
                     Player cp = Bukkit.getPlayer(args[1]);
                     if (cp == null){
                         sender.sendMessage("§cUnknown player.");
-                        return false;
+                        return true;
                     }
                     sender.sendMessage(shuffle(cp));
                 }
@@ -190,7 +190,7 @@ public class CommandAdmin implements CommandExecutor {
             case "particles":
                 if (args.length < 2){
                     sender.sendMessage(Lang.INCORRECT_SYNTAX);
-                    return false;
+                    return true;
                 }
                 if (args[1].equals("@a")){
                     for (Player p : Bukkit.getOnlinePlayers()){
@@ -200,7 +200,7 @@ public class CommandAdmin implements CommandExecutor {
                     Player cp = Bukkit.getPlayer(args[1]);
                     if (cp == null){
                         sender.sendMessage("§cUnknown player.");
-                        return false;
+                        return true;
                     }
                     sender.sendMessage(particles(cp));
                 }
@@ -209,7 +209,7 @@ public class CommandAdmin implements CommandExecutor {
             case "join":
                 if (args.length < 2){
                     sender.sendMessage(Lang.INCORRECT_SYNTAX);
-                    return false;
+                    return true;
                 }
                 if (args[1].equals("@a")){
                     for (Player p : Bukkit.getOnlinePlayers()){
@@ -219,7 +219,7 @@ public class CommandAdmin implements CommandExecutor {
                     Player cp = Bukkit.getPlayer(args[1]);
                     if (cp == null){
                         sender.sendMessage("§cUnknown player.");
-                        return false;
+                        return true;
                     }
                     sender.sendMessage(join(cp));
                 }
@@ -228,7 +228,7 @@ public class CommandAdmin implements CommandExecutor {
             case "random":
                 if (args.length < 2){
                     sender.sendMessage(Lang.INCORRECT_SYNTAX);
-                    return false;
+                    return true;
                 }
                 if (args[1].equals("@a")){
                     for (Player p : Bukkit.getOnlinePlayers()){
@@ -238,7 +238,7 @@ public class CommandAdmin implements CommandExecutor {
                     Player cp = Bukkit.getPlayer(args[1]);
                     if (cp == null){
                         sender.sendMessage("§cUnknown player.");
-                        return false;
+                        return true;
                     }
                     sender.sendMessage(random(cp));
                 }
@@ -247,12 +247,12 @@ public class CommandAdmin implements CommandExecutor {
             case "volume":
                 if (args.length < 3){
                     sender.sendMessage(Lang.INCORRECT_SYNTAX);
-                    return false;
+                    return true;
                 }
                 Player cp = Bukkit.getPlayer(args[1]);
                 if (cp == null){
                     sender.sendMessage("§cUnknown player.");
-                    return false;
+                    return true;
                 }
                 pdata = AetheriaCore.getInstance().datas.getDatas(cp);
                 try{
@@ -272,7 +272,7 @@ public class CommandAdmin implements CommandExecutor {
             case "loop":
                 if (args.length < 2){
                     sender.sendMessage(Lang.INCORRECT_SYNTAX);
-                    return false;
+                    return true;
                 }
                 if (args[1].equals("@a")){
                     for (Player p : Bukkit.getOnlinePlayers()){
@@ -282,7 +282,7 @@ public class CommandAdmin implements CommandExecutor {
                     cp = Bukkit.getPlayer(args[1]);
                     if (cp == null){
                         sender.sendMessage("§cUnknown player.");
-                        return false;
+                        return true;
                     }
                     sender.sendMessage(loop(cp));
                 }
@@ -291,7 +291,7 @@ public class CommandAdmin implements CommandExecutor {
             case "next":
                 if (args.length < 2) {
                     sender.sendMessage(Lang.INCORRECT_SYNTAX);
-                    return false;
+                    return true;
                 }
                 if (args[1].equals("@a")) {
                     int i = 0;
@@ -304,7 +304,7 @@ public class CommandAdmin implements CommandExecutor {
                     cp = Bukkit.getPlayer(args[1]);
                     if (cp == null) {
                         sender.sendMessage("§cUnknown player.");
-                        return false;
+                        return true;
                     }
                     AetheriaCore.getInstance().datas.getDatas(cp).nextSong();
                     sender.sendMessage("§aNext song for " + cp.getName());
@@ -317,7 +317,7 @@ public class CommandAdmin implements CommandExecutor {
 
         }
 
-        return false;
+        return true;
     }
 
     private String play(String[] args){
