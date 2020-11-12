@@ -3,14 +3,13 @@ package net.badbird5907.aetheriacore.spigot.jukebox.utils;
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.YamlConfiguration;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.bukkit.ChatColor;
-import org.bukkit.configuration.file.YamlConfiguration;
 
 
 public class Lang{

@@ -757,7 +757,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
     }
 
     public static String getItemName(Song s, Player p) {
-        boolean admin = p.hasPermission("music.adminItem");
+        boolean admin = p.hasPermission("aetheriacore.music.adminItem");
         return format(admin ? itemFormatAdmin : itemFormat, admin ? itemFormatAdminWithoutAuthor : itemFormatWithoutAuthor, s);
     }
 

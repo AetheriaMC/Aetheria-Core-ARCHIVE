@@ -7,8 +7,8 @@ prefix: AetheriaCore
 authors: [Badbird5907]
 description: AetheriaCore By Badbird5907
 website: badbird5907.net
-softdepend: [PremiumVanish, AetheriaMinigames, AetheriaCheat]
-depend: [DiscordSRV, SuperVanish, AdvancedBan, ProtocolLib, LuckPerms]
+softdepend: [PremiumVanish, AetheriaMinigames, AetheriaCheat, PlaceholderAPI]
+depend: [DiscordSRV, SuperVanish, AdvancedBan, ProtocolLib, LuckPerms, NoteBlockAPI]
 loadbefore: [DiscordSRV, AdvancedBan]
 commands:
   aetheriacore:
@@ -218,6 +218,19 @@ commands:
   shopkeeper:
     description: a scuffed shopkeeper made by DigitaDragon
 
+  music:
+    description: Main command for musics
+    aliases: [jukebox]
+    permission: aetheriacore.music
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    usage: /<command>
+  adminmusic:
+    description: Admin command for musics
+    aliases: [amusic]
+    permission: aetheriacore.music.admin
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    usage: /<command>
+
 #  givegroup:
 #    description: Give Player a Group
 #    usage: /<command>
@@ -276,6 +289,7 @@ permissions:
       aetheriacore.staff.lead.dev: false
       aetheriacore.staff.mod: false
       aetheriacore.staff.helper: false
+      aetheriacore.music.*: true
 
   aetheriacore.luckperms.*:
     description: All Aetheria Luckperms Commands
@@ -306,6 +320,21 @@ permissions:
       aetheriacore.bypass.clearchat: true
       aetheriacore.bypass.freeze: true
       aetheriacore.bypass.itemblacklist: true
+  aetheriacore.music.*:
+    description: Give access to JukeBox whole
+    children:
+      music.command: true
+      music.command.admin: true
+      music.adminItem: true
+  aetheriacore.music.command:
+    description: Give access to /music command
+    default: true
+  aetheriacore.music.command.admin:
+    description: Give access to /adminmusic
+    default: op
+  aetheriacore.music.adminItem:
+    description: Changes item format
+    default: op
   aetheriacore.cosmetic.teleportparticles:
     description: not in use rn
     default: false
