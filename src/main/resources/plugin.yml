@@ -215,6 +215,9 @@ commands:
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
     permission: aetheriacore.kickall
 
+  shopkeeper:
+    description: a scuffed shopkeeper made by DigitaDragon
+
 #  givegroup:
 #    description: Give Player a Group
 #    usage: /<command>

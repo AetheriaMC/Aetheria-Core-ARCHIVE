@@ -22,6 +22,7 @@ public class PlayerJoinEvent implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void JoinEvent(PlayerLoginEvent event){
+
         Player player = event.getPlayer();
         if(NPC.getNPCs() == null)
             return;
