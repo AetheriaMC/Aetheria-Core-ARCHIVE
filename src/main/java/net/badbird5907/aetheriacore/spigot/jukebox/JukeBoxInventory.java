@@ -279,7 +279,7 @@ public class JukeBoxInventory implements Listener {
 
     public void joinItem(){
         if (menu == ItemsMenu.OPTIONS)
-            name(inv.getItem(49), ChatColor.GREEN + (pdata.hasJoinMusic() ? Lang.DISABLE : Lang.ENABLE) + " " + Lang.CONNEXION_MUSIC + "\n" + ChatColor.YELLOW + "Currently: " + pdata.hasJoinMusic());
+            name(inv.getItem(49), ChatColor.GREEN + (pdata.hasJoinMusic() ? Lang.DISABLE : Lang.ENABLE) + " " + Lang.CONNEXION_MUSIC + Lang.CONNECTION_MUSIC_ENABLE_DISABLE + (pdata.hasJoinMusic() ? Lang.DISABLED : Lang.ENABLED) );
     }
 
     public void shuffleItem(){

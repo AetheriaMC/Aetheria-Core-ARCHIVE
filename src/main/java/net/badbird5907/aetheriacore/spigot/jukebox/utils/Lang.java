@@ -34,6 +34,7 @@ public class Lang{
     public static String SHUFFLE_MODE = "the shuffle mode";
     public static String LOOP_MODE = "the loop mode";
     public static String CONNEXION_MUSIC = "music when connecting";
+    public static String CONNECTION_MUSIC_ENABLE_DISABLE = "\n\nCurrently: ";
     public static String PARTICLES = "particles";
     public static String MUSIC_PLAYING = ChatColor.GREEN + "Music while playing:";
     public static String INCORRECT_SYNTAX = ChatColor.RED + "Incorrect syntax.";
