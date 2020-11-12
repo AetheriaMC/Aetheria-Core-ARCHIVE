@@ -184,7 +184,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
             if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) Placeholders.registerPlaceholders();
             getLogger().info("This JukeBox version requires NoteBlockAPI version 1.5.0 or more. Please ensure you have the right version before using JukeBox (you are using NBAPI ver. " + getPlugin(NoteBlockAPI.class).getDescription().getVersion() + ")");
             saveDefaultConfig();
-            initAll();
+            waitThenRun();
             //finished startup
             warn("Startup Finished!");
             log("INFO: do /AEC debug for plugin info");
@@ -472,6 +472,14 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
                 itemtypes.blacklisted_items.add(material);
         }
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "aetheriacore:messaging");
+    }
+    public void waitThenRun(){
+        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+            public void run() {
+                initAll();
+            }
+        }, 20L); // 600L (ticks) is equal to 30 seconds (20 ticks = 1 second)
+        return;
     }
     public void disableAll(){
         if (radio != null){

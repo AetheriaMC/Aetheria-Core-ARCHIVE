@@ -7,6 +7,7 @@ import com.xxmicloxx.NoteBlockAPI.model.Song;
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Lang;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Playlists;
+import net.badbird5907.aetheriacore.spigot.util.GUIholder;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -277,7 +278,8 @@ public class JukeBoxInventory implements Listener {
     }
 
     public void joinItem(){
-        if (menu == ItemsMenu.OPTIONS) name(inv.getItem(49), ChatColor.GREEN + (pdata.hasJoinMusic() ? Lang.DISABLE : Lang.ENABLE) + " " + Lang.CONNEXION_MUSIC);
+        if (menu == ItemsMenu.OPTIONS)
+            name(inv.getItem(49), ChatColor.GREEN + (pdata.hasJoinMusic() ? Lang.DISABLE : Lang.ENABLE) + " " + Lang.CONNEXION_MUSIC + "\n" + ChatColor.YELLOW + "Currently: " + pdata.hasJoinMusic());
     }
 
     public void shuffleItem(){
