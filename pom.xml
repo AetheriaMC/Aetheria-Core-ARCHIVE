@@ -165,5 +165,12 @@
             <version>1.6.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>net.badbird5907</groupId>
+            <artifactId>AetheriaItems</artifactId>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/AetheriaItems-1.0-SNAPSHOT.jar</systemPath>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

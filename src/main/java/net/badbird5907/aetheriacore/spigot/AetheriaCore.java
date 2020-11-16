@@ -1,7 +1,5 @@
 package net.badbird5907.aetheriacore.spigot;
 
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.ProtocolManager;
 import com.xxmicloxx.NoteBlockAPI.NoteBlockAPI;
 import com.xxmicloxx.NoteBlockAPI.model.Playlist;
 import com.xxmicloxx.NoteBlockAPI.model.Song;
@@ -20,6 +18,8 @@ import net.badbird5907.aetheriacore.spigot.jukebox.*;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.*;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
+import net.badbird5907.aetheriacore.spigot.setup.SetupCommands;
+import net.badbird5907.aetheriacore.spigot.setup.SetupEvents;
 import net.badbird5907.aetheriacore.spigot.util.TabComplete;
 import net.badbird5907.aetheriacore.spigot.util.inventories.ClickListener;
 import net.badbird5907.aetheriacore.spigot.util.itemtypes;
@@ -75,7 +75,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
     private String host, database, username, password;
     private int port;
     //protocolib
-    private ProtocolManager protocolManager;
+    //private ProtocolManager protocolManager;
     //SignGUI signGui;
     public static AetheriaCore instance;
     public AetheriaCore() {
@@ -158,11 +158,13 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
 
             //register commands
             log("Startup: initializing Commands");
-            this.setupCommands();
+            //this.setupCommands();
+            SetupCommands.setupCommands(this);
 
             //register events
             log("Startup: Registering Events...");
-            this.setupEvents();
+            //this.setupEvents();
+            SetupEvents.registerEvents(this);
             log("All Events Registered!");
             Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Lag(), 100L, 1L);
 
@@ -177,7 +179,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
 
             log("Setting Up Dependencies");
             setupDependencies();
-            protocolManager = ProtocolLibrary.getProtocolManager();
+            //protocolManager = ProtocolLibrary.getProtocolManager();
             log("done!");
             log("Starting jukebox...");
             //initAll();
@@ -260,6 +262,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
         getCommand("kickallnonstaff").setExecutor(new KickAllNonStaff());
         getCommand("lockdown").setExecutor(new Lockdown());
         getCommand("shopkeeper").setExecutor(new GuiMaker());
+        getCommand("loop").setExecutor(new Loop());
 
         //getCommand("nick").setExecutor(new nick());
         //getCommand("addgroup").setExecutor(new addGroup(this, this.luckPerms));
@@ -280,6 +283,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
     }
 
     private void setupEvents() {
+        //unused rn. check the class SetupEvents
         if (getConfig().getBoolean("enablelegacyblacklistitems", true)) {
             getServer().getPluginManager().registerEvents(new InventoryOpenEvent(), this);
         }
@@ -462,6 +466,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
         }
     }
     private void doStuff(){
+        itemtypes.addToAllItems();
         for (Material material : Material.values()) {
             itemtypes.allitems.add(material.name().toString());
             if(material.isBlock())
@@ -592,6 +597,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
         getCommand("music").setExecutor(new CommandMusic());
         getCommand("adminmusic").setExecutor(new CommandAdmin());
         getCommand("adminmusic").setTabCompleter(new TabComplete());
+        getCommand("playmusic").setExecutor(new PlayMusic());
         getServer().getPluginManager().registerEvents(this, this);
 
         radioEnabled = radioEnabled && !songs.isEmpty();
@@ -757,7 +763,13 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
     }
 
     public static Song getSongByFile(String fileName){
-        return fileNames.get(fileName);
+        if(fileName.contains(".nbs")){
+            return fileNames.get(fileName);
+        }
+        if(fileName.contains(".NBS")){
+            return fileNames.get(fileName);
+        }
+        return fileNames.get(fileName + ".nbs");
     }
 
     public static Song getSongByInternalName(String internalName) {

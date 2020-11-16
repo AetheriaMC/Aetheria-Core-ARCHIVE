@@ -5,6 +5,7 @@ import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import net.badbird5907.aetheriacore.spigot.util.IsInt;
 import net.badbird5907.aetheriacore.spigot.util.itemtypes;
+import net.badbird5907.aetheriaitems.api.GetCustomItems;
 import net.md_5.bungee.protocol.packet.Chat;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -51,12 +52,12 @@ public class item implements CommandExecutor {
                     int a1 = Integer.parseInt(ammount);
                     sender.sendMessage(ChatColor.GREEN + "Gave " + player.getName() + " " + ammount + " of " + item1 );
                     for(int i=a1; i>0; i--){
-                        player.getInventory().addItem(itemtypes.customitems.get(item1));
+                        player.getInventory().addItem(GetCustomItems.getItem(item1));
                     }
                 }
             }
             else{
-                DebugLogger.DebugLog(item1 + " is not an custom item. ");
+                DebugLogger.DebugLog(item1 + " is not an custom item. Or AetheriaItems is not installed");
                 if(IsInt.Check(ammount)){
                     int amount = Integer.parseInt(ammount);
                     Player player1 = Bukkit.getPlayerExact(sender.getName());
@@ -74,8 +75,13 @@ public class item implements CommandExecutor {
             sender.sendMessage(ChatColor.RED + item + " is not a valid itemstack.");
     }
     public static boolean iscustom(String item){
-        if(itemtypes.customitems.containsKey(item.toUpperCase()))
-            return true;
+        if(Bukkit.getPluginManager().isPluginEnabled("AetheriaItems")) {
+            if(GetCustomItems.get().containsKey(item)){
+                return true;
+            }
+            else
+                return false;
+        }
         else
             return false;
     }

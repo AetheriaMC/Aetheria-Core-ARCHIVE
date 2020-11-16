@@ -18,7 +18,6 @@ public class CommandMusic implements CommandExecutor {
             return true;
         }
         Player p = (Player) sender;
-        DebugLogger.DebugLog("Attempting to open inventory for " + p.getDisplayName());
         open(p);
 
         return true;

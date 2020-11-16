@@ -14,4 +14,5 @@ public class log {
     public static void Warn(String s){
         plugin.getLogger().warning(prefix + s);
     }
+    public static String permissionmessage = "§cYou do not have permissions to do this!§8 §oNO_PERMISSIONS";
 }
