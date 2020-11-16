@@ -19,6 +19,9 @@ public enum Permission {
     STAFF_LEAD_BUILDER("staff.lead.builder"),
     STAFF_LEAD_DEV("staff.lead.dev"),
     STAFF_LEAD_LM("staff.lead.lm"),
+
+
+
     STAFF_CHAT("staffchat"),
     ADMIN_CHAT("adminchat"),
     HUSH("hush"),
@@ -31,7 +34,10 @@ public enum Permission {
     SEE_SWITCH("see.switch"),
     COMMAND_SPY("commandspy"),
     COMMAND_SPY_BYPASS("commandspy.bypass"),
-    SEE_STAFF_ONLINE("staff.online")
+    SEE_STAFF_ONLINE("staff.online"),
+    GLOBAL_CLEAR_CHAT("clearchat.global"),
+    CLEAR_CHAT_BYPASS("clearchat.bypass")
+
     ;
     public final String node;
 
