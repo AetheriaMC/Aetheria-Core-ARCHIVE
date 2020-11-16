@@ -24,7 +24,7 @@ public class staff extends Command {
             int onlinep = ProxyServer.getInstance().getPlayers().size();
             for (ProxiedPlayer staffOnline : ProxyServer.getInstance().getPlayers()) {
                 if(staffOnline.hasPermission(Permission.STAFF.node)){
-                    String a = PlayerHandler.playerwithrank(staffOnline) + ChatColor.DARK_GRAY + "(" + staffOnline.getServer().getInfo().getName() + ")";
+                    String a = PlayerHandler.playerwithrank(staffOnline) + ChatColor.DARK_GRAY + " (" + staffOnline.getServer().getInfo().getName() + ")";
                     OnlineStaff.add(a);
                 }
             }

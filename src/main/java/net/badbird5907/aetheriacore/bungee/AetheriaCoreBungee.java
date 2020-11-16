@@ -4,6 +4,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import net.badbird5907.aetheriacore.bungee.commands.staff.*;
+import net.badbird5907.aetheriacore.bungee.commands.util.GlobalBroadcast;
 import net.badbird5907.aetheriacore.bungee.commands.util.GlobalClearChat;
 import net.badbird5907.aetheriacore.bungee.commands.warps.*;
 import net.badbird5907.aetheriacore.bungee.events.*;
@@ -26,7 +27,7 @@ public final class AetheriaCoreBungee extends Plugin implements Listener {
         instance = this;
         // Plugin startup logic
         log.Log("Starting...");
-        getProxy().registerChannel("aetheriacore:messaging");
+        //getProxy().registerChannel("aetheriacore:messaging");
         log.Log( "Registering Commands...");
         getProxy().getInstance().getPluginManager().registerCommand(this, new Hub());
         getProxy().getInstance().getPluginManager().registerCommand(this, new Beta());
@@ -39,6 +40,7 @@ public final class AetheriaCoreBungee extends Plugin implements Listener {
         getProxy().getInstance().getPluginManager().registerCommand(this, new StaffChat());
         getProxy().getInstance().getPluginManager().registerCommand(this, new AdminChat());
         getProxy().getInstance().getPluginManager().registerCommand(this, new GlobalClearChat());
+        getProxy().getInstance().getPluginManager().registerCommand(this, new GlobalBroadcast());
         log.Log("Registering Events...");
         getProxy().getInstance().getPluginManager().registerListener(this, new OnLogin());
         getProxy().getInstance().getPluginManager().registerListener(this, new CommandListener());

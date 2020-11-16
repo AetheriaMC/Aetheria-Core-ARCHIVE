@@ -18,9 +18,10 @@ public class OnLogin implements Listener {
         if (p.hasPermission(Permission.BROADCAST_JOIN.node)) {
             for (ProxiedPlayer staff : ProxyServer.getInstance().getPlayers()) {
                 if (staff.hasPermission(Permission.SEE_JOIN.node)) {
-                    if (AetheriaCoreBungee.Hush.contains(staff.getUniqueId())) {
+                    if (!AetheriaCoreBungee.Hush.contains(staff.getUniqueId())) {
                         staff.sendMessage(new TextComponent(ChatColor.GREEN + "Staff " + ChatColor.DARK_GRAY + "» " + PlayerHandler.playerwithrank(p) + ChatColor.GREEN + " Joined."));
                     }
+                    else break;
                 }
                 //staff.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.staff-leave-network").replaceAll("%player%", p.getName()))));
             }

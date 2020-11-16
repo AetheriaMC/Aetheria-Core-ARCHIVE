@@ -4,20 +4,20 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 public enum Ranks {
-    OWNER("&4&l[Owner]&r&4 "),
-    ADMIN("&c&l[Admin]&r&c"),
-    MOD("6.&5&l[Mod]"),
-    HELPER("&9&l[Helper]"),
-    DEV("&6&l[Dev]"),
-    BUILDER("&e&l[Builder]"),
-    LM("&e&l[Loremaster]"),
-    TRIAL_DEV("&6&l[Trial-Dev]"),
-    TRIAL_BUILDER("&e&l[Trial-Builder]"),
-    TRIAL_LM("&e&l[Trial-LoreMaster]");
-
+    OWNER(ChatColor.DARK_RED + "" + ChatColor.BOLD +"[Owner]" + ChatColor.RESET + "" + ChatColor.DARK_RED + ""),
+    ADMIN(ChatColor.RED + "" + ChatColor.BOLD + "[Admin]" + ChatColor.RESET + "" + ChatColor.RED + ""),
+    MOD(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD +  "[Mod]" + ChatColor.RESET + "" + ChatColor.DARK_PURPLE + ""),
+    HELPER(ChatColor.BLUE + "" + ChatColor.BOLD +"[Helper]" + ChatColor.RESET + "" + ChatColor.BLUE + ""),
+    DEV(ChatColor.GOLD + "" + ChatColor.BOLD +"[Dev]" + ChatColor.RESET + "" + ChatColor.GOLD + ""),
+    BUILDER(ChatColor.YELLOW + "" + ChatColor.BOLD + "[Builder]" + ChatColor.RESET + "" + ChatColor.YELLOW + ""),
+    LM(ChatColor.YELLOW + "" + ChatColor.BOLD + "[Loremaster]" + ChatColor.RESET + "" + ChatColor.YELLOW + ""),
+    TRIAL_DEV(ChatColor.GOLD + "" + ChatColor.BOLD +  "[Trial-Dev]" + ChatColor.RESET + "" + ChatColor.GOLD + ""),
+    TRIAL_BUILDER(ChatColor.YELLOW + "" + ChatColor.BOLD + "[Trial-Builder]" + ChatColor.RESET + "" + ChatColor.YELLOW + ""),
+    TRIAL_LM(ChatColor.YELLOW + "" + ChatColor.BOLD + "[Trial-LoreMaster]" + ChatColor.RESET + "" + ChatColor.YELLOW + "");
+    //ChatColor.translateAlternateColorCodes('&', rank);
     private String rank;
     Ranks(String rank) {
-        this.rank = ChatColor.translateAlternateColorCodes('&', rank);
+        this.rank = rank;
     }
     public String getString() {
         return rank;
