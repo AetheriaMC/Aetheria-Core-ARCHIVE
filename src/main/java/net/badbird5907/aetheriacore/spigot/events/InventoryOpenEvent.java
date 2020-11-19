@@ -32,7 +32,7 @@ public class InventoryOpenEvent implements Listener{
                     player.sendMessage(ChatColor.RED + "ITEM REMOVED: " + m);
                     player.sendMessage(ChatColor.DARK_GRAY + "--------------------------------------------");
                     Bukkit.getLogger().warning("Blacklisted item (" + m + ") detected & deleted in " + player + "'s inventory");
-                    StaffChatMessage.sendmessage("ItemBlacklist","Blacklisted item (" + m + ") detected & deleted in " + player + "'s inventory");
+                    StaffChatMessage.sendMessage("ItemBlacklist","Blacklisted item (" + m + ") detected & deleted in " + player + "'s inventory");
                     return;
                 }
 

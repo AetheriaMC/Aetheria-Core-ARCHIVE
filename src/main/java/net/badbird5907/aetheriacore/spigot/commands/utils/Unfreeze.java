@@ -27,7 +27,7 @@ public class Unfreeze implements CommandExecutor{
                             return true;
                         } else {
                             freezePlayer.frozen.remove(target.getUniqueId());
-                            StaffChatMessage.sendmessage("Aetheria Core ", ((Player) sender).getDisplayName() + " Has un-frozen " + target.getDisplayName() + " at coords: X: " + target.getLocation().getX() + " Y: " + target.getLocation().getY() + " Z: " + target.getLocation().getZ());
+                            StaffChatMessage.sendMessage("Aetheria Core ", ((Player) sender).getDisplayName() + " Has un-frozen " + target.getDisplayName() + " at coords: X: " + target.getLocation().getX() + " Y: " + target.getLocation().getY() + " Z: " + target.getLocation().getZ());
                             return true;
                         }
                     } else {
@@ -50,7 +50,7 @@ public class Unfreeze implements CommandExecutor{
                         return true;
                     } else {
                         freezePlayer.frozen.remove(target.getUniqueId());
-                        StaffChatMessage.sendmessage("Aetheria Core ", ("CONSOLE" + " Has un-frozen " + target.getDisplayName() + " at coords: X: " + target.getLocation().getX() + " Y: " + target.getLocation().getY() + " Z: " + target.getLocation().getZ()));
+                        StaffChatMessage.sendMessage("Aetheria Core ", ("CONSOLE" + " Has un-frozen " + target.getDisplayName() + " at coords: X: " + target.getLocation().getX() + " Y: " + target.getLocation().getY() + " Z: " + target.getLocation().getZ()));
                         return true;
                     }
                 } else {
