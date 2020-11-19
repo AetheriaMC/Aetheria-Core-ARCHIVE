@@ -37,6 +37,7 @@ public enum Permission {
     MUSIC_BROADCAST("music.broadcast"),
     PING_WARS("pingwars"),
     PING("ping"),
+    ITEM("item"),
 
     BYPASS_ITEM_BLACKLIST("bypass.itemblacklist")
     ;

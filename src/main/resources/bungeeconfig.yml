@@ -1,0 +1,42 @@
+Config:
+  request-cooldown: 20
+  report-cooldown: 60
+  enable-join-message: true
+  enable-leave-message: true
+  enable-switch-messages: true
+  cspy-on-console: true
+Messages:
+  sc-enabled: '&8[&6AEC&8]  &8&7Staff chat is now &aenabled&7.'
+  sc-disabled: '&8[&6AEC&8] &8&7Staff chat is now &cdisabled&7.'
+  sc-format: '&6&lStaffChat&r&8 »&r&7 (%server%)&r %player%&r: &7%message%'
+  ac-enabled: '&8[&6AEC&8] &8&7Admin chat is now &aenabled&7.'
+  ac-disabled: '&8[&6AEC&8] &8&7Admin chat is now &cdisabled&7.'
+  ac-format: '&c&lAdminChat&r&8 »&r&7 (%server%)&r %player%&r: &7%message%'
+  cspy-enabled: '&8[&6AEC&8] &8&7Command spy is now &aenabled&7.'
+  cspy-disabled: '&8[&6AEC&8] &8&7Command spy is now &cdisabled&7.'
+  cspy-format: '&9&lCommandSpy &8» &7(%server%) &r%user%: %command%'
+  no-permission: '&cYou do not have permissions to do this!&8 &oNO_PERMISSIONS'
+  helpop-no-message: '&c&lUsage: /gethelp <message>'
+  clearchat-bypass: "&aChat was cleared by %player% but you're immune"
+  clearchat: '&aChat was cleared globally by %player%'
+  report-to-staff-message:
+    - '&7&m-----------------------------------'
+    - '&7----&r&9&lReport&r&7----'
+    - '&9Reporter: &e%reporter% &7(%reporter-server%)'
+    - '&9Reported: &e%reported% &7(%reported-server%)'
+    - '&9Reason: &e%reason%'
+    - '&7&m-----------------------------------'
+  report-to-player-message: '&8[&6AEC&8] &8&aYou have reported: &e%player%&a, &afor &athe &areason: &e%reason%&7.'
+  report-incorrect-format: '&8[&6AEC&8] &cUsage: /report <player> <reason>'
+  report-offline-player: '&8[&6AEC&8] &8&cThat player is currently offline.'
+  staff-join-network: '&aStaff &8» &f%player% &aConnected'
+  staff-leave-network: '&aStaff &8» &f%player% &cDisconnected'
+  staff-switch-server: '&aStaff &8 » &f%player% &aSwitched from %from% to %to%'
+  helpop-to-staff:
+    - '&7&m-----------------------------------'
+    - '&c&l----Help Requested----'
+    - '&e%player% &7(%server%)'
+    - '&eMessage: %msg%'
+    - '&7&m-----------------------------------'
+  helpop-to-player: '&8[&6AEC&8] &8&7Requested help from staff: &c%msg%7.'
+  in-cooldown: '&9You still in cooldown: &7%seconds%'

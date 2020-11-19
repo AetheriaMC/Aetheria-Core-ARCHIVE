@@ -187,11 +187,11 @@ commands:
     usage: /<command> <player>
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
     permission: aetheriacore.getclientbrand
-  item:
-    description: Give item
-    usage: /<command> <item> <ammount>
-    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
-    permission: aetheriacore.item
+   item:
+     description: Give item
+     usage: /<command> <item> <ammount>
+     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+     permission: aetheriacore.item
   itemmenu:
     description: Give item BUT IN A MENU
     usage: /<command>

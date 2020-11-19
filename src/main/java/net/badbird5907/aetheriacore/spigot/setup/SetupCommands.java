@@ -12,6 +12,11 @@ import net.badbird5907.aetheriacore.spigot.commands.utils.*;
 import net.badbird5907.aetheriacore.spigot.test;
 import net.badbird5907.aetheriacore.spigot.util.TabComplete;
 import net.badbird5907.aetheriacore.spigot.commands.trolls.SudoOp;
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandMap;
+import org.bukkit.craftbukkit.v1_16_R3.CraftServer;
+
+import java.lang.reflect.Field;
 
 public class SetupCommands {
     public static void setupCommands(AetheriaCore plugin) {
@@ -43,8 +48,20 @@ public class SetupCommands {
         plugin.getCommand("masssay").setExecutor(new MassSay());
         plugin.getCommand("getclientbrand").setExecutor(new GetClientBrand());
         plugin.getCommand("getviewdistance").setExecutor(new GetViewDist());
-        plugin.getCommand("item").setExecutor(new item());
-        plugin.getCommand("item").setTabCompleter(new TabComplete());
+        //plugin.getCommand("item").setExecutor(new item());
+        //plugin.getCommand("item").setTabCompleter(new TabComplete());
+        if(!Bukkit.getPluginManager().isPluginEnabled("AetheriaItems")) {
+            try {
+                final Field bukkitCommandMap = Bukkit.getServer().getClass().getDeclaredField("commandMap");
+
+                bukkitCommandMap.setAccessible(true);
+                CommandMap commandMap = (CommandMap) bukkitCommandMap.get(Bukkit.getServer());
+                plugin.getCommand("item").setTabCompleter(new TabComplete());
+                commandMap.register("item", new item("item"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         plugin.getCommand("itemmenu").setExecutor(new itemmenu());
         plugin.getCommand("broadcast").setExecutor(new Broadcast());
         plugin.getCommand("mutechat").setExecutor(new mutechat(plugin));

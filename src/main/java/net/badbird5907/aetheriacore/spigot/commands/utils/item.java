@@ -1,39 +1,48 @@
 package net.badbird5907.aetheriacore.spigot.commands.utils;
 
 import net.badbird5907.aetheriacore.spigot.manager.DebugLogger;
+import net.badbird5907.aetheriacore.spigot.manager.Permission;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
-import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import net.badbird5907.aetheriacore.spigot.util.IsInt;
 import net.badbird5907.aetheriacore.spigot.util.itemtypes;
 import net.badbird5907.aetheriaitems.api.GetCustomItems;
-import net.md_5.bungee.protocol.packet.Chat;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.defaults.BukkitCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class item implements CommandExecutor {
+public class item extends BukkitCommand {
+    public item(String name) {
+        super(name);
+        this.description = "give item";
+        this.usageMessage = "/item <item>";
+        this.setPermission("aetheriacore.item");
+        this.setAliases(new ArrayList<String>());
+    }
 
     @Override
-    public boolean onCommand(CommandSender sender,  Command command,  String s,  String[] args) {
-        if(sender.hasPermission(permissionManager.item)){
+    public boolean execute( CommandSender sender, String s, String[] args) {
+        if(sender.hasPermission(Permission.ITEM.node)){
             if(sender instanceof  Player){
-                Player player = ((Player) sender).getPlayer();
-                if(args.length == 0)
-                    sender.sendMessage(ChatColor.RED + "USAGE: /item <ITEM> <AMMOUNT> \n " + ChatColor.GREEN + "You can also do /itemmenu");
-
-                if (args.length == 1){
-                    giveitem(player, args[0], "1", player);
+                Player player = (Player) sender;
+                if(Bukkit.getPluginManager().isPluginEnabled("AetheriaItems")){
+                    player.chat("/aetheriaitems:item " + args);
                 }
-                if (args.length == 2){
-                    giveitem(player, args[0], args[1], player);
+                else{
+                    if(args.length == 0)
+                        sender.sendMessage(ChatColor.RED + "USAGE: /item <ITEM> <AMMOUNT> \n " + ChatColor.GREEN + "You can also do /itemmenu");
+
+                    if (args.length == 1)
+                        giveitem(player, args[0], "1", player);
+
+                    if (args.length == 2)
+                        giveitem(player, args[0], args[1], player);
+
                 }
             }
             else

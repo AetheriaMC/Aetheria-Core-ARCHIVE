@@ -254,8 +254,8 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
         getCommand("masssay").setExecutor(new MassSay());
         getCommand("getclientbrand").setExecutor(new GetClientBrand());
         getCommand("getviewdistance").setExecutor(new GetViewDist());
-        getCommand("item").setExecutor(new item());
-        getCommand("item").setTabCompleter(new TabComplete());
+        //getCommand("item").setExecutor(new item());
+        //getCommand("item").setTabCompleter(new TabComplete());
         getCommand("itemmenu").setExecutor(new itemmenu());
         getCommand("broadcast").setExecutor(new Broadcast());
         getCommand("mutechat").setExecutor(new mutechat(this));
