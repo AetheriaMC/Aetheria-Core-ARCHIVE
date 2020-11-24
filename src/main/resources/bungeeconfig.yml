@@ -8,10 +8,10 @@ Config:
 Messages:
   sc-enabled: '&8[&6AEC&8]  &8&7Staff chat is now &aenabled&7.'
   sc-disabled: '&8[&6AEC&8] &8&7Staff chat is now &cdisabled&7.'
-  sc-format: '&6&lStaffChat&r&8 »&r&7 (%server%)&r %player%&r: &7%message%'
+  sc-format: '&6&lStaffChat&r&8 »&r&7 (%server%)&r %player%&r: %message%'
   ac-enabled: '&8[&6AEC&8] &8&7Admin chat is now &aenabled&7.'
   ac-disabled: '&8[&6AEC&8] &8&7Admin chat is now &cdisabled&7.'
-  ac-format: '&c&lAdminChat&r&8 »&r&7 (%server%)&r %player%&r: &7%message%'
+  ac-format: '&c&lAdminChat&r&8 »&r&7 (%server%)&r %player%&r: %message%'
   cspy-enabled: '&8[&6AEC&8] &8&7Command spy is now &aenabled&7.'
   cspy-disabled: '&8[&6AEC&8] &8&7Command spy is now &cdisabled&7.'
   cspy-format: '&9&lCommandSpy &8» &7(%server%) &r%user%: %command%'

@@ -5,25 +5,25 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 public class PlayerHandler {
     public static String playerwithrank(ProxiedPlayer player) {
         if(player.hasPermission(Permission.STAFF_OWNER.node))
-            return Ranks.OWNER + player.getName();
+            return Ranks.OWNER.getString() + player.getName();
         if(player.hasPermission(Permission.STAFF_ADMIN.node))
-            return Ranks.ADMIN + player.getName();
+            return Ranks.ADMIN.getString() + player.getName();
         if(player.hasPermission(Permission.STAFF_MOD.node))
-            return Ranks.MOD + player.getName();
+            return Ranks.MOD.getString() + player.getName();
         if(player.hasPermission(Permission.STAFF_HELPER.node))
-            return Ranks.HELPER + player.getName();
+            return Ranks.HELPER.getString() + player.getName();
         if(player.hasPermission(Permission.STAFF_DEV.node))
-            return Ranks.DEV + player.getName();
+            return Ranks.DEV.getString() + player.getName();
         if(player.hasPermission(Permission.STAFF_BUILDER.node))
-            return Ranks.BUILDER + player.getName();
+            return Ranks.BUILDER.getString() + player.getName();
         if(player.hasPermission(Permission.STAFF_LM.node))
-            return Ranks.LM + player.getName();
+            return Ranks.LM.getString() + player.getName();
         if(player.hasPermission(Permission.STAFF_TRIAL_DEV.node))
-            return Ranks.TRIAL_DEV + player.getName();
+            return Ranks.TRIAL_DEV.getString() + player.getName();
         if(player.hasPermission(Permission.STAFF_TRIAL_BUILDER.node))
-            return Ranks.TRIAL_BUILDER + player.getName();
+            return Ranks.TRIAL_BUILDER.getString() + player.getName();
         if(player.hasPermission(Permission.STAFF_TRIAL_LM.node))
-            return Ranks.TRIAL_LM + player.getName();
+            return Ranks.TRIAL_LM.getString() + player.getName();
         else
             return player.getName();
     }

@@ -10,7 +10,7 @@ public enum Ranks {
     HELPER(ChatColor.BLUE + "" + ChatColor.BOLD +"[Helper]" + ChatColor.RESET + "" + ChatColor.BLUE + ""),
     DEV(ChatColor.GOLD + "" + ChatColor.BOLD +"[Dev]" + ChatColor.RESET + "" + ChatColor.GOLD + ""),
     BUILDER(ChatColor.YELLOW + "" + ChatColor.BOLD + "[Builder]" + ChatColor.RESET + "" + ChatColor.YELLOW + ""),
-    LM(ChatColor.YELLOW + "" + ChatColor.BOLD + "[Loremaster]" + ChatColor.RESET + "" + ChatColor.YELLOW + ""),
+    LM(ChatColor.YELLOW + "" + ChatColor.BOLD + "[LoreMaster]" + ChatColor.RESET + "" + ChatColor.YELLOW + ""),
     TRIAL_DEV(ChatColor.GOLD + "" + ChatColor.BOLD +  "[Trial-Dev]" + ChatColor.RESET + "" + ChatColor.GOLD + ""),
     TRIAL_BUILDER(ChatColor.YELLOW + "" + ChatColor.BOLD + "[Trial-Builder]" + ChatColor.RESET + "" + ChatColor.YELLOW + ""),
     TRIAL_LM(ChatColor.YELLOW + "" + ChatColor.BOLD + "[Trial-LoreMaster]" + ChatColor.RESET + "" + ChatColor.YELLOW + "");

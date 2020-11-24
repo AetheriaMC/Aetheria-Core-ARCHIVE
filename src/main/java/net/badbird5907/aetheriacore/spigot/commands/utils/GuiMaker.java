@@ -206,7 +206,7 @@ public class GuiMaker implements CommandExecutor {
                     itemmeta.setLore(itemlore);
                     newitem.setItemMeta(itemmeta);
 
-                    gui.setItem(17, newitem);
+                    gui.setItem(19, newitem);
                 } //5 EMS
                 //make outline - blue
                 gui.setItem(0, filler1);
@@ -251,4 +251,3 @@ public class GuiMaker implements CommandExecutor {
         return false;
     }
 }
-

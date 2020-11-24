@@ -2,6 +2,7 @@ package net.badbird5907.aetheriacore.spigot.setup;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.commands.aetheriacore;
+import net.badbird5907.aetheriacore.spigot.commands.fun.PingWars;
 import net.badbird5907.aetheriacore.spigot.commands.management.togglePvp;
 import net.badbird5907.aetheriacore.spigot.commands.staff.Lockdown;
 import net.badbird5907.aetheriacore.spigot.commands.staff.QuickChat;
@@ -48,8 +49,11 @@ public class SetupCommands {
         plugin.getCommand("masssay").setExecutor(new MassSay());
         plugin.getCommand("getclientbrand").setExecutor(new GetClientBrand());
         plugin.getCommand("getviewdistance").setExecutor(new GetViewDist());
-        //plugin.getCommand("item").setExecutor(new item());
-        //plugin.getCommand("item").setTabCompleter(new TabComplete());
+        if(!Bukkit.getPluginManager().isPluginEnabled("AetheriaItems")){
+            plugin.getCommand("item").setExecutor(new item());
+            plugin.getCommand("item").setTabCompleter(new TabComplete());
+        }
+        /*
         if(!Bukkit.getPluginManager().isPluginEnabled("AetheriaItems")) {
             try {
                 final Field bukkitCommandMap = Bukkit.getServer().getClass().getDeclaredField("commandMap");
@@ -62,6 +66,7 @@ public class SetupCommands {
                 e.printStackTrace();
             }
         }
+         */
         plugin.getCommand("itemmenu").setExecutor(new itemmenu());
         plugin.getCommand("broadcast").setExecutor(new Broadcast());
         plugin.getCommand("mutechat").setExecutor(new mutechat(plugin));
@@ -71,7 +76,7 @@ public class SetupCommands {
         plugin.getCommand("loop").setExecutor(new Loop());
         plugin.getCommand("ping").setExecutor(new Ping());
         plugin.getCommand("test").setExecutor(new test());
-
+        plugin.getCommand("pingwars").setExecutor(new PingWars());
         //plugin.getCommand("nick").setExecutor(new nick());
         //plugin.instance.getCommand("addgroup").setExecutor(new addGroup(plugin.instance, plugin.instance.luckPerms));
         //plugin.instance.getCommand("systeminfo").setExecutor(new SystemInfo(plugin.instance));

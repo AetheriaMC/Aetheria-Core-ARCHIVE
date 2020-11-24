@@ -6,8 +6,8 @@ public enum Permission {
     //staff roles
     STAFF_TRIAL_BUILDER("staff.trial.builder"),
     STAFF_BUILDER("staff.builder"),
-    STAFF_TRIAL_LM("staff.trial.lm"),
-    STAFF_LM("staff.lm"),
+    STAFF_TRIAL_LM("staff.trial.loremaster"),
+    STAFF_LM("staff.loremaster"),
     STAFF_TRIAL_DEV("staff.trial.dev"),
     STAFF_DEV("staff.dev"),
     STAFF_HELPER("staff.helper"),
@@ -36,7 +36,7 @@ public enum Permission {
     COMMAND_SPY_BYPASS("commandspy.bypass"),
     SEE_STAFF_ONLINE("staff.online"),
     GLOBAL_CLEAR_CHAT("clearchat.global"),
-    CLEAR_CHAT_BYPASS("clearchat.bypass")
+    CLEAR_CHAT_BYPASS("clearchat.bypass`")
 
     ;
     public final String node;

@@ -1,8 +1,7 @@
 package net.badbird5907.aetheriacore.spigot.events;
 
-import org.bukkit.Bukkit;
+import net.badbird5907.aetheriacore.spigot.manager.DebugLogger;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -10,11 +9,13 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import static net.badbird5907.aetheriacore.spigot.manager.SoundManager.error;
+import static net.badbird5907.aetheriacore.spigot.manager.SoundManager.high_ping;
+
 public class GuiListener implements Listener {
     @EventHandler
     public void OnInventoryClick(InventoryClickEvent e) {
         Player player = (Player) e.getWhoClicked();
-        //play = player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME, 10, 1);
         Inventory playerInventory = player.getInventory();
         if (e.getView().getTitle().equals("§6Shopkeeper Menu")) {
 
@@ -23,12 +24,13 @@ public class GuiListener implements Listener {
             e.setCancelled(true);
 
 //this makes it so players cannot take the item from the inventory with the display name "test"
-
+            String debug = String.valueOf(e.getSlot());
+            DebugLogger.DebugLog(debug);
             switch (e.getSlot()) {
 
                 //OAK LOGS
                 case 10:
-                    ItemStack emerald64 = new ItemStack(Material.EMERALD, 63);
+                    ItemStack emerald64 = new ItemStack(Material.EMERALD, 64);
 
                     ItemStack oaklog64 = new ItemStack(Material.OAK_LOG, 64);
 
@@ -36,26 +38,28 @@ public class GuiListener implements Listener {
                         int price = 5;
                         ItemStack target = new ItemStack(Material.EMERALD, i);
                         if (playerInventory.contains(target)){
-                            if (i > price){
+                            if(i > price){
                                 playerInventory.removeItem(target);
                                 ItemStack refund = new ItemStack(Material.EMERALD, i-price);
                                 playerInventory.addItem(refund);
                                 playerInventory.addItem(oaklog64);
-                                i = i + 100;
-                                continue;
+                                high_ping(player, 10);
+                                return;
                             }
                             if (i == price){
                                 playerInventory.removeItem(target);
                                 playerInventory.addItem(oaklog64);
-                                i = i + 100;
-                                continue;
+                                high_ping(player, 10);
+                                return;
                             }
                             else{
-                                continue;
+                                error(player, 10);
+                                return;
                             }
+                     
                         }
+                     
                     }
-
                 case 11:
                     for (int i = 0; i < 65; i++) {
                         int price = 2;
@@ -67,17 +71,18 @@ public class GuiListener implements Listener {
                                 ItemStack refund = new ItemStack(Material.EMERALD, i-price);
                                 playerInventory.addItem(refund);
                                 playerInventory.addItem(buyitem);
-                                i = i + 100;
-                                continue;
+                                high_ping(player, 10);
+                                return;
                             }
                             if (i == price){
                                 playerInventory.removeItem(target);
                                 playerInventory.addItem(buyitem);
-                                i = i + 100;
-                                continue;
+                                high_ping(player, 10);
+                                return;
                             }
                             else{
-                                continue;
+                                error(player, 10);
+                                return;
                             }
                         }
                     }
@@ -93,17 +98,18 @@ public class GuiListener implements Listener {
                                 ItemStack refund = new ItemStack(Material.EMERALD, i-price);
                                 playerInventory.addItem(refund);
                                 playerInventory.addItem(buyitem);
-                                i = i + 100;
-                                continue;
+                                high_ping(player, 10);
+                                return;
                             }
                             if (i == price){
                                 playerInventory.removeItem(target);
                                 playerInventory.addItem(buyitem);
-                                i = i + 100;
-                                continue;
+                                high_ping(player, 10);
+                                return;
                             }
                             else{
-                                continue;
+                                error(player, 10);
+                                return;
                             }
                         }
                     }
@@ -119,17 +125,18 @@ public class GuiListener implements Listener {
                                 ItemStack refund = new ItemStack(Material.EMERALD, i-price);
                                 playerInventory.addItem(refund);
                                 playerInventory.addItem(buyitem);
-                                i = i + 100;
-                                continue;
+                                high_ping(player, 10);
+                                return;
                             }
                             if (i == price){
                                 playerInventory.removeItem(target);
                                 playerInventory.addItem(buyitem);
-                                i = i + 100;
-                                continue;
+                                high_ping(player, 10);
+                                return;
                             }
                             else{
-                                continue;
+                                error(player, 10);
+                                return;
                             }
                         }
                     }
@@ -145,22 +152,24 @@ public class GuiListener implements Listener {
                                 ItemStack refund = new ItemStack(Material.EMERALD, i-price);
                                 playerInventory.addItem(refund);
                                 playerInventory.addItem(buyitem);
-                                i = i + 100;
-                                continue;
+                                high_ping(player, 10);
+                                return;
                             }
                             if (i == price){
                                 playerInventory.removeItem(target);
                                 playerInventory.addItem(buyitem);
-                                i = i + 100;
-                                continue;
+                                high_ping(player, 10);
+                                return;
                             }
                             else{
-                                continue;
+                                error(player, 10);
+                                return;
                             }
                         }
                     }
 
-                case 15://SALMON
+                case 15:
+                    //SALMON
                     for (int i = 0; i < 65; i++) {
                         int price = 3;
                         ItemStack buyitem = new ItemStack(Material.COOKED_SALMON, 1);
@@ -171,17 +180,18 @@ public class GuiListener implements Listener {
                                 ItemStack refund = new ItemStack(Material.EMERALD, i-price);
                                 playerInventory.addItem(refund);
                                 playerInventory.addItem(buyitem);
-                                i = i + 100;
-                                continue;
+                                high_ping(player, 10);
+                                return;
                             }
                             if (i == price){
                                 playerInventory.removeItem(target);
                                 playerInventory.addItem(buyitem);
-                                i = i + 100;
-                                continue;
+                                high_ping(player, 10);
+                                return;
                             }
                             else{
-                                continue;
+                                error(player, 10);
+                                return;
                             }
                         }
                     }
@@ -197,22 +207,23 @@ public class GuiListener implements Listener {
                                 ItemStack refund = new ItemStack(Material.EMERALD, i-price);
                                 playerInventory.addItem(refund);
                                 playerInventory.addItem(buyitem);
-                                i = i + 100;
-                                continue;
+                                high_ping(player, 10);
+                                return;
                             }
                             if (i == price){
                                 playerInventory.removeItem(target);
                                 playerInventory.addItem(buyitem);
-                                i = i + 100;
-                                continue;
+                                high_ping(player, 10);
+                                return;
                             }
                             else{
-                                continue;
+                                error(player, 10);
+                                return;
                             }
                         }
                     }
 
-                case 17:
+                case 19:
                     for (int i = 0; i < 65; i++) {
                         int price = 3;
                         ItemStack buyitem = new ItemStack(Material.COOKED_BEEF, 1);
@@ -223,26 +234,24 @@ public class GuiListener implements Listener {
                                 ItemStack refund = new ItemStack(Material.EMERALD, i-price);
                                 playerInventory.addItem(refund);
                                 playerInventory.addItem(buyitem);
-                                i = i + 100;
-                                continue;
+                                high_ping(player, 10);
+                                return;
                             }
                             if (i == price){
                                 playerInventory.removeItem(target);
                                 playerInventory.addItem(buyitem);
-                                i = i + 100;
-                                continue;
+                                high_ping(player, 10);
+                                return;
                             }
                             else{
-                                continue;
+                                error(player, 10);
+                                return;
                             }
                         }
                     }
-
-//case 11 = slot 11
-
                     //Add whatever here you want to execute when player clicks item.
-
             }
         }
     }
+
 }

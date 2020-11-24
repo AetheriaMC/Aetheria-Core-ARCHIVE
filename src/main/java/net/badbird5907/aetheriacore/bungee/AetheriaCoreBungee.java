@@ -3,7 +3,10 @@ package net.badbird5907.aetheriacore.bungee;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
+import net.badbird5907.aetheriacore.bungee.commands.staff.*;
+import net.badbird5907.aetheriacore.bungee.commands.util.GlobalBroadcast;
 import net.badbird5907.aetheriacore.bungee.commands.warps.*;
+import net.badbird5907.aetheriacore.bungee.listeners.events;
 import net.badbird5907.aetheriacore.bungee.manager.log;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -20,7 +23,7 @@ import java.util.UUID;
 public final class AetheriaCoreBungee extends Plugin implements Listener {
     public static List<UUID> inSc = new ArrayList<>();
     public static List<UUID> inAc = new ArrayList<>();
-    public static List<UUID> CommandSpyPlayers = new ArrayList<>();
+    public static List<UUID> inCSpy = new ArrayList<>();
     public static List<UUID> Hush = new ArrayList<>();
     private static AetheriaCoreBungee instance;
     @Override
@@ -37,7 +40,14 @@ public final class AetheriaCoreBungee extends Plugin implements Listener {
         getProxy().getInstance().getPluginManager().registerCommand(this, new Survival());
         getProxy().getInstance().getPluginManager().registerCommand(this, new Vanilla());
 
+        getProxy().getInstance().getPluginManager().registerCommand(this, new AdminChat());
+        getProxy().getInstance().getPluginManager().registerCommand(this, new CSpy());
+        getProxy().getInstance().getPluginManager().registerCommand(this, new GlobalBroadcast());
+        getProxy().getInstance().getPluginManager().registerCommand(this, new StaffChat());
+        getProxy().getInstance().getPluginManager().registerCommand(this, new staff());
+
         log.Log("Registering Events...");
+        getProxy().getPluginManager().registerListener(this, new events());
         /*
         getProxy().getInstance().getPluginManager().registerListener(this, new OnLogin());
         getProxy().getInstance().getPluginManager().registerListener(this, new CommandListener());
@@ -76,10 +86,10 @@ public final class AetheriaCoreBungee extends Plugin implements Listener {
                     config.set("Config.enable-switch-messages", Boolean.valueOf(true));
                     config.set("Messages.sc-enabled", "&8[&6AEC&8]  &8&7Staff chat is now &aenabled&7.");
                     config.set("Messages.sc-disabled", "&8[&6AEC&8] &8&7Staff chat is now &cdisabled&7.");
-                    config.set("Messages.sc-format", "&6&lStaffChat&r&8 »&r&7 (%server%)&r %player%&r: &7%message%");
+                    config.set("Messages.sc-format", "&6&lStaffChat&r&8 »&r&7 (%server%)&r %player%&r: %message%");
                     config.set("Messages.ac-enabled", "&8[&6AEC&8] &8&7Admin chat is now &aenabled&7.");
                     config.set("Messages.ac-disabled", "&8[&6AEC&8] &8&7Admin chat is now &cdisabled&7.");
-                    config.set("Messages.ac-format", "&c&lAdminChat&r&8 »&r&7 (%server%)&r %player%&r: &7%message%");
+                    config.set("Messages.ac-format", "&c&lAdminChat&r&8 »&r&7 (%server%)&r %player%&r: %message%");
                     config.set("Messages.cspy-enabled", "&8[&6AEC&8] &8&7Command spy is now &aenabled&7.");
                     config.set("Messages.cspy-disabled", "&8[&6AEC&8] &8&7Command spy is now &cdisabled&7.");
                     config.set("Messages.cspy-format", "&9&lCommandSpy &8» &7(%server%) &r%user%: %command%");

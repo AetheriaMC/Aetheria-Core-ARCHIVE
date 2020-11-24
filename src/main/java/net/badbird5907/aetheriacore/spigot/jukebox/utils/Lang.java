@@ -36,7 +36,7 @@ public class Lang{
     public static String CONNEXION_MUSIC = "music when connecting";
     public static String CONNECTION_MUSIC_ENABLE_DISABLE = "\n\nCurrently: ";
     public static String PARTICLES = "particles";
-    public static String MUSIC_PLAYING = ChatColor.GREEN + "Music while playing:";
+    public static String MUSIC_PLAYING = ChatColor.GREEN + "Playing:";
     public static String INCORRECT_SYNTAX = ChatColor.RED + "Incorrect syntax.";
     public static String RELOAD_LAUNCH = ChatColor.GREEN + "Trying to reload.";
     public static String RELOAD_FINISH = ChatColor.GREEN + "Reload finished.";
