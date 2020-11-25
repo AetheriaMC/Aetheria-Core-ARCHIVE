@@ -251,7 +251,9 @@ commands:
     permission: aetheriacore.pingwars
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
     usage: /<command>
-
+  69420:
+    description: 69420
+    usage: /<command>
 #  givegroup:
 #    description: Give Player a Group
 #    usage: /<command>
