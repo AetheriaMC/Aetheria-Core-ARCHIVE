@@ -44,6 +44,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -132,6 +133,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
     public Consumer<Player> stopVanillaMusic = null;
     //music-end
 
+    private HashMap<Plugin, Boolean> dependentPlugins = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -475,6 +477,11 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
                 itemtypes.items.add(material.name().toString());
             if(material.toString().contains("SPAWN_EGG"))
                 itemtypes.blacklisted_items.add(material);
+        }
+        for (Plugin pl : getServer().getPluginManager().getPlugins()){
+            if (pl.getDescription().getDepend().contains("AetheriaCore") || pl.getDescription().getSoftDepend().contains("AetheriaCore")){
+                dependentPlugins.put(pl, false);
+            }
         }
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "aetheriacore:messaging");
     }

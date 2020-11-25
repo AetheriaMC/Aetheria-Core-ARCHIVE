@@ -19,8 +19,8 @@ public class six_nine_four_twenty implements CommandExecutor {
         if(sender instanceof Player){
             Player player = Bukkit.getPlayerExact(((Player) sender).getDisplayName());
 //            sendTitle.send(player, ChatColor.RED + "69420", "", 10, 10, 10);
-            player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 5, 1));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 5, 2));
+            //player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 1));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 100, 2));
             sender.sendMessage(ChatColor.GREEN + "u ok?");
             Bukkit.getScheduler().scheduleSyncRepeatingTask(AetheriaCore.instance, new Runnable() {
                 @Override
