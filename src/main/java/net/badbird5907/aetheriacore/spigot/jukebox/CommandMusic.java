@@ -1,5 +1,6 @@
 package net.badbird5907.aetheriacore.spigot.jukebox;
 
+import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Lang;
 import net.badbird5907.aetheriacore.spigot.manager.DebugLogger;
 import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
@@ -25,7 +26,7 @@ public class CommandMusic implements CommandExecutor {
 
     public static void open(Player p) {
         if (Noteblock.worlds && !Noteblock.worldsEnabled.contains(p.getWorld().getName())) return;
-        PlayerData pdata = Noteblock.getInstance().datas.getDatas(p);
+        PlayerData pdata = AetheriaCore.getInstance().datas.getDatas(p);
         if (pdata == null) {
             p.sendMessage("§cLoading player... Try again!");
             return;

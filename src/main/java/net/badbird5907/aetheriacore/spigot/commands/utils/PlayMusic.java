@@ -6,7 +6,6 @@ import net.badbird5907.aetheriacore.spigot.jukebox.PlayerData;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Lang;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Playlists;
 import net.badbird5907.aetheriacore.spigot.manager.DebugLogger;
-import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -88,7 +87,7 @@ public class PlayMusic implements CommandExecutor {
             }
         }
         DebugLogger.DebugLog("a1");
-        PlayerData pdata = Noteblock.getInstance().datas.getDatas(cp);
+        PlayerData pdata = AetheriaCore.getInstance().datas.getDatas(cp);
         DebugLogger.DebugLog("a2");
         pdata.setPlaylist(Playlists.PLAYLIST, false);
         DebugLogger.DebugLog("a3");

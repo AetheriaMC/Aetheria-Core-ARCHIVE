@@ -1,6 +1,6 @@
 package net.badbird5907.aetheriacore.spigot.jukebox.utils;
 
-import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
+import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.sql.*;
@@ -38,14 +38,14 @@ public class Database {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         }catch (ClassNotFoundException e) {
-            Noteblock.getInstance().getLogger().severe("Database driver not found.");
+            AetheriaCore.getInstance().getLogger().severe("Database driver not found.");
             return false;
         }
 
         try {
             connection = DriverManager.getConnection("jdbc:mysql://" + this.host + ":" + this.port + "/" + this.getDatabase(), properties);
         }catch (SQLException ex) {
-            Noteblock.getInstance().getLogger().severe("An exception occurred when connecting to the database.");
+            AetheriaCore.getInstance().getLogger().severe("An exception occurred when connecting to the database.");
             ex.printStackTrace();
             return false;
         }
@@ -66,7 +66,7 @@ public class Database {
             try {
                 connection.close();
             }catch (SQLException ex) {
-                Noteblock.getInstance().getLogger().severe("An exception occurred when closing database connection.");
+                AetheriaCore.getInstance().getLogger().severe("An exception occurred when closing database connection.");
                 ex.printStackTrace();
             }
             connection = null;

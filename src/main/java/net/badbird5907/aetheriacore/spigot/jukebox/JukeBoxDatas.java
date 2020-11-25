@@ -2,6 +2,7 @@ package net.badbird5907.aetheriacore.spigot.jukebox;
 
 import com.xxmicloxx.NoteBlockAPI.model.Song;
 
+import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Database;
 import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import org.bukkit.Bukkit;
@@ -83,7 +84,7 @@ public class JukeBoxDatas {
         }else {
             PlayerData pdata = PlayerData.create(id);
             players.put(id, pdata);
-            Bukkit.getScheduler().runTaskAsynchronously(Noteblock.getInstance(), () -> {
+            Bukkit.getScheduler().runTaskAsynchronously(AetheriaCore.getInstance(), () -> {
                 synchronized (getStatement) {
                     try {
                         PreparedStatement statement = getStatement.getStatement();
@@ -119,7 +120,7 @@ public class JukeBoxDatas {
             }else {
                 boolean isDefault = pdata.isDefault(Noteblock.defaultPlayer);
                 if (!pdata.created || !isDefault) {
-                    Bukkit.getScheduler().runTaskAsynchronously(Noteblock.getInstance(), () -> {
+                    Bukkit.getScheduler().runTaskAsynchronously(AetheriaCore.getInstance(), () -> {
                         if (isDefault) {
                             synchronized (deleteStatement) {
                                 try {

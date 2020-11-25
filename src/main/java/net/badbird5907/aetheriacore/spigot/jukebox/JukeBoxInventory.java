@@ -53,7 +53,7 @@ public class JukeBoxInventory implements Listener {
     private Inventory inv;
 
     public JukeBoxInventory(Player p, PlayerData pdata) {
-        Bukkit.getPluginManager().registerEvents(this, Noteblock.getInstance());
+        Bukkit.getPluginManager().registerEvents(this, AetheriaCore.getInstance());
         this.id = p.getUniqueId();
         this.pdata = pdata;
         this.pdata.linked = this;
@@ -362,7 +362,7 @@ public class JukeBoxInventory implements Listener {
             profileField.set(headMeta, profile);
         }catch (ReflectiveOperationException e) {
             e.printStackTrace();
-            Noteblock.getInstance().getLogger().severe("An error occured during initialization of Radio item. Please report it to an administrator !");
+            AetheriaCore.getInstance().getLogger().severe("An error occured during initialization of Radio item. Please report it to an administrator !");
             item = new ItemStack(Material.TORCH);
             headMeta = item.getItemMeta();
         }

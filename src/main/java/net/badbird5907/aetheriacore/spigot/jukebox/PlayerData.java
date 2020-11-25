@@ -48,7 +48,7 @@ public class PlayerData implements Listener {
 
     PlayerData(UUID id) {
         this.id = id;
-        Bukkit.getPluginManager().registerEvents(this, Noteblock.getInstance());
+        Bukkit.getPluginManager().registerEvents(this, AetheriaCore.getInstance());
     }
 
     private PlayerData(UUID id, PlayerData defaults){
@@ -122,7 +122,7 @@ public class PlayerData implements Listener {
 
         playSong(false);
 
-        if (Noteblock.getInstance().stopVanillaMusic != null) Noteblock.getInstance().stopVanillaMusic.accept(p);
+        if (AetheriaCore.getInstance().stopVanillaMusic != null) AetheriaCore.getInstance().stopVanillaMusic.accept(p);
         if (linked != null) linked.playingStarted();
     }
 
@@ -321,7 +321,7 @@ public class PlayerData implements Listener {
                 }else Noteblock.radio.join(getPlayer());
             }
         }
-        if (Noteblock.getInstance().stopVanillaMusic != null && isPlaying()) Noteblock.getInstance().stopVanillaMusic.accept(p);
+        if (AetheriaCore.getInstance().stopVanillaMusic != null && isPlaying()) AetheriaCore.getInstance().stopVanillaMusic.accept(p);
     }
 
     public void playerLeave(){
@@ -457,7 +457,7 @@ public class PlayerData implements Listener {
             for (String s : (List<String>) map.get("favorites")) {
                 Song song = songsName.get(s);
                 if (song == null) {
-                    Noteblock.getInstance().getLogger().warning("Unknown song \"" + s + "\" for favorite playlist of " + pdata.getID().toString());
+                    AetheriaCore.getInstance().getLogger().warning("Unknown song \"" + s + "\" for favorite playlist of " + pdata.getID().toString());
                 }else pdata.addSong(song, false);
             }
             pdata.setPlaylist(Playlists.PLAYLIST, false);

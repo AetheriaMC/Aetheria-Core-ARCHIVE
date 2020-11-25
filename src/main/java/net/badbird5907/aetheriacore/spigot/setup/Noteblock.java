@@ -45,10 +45,6 @@ public class Noteblock {
     public static boolean savePlayerDatas = true;
     private static Random random = new Random();
 
-    public static AetheriaCore getInstance() {
-        return AetheriaCore.instance;
-    }
-
     public static Song randomSong() {
         if (songs.isEmpty()) return null;
         if (songs.size() == 1) return songs.get(0);

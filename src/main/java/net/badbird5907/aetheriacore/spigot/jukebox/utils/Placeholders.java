@@ -2,6 +2,7 @@ package net.badbird5907.aetheriacore.spigot.jukebox.utils;
 
 import com.xxmicloxx.NoteBlockAPI.model.Song;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.jukebox.PlayerData;
 import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import org.bukkit.OfflinePlayer;
@@ -13,14 +14,14 @@ public class Placeholders extends PlaceholderExpansion {
 
     public static void registerPlaceholders(){
         new Placeholders().register();
-        Noteblock.getInstance().getLogger().info("Placeholders registered");
+        AetheriaCore.getInstance().getLogger().info("Placeholders registered");
     }
 
     private Placeholders() {}
 
     @Override
     public String getAuthor() {
-        return Noteblock.getInstance().getDescription().getAuthors().toString();
+        return AetheriaCore.getInstance().getDescription().getAuthors().toString();
     }
 
     @Override
@@ -30,7 +31,7 @@ public class Placeholders extends PlaceholderExpansion {
 
     @Override
     public String getVersion() {
-        return Noteblock.getInstance().getDescription().getVersion();
+        return AetheriaCore.getInstance().getDescription().getVersion();
     }
 
     @Override
@@ -45,7 +46,7 @@ public class Placeholders extends PlaceholderExpansion {
 
     @Override
     public String onRequest(OfflinePlayer p, String params) {
-        PlayerData pdata = Noteblock.getInstance().datas.getDatas(p.getUniqueId());
+        PlayerData pdata = AetheriaCore.getInstance().datas.getDatas(p.getUniqueId());
         if (pdata == null) return "§c§lunknown player data";
         if (params.startsWith("playeroptions_")) {
             switch (params.substring(params.indexOf("_") + 1)) {

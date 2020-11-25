@@ -4,6 +4,7 @@ import com.xxmicloxx.NoteBlockAPI.event.SongNextEvent;
 import com.xxmicloxx.NoteBlockAPI.model.Playlist;
 import com.xxmicloxx.NoteBlockAPI.model.RepeatMode;
 import com.xxmicloxx.NoteBlockAPI.model.Song;
+import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -20,7 +21,7 @@ public class JukeBoxRadio implements Listener {
     private List<Player> listening = new ArrayList<>();
 
     public JukeBoxRadio(Playlist songs){
-        Bukkit.getPluginManager().registerEvents(this, Noteblock.getInstance());
+        Bukkit.getPluginManager().registerEvents(this, AetheriaCore.getInstance());
         songPlayer = new CustomSongPlayer(songs);
         songPlayer.playNextSong();
         songPlayer.setRandom(true);

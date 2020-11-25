@@ -101,6 +101,10 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
 
     private HashMap<Plugin, Boolean> dependentPlugins = new HashMap<>();
 
+    public static AetheriaCore getInstance() {
+        return instance;
+    }
+
     @Override
     public void onEnable() {
         instance = this;
