@@ -19,7 +19,7 @@ public class Lang{
     public static String CURRENT_PAGE = ChatColor.DARK_AQUA + "§oPage %d of %d";
     public static String PLAYER = ChatColor.RED + "You must be a player to do this command.";
     public static String RELOAD_MUSIC = ChatColor.GREEN + "Music reloaded.";
-    public static String INV_NAME = ChatColor.LIGHT_PURPLE + "§lJukebox !";
+    public static String INV_NAME = ChatColor.LIGHT_PURPLE + "§b§lMusic";
     public static String TOGGLE_PLAYING = ChatColor.GOLD + "Pause/play";
     public static String VOLUME = ChatColor.BLUE + "Music volume : §b";
     public static String RIGHT_CLICK = "§eRight click: decrease by 10%";
@@ -36,7 +36,7 @@ public class Lang{
     public static String CONNEXION_MUSIC = "music when connecting";
     public static String CONNECTION_MUSIC_ENABLE_DISABLE = "\n\nCurrently: ";
     public static String PARTICLES = "particles";
-    public static String MUSIC_PLAYING = ChatColor.GREEN + "Playing:";
+    public static String MUSIC_PLAYING = ChatColor.GREEN + "Playing Music: ";
     public static String INCORRECT_SYNTAX = ChatColor.RED + "Incorrect syntax.";
     public static String RELOAD_LAUNCH = ChatColor.GREEN + "Trying to reload.";
     public static String RELOAD_FINISH = ChatColor.GREEN + "Reload finished.";

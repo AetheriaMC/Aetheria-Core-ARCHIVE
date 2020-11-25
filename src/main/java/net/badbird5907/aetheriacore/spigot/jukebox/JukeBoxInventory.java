@@ -7,7 +7,6 @@ import com.xxmicloxx.NoteBlockAPI.model.Song;
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Lang;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Playlists;
-import net.badbird5907.aetheriacore.spigot.util.GUIholder;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

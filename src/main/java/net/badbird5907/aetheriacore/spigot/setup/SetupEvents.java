@@ -1,6 +1,7 @@
 package net.badbird5907.aetheriacore.spigot.setup;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
+import net.badbird5907.aetheriacore.spigot.commands.utils.Player_death_event;
 import net.badbird5907.aetheriacore.spigot.events.*;
 import net.badbird5907.aetheriacore.spigot.util.inventories.ClickListener;
 import org.bukkit.Bukkit;
@@ -25,5 +26,6 @@ public class SetupEvents {
         Bukkit.getServer().getPluginManager().registerEvents(new BlockPlaceEvent(), AetheriaCore.instance);
         Bukkit.getServer().getPluginManager().registerEvents(new ClickListener(), AetheriaCore.instance);
         Bukkit.getServer().getPluginManager().registerEvents(new GuiListener(), AetheriaCore.instance);
+        Bukkit.getServer().getPluginManager().registerEvents(new Player_death_event(), AetheriaCore.instance);
     }
 }

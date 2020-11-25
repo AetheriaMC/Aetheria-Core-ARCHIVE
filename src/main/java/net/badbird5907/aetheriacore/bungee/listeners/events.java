@@ -6,6 +6,7 @@ import net.badbird5907.aetheriacore.bungee.util.PlayerHandler;
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ChatEvent;
@@ -15,6 +16,7 @@ import net.md_5.bungee.api.event.ServerSwitchEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.event.EventHandler;
+import org.w3c.dom.Text;
 
 public class events implements Listener {
     @EventHandler
@@ -29,10 +31,13 @@ public class events implements Listener {
             e.setCancelled(true);
             for (ProxiedPlayer staff : BungeeCord.getInstance().getPlayers()) {
                 if (staff.hasPermission(Permission.STAFF_CHAT.node)) {
-                    BaseComponent[] cp = TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.sc-format")
+                    TextComponent cp = new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.sc-format")
                             .replaceAll("%message%", e.getMessage())
-                            .replaceAll("%player%", p.getName())
+                            .replaceAll("%player%", PlayerHandler.playerwithrank(p))
                             .replaceAll("%server%", p.getServer().getInfo().getName())));
+                    cp.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText(
+                            config.getString("Messages.sc-hover")
+                    )));
                     staff.sendMessage(cp);
                 }
             }
@@ -41,13 +46,27 @@ public class events implements Listener {
             e.setCancelled(true);
             for (ProxiedPlayer staff : BungeeCord.getInstance().getPlayers()) {
                 if (staff.hasPermission(Permission.ADMIN_CHAT.node)) {
-                    BaseComponent[] cp = TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.ac-format").replaceAll("%message%", e.getMessage()).replaceAll("%player%", p.getName()).replaceAll("%server%", p.getServer().getInfo().getName())));
+                    BaseComponent[] cp = TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.ac-format")
+                            .replaceAll("%message%", e.getMessage())
+                            .replaceAll("%player%", PlayerHandler.playerwithrank(p))
+                            .replaceAll("%server%", p.getServer().getInfo().getName())));
                     staff.sendMessage(cp);
                 }
             }
         }
         if(e.getMessage().startsWith("#")){
-            
+            e.setCancelled(true);
+            for (ProxiedPlayer staff : BungeeCord.getInstance().getPlayers()) {
+                if (staff.hasPermission(Permission.STAFF_CHAT.node)) {
+                    String message = e.getMessage().replaceFirst("#", "");
+                    BaseComponent[] cp = TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.sc-format")
+                            .replaceAll("%message%", message)
+                            .replaceAll("%player%", PlayerHandler.playerwithrank(p))
+                            .replaceAll("%server%", p.getServer().getInfo().getName())));
+
+                    staff.sendMessage(cp);
+                }
+            }
         }
     }
 
@@ -65,13 +84,13 @@ public class events implements Listener {
                                     .replaceAll("%server%", p.getServer().getInfo().getName())
                                     .replaceAll("%user%", p.getName())
                                     .replaceAll("%command%", e.getMessage())
-                                    .replaceAll("%player%", p.getDisplayName())));
+                                    .replaceAll("%player%", PlayerHandler.playerwithrank(p))));
             }
             BungeeCord.getInstance().getConsole().sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.cspy-format"))
                     .replaceAll("%server%", p.getServer().getInfo().getName())
                     .replaceAll("%user%", p.getName())
                     .replaceAll("%command%", e.getMessage())
-                    .replaceAll("%player%", p.getDisplayName())));
+                    .replaceAll("%player%", PlayerHandler.playerwithrank(p))));
         }
     }
 
@@ -83,7 +102,8 @@ public class events implements Listener {
                 config.getBoolean("Config.enable-leave-message"))
             for (ProxiedPlayer staff : BungeeCord.getInstance().getPlayers()) {
                 if (staff.hasPermission(Permission.STAFF_CHAT.node))
-                    staff.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.staff-leave-network").replaceAll("%player%", p.getName()))));
+                    staff.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.staff-leave-network")
+                            .replaceAll("%player%", PlayerHandler.playerwithrank(p)))));
             }
     }
 
@@ -95,7 +115,8 @@ public class events implements Listener {
                 config.getBoolean("Config.enable-join-message"))
             for (ProxiedPlayer staff : BungeeCord.getInstance().getPlayers()) {
                 if (staff.hasPermission(Permission.STAFF_CHAT.node))
-                    staff.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.staff-join-network").replaceAll("%player%", PlayerHandler.playerwithrank(p)))));
+                    staff.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.staff-join-network")
+                            .replaceAll("%player%", PlayerHandler.playerwithrank(p)))));
             }
     }
 
@@ -110,8 +131,10 @@ public class events implements Listener {
                         e.getFrom() != null) {
                     String sserver = e.getFrom().getName().toString();
                     String dserver = e.getPlayer().getServer().getInfo().getName();
-                    staff.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.staff-leave-server").replaceAll("%server%", sserver).replaceAll("%player%", p.getName()))));
-                    staff.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.staff-join-server").replaceAll("%server%", dserver).replaceAll("%player%", p.getName()))));
+                    staff.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.staff-switch-server")
+                            .replaceAll("%from%", sserver)
+                            .replaceAll("%to%", dserver)
+                            .replaceAll("%player%", PlayerHandler.playerwithrank(p)))));
                 }
             }
     }

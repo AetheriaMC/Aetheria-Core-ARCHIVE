@@ -43,6 +43,7 @@ public final class AetheriaCoreBungee extends Plugin implements Listener {
         getProxy().getInstance().getPluginManager().registerCommand(this, new AdminChat());
         getProxy().getInstance().getPluginManager().registerCommand(this, new CSpy());
         getProxy().getInstance().getPluginManager().registerCommand(this, new GlobalBroadcast());
+        getProxy().getInstance().getPluginManager().registerCommand(this, new GlobalClearChat());
         getProxy().getInstance().getPluginManager().registerCommand(this, new StaffChat());
         getProxy().getInstance().getPluginManager().registerCommand(this, new staff());
 
@@ -84,6 +85,7 @@ public final class AetheriaCoreBungee extends Plugin implements Listener {
                     config.set("Config.enable-join-message", Boolean.valueOf(true));
                     config.set("Config.enable-leave-message", Boolean.valueOf(true));
                     config.set("Config.enable-switch-messages", Boolean.valueOf(true));
+                    config.set("Messages.sc-hover", "%player%\n%server%");
                     config.set("Messages.sc-enabled", "&8[&6AEC&8]  &8&7Staff chat is now &aenabled&7.");
                     config.set("Messages.sc-disabled", "&8[&6AEC&8] &8&7Staff chat is now &cdisabled&7.");
                     config.set("Messages.sc-format", "&6&lStaffChat&r&8 »&r&7 (%server%)&r %player%&r: %message%");

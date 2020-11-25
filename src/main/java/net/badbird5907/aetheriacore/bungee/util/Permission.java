@@ -35,8 +35,9 @@ public enum Permission {
     COMMAND_SPY("commandspy"),
     COMMAND_SPY_BYPASS("commandspy.bypass"),
     SEE_STAFF_ONLINE("staff.online"),
-    GLOBAL_CLEAR_CHAT("clearchat.global"),
-    CLEAR_CHAT_BYPASS("clearchat.bypass`")
+    GLOBAL_CLEAR_CHAT("global.clearchat"),
+    CLEAR_CHAT_BYPASS("clearchat.bypass`"),
+    GLOBAL_BROADCAST("global.broadcast")
 
     ;
     public final String node;
