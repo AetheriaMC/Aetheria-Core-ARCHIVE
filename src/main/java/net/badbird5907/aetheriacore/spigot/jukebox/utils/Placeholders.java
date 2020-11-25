@@ -2,8 +2,8 @@ package net.badbird5907.aetheriacore.spigot.jukebox.utils;
 
 import com.xxmicloxx.NoteBlockAPI.model.Song;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.jukebox.PlayerData;
+import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import org.bukkit.OfflinePlayer;
 
 import java.util.Arrays;
@@ -13,14 +13,14 @@ public class Placeholders extends PlaceholderExpansion {
 
     public static void registerPlaceholders(){
         new Placeholders().register();
-        AetheriaCore.getInstance().getLogger().info("Placeholders registered");
+        Noteblock.getInstance().getLogger().info("Placeholders registered");
     }
 
     private Placeholders() {}
 
     @Override
     public String getAuthor() {
-        return AetheriaCore.getInstance().getDescription().getAuthors().toString();
+        return Noteblock.getInstance().getDescription().getAuthors().toString();
     }
 
     @Override
@@ -30,7 +30,7 @@ public class Placeholders extends PlaceholderExpansion {
 
     @Override
     public String getVersion() {
-        return AetheriaCore.getInstance().getDescription().getVersion();
+        return Noteblock.getInstance().getDescription().getVersion();
     }
 
     @Override
@@ -45,7 +45,7 @@ public class Placeholders extends PlaceholderExpansion {
 
     @Override
     public String onRequest(OfflinePlayer p, String params) {
-        PlayerData pdata = AetheriaCore.getInstance().datas.getDatas(p.getUniqueId());
+        PlayerData pdata = Noteblock.getInstance().datas.getDatas(p.getUniqueId());
         if (pdata == null) return "§c§lunknown player data";
         if (params.startsWith("playeroptions_")) {
             switch (params.substring(params.indexOf("_") + 1)) {
@@ -66,13 +66,13 @@ public class Placeholders extends PlaceholderExpansion {
             Song song;
             if (pdata.songPlayer == null) {
                 if (pdata.getPlaylistType() == Playlists.RADIO) {
-                    song = AetheriaCore.radio.getSong();
+                    song = Noteblock.radio.getSong();
                 }else return Lang.NONE;
             }else song = pdata.songPlayer.getSong();
             if (params.equals("active_title")) return song.getTitle();
             if (params.equals("active_author")) return song.getAuthor();
             if (params.equals("active_description")) return song.getDescription();
-            return AetheriaCore.getSongName(song);
+            return Noteblock.getSongName(song);
         }else if (params.equals("playlist")) {
             return pdata.getPlaylistType().name;
         }

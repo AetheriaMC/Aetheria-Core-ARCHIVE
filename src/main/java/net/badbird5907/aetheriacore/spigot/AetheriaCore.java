@@ -18,14 +18,13 @@ import net.badbird5907.aetheriacore.spigot.jukebox.*;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.*;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
+import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import net.badbird5907.aetheriacore.spigot.setup.SetupCommands;
 import net.badbird5907.aetheriacore.spigot.setup.SetupEvents;
 import net.badbird5907.aetheriacore.spigot.util.TabComplete;
 import net.badbird5907.aetheriacore.spigot.util.inventories.ClickListener;
 import net.badbird5907.aetheriacore.spigot.util.itemtypes;
 import net.luckperms.api.LuckPerms;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -82,9 +81,6 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
     public AetheriaCore() {
         instance = this;
     }
-    public static AetheriaCore getInstance() {
-        return instance;
-    }
 
     //music
     public static int version = Integer.parseInt(Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3].split("_")[1]);
@@ -93,36 +89,6 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
     private static File playersFile;
     public static FileConfiguration players;
     public static File songsFolder;
-
-    public static JukeBoxRadio radio = null;
-
-    private static LinkedList<Song> songs;
-    private static Map<String, Song> fileNames;
-    public static Map<String, Song> internalNames;
-    private static Playlist playlist;
-
-    public static int maxPage;
-    public static boolean jukeboxClick = false;
-    public static boolean sendMessages = true;
-    public static boolean async = false;
-    public static boolean autoJoin = false;
-    public static boolean radioEnabled = true;
-    public static boolean radioOnJoin = false;
-    public static boolean autoReload = true;
-    public static boolean preventVanillaMusic = false;
-    public static PlayerData defaultPlayer = null;
-    public static List<String> worldsEnabled;
-    public static boolean worlds;
-    public static boolean particles;
-    public static boolean actionBar;
-    public static Material songItem;
-    public static String itemFormat;
-    public static String itemFormatWithoutAuthor;
-    public static String itemFormatAdmin;
-    public static String itemFormatAdminWithoutAuthor;
-    public static String songFormat;
-    public static String songFormatWithoutAuthor;
-    public static boolean savePlayerDatas = true;
 
     public ItemStack jukeboxItem;
 
@@ -494,12 +460,12 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
         return;
     }
     public void disableAll(){
-        if (radio != null){
-            radio.stop();
-            radio = null;
+        if (Noteblock.radio != null){
+            Noteblock.radio.stop();
+            Noteblock.radio = null;
         }
         if (datas != null) {
-            if (savePlayerDatas && db == null) players.set("players", datas.getSerializedList());
+            if (Noteblock.savePlayerDatas && db == null) players.set("players", datas.getSerializedList());
             players.set("item", (jukeboxItem == null) ? null : jukeboxItem.serialize());
             try {
                 players.save(playersFile);
@@ -517,28 +483,28 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
         if (disable) return;
 
         FileConfiguration config = getConfig();
-        jukeboxClick = config.getBoolean("jukeboxClick");
-        sendMessages = config.getBoolean("sendMessages");
-        async = config.getBoolean("asyncLoading");
-        autoJoin = config.getBoolean("forceJoinMusic");
-        defaultPlayer = PlayerData.deserialize(config.getConfigurationSection("defaultPlayerOptions").getValues(false), null);
-        particles = config.getBoolean("noteParticles") && version >= 9;
-        actionBar = config.getBoolean("actionBar") && version >= 9;
-        radioEnabled = config.getBoolean("radio");
-        radioOnJoin = radioEnabled && config.getBoolean("radioOnJoin");
-        autoReload = config.getBoolean("reloadOnJoin");
-        preventVanillaMusic = config.getBoolean("preventVanillaMusic") && version >= 13;
-        songItem = Material.matchMaterial(config.getString("songItem"));
-        itemFormat = config.getString("itemFormat");
-        itemFormatWithoutAuthor = config.getString("itemFormatWithoutAuthor");
-        itemFormatAdmin = config.getString("itemFormatAdmin");
-        itemFormatAdminWithoutAuthor = config.getString("itemFormatAdminWithoutAuthor");
-        songFormat = config.getString("songFormat");
-        songFormatWithoutAuthor = config.getString("songFormatWithoutAuthor");
-        savePlayerDatas = config.getBoolean("savePlayerDatas");
+        Noteblock.jukeboxClick = config.getBoolean("jukeboxClick");
+        Noteblock.sendMessages = config.getBoolean("sendMessages");
+        Noteblock.async = config.getBoolean("asyncLoading");
+        Noteblock.autoJoin = config.getBoolean("forceJoinMusic");
+        Noteblock.defaultPlayer = PlayerData.deserialize(config.getConfigurationSection("defaultPlayerOptions").getValues(false), null);
+        Noteblock.particles = config.getBoolean("noteParticles") && version >= 9;
+        Noteblock.actionBar = config.getBoolean("actionBar") && version >= 9;
+        Noteblock.radioEnabled = config.getBoolean("radio");
+        Noteblock.radioOnJoin = Noteblock.radioEnabled && config.getBoolean("radioOnJoin");
+        Noteblock.autoReload = config.getBoolean("reloadOnJoin");
+        Noteblock.preventVanillaMusic = config.getBoolean("preventVanillaMusic") && version >= 13;
+        Noteblock.songItem = Material.matchMaterial(config.getString("songItem"));
+        Noteblock.itemFormat = config.getString("itemFormat");
+        Noteblock.itemFormatWithoutAuthor = config.getString("itemFormatWithoutAuthor");
+        Noteblock.itemFormatAdmin = config.getString("itemFormatAdmin");
+        Noteblock.itemFormatAdminWithoutAuthor = config.getString("itemFormatAdminWithoutAuthor");
+        Noteblock.songFormat = config.getString("songFormat");
+        Noteblock.songFormatWithoutAuthor = config.getString("songFormatWithoutAuthor");
+        Noteblock.savePlayerDatas = config.getBoolean("savePlayerDatas");
 
-        worldsEnabled = config.getStringList("enabledWorlds");
-        worlds = !worldsEnabled.isEmpty();
+        Noteblock.worldsEnabled = config.getStringList("enabledWorlds");
+        Noteblock.worlds = !Noteblock.worldsEnabled.isEmpty();
 
         ConfigurationSection dbConfig = config.getConfigurationSection("database");
         /*
@@ -554,7 +520,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
          */
         db = null;
 
-        if (async){
+        if (Noteblock.async){
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -567,7 +533,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
             finishEnabling();
         }
 
-        if (preventVanillaMusic) {
+        if (Noteblock.preventVanillaMusic) {
             try {
                 String nms = "net.minecraft.server";
                 String cb = "org.bukkit.craftbukkit";
@@ -607,10 +573,10 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
         getCommand("playmusic").setExecutor(new PlayMusic());
         getServer().getPluginManager().registerEvents(this, this);
 
-        radioEnabled = radioEnabled && !songs.isEmpty();
-        if (radioEnabled){
-            radio = new JukeBoxRadio(playlist);
-        }else radioOnJoin = false;
+        Noteblock.radioEnabled = Noteblock.radioEnabled && !Noteblock.songs.isEmpty();
+        if (Noteblock.radioEnabled){
+            Noteblock.radio = new JukeBoxRadio(Noteblock.playlist);
+        }else Noteblock.radioOnJoin = false;
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             datas.joins(p);
@@ -619,34 +585,34 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
 
     private void loadDatas(){
         /* --------------------------------------------- SONGS ------- */
-        songs = new LinkedList<>();
-        fileNames = new HashMap<>();
-        internalNames = new HashMap<>();
+        Noteblock.songs = new LinkedList<>();
+        Noteblock.fileNames = new HashMap<>();
+        Noteblock.internalNames = new HashMap<>();
         songsFolder = new File(getDataFolder(), "songs");
         if (!songsFolder.exists()) songsFolder.mkdirs();
         for (File file : songsFolder.listFiles()){
             if (file.getName().substring(file.getName().lastIndexOf(".") + 1).equals("nbs")){
                 Song song = NBSDecoder.parse(file);
                 if (song == null) continue;
-                String n = getInternal(song);
-                if (internalNames.containsKey(n)) {
+                String n = Noteblock.getInternal(song);
+                if (Noteblock.internalNames.containsKey(n)) {
                     getLogger().warning("Song \"" + n + "\" is duplicated. Please delete one from the songs directory. File name: " + file.getName());
                     continue;
                 }
-                fileNames.put(file.getName(), song);
-                internalNames.put(n, song);
+                Noteblock.fileNames.put(file.getName(), song);
+                Noteblock.internalNames.put(n, song);
             }
         }
-        getLogger().info(internalNames.size() + " songs loadeds. Sorting by name... ");
-        List<String> names = new ArrayList<>(internalNames.keySet());
+        getLogger().info(Noteblock.internalNames.size() + " songs loadeds. Sorting by name... ");
+        List<String> names = new ArrayList<>(Noteblock.internalNames.keySet());
         Collections.sort(names, Collator.getInstance());
         for (String str : names){
-            songs.add(internalNames.get(str));
+            Noteblock.songs.add(Noteblock.internalNames.get(str));
         }
 
         setMaxPage();
-        getLogger().info("Songs sorted ! " + songs.size() + " songs. Number of pages : " + maxPage);
-        if (!songs.isEmpty()) playlist = new Playlist(songs.toArray(new Song[0]));
+        getLogger().info("Songs sorted ! " + Noteblock.songs.size() + " songs. Number of pages : " + Noteblock.maxPage);
+        if (!Noteblock.songs.isEmpty()) Noteblock.playlist = new Playlist(Noteblock.songs.toArray(new Song[0]));
 
         /* --------------------------------------------- PLAYERS ------- */
         try {
@@ -658,7 +624,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
             e.printStackTrace();
         }
         if (db == null) {
-            datas = new JukeBoxDatas(players.getMapList("players"), internalNames);
+            datas = new JukeBoxDatas(players.getMapList("players"), Noteblock.internalNames);
         }else {
             try {
                 datas = new JukeBoxDatas(db);
@@ -669,7 +635,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
     }
 
     void setMaxPage(){
-        maxPage = (int) StrictMath.ceil(songs.size() * 1.0 / 45);
+        Noteblock.maxPage = (int) StrictMath.ceil(Noteblock.songs.size() * 1.0 / 45);
     }
 
 
@@ -732,7 +698,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
                 return;
             }
         }
-        if (e.getAction() == Action.RIGHT_CLICK_BLOCK && jukeboxClick){
+        if (e.getAction() == Action.RIGHT_CLICK_BLOCK && Noteblock.jukeboxClick){
             if (e.getClickedBlock().getType() == Material.JUKEBOX){
                 String disc = e.getItem().getType().name();
                 if (version < 13 ? JukeBoxInventory.discs8.contains(disc) : JukeBoxInventory.discs13.contains(disc)) {
@@ -746,82 +712,27 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onTeleport(PlayerTeleportEvent e){
-        if (!worlds) return;
+        if (!Noteblock.worlds) return;
         if (e.getFrom().getWorld() == e.getTo().getWorld()) return;
-        if (worldsEnabled.contains(e.getTo().getWorld().getName())) return;
+        if (Noteblock.worldsEnabled.contains(e.getTo().getWorld().getName())) return;
         PlayerData pdata = datas.getDatas(e.getPlayer());
         if (pdata == null) return;
         if (pdata.songPlayer != null) pdata.stopPlaying(true);
         if (pdata.getPlaylistType() == Playlists.RADIO) pdata.setPlaylist(Playlists.PLAYLIST, false);
     }
-    private static Random random = new Random();
-    public static Song randomSong() {
-        if (songs.isEmpty()) return null;
-        if (songs.size() == 1) return songs.get(0);
-        return songs.get(random.nextInt(songs.size() - 1));
-    }
-
-    public static Playlist getPlaylist(){
-        return playlist;
-    }
 
     public static List<Song> getSongs(){
-        return songs;
+        return Noteblock.songs;
     }
 
     public static Song getSongByFile(String fileName){
         if(fileName.contains(".nbs")){
-            return fileNames.get(fileName);
+            return Noteblock.fileNames.get(fileName);
         }
         if(fileName.contains(".NBS")){
-            return fileNames.get(fileName);
+            return Noteblock.fileNames.get(fileName);
         }
-        return fileNames.get(fileName + ".nbs");
+        return Noteblock.fileNames.get(fileName + ".nbs");
     }
 
-    public static Song getSongByInternalName(String internalName) {
-        return internalNames.get(internalName);
-    }
-
-    public static String getInternal(Song s) {
-        if (s.getTitle() == null || s.getTitle().isEmpty()) return s.getPath().getName();
-        return s.getTitle();
-    }
-
-    public static String getItemName(Song s, Player p) {
-        boolean admin = p.hasPermission("aetheriacore.music.adminItem");
-        return format(admin ? itemFormatAdmin : itemFormat, admin ? itemFormatAdminWithoutAuthor : itemFormatWithoutAuthor, s);
-    }
-
-    public static String getSongName(Song song) {
-        return format(songFormat, songFormatWithoutAuthor, song);
-    }
-
-    private static String removeFileExtension(String path) {
-        int dot = path.lastIndexOf('.');
-        if(dot == -1) return path;
-        return path.substring(0, dot);
-    }
-
-    public static String format(String base, String noAuthorBase, Song song) {
-        String name = song.getTitle().isEmpty() ? removeFileExtension(song.getPath().getName()) : song.getTitle();
-        String author = song.getAuthor();
-        String id = String.valueOf(songs.indexOf(song));
-        if(author == null || author.isEmpty()) {
-            return noAuthorBase.replace("{NAME}", name).replace("{ID}", id);
-        }
-        return base.replace("{NAME}", name).replace("{AUTHOR}", author).replace("{ID}", id);
-    }
-
-    public static boolean sendMessage(Player p, String msg){
-        if (AetheriaCore.sendMessages){
-            if (AetheriaCore.actionBar){
-                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(msg));
-            }else {
-                p.spigot().sendMessage(TextComponent.fromLegacyText(msg));
-            }
-            return true;
-        }
-        return false;
-    }
 }

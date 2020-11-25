@@ -7,6 +7,7 @@ import com.xxmicloxx.NoteBlockAPI.model.Song;
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Lang;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Playlists;
+import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -52,13 +53,13 @@ public class JukeBoxInventory implements Listener {
     private Inventory inv;
 
     public JukeBoxInventory(Player p, PlayerData pdata) {
-        Bukkit.getPluginManager().registerEvents(this, AetheriaCore.getInstance());
+        Bukkit.getPluginManager().registerEvents(this, Noteblock.getInstance());
         this.id = p.getUniqueId();
         this.pdata = pdata;
         this.pdata.linked = this;
 
         Random ran = new Random();
-        Material defaultMat = AetheriaCore.songItem;
+        Material defaultMat = Noteblock.songItem;
         discs = new Material[AetheriaCore.getSongs().size()];
         for (int i = 0; i < discs.length; i++){
             discs[i] = defaultMat != null ? defaultMat : Material.valueOf(AetheriaCore.version > 12 ? discs13.get(ran.nextInt(12)) : discs8.get(ran.nextInt(12)));
@@ -78,8 +79,8 @@ public class JukeBoxInventory implements Listener {
     }
 
     public void setSongsPage(Player p) {
-        inv.setItem(52, item(Material.ARROW, Lang.LATER_PAGE, String.format(Lang.CURRENT_PAGE, page + 1, Math.max(AetheriaCore.maxPage, 1)))); // max to avoid 0 pages if no songs
-        inv.setItem(53, item(Material.ARROW, Lang.NEXT_PAGE, String.format(Lang.CURRENT_PAGE, page + 1, Math.max(AetheriaCore.maxPage, 1))));
+        inv.setItem(52, item(Material.ARROW, Lang.LATER_PAGE, String.format(Lang.CURRENT_PAGE, page + 1, Math.max(Noteblock.maxPage, 1)))); // max to avoid 0 pages if no songs
+        inv.setItem(53, item(Material.ARROW, Lang.NEXT_PAGE, String.format(Lang.CURRENT_PAGE, page + 1, Math.max(Noteblock.maxPage, 1))));
 
         for (int i = 0; i < 45; i++) inv.setItem(i, null);
         if (pdata.getPlaylistType() == Playlists.RADIO) return;
@@ -110,7 +111,7 @@ public class JukeBoxInventory implements Listener {
                 inv.setItem(47, item(Material.BEACON, "§cerror", Lang.RIGHT_CLICK, Lang.LEFT_CLICK));
                 volumeItem();
                 if (pdata.getPlaylistType() != Playlists.RADIO) {
-                    if (AetheriaCore.particles) inv.setItem(48, item(particles, "§cerror"));
+                    if (Noteblock.particles) inv.setItem(48, item(particles, "§cerror"));
                     particlesItem();
                     inv.setItem(49, item(sign, "§cerror"));
                     joinItem();
@@ -142,7 +143,7 @@ public class JukeBoxInventory implements Listener {
         int slot = e.getSlot();
 
         Material type = e.getCurrentItem().getType();
-        if (AetheriaCore.songItem == null ? type.name().contains("RECORD") || type.name().contains("DISC") : type == AetheriaCore.songItem) {
+        if (Noteblock.songItem == null ? type.name().contains("RECORD") || type.name().contains("DISC") : type == Noteblock.songItem) {
             Song s = AetheriaCore.getSongs().get(page * 45 + slot);
             if (e.getClick() == ClickType.MIDDLE){
                 if (pdata.isInPlaylist(s)) {
@@ -159,9 +160,9 @@ public class JukeBoxInventory implements Listener {
 
             case 52:
             case 53:
-                if (AetheriaCore.maxPage == 0) break;
+                if (Noteblock.maxPage == 0) break;
                 if (slot == 53){ //Next
-                    if (page == AetheriaCore.maxPage - 1) break;
+                    if (page == Noteblock.maxPage - 1) break;
                     page++;
                 }else if (slot == 52){ // Later
                     if (page == 0) return;
@@ -221,7 +222,7 @@ public class JukeBoxInventory implements Listener {
                                 break;
 
                             case 49:
-                                if (!AetheriaCore.autoJoin) pdata.setJoinMusic(!pdata.hasJoinMusic());
+                                if (!Noteblock.autoJoin) pdata.setJoinMusic(!pdata.hasJoinMusic());
                                 break;
 
                             case 50:
@@ -260,7 +261,7 @@ public class JukeBoxInventory implements Listener {
     }
 
     public ItemStack getSongItem(Song s, Player p) {
-        ItemStack is = item(discs[AetheriaCore.getSongs().indexOf(s)], AetheriaCore.getItemName(s, p));
+        ItemStack is = item(discs[AetheriaCore.getSongs().indexOf(s)], Noteblock.getItemName(s, p));
         if (!StringUtils.isEmpty(s.getDescription())) loreAdd(is, splitOnSpace(s.getDescription(), 30));
         return is;
     }
@@ -271,8 +272,8 @@ public class JukeBoxInventory implements Listener {
 
     public void particlesItem(){
         if (menu != ItemsMenu.OPTIONS) return;
-        if (!AetheriaCore.particles) return;
-        if (!AetheriaCore.particles) inv.setItem(48, null);
+        if (!Noteblock.particles) return;
+        if (!Noteblock.particles) inv.setItem(48, null);
         name(inv.getItem(48), ChatColor.AQUA + (pdata.hasParticles() ? Lang.DISABLE : Lang.ENABLE) + " " + Lang.PARTICLES);
     }
 
@@ -361,7 +362,7 @@ public class JukeBoxInventory implements Listener {
             profileField.set(headMeta, profile);
         }catch (ReflectiveOperationException e) {
             e.printStackTrace();
-            AetheriaCore.getInstance().getLogger().severe("An error occured during initialization of Radio item. Please report it to an administrator !");
+            Noteblock.getInstance().getLogger().severe("An error occured during initialization of Radio item. Please report it to an administrator !");
             item = new ItemStack(Material.TORCH);
             headMeta = item.getItemMeta();
         }

@@ -4,6 +4,7 @@ import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.CustomSongPlayer;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Lang;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Playlists;
+import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import org.bukkit.event.Listener;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,7 +48,7 @@ public class PlayerData implements Listener {
 
     PlayerData(UUID id) {
         this.id = id;
-        Bukkit.getPluginManager().registerEvents(this, AetheriaCore.getInstance());
+        Bukkit.getPluginManager().registerEvents(this, Noteblock.getInstance());
     }
 
     private PlayerData(UUID id, PlayerData defaults){
@@ -104,7 +105,7 @@ public class PlayerData implements Listener {
 
     public void playList(Playlist list){
         if (listening == Playlists.RADIO){
-            AetheriaCore.sendMessage(getPlayer(), Lang.UNAVAILABLE_RADIO);
+            Noteblock.sendMessage(getPlayer(), Lang.UNAVAILABLE_RADIO);
             return;
         }
         if (songPlayer != null) stopPlaying(false);
@@ -121,13 +122,13 @@ public class PlayerData implements Listener {
 
         playSong(false);
 
-        if (AetheriaCore.getInstance().stopVanillaMusic != null) AetheriaCore.getInstance().stopVanillaMusic.accept(p);
+        if (Noteblock.getInstance().stopVanillaMusic != null) Noteblock.getInstance().stopVanillaMusic.accept(p);
         if (linked != null) linked.playingStarted();
     }
 
     public boolean playSong(Song song){
         if (listening == Playlists.RADIO){
-            AetheriaCore.sendMessage(getPlayer(), Lang.UNAVAILABLE_RADIO);
+            Noteblock.sendMessage(getPlayer(), Lang.UNAVAILABLE_RADIO);
             return false;
         }
         if (songPlayer != null) stopPlaying(false);
@@ -151,9 +152,9 @@ public class PlayerData implements Listener {
                 toPlay = favorites;
                 break;
             case PLAYLIST:
-                randomPlaylist.add(AetheriaCore.getPlaylist().getIndex(song));
+                randomPlaylist.add(Noteblock.getPlaylist().getIndex(song));
                 if (playIndex) finishPlaying();
-                toPlay = AetheriaCore.getPlaylist();
+                toPlay = Noteblock.getPlaylist();
                 break;
             case RADIO:
                 return false;
@@ -175,7 +176,7 @@ public class PlayerData implements Listener {
                 }else favorites.remove(song);
                 break;
             case PLAYLIST:
-                randomPlaylist.remove((Integer) AetheriaCore.getPlaylist().getIndex(song));
+                randomPlaylist.remove((Integer) Noteblock.getPlaylist().getIndex(song));
                 break;
             case RADIO:
                 break;
@@ -188,7 +189,7 @@ public class PlayerData implements Listener {
                 if (favorites != null) return favorites.contains(song);
                 break;
             case PLAYLIST:
-                return randomPlaylist.contains(AetheriaCore.getPlaylist().getIndex(song));
+                return randomPlaylist.contains(Noteblock.getPlaylist().getIndex(song));
             case RADIO:
                 return false;
         }
@@ -215,7 +216,7 @@ public class PlayerData implements Listener {
     public Song playRandom() {
         if (AetheriaCore.getSongs().isEmpty()) return null;
         setPlaylist(Playlists.PLAYLIST, false);
-        Song song = AetheriaCore.randomSong();
+        Song song = Noteblock.randomSong();
         playSong(song);
         return song;
     }
@@ -225,7 +226,7 @@ public class PlayerData implements Listener {
         CustomSongPlayer tmp = songPlayer;
         this.songPlayer = null;
         tmp.destroy();
-        if (msg && getPlayer().isOnline()) AetheriaCore.sendMessage(getPlayer(), Lang.MUSIC_STOPPED);
+        if (msg && getPlayer().isOnline()) Noteblock.sendMessage(getPlayer(), Lang.MUSIC_STOPPED);
         if (linked != null) linked.playingStopped();
     }
 
@@ -234,14 +235,14 @@ public class PlayerData implements Listener {
     }
 
     public void nextPlaylist(){
-        if (listening == Playlists.RADIO) AetheriaCore.radio.leave(getPlayer());
+        if (listening == Playlists.RADIO) Noteblock.radio.leave(getPlayer());
 
         switch (listening){
             case PLAYLIST:
                 setPlaylist(Playlists.FAVORITES, true);
                 break;
             case FAVORITES:
-                setPlaylist(AetheriaCore.radioEnabled ? Playlists.RADIO : Playlists.PLAYLIST, true);
+                setPlaylist(Noteblock.radioEnabled ? Playlists.RADIO : Playlists.PLAYLIST, true);
                 break;
             case RADIO:
                 setPlaylist(Playlists.PLAYLIST, true);
@@ -256,13 +257,13 @@ public class PlayerData implements Listener {
         stopPlaying(false);
         switch (listening){
             case PLAYLIST:
-                playList(AetheriaCore.getPlaylist());
+                playList(Noteblock.getPlaylist());
                 break;
             case FAVORITES:
                 playList(favorites);
                 break;
             case RADIO:
-                AetheriaCore.radio.join(getPlayer());
+                Noteblock.radio.join(getPlayer());
                 if (linked != null) linked.playingStarted();
                 break;
         }
@@ -284,11 +285,11 @@ public class PlayerData implements Listener {
 
     public void nextSong() {
         if (listening == Playlists.RADIO){
-            AetheriaCore.sendMessage(getPlayer(), Lang.UNAVAILABLE_RADIO);
+            Noteblock.sendMessage(getPlayer(), Lang.UNAVAILABLE_RADIO);
             return;
         }
         if (songPlayer == null) {
-            playList(listening == Playlists.PLAYLIST ? AetheriaCore.getPlaylist() : favorites);
+            playList(listening == Playlists.PLAYLIST ? Noteblock.getPlaylist() : favorites);
         }else {
             finishPlaying();
         }
@@ -297,16 +298,16 @@ public class PlayerData implements Listener {
     public void playerJoin(Player player, boolean replay){
         this.p = player;
         if (!replay) return;
-        if (AetheriaCore.radioOnJoin){
+        if (Noteblock.radioOnJoin){
             setPlaylist(Playlists.RADIO, true);
             return;
         }
         if (listening == Playlists.RADIO) return;
         if (songPlayer == null){
             if (hasJoinMusic()) playRandom();
-        }else if (!songPlayer.adminPlayed && AetheriaCore.autoReload) {
+        }else if (!songPlayer.adminPlayed && Noteblock.autoReload) {
             songPlayer.setPlaying(true);
-            AetheriaCore.sendMessage(getPlayer(), Lang.RELOAD_MUSIC + " (" + AetheriaCore.getSongName(songPlayer.getSong()) + ")");
+            Noteblock.sendMessage(getPlayer(), Lang.RELOAD_MUSIC + " (" + Noteblock.getSongName(songPlayer.getSong()) + ")");
         }
     }
 
@@ -315,17 +316,17 @@ public class PlayerData implements Listener {
             songPlayer.setPlaying(!songPlayer.isPlaying());
         }else {
             if (listening == Playlists.RADIO) {
-                if (AetheriaCore.radio.isListening(getPlayer())) {
-                    AetheriaCore.radio.leave(getPlayer());
-                }else AetheriaCore.radio.join(getPlayer());
+                if (Noteblock.radio.isListening(getPlayer())) {
+                    Noteblock.radio.leave(getPlayer());
+                }else Noteblock.radio.join(getPlayer());
             }
         }
-        if (AetheriaCore.getInstance().stopVanillaMusic != null && isPlaying()) AetheriaCore.getInstance().stopVanillaMusic.accept(p);
+        if (Noteblock.getInstance().stopVanillaMusic != null && isPlaying()) Noteblock.getInstance().stopVanillaMusic.accept(p);
     }
 
     public void playerLeave(){
         p = null;
-        if (!AetheriaCore.autoReload) stopPlaying(false);
+        if (!Noteblock.autoReload) stopPlaying(false);
     }
 
     private void playSong(boolean next){
@@ -334,7 +335,7 @@ public class PlayerData implements Listener {
             int id = randomPlaylist.remove(0);
             if (next && linked != null) linked.songItem(id, getPlayer());
         }
-        AetheriaCore.sendMessage(getPlayer(), Lang.MUSIC_PLAYING + " " + AetheriaCore.getSongName(songPlayer.getSong()));
+        Noteblock.sendMessage(getPlayer(), Lang.MUSIC_PLAYING + " " + Noteblock.getSongName(songPlayer.getSong()));
     }
 
 
@@ -409,7 +410,7 @@ public class PlayerData implements Listener {
     }
 
     public boolean isDefault(PlayerData base){
-        if (base.hasJoinMusic() != hasJoinMusic()) if (!AetheriaCore.autoJoin) return false;
+        if (base.hasJoinMusic() != hasJoinMusic()) if (!Noteblock.autoJoin) return false;
         if (base.isShuffle() != isShuffle()) return false;
         if (base.getVolume() != getVolume()) return false;
         if (base.hasParticles() != hasParticles()) return false;
@@ -429,7 +430,7 @@ public class PlayerData implements Listener {
 
         if (favorites != null) {
             List<String> list = new ArrayList<>();
-            for (Song song : favorites.getSongList()) list.add(AetheriaCore.getInternal(song));
+            for (Song song : favorites.getSongList()) list.add(Noteblock.getInternal(song));
             map.put("favorites", list);
         }
 
@@ -437,8 +438,8 @@ public class PlayerData implements Listener {
     }
 
     static PlayerData create(UUID id){
-        PlayerData pdata = new PlayerData(id, AetheriaCore.defaultPlayer);
-        if (AetheriaCore.autoJoin) pdata.setJoinMusic(true);
+        PlayerData pdata = new PlayerData(id, Noteblock.defaultPlayer);
+        if (Noteblock.autoJoin) pdata.setJoinMusic(true);
         return pdata;
     }
 
@@ -456,7 +457,7 @@ public class PlayerData implements Listener {
             for (String s : (List<String>) map.get("favorites")) {
                 Song song = songsName.get(s);
                 if (song == null) {
-                    AetheriaCore.getInstance().getLogger().warning("Unknown song \"" + s + "\" for favorite playlist of " + pdata.getID().toString());
+                    Noteblock.getInstance().getLogger().warning("Unknown song \"" + s + "\" for favorite playlist of " + pdata.getID().toString());
                 }else pdata.addSong(song, false);
             }
             pdata.setPlaylist(Playlists.PLAYLIST, false);

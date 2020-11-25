@@ -5,6 +5,7 @@ import com.xxmicloxx.NoteBlockAPI.utils.NBSDecoder;
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Lang;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Playlists;
+import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -39,8 +40,8 @@ public class CommandAdmin implements CommandExecutor {
             case "reload":
                 sender.sendMessage(Lang.RELOAD_LAUNCH);
                 try{
-                    AetheriaCore.getInstance().disableAll();
-                    AetheriaCore.getInstance().initAll();
+                    Noteblock.getInstance().disableAll();
+                    Noteblock.getInstance().initAll();
                 }catch (Exception ex){
                     sender.sendMessage("§cError while reloading. Please check the console   .");
                     ex.printStackTrace();
@@ -58,7 +59,7 @@ public class CommandAdmin implements CommandExecutor {
                     sender.sendMessage("§cUnknown player.");
                     return true;
                 }
-                PlayerData pdata = AetheriaCore.getInstance().datas.getDatas(pp.getUniqueId());
+                PlayerData pdata = Noteblock.getInstance().datas.getDatas(pp.getUniqueId());
                 String s = Lang.MUSIC_PLAYING + " ";
                 if (pdata == null){
                     s = s + "§cx";
@@ -67,7 +68,7 @@ public class CommandAdmin implements CommandExecutor {
                         s = s + "§cx";
                     }else {
                         Song song = pdata.songPlayer.getSong();
-                        s = AetheriaCore.getSongName(song);
+                        s = Noteblock.getSongName(song);
                     }
                 }
                 sender.sendMessage(s);
@@ -135,9 +136,9 @@ public class CommandAdmin implements CommandExecutor {
                 }
                 ItemStack is = ((Player) sender).getInventory().getItemInHand();
                 if (is == null || is.getType() == Material.AIR){
-                    AetheriaCore.getInstance().jukeboxItem = null;
-                }else AetheriaCore.getInstance().jukeboxItem = is;
-                sender.sendMessage("§aItem edited. Now : §2" + ((AetheriaCore.getInstance().jukeboxItem == null) ? "null" : AetheriaCore.getInstance().jukeboxItem.toString()));
+                    Noteblock.getInstance().jukeboxItem = null;
+                }else Noteblock.getInstance().jukeboxItem = is;
+                sender.sendMessage("§aItem edited. Now : §2" + ((Noteblock.getInstance().jukeboxItem == null) ? "null" : Noteblock.getInstance().jukeboxItem.toString()));
                 break;
 
             case "download":
@@ -254,7 +255,7 @@ public class CommandAdmin implements CommandExecutor {
                     sender.sendMessage("§cUnknown player.");
                     return true;
                 }
-                pdata = AetheriaCore.getInstance().datas.getDatas(cp);
+                pdata = Noteblock.getInstance().datas.getDatas(cp);
                 try{
                     int volume;
                     if (args[2].equals("+")) {
@@ -296,7 +297,7 @@ public class CommandAdmin implements CommandExecutor {
                 if (args[1].equals("@a")) {
                     int i = 0;
                     for (Player p : Bukkit.getOnlinePlayers()) {
-                        AetheriaCore.getInstance().datas.getDatas(p).nextSong();
+                        Noteblock.getInstance().datas.getDatas(p).nextSong();
                         i++;
                     }
                     sender.sendMessage("§aNext song for " + i + "players.");
@@ -306,7 +307,7 @@ public class CommandAdmin implements CommandExecutor {
                         sender.sendMessage("§cUnknown player.");
                         return true;
                     }
-                    AetheriaCore.getInstance().datas.getDatas(cp).nextSong();
+                    Noteblock.getInstance().datas.getDatas(cp).nextSong();
                     sender.sendMessage("§aNext song for " + cp.getName());
                 }
                 break;
@@ -323,7 +324,7 @@ public class CommandAdmin implements CommandExecutor {
     private String play(String[] args){
         Player cp = Bukkit.getPlayer(args[1]);
         if (cp == null) return "§cUnknown player.";
-        if (AetheriaCore.worlds && !AetheriaCore.worldsEnabled.contains(cp.getWorld().getName())) return "§cMusic isn't enabled in the world the player is into.";
+        if (Noteblock.worlds && !Noteblock.worldsEnabled.contains(cp.getWorld().getName())) return "§cMusic isn't enabled in the world the player is into.";
         Song song;
         try{
             int id = Integer.parseInt(args[2]);
@@ -340,7 +341,7 @@ public class CommandAdmin implements CommandExecutor {
             song = AetheriaCore.getSongByFile(fileName);
             if (song == null) return Lang.INVALID_NUMBER;
         }
-        PlayerData pdata = AetheriaCore.getInstance().datas.getDatas(cp);
+        PlayerData pdata = Noteblock.getInstance().datas.getDatas(cp);
         pdata.setPlaylist(Playlists.PLAYLIST, false);
         pdata.playSong(song);
         pdata.songPlayer.adminPlayed = true;
@@ -348,38 +349,38 @@ public class CommandAdmin implements CommandExecutor {
     }
 
     private String stop(Player cp){
-        PlayerData pdata = AetheriaCore.getInstance().datas.getDatas(cp);
+        PlayerData pdata = Noteblock.getInstance().datas.getDatas(cp);
         pdata.stopPlaying(true);
         return Lang.PLAYER_MUSIC_STOPPED + cp.getName();
     }
 
     private void toggle(Player cp){
-        PlayerData pdata = AetheriaCore.getInstance().datas.getDatas(cp);
+        PlayerData pdata = Noteblock.getInstance().datas.getDatas(cp);
         pdata.togglePlaying();
     }
 
     private String shuffle(Player cp){
-        PlayerData pdata = AetheriaCore.getInstance().datas.getDatas(cp);
+        PlayerData pdata = Noteblock.getInstance().datas.getDatas(cp);
         return "§aShuffle: " + pdata.setShuffle(!pdata.isShuffle());
     }
 
     private String join(Player cp){
-        PlayerData pdata = AetheriaCore.getInstance().datas.getDatas(cp);
+        PlayerData pdata = Noteblock.getInstance().datas.getDatas(cp);
         return "§aJoin: " + pdata.setJoinMusic(!pdata.hasJoinMusic());
     }
 
     private String particles(Player cp){
-        PlayerData pdata = AetheriaCore.getInstance().datas.getDatas(cp);
+        PlayerData pdata = Noteblock.getInstance().datas.getDatas(cp);
         return "§aParticles: " + pdata.setParticles(!pdata.hasParticles());
     }
 
     private String loop(Player cp){
-        PlayerData pdata = AetheriaCore.getInstance().datas.getDatas(cp);
+        PlayerData pdata = Noteblock.getInstance().datas.getDatas(cp);
         return "§aLoop: " + pdata.setRepeat(!pdata.isRepeatEnabled());
     }
 
     private String random(Player cp){
-        PlayerData pdata = AetheriaCore.getInstance().datas.getDatas(cp);
+        PlayerData pdata = Noteblock.getInstance().datas.getDatas(cp);
         Song song = pdata.playRandom();
         if (song == null) return "§aShuffle: §cnothing to play";
         return "§aShuffle: " + song.getTitle();

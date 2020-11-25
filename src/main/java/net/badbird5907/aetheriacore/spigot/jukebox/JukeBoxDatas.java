@@ -2,8 +2,8 @@ package net.badbird5907.aetheriacore.spigot.jukebox;
 
 import com.xxmicloxx.NoteBlockAPI.model.Song;
 
-import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Database;
+import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -66,7 +66,7 @@ public class JukeBoxDatas {
         List<Map<String, Object>> list = new ArrayList<>();
         for (PlayerData pdata : players.values()) {
             if (pdata.songPlayer != null) pdata.stopPlaying(true);
-            if (!pdata.isDefault(AetheriaCore.defaultPlayer)) list.add(pdata.serialize());
+            if (!pdata.isDefault(Noteblock.defaultPlayer)) list.add(pdata.serialize());
         }
         return list;
     }
@@ -79,11 +79,11 @@ public class JukeBoxDatas {
                 pdata = PlayerData.create(id);
                 players.put(id, pdata);
             }
-            pdata.playerJoin(p, !AetheriaCore.worlds || AetheriaCore.worldsEnabled.contains(p.getWorld().getName()));
+            pdata.playerJoin(p, !Noteblock.worlds || Noteblock.worldsEnabled.contains(p.getWorld().getName()));
         }else {
             PlayerData pdata = PlayerData.create(id);
             players.put(id, pdata);
-            Bukkit.getScheduler().runTaskAsynchronously(AetheriaCore.getInstance(), () -> {
+            Bukkit.getScheduler().runTaskAsynchronously(Noteblock.getInstance(), () -> {
                 synchronized (getStatement) {
                     try {
                         PreparedStatement statement = getStatement.getStatement();
@@ -97,13 +97,13 @@ public class JukeBoxDatas {
                             pdata.setRepeat(resultSet.getBoolean("repeat"));
                             pdata.setVolume(resultSet.getInt("volume"));
                             String favorites = resultSet.getString("favorites");
-                            if (!favorites.isEmpty()) pdata.setFavorites(Arrays.stream(favorites.split("\\|")).map(AetheriaCore::getSongByInternalName).toArray(Song[]::new));
+                            if (!favorites.isEmpty()) pdata.setFavorites(Arrays.stream(favorites.split("\\|")).map(Noteblock::getSongByInternalName).toArray(Song[]::new));
                         }
                         resultSet.close();
                     }catch (SQLException e) {
                         e.printStackTrace();
                     }
-                    pdata.playerJoin(p, !AetheriaCore.worlds || AetheriaCore.worldsEnabled.contains(p.getWorld().getName()));
+                    pdata.playerJoin(p, !Noteblock.worlds || Noteblock.worldsEnabled.contains(p.getWorld().getName()));
                 }
             });
         }
@@ -115,11 +115,11 @@ public class JukeBoxDatas {
         if (pdata != null) {
             pdata.playerLeave();
             if (db == null) {
-                if (!AetheriaCore.savePlayerDatas) players.remove(id);
+                if (!Noteblock.savePlayerDatas) players.remove(id);
             }else {
-                boolean isDefault = pdata.isDefault(AetheriaCore.defaultPlayer);
+                boolean isDefault = pdata.isDefault(Noteblock.defaultPlayer);
                 if (!pdata.created || !isDefault) {
-                    Bukkit.getScheduler().runTaskAsynchronously(AetheriaCore.getInstance(), () -> {
+                    Bukkit.getScheduler().runTaskAsynchronously(Noteblock.getInstance(), () -> {
                         if (isDefault) {
                             synchronized (deleteStatement) {
                                 try {
@@ -140,7 +140,7 @@ public class JukeBoxDatas {
                                     statement.setBoolean(i++, pdata.hasParticles());
                                     statement.setBoolean(i++, pdata.isRepeatEnabled());
                                     statement.setInt(i++, pdata.getVolume());
-                                    statement.setString(i++, pdata.getFavorites() == null ? "" : pdata.getFavorites().getSongList().stream().map(AetheriaCore::getInternal).collect(Collectors.joining("|")));
+                                    statement.setString(i++, pdata.getFavorites() == null ? "" : pdata.getFavorites().getSongList().stream().map(Noteblock::getInternal).collect(Collectors.joining("|")));
                                     statement.setString(i++, id.toString().replace("-", ""));
                                     statement.executeUpdate();
                                 }catch (SQLException e) {

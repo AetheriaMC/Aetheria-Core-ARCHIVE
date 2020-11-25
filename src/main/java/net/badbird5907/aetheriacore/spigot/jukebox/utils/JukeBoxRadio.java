@@ -4,7 +4,7 @@ import com.xxmicloxx.NoteBlockAPI.event.SongNextEvent;
 import com.xxmicloxx.NoteBlockAPI.model.Playlist;
 import com.xxmicloxx.NoteBlockAPI.model.RepeatMode;
 import com.xxmicloxx.NoteBlockAPI.model.Song;
-import net.badbird5907.aetheriacore.spigot.AetheriaCore;
+import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,7 +20,7 @@ public class JukeBoxRadio implements Listener {
     private List<Player> listening = new ArrayList<>();
 
     public JukeBoxRadio(Playlist songs){
-        Bukkit.getPluginManager().registerEvents(this, AetheriaCore.getInstance());
+        Bukkit.getPluginManager().registerEvents(this, Noteblock.getInstance());
         songPlayer = new CustomSongPlayer(songs);
         songPlayer.playNextSong();
         songPlayer.setRandom(true);
@@ -34,7 +34,7 @@ public class JukeBoxRadio implements Listener {
         if (e.getSongPlayer() == songPlayer) {
             for (UUID id : songPlayer.getPlayerUUIDs()){
                 Player p = Bukkit.getPlayer(id);
-                if (p != null) AetheriaCore.sendMessage(p, Lang.MUSIC_PLAYING + " " + AetheriaCore.getSongName(e.getSongPlayer().getSong()));
+                if (p != null) Noteblock.sendMessage(p, Lang.MUSIC_PLAYING + " " + Noteblock.getSongName(e.getSongPlayer().getSong()));
             }
         }
     }
@@ -46,7 +46,7 @@ public class JukeBoxRadio implements Listener {
     public void join(Player p){
         songPlayer.addPlayer(p);
         listening.add(p);
-        AetheriaCore.sendMessage(p, Lang.MUSIC_PLAYING + " " + AetheriaCore.getSongName(songPlayer.getSong()));
+        Noteblock.sendMessage(p, Lang.MUSIC_PLAYING + " " + Noteblock.getSongName(songPlayer.getSong()));
     }
 
     public void leave(Player p){
@@ -61,7 +61,7 @@ public class JukeBoxRadio implements Listener {
     public void stop(){
         for (UUID id : songPlayer.getPlayerUUIDs()){
             Player p = Bukkit.getPlayer(id);
-            if (p != null) AetheriaCore.sendMessage(p, Lang.MUSIC_STOPPED);
+            if (p != null) Noteblock.sendMessage(p, Lang.MUSIC_STOPPED);
         }
         songPlayer.destroy();
     }

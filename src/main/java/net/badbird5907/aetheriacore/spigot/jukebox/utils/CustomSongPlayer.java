@@ -5,7 +5,7 @@ import com.xxmicloxx.NoteBlockAPI.model.Playlist;
 import com.xxmicloxx.NoteBlockAPI.model.SoundCategory;
 import com.xxmicloxx.NoteBlockAPI.model.playmode.StereoMode;
 import com.xxmicloxx.NoteBlockAPI.songplayer.RadioSongPlayer;
-import net.badbird5907.aetheriacore.spigot.AetheriaCore;
+import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import org.bukkit.entity.Player;
 
 public class CustomSongPlayer extends RadioSongPlayer{
@@ -19,12 +19,12 @@ public class CustomSongPlayer extends RadioSongPlayer{
         try {
             super.setChannelMode(new StereoMode());
         }catch (Exception ex) {
-            AetheriaCore.getInstance().getLogger().warning("It looks like you're using an old version of NoteBlockAPI. Please update as fast as possible to version 1.5.0 or greater.");
+            Noteblock.getInstance().getLogger().warning("It looks like you're using an old version of NoteBlockAPI. Please update as fast as possible to version 1.5.0 or greater.");
         }
     }
 
     public void setParticlesEnabled(boolean particles){
-        if (AetheriaCore.particles) this.particlesEnabled = particles;
+        if (Noteblock.particles) this.particlesEnabled = particles;
     }
 
     @Override
