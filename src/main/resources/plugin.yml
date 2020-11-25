@@ -7,10 +7,13 @@ prefix: AetheriaCore
 authors: [Badbird5907]
 description: AetheriaCore By Badbird5907
 website: badbird5907.net
-softdepend: [PremiumVanish, AetheriaMinigames, AetheriaCheat]
-depend: [DiscordSRV, SuperVanish, AdvancedBan, ProtocolLib, LuckPerms]
+softdepend: [PremiumVanish, AetheriaMinigames, AetheriaCheat, PlaceholderAPI, AetheriaItems]
+depend: [DiscordSRV, SuperVanish, AdvancedBan, ProtocolLib, LuckPerms, NoteBlockAPI]
 loadbefore: [DiscordSRV, AdvancedBan]
 commands:
+  test:
+    usage: /<command>
+
   aetheriacore:
     description: Main AetheriaCore Command
     aliases: [aec]
@@ -21,7 +24,6 @@ commands:
     permission: aetheriacore.clearchat
     usage: /<command> <args>
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
-#
 #  discord:
 #    description: Discord Link
 #    permission: aetheriacore.discord
@@ -194,6 +196,64 @@ commands:
     usage: /<command>
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
     permission: aetheriacore.item
+  broadcast:
+    description: Broadcast a message to the whole server
+    usage: /<command> <message>
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    permission: aetheriacore.broadcast
+  mutechat:
+    description: Mute the chat
+    usage: /<command>
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    permission: aetheriacore.mutechat
+  lockdown:
+    description: Lockdown the server
+    usage: /<command> <low/medium/high> <server/network>
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    permission: aetheriacore.lockdown
+  kickallnonstaff:
+    description: Kick all players without the perm aetheriacore.staff
+    usage: /<command> <reason>
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    permission: aetheriacore.kickall
+
+  shopkeeper:
+    description: a scuffed shopkeeper made by DigitalDragon
+  loop:
+    description: loop a command
+    usage: /<command> <reason>
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    permission: aetheriacore.loop
+
+  music:
+    description: Main command for musics
+    aliases: [jukebox]
+    permission: aetheriacore.music
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+#    usage: /<command>
+  adminmusic:
+    description: Admin command for musics
+    aliases: [amusic]
+    permission: aetheriacore.music.admin
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+  playmusic:
+    description: Admin command for musics
+    permission: aetheriacore.music.admin
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    usage: /<command>
+  ping:
+    description: get player ping
+    permission: aetheriacore.ping
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    usage: /<command>
+  pingwars:
+    description: PING WARS
+    permission: aetheriacore.pingwars
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    usage: /<command>
+  69420:
+    description: 69420
+    usage: /<command>
 #  givegroup:
 #    description: Give Player a Group
 #    usage: /<command>
@@ -235,6 +295,28 @@ permissions:
       aetheriacore.getclientbrand: true
       aetheriacore.nick: true
       aetheriacore.item: true
+      aetheriacore.broadcast: true
+      aetheriacore.mutechat: true
+      aetheriacore.admin: true
+      aetheriacore.kickall: true
+      aetheriacore.staff: true
+      aetheriacore.staff.trial.builder: false
+      aetheriacore.staff.trial.dev: false
+      aetheriacore.staff.trial.lm: false
+      aetheriacore.staff.builder: false
+      aetheriacore.staff.dev: false
+      aetheriacore.staff.lm: false
+      aetheriacore.staff.owner: false
+      aetheriacore.staff.lead.builder: false
+      aetheriacore.staff.lead.lm: false
+      aetheriacore.staff.lead.dev: false
+      aetheriacore.staff.mod: false
+      aetheriacore.staff.helper: false
+      aetheriacore.music.*: true
+      aetheriacore.loop: true
+      aetheriacore.ping: true
+      aetheriacore.pingwars: true
+
   aetheriacore.luckperms.*:
     description: All Aetheria Luckperms Commands
     children:
@@ -264,6 +346,25 @@ permissions:
       aetheriacore.bypass.clearchat: true
       aetheriacore.bypass.freeze: true
       aetheriacore.bypass.itemblacklist: true
+  aetheriacore.music.*:
+    description: Give access to JukeBox whole
+    children:
+      music.command: true
+      music.command.admin: true
+      music.adminItem: true
+      aetheriacore.music.broadcast: true
+  aetheriacore.music.command:
+    description: Give access to /music command
+    default: true
+  aetheriacore.music.command.admin:
+    description: Give access to /adminmusic
+    default: op
+  aetheriacore.music.adminItem:
+    description: Changes item format
+    default: op
+  aetheriacore.music.broadcast:
+    description: Broadcast music
+    default: op
   aetheriacore.cosmetic.teleportparticles:
     description: not in use rn
     default: false
@@ -393,3 +494,50 @@ permissions:
   aetheriacore.item:
     default: op
     description: Give item
+  aetheriacore.broadcast:
+    description: Broadcast a message to the whole server
+    default: op
+  aetheriacore.mutechat:
+    description: Mute the chat
+    default: op
+  aetheriacore.kickall:
+    description: kick all
+    default: op
+  aetheriacore.staff:
+    description: Staff role
+    default: op
+  aetheriacore.staff.trial.buider:
+    description: Trial Builder
+  aetheriacore.staff.trial.lm:
+    description: Trial LM
+  aetheriacore.staff.trial.dev:
+    description: Trial Dev
+  aetheriacore.staff.buider:
+    description: Builder
+  aetheriacore.staff.dev:
+    description: Dev
+  aetheriacore.staff.lm:
+    description: Lore Master
+  aetheriacore.staff.helper:
+    description: Helper
+  aetheriacore.staff.mod:
+    description: Mod
+  aetheriacore.staff.admin:
+    description: Admin
+  aetheriacore.staff.owner:
+    description: Owner
+  aetheriacore.staff.lead.lm:
+    description: Lead LM
+  aetheriacore.staff.lead.dev:
+    description: Lead Dev
+  aetheriacore.staff.lead.builder:
+    description: Lead Builder
+  aetheriacore.loop:
+    description: Loop
+    default: op
+  aetheriacore.ping:
+    default: op
+    description: get ping
+  aetheriacore.pingwars:
+    default: op
+    description: PING WARS
