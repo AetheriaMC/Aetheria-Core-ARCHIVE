@@ -1,9 +1,6 @@
 package net.badbird5907.aetheriacore.spigot.util;
 
-import net.badbird5907.aetheriacore.spigot.commands.utils.item;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
-import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -42,9 +39,9 @@ public class TabComplete implements TabCompleter {
             return l;
         }
         if (cmd.getName().equalsIgnoreCase("item")) {
-            if(args.length == 1){
-                for(String a : itemtypes.allitems){
-                    if(a.toUpperCase().startsWith(args[0].toUpperCase())){
+            if (args.length == 1) {
+                for (String a : itemtypes.allitems) {
+                    if (a.toUpperCase().startsWith(args[0].toUpperCase())) {
                         l.add(a.toString());
                     }
                 }
@@ -55,21 +52,50 @@ public class TabComplete implements TabCompleter {
                 return itemtypes.allitems;
              */
 
-            if(args.length == 1)
+            if (args.length == 1)
                 return itemtypes.allitems;
 
-            if(args.length == 2){
+            if (args.length == 2) {
                 l.add("1");
                 l.add("10");
                 l.add("20");
                 l.add("32");
                 l.add("64");
                 return l;
-            }
-            else
+            } else
                 return l;
 
             //return itemtypes.allitems;
+        }
+        if(cmd.getName().equalsIgnoreCase("adminmusic")){
+            if(args.length == 0){
+                l.add("reload");
+                l.add("player");
+                l.add("play");
+                l.add("stop");
+                l.add("setItem");
+                l.add("download");
+                l.add("shuffle");
+                l.add("volume");
+                l.add("random");
+                l.add("next");
+                return l;
+            }
+            /*
+            if(args.length < 1){
+                if(args[0].equalsIgnoreCase("play")){
+                    if(args[1].isEmpty()){
+                        for(Player p:Bukkit.getOnlinePlayers()){
+                            l.add(p.getDisplayName());
+                            return l;
+                        }
+                    }
+                }
+                if(args[0].equalsIgnoreCase("")){
+
+                }
+            }
+             */
         }
 
         return null;

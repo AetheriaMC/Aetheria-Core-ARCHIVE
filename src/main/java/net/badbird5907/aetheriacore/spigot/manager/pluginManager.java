@@ -26,6 +26,9 @@ public class pluginManager {
     public static void warn(final String string) {
         Bukkit.getLogger().warning(pluginManager.prefix + string        );
     }
+    public static void critical_error(final String string) {
+        Bukkit.getLogger().warning(pluginManager.prefix + string        );
+    }
     public static String ServerType = Bukkit.getServer().getPluginManager().getPlugin("AetheriaCore").getConfig().getString("Server-Type");
 
 }

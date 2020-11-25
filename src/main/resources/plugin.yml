@@ -7,10 +7,13 @@ prefix: AetheriaCore
 authors: [Badbird5907]
 description: AetheriaCore By Badbird5907
 website: badbird5907.net
-softdepend: [PremiumVanish, AetheriaMinigames, AetheriaCheat]
-depend: [DiscordSRV, SuperVanish, AdvancedBan, ProtocolLib, LuckPerms]
+softdepend: [PremiumVanish, AetheriaMinigames, AetheriaCheat, PlaceholderAPI, AetheriaItems]
+depend: [DiscordSRV, SuperVanish, AdvancedBan, ProtocolLib, LuckPerms, NoteBlockAPI]
 loadbefore: [DiscordSRV, AdvancedBan]
 commands:
+  test:
+    usage: /<command>
+
   aetheriacore:
     description: Main AetheriaCore Command
     aliases: [aec]
@@ -21,7 +24,6 @@ commands:
     permission: aetheriacore.clearchat
     usage: /<command> <args>
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
-#
 #  discord:
 #    description: Discord Link
 #    permission: aetheriacore.discord
@@ -215,6 +217,43 @@ commands:
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
     permission: aetheriacore.kickall
 
+  shopkeeper:
+    description: a scuffed shopkeeper made by DigitalDragon
+  loop:
+    description: loop a command
+    usage: /<command> <reason>
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    permission: aetheriacore.loop
+
+  music:
+    description: Main command for musics
+    aliases: [jukebox]
+    permission: aetheriacore.music
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+#    usage: /<command>
+  adminmusic:
+    description: Admin command for musics
+    aliases: [amusic]
+    permission: aetheriacore.music.admin
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+  playmusic:
+    description: Admin command for musics
+    permission: aetheriacore.music.admin
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    usage: /<command>
+  ping:
+    description: get player ping
+    permission: aetheriacore.ping
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    usage: /<command>
+  pingwars:
+    description: PING WARS
+    permission: aetheriacore.pingwars
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    usage: /<command>
+  69420:
+    description: 69420
+    usage: /<command>
 #  givegroup:
 #    description: Give Player a Group
 #    usage: /<command>
@@ -273,6 +312,10 @@ permissions:
       aetheriacore.staff.lead.dev: false
       aetheriacore.staff.mod: false
       aetheriacore.staff.helper: false
+      aetheriacore.music.*: true
+      aetheriacore.loop: true
+      aetheriacore.ping: true
+      aetheriacore.pingwars: true
 
   aetheriacore.luckperms.*:
     description: All Aetheria Luckperms Commands
@@ -303,6 +346,25 @@ permissions:
       aetheriacore.bypass.clearchat: true
       aetheriacore.bypass.freeze: true
       aetheriacore.bypass.itemblacklist: true
+  aetheriacore.music.*:
+    description: Give access to JukeBox whole
+    children:
+      music.command: true
+      music.command.admin: true
+      music.adminItem: true
+      aetheriacore.music.broadcast: true
+  aetheriacore.music.command:
+    description: Give access to /music command
+    default: true
+  aetheriacore.music.command.admin:
+    description: Give access to /adminmusic
+    default: op
+  aetheriacore.music.adminItem:
+    description: Changes item format
+    default: op
+  aetheriacore.music.broadcast:
+    description: Broadcast music
+    default: op
   aetheriacore.cosmetic.teleportparticles:
     description: not in use rn
     default: false
@@ -470,8 +532,12 @@ permissions:
     description: Lead Dev
   aetheriacore.staff.lead.builder:
     description: Lead Builder
-
-
-
-
-
+  aetheriacore.loop:
+    description: Loop
+    default: op
+  aetheriacore.ping:
+    default: op
+    description: get ping
+  aetheriacore.pingwars:
+    default: op
+    description: PING WARS

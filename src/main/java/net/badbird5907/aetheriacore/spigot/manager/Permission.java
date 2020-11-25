@@ -33,6 +33,11 @@ public enum Permission {
     BROADCAST("broadcast"),
     MUTE_CHAT("mutechat"),
     KICK_ALL("kickall"),
+    LOOP("loop"),
+    MUSIC_BROADCAST("music.broadcast"),
+    PING_WARS("pingwars"),
+    PING("ping"),
+    ITEM("item"),
 
     BYPASS_ITEM_BLACKLIST("bypass.itemblacklist")
     ;
