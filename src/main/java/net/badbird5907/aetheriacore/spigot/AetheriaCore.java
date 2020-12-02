@@ -1,108 +1,70 @@
 package net.badbird5907.aetheriacore.spigot;
 
 import com.xxmicloxx.NoteBlockAPI.NoteBlockAPI;
-import com.xxmicloxx.NoteBlockAPI.model.Playlist;
-import com.xxmicloxx.NoteBlockAPI.model.Song;
-import com.xxmicloxx.NoteBlockAPI.utils.NBSDecoder;
-import github.scarsz.discordsrv.DiscordSRV;
-import net.badbird5907.aetheriacore.spigot.commands.aetheriacore;
-import net.badbird5907.aetheriacore.spigot.commands.management.togglePvp;
-import net.badbird5907.aetheriacore.spigot.commands.staff.Lockdown;
-import net.badbird5907.aetheriacore.spigot.commands.staff.QuickChat;
-import net.badbird5907.aetheriacore.spigot.commands.staff.StaffMode;
-import net.badbird5907.aetheriacore.spigot.commands.staff.staffchat;
-import net.badbird5907.aetheriacore.spigot.commands.trolls.*;
-import net.badbird5907.aetheriacore.spigot.commands.utils.*;
+//import github.scarsz.discordsrv.DiscordSRV;
 import net.badbird5907.aetheriacore.spigot.events.*;
-import net.badbird5907.aetheriacore.spigot.jukebox.*;
-import net.badbird5907.aetheriacore.spigot.jukebox.utils.*;
+import net.badbird5907.aetheriacore.spigot.jukebox.utils.Placeholders;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
 import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import net.badbird5907.aetheriacore.spigot.setup.SetupCommands;
 import net.badbird5907.aetheriacore.spigot.setup.SetupEvents;
-import net.badbird5907.aetheriacore.spigot.util.TabComplete;
 import net.badbird5907.aetheriacore.spigot.util.inventories.ClickListener;
 import net.badbird5907.aetheriacore.spigot.util.itemtypes;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.io.*;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.text.Collator;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.function.Consumer;
 
 //import net.badbird5907.aetheriacore.spigot.util.SignGUI;
 
 public final class AetheriaCore extends JavaPlugin implements Listener {
-    private LuckPerms luckPerms;
+    public static AetheriaCore instance;
+    public static List<String> SUPPORTED_VERSIONS = new ArrayList<String>();
+    private static AetheriaCore plugin;
     public File customConfigFile;
     public FileConfiguration customConfig;
-    private static AetheriaCore plugin;
-    private OnDiscordMessageRecieved discordsrvListener = new OnDiscordMessageRecieved(this);
-    public static List<String> SUPPORTED_VERSIONS = new ArrayList<String>();
+    public Consumer<Player> stopVanillaMusic = null;
+    private LuckPerms luckPerms;
+    //private final OnDiscordMessageRecieved discordsrvListener = new OnDiscordMessageRecieved(this);
     //sql
     private Connection connection;
     private String host, database, username, password;
     private int port;
+    private final HashMap<Plugin, Boolean> dependentPlugins = new HashMap<>();
+    //music-end
+
     //protocolib
     //private ProtocolManager protocolManager;
     //SignGUI signGui;
-    public static AetheriaCore instance;
     public AetheriaCore() {
         instance = this;
     }
 
-    //music
-    public static int version = Integer.parseInt(Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3].split("_")[1]);
-    private boolean disable = false;
-
-    private static File playersFile;
-    public static FileConfiguration players;
-    public static File songsFolder;
-
-    public ItemStack jukeboxItem;
-
-    private Database db;
-    public JukeBoxDatas datas;
-
-    private BukkitTask vanillaMusicTask = null;
-    public Consumer<Player> stopVanillaMusic = null;
-    //music-end
-
-    private HashMap<Plugin, Boolean> dependentPlugins = new HashMap<>();
-
     public static AetheriaCore getInstance() {
         return instance;
+    }
+
+    public static Class<?> getVersionedClass(String packageName, String className) throws ClassNotFoundException {
+        return Class.forName(packageName + "." + Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3] + "." + className);
     }
 
     @Override
@@ -111,11 +73,11 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
         if (getConfig().getBoolean("enable")) {
             //signGui = new SignGUI(this);
             boolean mc1164 = Bukkit.getServer().getClass().getPackage().getName().contains("1.16.4");
-            if(!mc1164)
+            if (!mc1164)
                 warn("SERVER IS VERSION: " + Bukkit.getServer().getVersion() + "ONLY " + SUPPORTED_VERSIONS.toString() + " IS SUPPORTED.");
             else
                 log("Server is version " + Bukkit.getServer().getVersion() + " is supported!");
-            DiscordSRV.api.subscribe(discordsrvListener);
+            //DiscordSRV.api.subscribe(discordsrvListener);
             plugin = this;
 
             warn("Startup: Starting...");
@@ -142,7 +104,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
 
             //get config
             log("Startup: Loading Config...");
-            DataFile();
+            Noteblock.DataFile();
             this.setupConfig();
             log("Startup: Config Loaded!!");
 
@@ -158,7 +120,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
             if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) Placeholders.registerPlaceholders();
             getLogger().info("This JukeBox version requires NoteBlockAPI version 1.5.0 or more. Please ensure you have the right version before using JukeBox (you are using NBAPI ver. " + getPlugin(NoteBlockAPI.class).getDescription().getVersion() + ")");
             saveDefaultConfig();
-            waitThenRun();
+            Noteblock.waitThenRun();
             //finished startup
             warn("Startup Finished!");
             log("INFO: do /AEC debug for plugin info");
@@ -173,9 +135,9 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-        if (!disable) disableAll();
+        if (!Noteblock.disable) disableAll();
         getServer().getScheduler().cancelTasks(this);
-        DiscordSRV.api.unsubscribe(discordsrvListener);
+        //DiscordSRV.api.unsubscribe(discordsrvListener);
         log("Killing All Custom Hostile Mobs. (as Colbite wanted)");
         // Iterate through every world on the server
         int removed_entities = 0;
@@ -195,65 +157,6 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
         log("Plugin Disabled.");
         warn("Baiwoo!!!");
     }
-
-
-    private void setupCommands() {
-        getCommand("aetheriacore").setExecutor(new aetheriacore(this));
-        getCommand("aetheriacore").setTabCompleter(new TabComplete());
-        getCommand("invis").setExecutor(new invis());
-        getCommand("clearchat").setExecutor(new clearchat(this));
-        getCommand("rules").setExecutor(new rules());
-        getCommand("performance").setExecutor(new performance());
-        getCommand("itemblacklist").setExecutor(new itemblacklist());
-        //getCommand("queuerestart").setExecutor(new queuerestart(this));
-        //getCommand("levitate").setExecutor(new levitate());
-        getCommand("dupethis").setExecutor(new DupeThis());
-        getCommand("opme").setExecutor(new opme());
-        getCommand("getuuid").setExecutor(new getUUID());
-        getCommand("staffchat").setExecutor(new staffchat());
-        getCommand("staffmode").setExecutor(new StaffMode());
-        getCommand("hush").setExecutor(new hush());
-        getCommand("QuickChat").setExecutor(new QuickChat(this));
-        getCommand("ClearFloorDrops").setExecutor(new ClearFloorDrops());
-        getCommand("SudoOp").setExecutor(new SudoOpPlaceholder());
-        getCommand("freeze").setExecutor(new freezePlayer());
-        getCommand("unfreeze").setExecutor(new Unfreeze());
-        getCommand("nightvision").setExecutor(new NightVision());
-        getCommand("togglePVP").setExecutor(new togglePvp(this));
-        getCommand("CreateNPC").setExecutor(new CreateNPC());
-        getCommand("killall").setExecutor(new KillAll());
-        getCommand("link").setExecutor(new link());
-        getCommand("masssay").setExecutor(new MassSay());
-        getCommand("getclientbrand").setExecutor(new GetClientBrand());
-        getCommand("getviewdistance").setExecutor(new GetViewDist());
-        //getCommand("item").setExecutor(new item());
-        //getCommand("item").setTabCompleter(new TabComplete());
-        getCommand("itemmenu").setExecutor(new itemmenu());
-        getCommand("broadcast").setExecutor(new Broadcast());
-        getCommand("mutechat").setExecutor(new mutechat(this));
-        getCommand("kickallnonstaff").setExecutor(new KickAllNonStaff());
-        getCommand("lockdown").setExecutor(new Lockdown());
-        getCommand("shopkeeper").setExecutor(new GuiMaker());
-        getCommand("loop").setExecutor(new Loop());
-
-        //getCommand("nick").setExecutor(new nick());
-        //getCommand("addgroup").setExecutor(new addGroup(this, this.luckPerms));
-        //getCommand("systeminfo").setExecutor(new SystemInfo(this));
-        SudoOp.SudoOp.add("Badbird5907");
-        SudoOp.SudoOp.add("tuckMCWizard");
-        SudoOp.SudoOp.add("Pylons");
-        SudoOp.SudoOp.add("StrawHat_KoITta");
-        SudoOp.SudoOp.add("CONSOLE");
-        /*
-        if(getConfig().getBoolean("Essentials-Replacement", true)){
-            getCommand("fly").setExecutor(new Fly());
-            getCommand("gma").setExecutor(new gma());
-            getCommand("gmsp").setExecutor(new gmc());
-        }
-         */
-
-    }
-
     private void setupEvents() {
         //unused rn. check the class SetupEvents
         if (getConfig().getBoolean("enablelegacyblacklistitems", true)) {
@@ -350,6 +253,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
             }
         }
     }
+
     String getText(String url) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
         //add headers to the connection, or check the status if desired..
@@ -380,30 +284,10 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
         return this.customConfig;
     }
 
-    public void DataFile() {
-        log("Checking Data File");
-        customConfigFile = new File(getDataFolder(), "data.yml");
-        if (!customConfigFile.exists()) {
-            warn("Data file does not exist. Creating new file");
-            customConfigFile.getParentFile().mkdirs();
-            saveResource("data.yml", false);
-        }
-
-        customConfig = new YamlConfiguration();
-        try {
-            customConfig.load(customConfigFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-        getDataFile().addDefault("pvp", true);
-        getDataFile().addDefault("mutechatstatis", false);
-
-    }
-
-    public void SetupDatabase(){
+    public void SetupDatabase() {
         if (plugin.getConfig().getBoolean("enableDatabase", true)) {
-            log("Setting Up Database");
-            if(plugin.getConfig().getBoolean("Custom-DB-port"))
+            pluginManager.log("Setting Up Database");
+            if (plugin.getConfig().getBoolean("Custom-DB-port"))
                 port = plugin.getConfig().getInt("Database-port");
             else
                 port = 3306;
@@ -412,7 +296,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
             database = plugin.getConfig().getString("Database-Name");
             username = plugin.getConfig().getString("Database-Username");
             password = plugin.getConfig().getString("Database-Password");
-            try{
+            try {
                 openConnection();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -424,6 +308,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
             warn("Database is not enabled. Plugin may not work as expected");
         }
     }
+
     public void openConnection() throws SQLException, ClassNotFoundException {
         if (connection != null && !connection.isClosed()) {
             return;
@@ -434,309 +319,47 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
                 return;
             }
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://" + this.host+ ":" + this.port + "/" + this.database, this.username, this.password);
+            connection = DriverManager.getConnection("jdbc:mysql://" + this.host + ":" + this.port + "/" + this.database, this.username, this.password);
         }
     }
-    private void doStuff(){
+
+    private void doStuff() {
         itemtypes.addToAllItems();
         for (Material material : Material.values()) {
-            itemtypes.allitems.add(material.name().toString());
-            if(material.isBlock())
-                itemtypes.blocks.add(material.name().toString());
-            if(material.isItem())
-                itemtypes.items.add(material.name().toString());
-            if(material.toString().contains("SPAWN_EGG"))
+            itemtypes.allitems.add(material.name());
+            if (material.isBlock())
+                itemtypes.blocks.add(material.name());
+            if (material.isItem())
+                itemtypes.items.add(material.name());
+            if (material.toString().contains("SPAWN_EGG"))
                 itemtypes.blacklisted_items.add(material);
         }
-        for (Plugin pl : getServer().getPluginManager().getPlugins()){
-            if (pl.getDescription().getDepend().contains("AetheriaCore") || pl.getDescription().getSoftDepend().contains("AetheriaCore")){
+        for (Plugin pl : getServer().getPluginManager().getPlugins()) {
+            if (pl.getDescription().getDepend().contains("AetheriaCore") || pl.getDescription().getSoftDepend().contains("AetheriaCore")) {
                 dependentPlugins.put(pl, false);
             }
         }
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "aetheriacore:messaging");
     }
-    public void waitThenRun(){
-        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-            public void run() {
-                initAll();
-            }
-        }, 20L); // 600L (ticks) is equal to 30 seconds (20 ticks = 1 second)
-        return;
-    }
-    public void disableAll(){
-        if (Noteblock.radio != null){
+
+    public void disableAll() {
+        if (Noteblock.radio != null) {
             Noteblock.radio.stop();
             Noteblock.radio = null;
         }
-        if (datas != null) {
-            if (Noteblock.savePlayerDatas && db == null) players.set("players", datas.getSerializedList());
-            players.set("item", (jukeboxItem == null) ? null : jukeboxItem.serialize());
+        if (Noteblock.datas != null) {
+            if (Noteblock.savePlayerDatas && Noteblock.db == null)
+                Noteblock.players.set("players", Noteblock.datas.getSerializedList());
+            Noteblock.players.set("item", (Noteblock.jukeboxItem == null) ? null : Noteblock.jukeboxItem.serialize());
             try {
-                players.save(playersFile);
-            }catch (IOException e) {
+                Noteblock.players.save(Noteblock.playersFile);
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        if (vanillaMusicTask != null) vanillaMusicTask.cancel();
+        if (Noteblock.vanillaMusicTask != null) Noteblock.vanillaMusicTask.cancel();
         HandlerList.unregisterAll((JavaPlugin) this);
     }
-    public void initAll(){
-        reloadConfig();
 
-        loadLang();
-        if (disable) return;
-
-        FileConfiguration config = getConfig();
-        Noteblock.jukeboxClick = config.getBoolean("jukeboxClick");
-        Noteblock.sendMessages = config.getBoolean("sendMessages");
-        Noteblock.async = config.getBoolean("asyncLoading");
-        Noteblock.autoJoin = config.getBoolean("forceJoinMusic");
-        Noteblock.defaultPlayer = PlayerData.deserialize(config.getConfigurationSection("defaultPlayerOptions").getValues(false), null);
-        Noteblock.particles = config.getBoolean("noteParticles") && version >= 9;
-        Noteblock.actionBar = config.getBoolean("actionBar") && version >= 9;
-        Noteblock.radioEnabled = config.getBoolean("radio");
-        Noteblock.radioOnJoin = Noteblock.radioEnabled && config.getBoolean("radioOnJoin");
-        Noteblock.autoReload = config.getBoolean("reloadOnJoin");
-        Noteblock.preventVanillaMusic = config.getBoolean("preventVanillaMusic") && version >= 13;
-        Noteblock.songItem = Material.matchMaterial(config.getString("songItem"));
-        Noteblock.itemFormat = config.getString("itemFormat");
-        Noteblock.itemFormatWithoutAuthor = config.getString("itemFormatWithoutAuthor");
-        Noteblock.itemFormatAdmin = config.getString("itemFormatAdmin");
-        Noteblock.itemFormatAdminWithoutAuthor = config.getString("itemFormatAdminWithoutAuthor");
-        Noteblock.songFormat = config.getString("songFormat");
-        Noteblock.songFormatWithoutAuthor = config.getString("songFormatWithoutAuthor");
-        Noteblock.savePlayerDatas = config.getBoolean("savePlayerDatas");
-
-        Noteblock.worldsEnabled = config.getStringList("enabledWorlds");
-        Noteblock.worlds = !Noteblock.worldsEnabled.isEmpty();
-
-        ConfigurationSection dbConfig = config.getConfigurationSection("database");
-        /*
-        if (dbConfig.getBoolean("enabled")) {
-            db = new Database(dbConfig);
-            if (db.openConnection()) {
-                getLogger().info("Connected to database.");
-            }else {
-                getLogger().info("Failed to connect to database. Now using YAML system.");
-                db = null;
-            }
-        }
-         */
-        db = null;
-
-        if (Noteblock.async){
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    loadDatas();
-                    finishEnabling();
-                }
-            }.runTaskAsynchronously(this);
-        }else{
-            loadDatas();
-            finishEnabling();
-        }
-
-        if (Noteblock.preventVanillaMusic) {
-            try {
-                String nms = "net.minecraft.server";
-                String cb = "org.bukkit.craftbukkit";
-                Method getHandle = getVersionedClass(cb, "entity.CraftPlayer").getDeclaredMethod("getHandle");
-                Field playerConnection = getVersionedClass(nms, "EntityPlayer").getDeclaredField("playerConnection");
-                Method sendPacket = getVersionedClass(nms, "PlayerConnection").getDeclaredMethod("sendPacket", getVersionedClass(nms, "Packet"));
-                Class<?> soundCategory = getVersionedClass(nms, "SoundCategory");
-                Object packet = getVersionedClass(nms, "PacketPlayOutStopSound").getDeclaredConstructor(getVersionedClass(nms, "MinecraftKey"), soundCategory).newInstance(null, soundCategory.getDeclaredField("MUSIC").get(null));
-
-                stopVanillaMusic = player -> {
-                    try {
-                        sendPacket.invoke(playerConnection.get(getHandle.invoke(player)), packet);
-                    }catch (ReflectiveOperationException e1) {
-                        e1.printStackTrace();
-                    }
-                };
-
-                vanillaMusicTask = Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
-                    for (PlayerData pdata : datas.getDatas()) {
-                        if (pdata.isPlaying() && pdata.getPlayer() != null) stopVanillaMusic.accept(pdata.getPlayer());
-                    }
-                }, 20L, 100l); // every 5 seconds
-            }catch (ReflectiveOperationException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
-    private Class<?> getVersionedClass(String packageName, String className) throws ClassNotFoundException {
-        return Class.forName(packageName + "." + Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3] + "." + className);
-    }
-
-    private void finishEnabling(){
-
-        getCommand("music").setExecutor(new CommandMusic());
-        getCommand("adminmusic").setExecutor(new CommandAdmin());
-        getCommand("adminmusic").setTabCompleter(new TabComplete());
-        getCommand("playmusic").setExecutor(new PlayMusic());
-        getServer().getPluginManager().registerEvents(this, this);
-
-        Noteblock.radioEnabled = Noteblock.radioEnabled && !Noteblock.songs.isEmpty();
-        if (Noteblock.radioEnabled){
-            Noteblock.radio = new JukeBoxRadio(Noteblock.playlist);
-        }else Noteblock.radioOnJoin = false;
-
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            datas.joins(p);
-        }
-    }
-
-    private void loadDatas(){
-        /* --------------------------------------------- SONGS ------- */
-        Noteblock.songs = new LinkedList<>();
-        Noteblock.fileNames = new HashMap<>();
-        Noteblock.internalNames = new HashMap<>();
-        songsFolder = new File(getDataFolder(), "songs");
-        if (!songsFolder.exists()) songsFolder.mkdirs();
-        for (File file : songsFolder.listFiles()){
-            if (file.getName().substring(file.getName().lastIndexOf(".") + 1).equals("nbs")){
-                Song song = NBSDecoder.parse(file);
-                if (song == null) continue;
-                String n = Noteblock.getInternal(song);
-                if (Noteblock.internalNames.containsKey(n)) {
-                    getLogger().warning("Song \"" + n + "\" is duplicated. Please delete one from the songs directory. File name: " + file.getName());
-                    continue;
-                }
-                Noteblock.fileNames.put(file.getName(), song);
-                Noteblock.internalNames.put(n, song);
-            }
-        }
-        getLogger().info(Noteblock.internalNames.size() + " songs loadeds. Sorting by name... ");
-        List<String> names = new ArrayList<>(Noteblock.internalNames.keySet());
-        Collections.sort(names, Collator.getInstance());
-        for (String str : names){
-            Noteblock.songs.add(Noteblock.internalNames.get(str));
-        }
-
-        setMaxPage();
-        getLogger().info("Songs sorted ! " + Noteblock.songs.size() + " songs. Number of pages : " + Noteblock.maxPage);
-        if (!Noteblock.songs.isEmpty()) Noteblock.playlist = new Playlist(Noteblock.songs.toArray(new Song[0]));
-
-        /* --------------------------------------------- PLAYERS ------- */
-        try {
-            playersFile = new File(getDataFolder(), "datas.yml");
-            playersFile.createNewFile();
-            players = YamlConfiguration.loadConfiguration(playersFile);
-            if (players.get("item") != null) jukeboxItem = ItemStack.deserialize(players.getConfigurationSection("item").getValues(false));
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (db == null) {
-            datas = new JukeBoxDatas(players.getMapList("players"), Noteblock.internalNames);
-        }else {
-            try {
-                datas = new JukeBoxDatas(db);
-            }catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    void setMaxPage(){
-        Noteblock.maxPage = (int) StrictMath.ceil(Noteblock.songs.size() * 1.0 / 45);
-    }
-
-
-    private YamlConfiguration loadLang() {
-        String s = "en.yml";
-        if (getConfig().getString("lang") != null) s = getConfig().getString("lang") + ".yml";
-        File lang = new File(getDataFolder(), s);
-        if (!lang.exists()) {
-            try {
-                getDataFolder().mkdir();
-                lang.createNewFile();
-                InputStream defConfigStream = this.getResource(s);
-                if (defConfigStream != null) {
-                    YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(defConfigStream, StandardCharsets.UTF_8));
-                    defConfig.save(lang);
-                    Lang.loadFromConfig(defConfig);
-                    getLogger().info("Created language file " + s);
-                    return defConfig;
-                }
-            } catch(IOException e) {
-                e.printStackTrace();
-                getLogger().severe("Couldn't create language file.");
-                getLogger().severe("This is a fatal error. Now disabling.");
-                disable = true;
-                this.setEnabled(false);
-                return null;
-            }
-        }
-        YamlConfiguration conf = YamlConfiguration.loadConfiguration(lang);
-        try {
-            Lang.saveFile(conf, lang);
-        } catch(IOException | IllegalArgumentException | IllegalAccessException e) {
-            getLogger().warning("Failed to save lang.yml.");
-            getLogger().warning("Report this stack trace to SkytAsul on SpigotMC.");
-            e.printStackTrace();
-        }
-        Lang.loadFromConfig(conf);
-        getLogger().info("Loaded language file " + s);
-        return conf;
-    }
-
-
-    @EventHandler
-    public void onJoin(PlayerJoinEvent e){
-        datas.joins(e.getPlayer());
-    }
-
-    @EventHandler
-    public void onQuit(PlayerQuitEvent e){
-        datas.quits(e.getPlayer());
-    }
-
-    @EventHandler
-    public void onInteract(PlayerInteractEvent e){
-        if (e.getItem() == null) return;
-        if (jukeboxItem != null && (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)){
-            if (e.getItem().equals(jukeboxItem)){
-                CommandMusic.open(e.getPlayer());
-                e.setCancelled(true);
-                return;
-            }
-        }
-        if (e.getAction() == Action.RIGHT_CLICK_BLOCK && Noteblock.jukeboxClick){
-            if (e.getClickedBlock().getType() == Material.JUKEBOX){
-                String disc = e.getItem().getType().name();
-                if (version < 13 ? JukeBoxInventory.discs8.contains(disc) : JukeBoxInventory.discs13.contains(disc)) {
-                    CommandMusic.open(e.getPlayer());
-                    e.setCancelled(true);
-                    return;
-                }
-            }
-        }
-    }
-
-    @EventHandler
-    public void onTeleport(PlayerTeleportEvent e){
-        if (!Noteblock.worlds) return;
-        if (e.getFrom().getWorld() == e.getTo().getWorld()) return;
-        if (Noteblock.worldsEnabled.contains(e.getTo().getWorld().getName())) return;
-        PlayerData pdata = datas.getDatas(e.getPlayer());
-        if (pdata == null) return;
-        if (pdata.songPlayer != null) pdata.stopPlaying(true);
-        if (pdata.getPlaylistType() == Playlists.RADIO) pdata.setPlaylist(Playlists.PLAYLIST, false);
-    }
-
-    public static List<Song> getSongs(){
-        return Noteblock.songs;
-    }
-
-    public static Song getSongByFile(String fileName){
-        if(fileName.contains(".nbs")){
-            return Noteblock.fileNames.get(fileName);
-        }
-        if(fileName.contains(".NBS")){
-            return Noteblock.fileNames.get(fileName);
-        }
-        return Noteblock.fileNames.get(fileName + ".nbs");
-    }
 
 }

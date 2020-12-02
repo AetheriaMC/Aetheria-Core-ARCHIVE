@@ -45,7 +45,7 @@ public class Lockdown implements CommandExecutor {
         if(severity.equalsIgnoreCase("medium"))
             MedLockdown(sender, server_global, reason);
         if(severity.equalsIgnoreCase("high"))
-            HighLockdown(sender, server_global, reason);
+            sender.sendMessage("This command is a bungeecord command. Please make sure that bungeecord AetheriaCore is installed and enabled. You also must be a player online to have this work.");
     }
     private static void LowLockdown(Player sender, String server_global, String reason){
         String kickmessage = kickmsg.replace("%reason%", reason);
@@ -66,15 +66,5 @@ public class Lockdown implements CommandExecutor {
         WhoCalled = sender.getUniqueId();
         KickAllNonStaff.KickAll(kickmessage);
         //IsLockdown.put("MEDIUM", server_global.toUpperCase());
-    }
-    private static void HighLockdown(Player sender, String server_global, String reason){
-        String kickmessage = kickmsg.replace("%reason%", reason);
-        IsLockdown = true;
-        LockdownSeverity = "HIGH";
-        Reason = reason;
-        Servers = server_global;
-        WhoCalled = sender.getUniqueId();
-        KickAllNonStaff.KickAll(kickmessage);
-        //IsLockdown.put("HIGH", server_global.toUpperCase());
     }
 }

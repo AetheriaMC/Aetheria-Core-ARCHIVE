@@ -214,7 +214,7 @@ public class PlayerData implements Listener {
     }
 
     public Song playRandom() {
-        if (AetheriaCore.getSongs().isEmpty()) return null;
+        if (Noteblock.getSongs().isEmpty()) return null;
         setPlaylist(Playlists.PLAYLIST, false);
         Song song = Noteblock.randomSong();
         playSong(song);

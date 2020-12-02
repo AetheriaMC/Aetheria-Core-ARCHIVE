@@ -1,7 +1,7 @@
 package net.badbird5907.aetheriacore.spigot.jukebox.utils;
 
-import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
+import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -70,7 +70,7 @@ public class Lang{
             try {
                 String str = cfg.getString(key);
                 str = net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', str);
-                if (AetheriaCore.version >= 16) str = translateHexColorCodes("(&|§)#", "", str);
+                if (Noteblock.version >= 16) str = translateHexColorCodes("(&|§)#", "", str);
                 Lang.class.getDeclaredField(key).set(key, str);
             }catch (Exception e) {
                 pluginManager.warn("Error when loading language value \"" + key + "\".");

@@ -1,11 +1,11 @@
 package net.badbird5907.aetheriacore.spigot.commands.utils;
 
 import com.xxmicloxx.NoteBlockAPI.model.Song;
-import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.jukebox.PlayerData;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Lang;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Playlists;
 import net.badbird5907.aetheriacore.spigot.manager.DebugLogger;
+import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -72,7 +72,7 @@ public class PlayMusic implements CommandExecutor {
             int id = Integer.parseInt(id1);
             try{
                 DebugLogger.DebugLog("Attempting to get " + id1 + " By ID.");
-                song = AetheriaCore.getSongs().get(id);
+                song = Noteblock.getSongs().get(id);
             }catch (IndexOutOfBoundsException ex){
                 DebugLogger.DebugLog(id1 + " Was not found.");
                 return "§cError on §l" + id + " §r§c(inexistant)";
@@ -80,14 +80,14 @@ public class PlayMusic implements CommandExecutor {
         }catch (NumberFormatException ex){
             //get by file name
             DebugLogger.DebugLog("Attempting to get " + id1 + " By file.");
-            song = AetheriaCore.getSongByFile(id1);
+            song = Noteblock.getSongByFile(id1);
             if (song == null) {
                 DebugLogger.DebugLog(id1 + " Was not found.");
                 return Lang.INVALID_NUMBER;
             }
         }
         DebugLogger.DebugLog("a1");
-        PlayerData pdata = AetheriaCore.getInstance().datas.getDatas(cp);
+        PlayerData pdata = Noteblock.datas.getDatas(cp);
         DebugLogger.DebugLog("a2");
         pdata.setPlaylist(Playlists.PLAYLIST, false);
         DebugLogger.DebugLog("a3");

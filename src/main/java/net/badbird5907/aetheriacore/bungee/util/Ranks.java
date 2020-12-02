@@ -15,7 +15,7 @@ public enum Ranks {
     TRIAL_BUILDER(ChatColor.YELLOW + "" + ChatColor.BOLD + "[Trial-Builder]" + ChatColor.RESET + "" + ChatColor.YELLOW + " "),
     TRIAL_LM(ChatColor.YELLOW + "" + ChatColor.BOLD + "[Trial-LoreMaster]" + ChatColor.RESET + "" + ChatColor.YELLOW + " ");
     //ChatColor.translateAlternateColorCodes('&', rank);
-    private String rank;
+    public String rank;
     Ranks(String rank) {
         this.rank = rank;
     }

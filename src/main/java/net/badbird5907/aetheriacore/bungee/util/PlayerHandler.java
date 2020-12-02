@@ -27,4 +27,28 @@ public class PlayerHandler {
         else
             return player.getName();
     }
+    public static String RankName(ProxiedPlayer player){
+        if(player.hasPermission(Permission.STAFF_OWNER.node))
+            return "OWNER";
+        if(player.hasPermission(Permission.STAFF_ADMIN.node))
+            return "ADMIN";
+        if(player.hasPermission(Permission.STAFF_MOD.node))
+            return "MOD";
+        if(player.hasPermission(Permission.STAFF_HELPER.node))
+            return "HELPER";
+        if(player.hasPermission(Permission.STAFF_DEV.node))
+            return "DEV";
+        if(player.hasPermission(Permission.STAFF_BUILDER.node))
+            return "BUILDER";
+        if(player.hasPermission(Permission.STAFF_LM.node))
+            return "LOREMASTER";
+        if(player.hasPermission(Permission.STAFF_TRIAL_DEV.node))
+            return "TRIAL_DEV";
+        if(player.hasPermission(Permission.STAFF_TRIAL_BUILDER.node))
+            return "TRIAL_BUILDER";
+        if(player.hasPermission(Permission.STAFF_TRIAL_LM.node))
+            return "TRIAL_LOREMASTER";
+        else
+            return "No rank";
+    }
 }

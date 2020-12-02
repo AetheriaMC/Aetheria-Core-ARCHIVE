@@ -46,7 +46,7 @@ public class Placeholders extends PlaceholderExpansion {
 
     @Override
     public String onRequest(OfflinePlayer p, String params) {
-        PlayerData pdata = AetheriaCore.getInstance().datas.getDatas(p.getUniqueId());
+        PlayerData pdata = Noteblock.datas.getDatas(p.getUniqueId());
         if (pdata == null) return "§c§lunknown player data";
         if (params.startsWith("playeroptions_")) {
             switch (params.substring(params.indexOf("_") + 1)) {

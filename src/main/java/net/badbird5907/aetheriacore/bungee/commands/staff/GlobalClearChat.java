@@ -1,6 +1,6 @@
 package net.badbird5907.aetheriacore.bungee.commands.staff;
 
-import net.badbird5907.aetheriacore.bungee.AetheriaCoreBungee;
+import net.badbird5907.aetheriacore.bungee.util.Messages;
 import net.badbird5907.aetheriacore.bungee.util.Permission;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
@@ -17,7 +17,7 @@ public class GlobalClearChat extends Command {
 
     public void execute(CommandSender sender, String[] args) {
         if (sender instanceof ProxiedPlayer) {
-            Configuration config = AetheriaCoreBungee.getInstance().getConfig("bungeeconfig");
+            Configuration config = Messages.getConfig("bungeemessages");
             ProxiedPlayer p = (ProxiedPlayer)sender;
             if (args.length == 0)
                 if (p.hasPermission(Permission.GLOBAL_CLEAR_CHAT.node)) {

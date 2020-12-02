@@ -37,7 +37,10 @@ public enum Permission {
     SEE_STAFF_ONLINE("staff.online"),
     GLOBAL_CLEAR_CHAT("global.clearchat"),
     CLEAR_CHAT_BYPASS("clearchat.bypass`"),
-    GLOBAL_BROADCAST("global.broadcast")
+    GLOBAL_BROADCAST("global.broadcast"),
+    GLOBAL_LOCKDOWN("global.lockdown"),
+    SEE_SERVER_PLUGINS("view.plugis"),
+    SEE_DEFAULT_HELP("view.defaulthelp")
 
     ;
     public final String node;

@@ -32,15 +32,15 @@ public class JukeBoxInventory implements Listener {
 
     private static ItemStack stopItem = item(Material.BARRIER, Lang.STOP);
     private static ItemStack menuItem = item(Material.TRAPPED_CHEST, Lang.MENU_ITEM);
-    private static ItemStack toggleItem = item(AetheriaCore.version < 9 ? Material.STONE_BUTTON : Material.valueOf("END_CRYSTAL"), Lang.TOGGLE_PLAYING);
-    private static ItemStack randomItem = item(Material.valueOf(AetheriaCore.version > 12 ? "FIRE_CHARGE" : "FIREBALL"), Lang.RANDOM_MUSIC);
+    private static ItemStack toggleItem = item(Noteblock.version < 9 ? Material.STONE_BUTTON : Material.valueOf("END_CRYSTAL"), Lang.TOGGLE_PLAYING);
+    private static ItemStack randomItem = item(Material.valueOf(Noteblock.version > 12 ? "FIRE_CHARGE" : "FIREBALL"), Lang.RANDOM_MUSIC);
     private static ItemStack playlistMenuItem = item(Material.CHEST, Lang.PLAYLIST_ITEM);
-    private static ItemStack optionsMenuItem = item(Material.valueOf(AetheriaCore.version > 12 ? "COMPARATOR" : "REDSTONE_COMPARATOR"), Lang.OPTIONS_ITEM);
+    private static ItemStack optionsMenuItem = item(Material.valueOf(Noteblock.version > 12 ? "COMPARATOR" : "REDSTONE_COMPARATOR"), Lang.OPTIONS_ITEM);
     private static ItemStack nextSongItem = item(Material.FEATHER, Lang.NEXT_ITEM);
     private static ItemStack clearItem = item(Material.LAVA_BUCKET, Lang.CLEAR_PLAYLIST);
-    private static Material particles = AetheriaCore.version < 13 ? Material.valueOf("FIREWORK") : Material.valueOf("FIREWORK_ROCKET");
-    private static Material sign = AetheriaCore.version < 14 ? Material.valueOf("SIGN") : Material.valueOf("OAK_SIGN");
-    private static Material lead = AetheriaCore.version < 13 ? Material.valueOf("LEASH") : Material.valueOf("LEAD");
+    private static Material particles = Noteblock.version < 13 ? Material.valueOf("FIREWORK") : Material.valueOf("FIREWORK_ROCKET");
+    private static Material sign = Noteblock.version < 14 ? Material.valueOf("SIGN") : Material.valueOf("OAK_SIGN");
+    private static Material lead = Noteblock.version < 13 ? Material.valueOf("LEASH") : Material.valueOf("LEAD");
     private static List<String> playlistLore = Arrays.asList("", Lang.IN_PLAYLIST);
 
     private Material[] discs;
@@ -60,9 +60,9 @@ public class JukeBoxInventory implements Listener {
 
         Random ran = new Random();
         Material defaultMat = Noteblock.songItem;
-        discs = new Material[AetheriaCore.getSongs().size()];
+        discs = new Material[Noteblock.getSongs().size()];
         for (int i = 0; i < discs.length; i++){
-            discs[i] = defaultMat != null ? defaultMat : Material.valueOf(AetheriaCore.version > 12 ? discs13.get(ran.nextInt(12)) : discs8.get(ran.nextInt(12)));
+            discs[i] = defaultMat != null ? defaultMat : Material.valueOf(Noteblock.version > 12 ? discs13.get(ran.nextInt(12)) : discs8.get(ran.nextInt(12)));
         }
 
         this.inv = Bukkit.createInventory(null, 54, Lang.INV_NAME);
@@ -84,14 +84,14 @@ public class JukeBoxInventory implements Listener {
 
         for (int i = 0; i < 45; i++) inv.setItem(i, null);
         if (pdata.getPlaylistType() == Playlists.RADIO) return;
-        if (AetheriaCore.getSongs().isEmpty()) return;
+        if (Noteblock.getSongs().isEmpty()) return;
         int i = 0;
         for (; i < 45; i++){
-            Song s = AetheriaCore.getSongs().get((page*45) + i);
+            Song s = Noteblock.getSongs().get((page*45) + i);
             ItemStack is = getSongItem(s, p);
             if (pdata.isInPlaylist(s)) loreAdd(is, playlistLore);
             inv.setItem(i, is);
-            if (AetheriaCore.getSongs().size() - 1 == (page*45) + i) break;
+            if (Noteblock.getSongs().size() - 1 == (page*45) + i) break;
         }
     }
 
@@ -103,7 +103,7 @@ public class JukeBoxInventory implements Listener {
             case DEFAULT:
                 inv.setItem(45, stopItem);
                 if (pdata.isListening()) inv.setItem(46, toggleItem);
-                if (!AetheriaCore.getSongs().isEmpty()) inv.setItem(47, randomItem);
+                if (!Noteblock.getSongs().isEmpty()) inv.setItem(47, randomItem);
                 inv.setItem(49, playlistMenuItem);
                 inv.setItem(50, optionsMenuItem);
                 break;
@@ -144,7 +144,7 @@ public class JukeBoxInventory implements Listener {
 
         Material type = e.getCurrentItem().getType();
         if (Noteblock.songItem == null ? type.name().contains("RECORD") || type.name().contains("DISC") : type == Noteblock.songItem) {
-            Song s = AetheriaCore.getSongs().get(page * 45 + slot);
+            Song s = Noteblock.getSongs().get(page * 45 + slot);
             if (e.getClick() == ClickType.MIDDLE){
                 if (pdata.isInPlaylist(s)) {
                     pdata.removeSong(s);
@@ -261,7 +261,7 @@ public class JukeBoxInventory implements Listener {
     }
 
     public ItemStack getSongItem(Song s, Player p) {
-        ItemStack is = item(discs[AetheriaCore.getSongs().indexOf(s)], Noteblock.getItemName(s, p));
+        ItemStack is = item(discs[Noteblock.getSongs().indexOf(s)], Noteblock.getItemName(s, p));
         if (!StringUtils.isEmpty(s.getDescription())) loreAdd(is, splitOnSpace(s.getDescription(), 30));
         return is;
     }
@@ -306,7 +306,7 @@ public class JukeBoxInventory implements Listener {
 
     public void songItem(int id, Player p) {
         if (!(id > page*45 && id < (page+1)*45) || pdata.getPlaylistType() == Playlists.RADIO) return;
-        Song song = AetheriaCore.getSongs().get(id);
+        Song song = Noteblock.getSongs().get(id);
         ItemStack is = getSongItem(song, p);
         if (pdata.isInPlaylist(song)) loreAdd(is, playlistLore);
         inv.setItem(id - page*45, is);
@@ -351,7 +351,7 @@ public class JukeBoxInventory implements Listener {
         }
         propertyMap.put("textures", new Property("textures", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTQ4YThjNTU4OTFkZWM3Njc2NDQ0OWY1N2JhNjc3YmUzZWU4OGEwNjkyMWNhOTNiNmNjN2M5NjExYTdhZiJ9fX0="));
         ItemStack item;
-        if (AetheriaCore.version < 13){
+        if (Noteblock.version < 13){
             item = new ItemStack(Material.valueOf("SKULL_ITEM"), 1, (short) 3);
         }else item = new ItemStack(Material.valueOf("PLAYER_HEAD"));
         ItemMeta headMeta = item.getItemMeta();

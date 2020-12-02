@@ -36,22 +36,17 @@ public class aetheriacore implements CommandExecutor {
                 player.sendMessage(ChatColor.WHITE + "The Aetheria Server's Core and API");
                 player.sendMessage(ChatColor.WHITE + "use /aec help for a list of commands.");
                 player.sendMessage(ChatColor.WHITE + "Connected Supported Plugins: ");
-                //all enabled
-                if (Bukkit.getServer().getPluginManager().isPluginEnabled("AethrtiaAntiCheat") && Bukkit.getServer().getPluginManager().isPluginEnabled("AethrtiaAntiCheat")) {
+                //Only Anti Cheat Enabled
+                if (Bukkit.getServer().getPluginManager().isPluginEnabled("AetheriaAntiCheat"))
                     player.sendMessage(ChatColor.GREEN + "Aetheria-Anti-Cheat");
+                //Only Minigames Enabled
+                if (Bukkit.getServer().getPluginManager().isPluginEnabled("AetheriaMinigames"))
                     player.sendMessage(ChatColor.GREEN + "Aetheria-Minigames");
-                } else {
-                    //Only Anti Cheat Enabled
-                    if (Bukkit.getServer().getPluginManager().isPluginEnabled("AetheriaAntiCheat"))
-                        player.sendMessage(ChatColor.GREEN + "Aetheria-Anti-Cheat");
-                    //Only Minigames Enabled
-                    if (Bukkit.getServer().getPluginManager().isPluginEnabled("AetheriaMinigames"))
-                        player.sendMessage(ChatColor.GREEN + "Aetheria-Minigames");
-                    if (!Bukkit.getServer().getPluginManager().isPluginEnabled("AethrtiaAntiCheat") && Bukkit.getServer().getPluginManager().isPluginEnabled("AethrtiaAntiCheat")) {
-                        player.sendMessage(ChatColor.RED + "None");
-                        player.sendMessage(ChatColor.DARK_GRAY + "------------------------------------");
-                        return true;
-                    }
+                if (!Bukkit.getServer().getPluginManager().isPluginEnabled("AetheriaAntiCheat") && !Bukkit.getServer().getPluginManager().isPluginEnabled("AetheriaAntiCheat")) {
+                    player.sendMessage(ChatColor.RED + "None");
+                    player.sendMessage(ChatColor.DARK_GRAY + "------------------------------------");
+                    return true;
+                //all enabled
                 }
                 if (args.length == 1) {
                     if (args[0].equalsIgnoreCase("settings")) {
@@ -151,13 +146,9 @@ public class aetheriacore implements CommandExecutor {
                     }
 
                 } else {
-                    player.sendMessage(ChatColor.RED + "Error: Invalid Arguments. Please use /aec help" + ChatColor.DARK_GRAY + " " + ChatColor.ITALIC + "INVALID_ARGUMENTS");
                     return true;
                 }
-
             }
-
-
             return true;
         }
         return true;

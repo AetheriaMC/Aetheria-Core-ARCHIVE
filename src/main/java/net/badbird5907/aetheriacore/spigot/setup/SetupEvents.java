@@ -27,5 +27,6 @@ public class SetupEvents {
         Bukkit.getServer().getPluginManager().registerEvents(new ClickListener(), AetheriaCore.instance);
         Bukkit.getServer().getPluginManager().registerEvents(new GuiListener(), AetheriaCore.instance);
         Bukkit.getServer().getPluginManager().registerEvents(new Player_death_event(), AetheriaCore.instance);
+        Bukkit.getServer().getPluginManager().registerEvents(new NoteblockListener(), AetheriaCore.instance);
     }
 }

@@ -2,6 +2,7 @@ package net.badbird5907.aetheriacore.bungee.commands.staff;
 
 
 import net.badbird5907.aetheriacore.bungee.AetheriaCoreBungee;
+import net.badbird5907.aetheriacore.bungee.util.Messages;
 import net.badbird5907.aetheriacore.bungee.util.Permission;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
@@ -18,7 +19,7 @@ public class CSpy extends Command {
     public void execute(CommandSender sender, String[] args) {
         if (sender instanceof ProxiedPlayer) {
             ProxiedPlayer p = (ProxiedPlayer)sender;
-            Configuration config = AetheriaCoreBungee.getInstance().getConfig("bungeeconfig");
+            Configuration config = Messages.getConfig("bungeemessages");
             if (args.length == 0) {
                 if (p.hasPermission(Permission.COMMAND_SPY.node)) {
                     if (AetheriaCoreBungee.inCSpy.contains(p.getUniqueId())) {

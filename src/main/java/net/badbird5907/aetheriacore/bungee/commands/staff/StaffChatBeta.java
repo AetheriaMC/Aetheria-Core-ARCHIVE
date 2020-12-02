@@ -1,6 +1,7 @@
 package net.badbird5907.aetheriacore.bungee.commands.staff;
 
 import net.badbird5907.aetheriacore.bungee.AetheriaCoreBungee;
+import net.badbird5907.aetheriacore.bungee.util.Database;
 import net.badbird5907.aetheriacore.bungee.util.Messages;
 import net.badbird5907.aetheriacore.bungee.util.Permission;
 import net.badbird5907.aetheriacore.bungee.util.PlayerHandler;
@@ -13,8 +14,14 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.config.Configuration;
 
-public class StaffChat extends Command {
-    public StaffChat() {
+import java.sql.Array;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+public class StaffChatBeta extends Command {
+    public StaffChatBeta() {
         super("sc", Permission.STAFF_CHAT.node, new String[] { "staffchat" });
     }
 
@@ -24,9 +31,13 @@ public class StaffChat extends Command {
             Configuration config = Messages.getConfig("bungeemessages");
             if (args.length == 0) {
                 if (p.hasPermission(Permission.STAFF_CHAT.node)) {
-                    if (AetheriaCoreBungee.inSc.contains(p.getUniqueId())) {
+                    if (insc(p.getUniqueId().toString())) {
                         p.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.sc-disabled"))));
-                        AetheriaCoreBungee.inSc.remove(p.getUniqueId());
+                        try {
+                            PreparedStatement ps = Database.getConnection().prepareStatement("DELETE FROM AetheriaCoreBungee WHERE ");
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
                     } else {
                         AetheriaCoreBungee.inSc.add(p.getUniqueId());
                         p.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.sc-enabled"))));
@@ -53,6 +64,22 @@ public class StaffChat extends Command {
             } else {
                 p.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.no-permission"))));
             }
+        }
+    }
+    public static boolean insc(String uuid){
+        try{
+            PreparedStatement ps = Database.getConnection().prepareStatement("SELECT * FROM AetheriaCoreBungee_StaffChat");
+            ResultSet rs = ps.executeQuery();
+            ArrayList a = (ArrayList) rs.getArray(1);
+            if(a.contains(uuid)){
+                return true;
+            }
+            else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }
