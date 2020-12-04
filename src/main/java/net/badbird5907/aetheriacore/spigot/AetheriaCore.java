@@ -70,6 +70,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         instance = this;
+        long start = System.currentTimeMillis();
         if (getConfig().getBoolean("enable")) {
             //signGui = new SignGUI(this);
             boolean mc1164 = Bukkit.getServer().getClass().getPackage().getName().contains("1.16.4");
@@ -122,10 +123,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
             saveDefaultConfig();
             Noteblock.waitThenRun();
             //finished startup
-            warn("Startup Finished!");
-            log("INFO: do /AEC debug for plugin info");
-            log("INFO: do /AEC reload to reload plugin config");
-            log("INFO: do /performance to show server performance");
+            warn("Startup Finished! Took " + (System.currentTimeMillis() - start) + "ms." );
         } else {
             warn("Plugin Disabled because disabled in config.yml");
             warn("Enable plugin by changing enable: false to enable: true");

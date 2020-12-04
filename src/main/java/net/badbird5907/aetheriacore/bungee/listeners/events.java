@@ -67,32 +67,6 @@ public class events implements Listener {
     }
 
     @EventHandler
-    public void onDisconnect(PlayerDisconnectEvent e) {
-        ProxiedPlayer p = e.getPlayer();
-        Configuration config = Messages.getConfig("bungeemessages");
-        if (p.hasPermission(Permission.BROADCAST_LEAVE.node) &&
-                config.getBoolean("Config.enable-leave-message"))
-            for (ProxiedPlayer staff : BungeeCord.getInstance().getPlayers()) {
-                if (staff.hasPermission(Permission.STAFF_CHAT.node))
-                    staff.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.staff-leave-network")
-                            .replaceAll("%player%", PlayerHandler.playerwithrank(p)))));
-            }
-    }
-
-    @EventHandler
-    public void onLogin(PostLoginEvent e) {
-        ProxiedPlayer p = e.getPlayer();
-        Configuration config = Messages.getConfig("bungeemessages");
-        if (p.hasPermission(Permission.BROADCAST_JOIN.node) &&
-                config.getBoolean("Config.enable-join-message"))
-            for (ProxiedPlayer staff : BungeeCord.getInstance().getPlayers()) {
-                if (staff.hasPermission(Permission.STAFF_CHAT.node))
-                    staff.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.staff-join-network")
-                            .replaceAll("%player%", PlayerHandler.playerwithrank(p)))));
-            }
-    }
-
-    @EventHandler
     public void onSwitch(ServerSwitchEvent e) {
         ProxiedPlayer p = e.getPlayer();
         Configuration config = Messages.getConfig("bungeemessages");

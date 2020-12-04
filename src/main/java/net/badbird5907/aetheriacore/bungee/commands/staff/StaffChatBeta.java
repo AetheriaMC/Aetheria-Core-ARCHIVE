@@ -14,15 +14,12 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.config.Configuration;
 
-import java.sql.Array;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class StaffChatBeta extends Command {
     public StaffChatBeta() {
-        super("sc", Permission.STAFF_CHAT.node, new String[] { "staffchat" });
+        super("scb", Permission.STAFF_CHAT.node, new String[] { "staffchatbeta" });
     }
 
     public void execute(CommandSender sender, String[] args) {
@@ -34,12 +31,18 @@ public class StaffChatBeta extends Command {
                     if (insc(p.getUniqueId().toString())) {
                         p.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.sc-disabled"))));
                         try {
-                            PreparedStatement ps = Database.getConnection().prepareStatement("DELETE FROM AetheriaCoreBungee WHERE ");
+                            PreparedStatement ps = Database.getConnection().prepareStatement("UPDATE AetheriaCoreBungee_Staff SET sc=0 WHERE uuid = \"" + p.getUniqueId() + "\"");
+                            ps.execute();
                         } catch (SQLException throwables) {
                             throwables.printStackTrace();
                         }
                     } else {
-                        AetheriaCoreBungee.inSc.add(p.getUniqueId());
+                        try {
+                            PreparedStatement ps = Database.getConnection().prepareStatement("UPDATE AetheriaCoreBungee_Staff SET sc=1 WHERE uuid = \"" + p.getUniqueId() + "\"");
+                            ps.execute();
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
                         p.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.sc-enabled"))));
                     }
                 } else {
@@ -68,15 +71,18 @@ public class StaffChatBeta extends Command {
     }
     public static boolean insc(String uuid){
         try{
-            PreparedStatement ps = Database.getConnection().prepareStatement("SELECT * FROM AetheriaCoreBungee_StaffChat");
+            PreparedStatement ps = Database.getConnection().prepareStatement("SELECT sc FROM AetheriaCoreBungee_Staff");
             ResultSet rs = ps.executeQuery();
-            ArrayList a = (ArrayList) rs.getArray(1);
-            if(a.contains(uuid)){
-                return true;
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            ArrayList<String> arrayList = new ArrayList<>(columnCount);
+            while (rs.next()) {
+                int i = 1;
+                while(i <= columnCount) {
+                    arrayList.add(rs.getString(i++));
+                }
             }
-            else {
-                return false;
-            }
+            if(arrayList.contains(uuid)){ return true;} else{return false;}
         } catch (Exception e) {
             e.printStackTrace();
             return false;

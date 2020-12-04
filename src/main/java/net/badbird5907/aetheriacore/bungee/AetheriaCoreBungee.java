@@ -3,18 +3,17 @@ package net.badbird5907.aetheriacore.bungee;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
-import jdk.internal.org.jline.utils.Log;
 import net.badbird5907.aetheriacore.bungee.commands.staff.*;
 import net.badbird5907.aetheriacore.bungee.commands.util.GlobalBroadcast;
 import net.badbird5907.aetheriacore.bungee.commands.warps.*;
 import net.badbird5907.aetheriacore.bungee.listeners.LockdownListener;
+import net.badbird5907.aetheriacore.bungee.listeners.Login_Disconnect;
 import net.badbird5907.aetheriacore.bungee.listeners.events;
 import net.badbird5907.aetheriacore.bungee.manager.log;
 import net.badbird5907.aetheriacore.bungee.util.Config;
 import net.badbird5907.aetheriacore.bungee.util.DataFile;
 import net.badbird5907.aetheriacore.bungee.util.Database;
 import net.badbird5907.aetheriacore.bungee.util.Messages;
-import net.badbird5907.aetheriacore.spigot.util.Data;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
@@ -24,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public final class AetheriaCoreBungee extends Plugin implements Listener {
+public final class AetheriaCoreBungee extends Plugin {
     public static List<UUID> inSc = new ArrayList<>();
     public static List<UUID> inAc = new ArrayList<>();
     public static List<UUID> inCSpy = new ArrayList<>();
@@ -42,6 +41,7 @@ public final class AetheriaCoreBungee extends Plugin implements Listener {
         instance = this;
         // Plugin startup logic
         log.Log("Starting...");
+        long start = System.currentTimeMillis();
         //getProxy().registerChannel("aetheriacore:messaging");
         Messages.createFile("bungeemessages");
         DataFile.createFile("bungeedata");
@@ -59,9 +59,11 @@ public final class AetheriaCoreBungee extends Plugin implements Listener {
         getProxy().getInstance().getPluginManager().registerCommand(this, new GlobalClearChat());
         getProxy().getInstance().getPluginManager().registerCommand(this, new StaffChat());
         getProxy().getInstance().getPluginManager().registerCommand(this, new staff());
+        getProxy().getInstance().getPluginManager().registerCommand(this, new StaffChatBeta());
 
         log.Log("Registering Events...");
         getProxy().getPluginManager().registerListener(this, new events());
+        getProxy().getPluginManager().registerListener(this, new Login_Disconnect());
         getProxy().getPluginManager().registerListener(this, new LockdownListener());
         /*
         getProxy().getInstance().getPluginManager().registerListener(this, new OnLogin());
@@ -75,10 +77,10 @@ public final class AetheriaCoreBungee extends Plugin implements Listener {
         try {
             Database.SetupDB();
         } catch (SQLException throwables) {
-            Log.error("Could not connect to database!");
+            log.Warn("Could not connect to database!");
             throwables.printStackTrace();
         }
-        log.Log("Startup Finished!!!");
+        log.Log("Startup Finished. Took " + (System.currentTimeMillis() - start) + "ms.");
 
     }
         @Override

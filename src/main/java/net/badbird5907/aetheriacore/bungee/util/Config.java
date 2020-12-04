@@ -18,7 +18,11 @@ public class Config {
                 file.createNewFile();
                 if (fileName.equals("bungeeconfig")) {
                     Configuration config = getData(fileName);
-                    config.set("Lockdown.enabled", false);
+                    config.set("Database.uri", "URI");
+                    config.set("Database.password", "PASSWORD");
+                    config.set("Database.username", "USERNAME");
+                    config.set("Database.port", "3306");
+                    config.set("Database.name", "NAME_HERE");
                     saveData(config, fileName);
                 }
             } catch (IOException e) {

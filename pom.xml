@@ -182,8 +182,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.41</version>
-            <scope>provided</scope>
+            <version>8.0.22</version>
         </dependency>
     </dependencies>
 </project>
