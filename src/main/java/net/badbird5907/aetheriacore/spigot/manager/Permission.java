@@ -39,7 +39,8 @@ public enum Permission {
     PING("ping"),
     ITEM("item"),
 
-    BYPASS_ITEM_BLACKLIST("bypass.itemblacklist")
+    BYPASS_ITEM_BLACKLIST("bypass.itemblacklist"),
+    PUNISH("punish")
     ;
 
     public final String node;

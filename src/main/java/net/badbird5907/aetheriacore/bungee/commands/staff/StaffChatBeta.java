@@ -82,7 +82,14 @@ public class StaffChatBeta extends Command {
                     arrayList.add(rs.getString(i++));
                 }
             }
-            if(arrayList.contains(uuid)){ return true;} else{return false;}
+            if(arrayList.contains(uuid)){
+                arrayList.clear();
+                return true;
+            }
+            else{
+                arrayList.clear();
+                return false;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;

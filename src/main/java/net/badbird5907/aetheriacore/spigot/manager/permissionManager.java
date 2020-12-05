@@ -1,5 +1,7 @@
 package net.badbird5907.aetheriacore.spigot.manager;
-
+/**
+ * @deprecated Do not use. use the permision enum instead.
+ */
 public class permissionManager {
     //only here because i need a list of permissions and stuff dosent get mixed up
     public static String teleportparticles = "aetheriacore.cosmetic.teleportparticles";

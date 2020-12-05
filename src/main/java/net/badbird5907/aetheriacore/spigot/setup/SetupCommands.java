@@ -7,6 +7,7 @@ import net.badbird5907.aetheriacore.spigot.commands.management.togglePvp;
 import net.badbird5907.aetheriacore.spigot.commands.staff.Lockdown;
 import net.badbird5907.aetheriacore.spigot.commands.staff.QuickChat;
 import net.badbird5907.aetheriacore.spigot.commands.staff.StaffMode;
+import net.badbird5907.aetheriacore.spigot.commands.staff.punish.punish;
 import net.badbird5907.aetheriacore.spigot.commands.staff.staffchat;
 import net.badbird5907.aetheriacore.spigot.commands.trolls.*;
 import net.badbird5907.aetheriacore.spigot.commands.utils.*;
@@ -78,6 +79,7 @@ public class SetupCommands {
         plugin.getCommand("test").setExecutor(new test());
         plugin.getCommand("pingwars").setExecutor(new PingWars());
         plugin.getCommand("69420").setExecutor(new six_nine_four_twenty());
+        plugin.getCommand("punish").setExecutor(new punish());
         //plugin.getCommand("nick").setExecutor(new nick());
         //plugin.instance.getCommand("addgroup").setExecutor(new addGroup(plugin.instance, plugin.instance.luckPerms));
         //plugin.instance.getCommand("systeminfo").setExecutor(new SystemInfo(plugin.instance));

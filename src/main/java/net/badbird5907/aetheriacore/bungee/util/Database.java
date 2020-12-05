@@ -1,6 +1,9 @@
 package net.badbird5907.aetheriacore.bungee.util;
 
+import com.mysql.cj.xdevapi.SqlStatement;
+import me.leoko.advancedban.utils.SQLQuery;
 import net.badbird5907.aetheriacore.bungee.manager.log;
+import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.md_5.bungee.config.Configuration;
 
 import java.sql.*;
@@ -72,7 +75,17 @@ public class Database {
             return true;
         }
         else {
+
             return false;
+        }
+    }
+    public static ResultSet ExecuteQuery(String sql){
+        try {
+            PreparedStatement a = Database.getConnection().prepareStatement(sql);
+            return a.executeQuery();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
         }
     }
 }
