@@ -6,6 +6,8 @@ import com.mongodb.client.MongoDatabase;
 import net.badbird5907.aetheriacore.bungee.commands.staff.*;
 import net.badbird5907.aetheriacore.bungee.commands.util.GlobalBroadcast;
 import net.badbird5907.aetheriacore.bungee.commands.warps.*;
+import net.badbird5907.aetheriacore.bungee.discord.listeners.ACListener;
+import net.badbird5907.aetheriacore.bungee.discord.listeners.SCListener;
 import net.badbird5907.aetheriacore.bungee.listeners.LockdownListener;
 import net.badbird5907.aetheriacore.bungee.listeners.Login_Disconnect;
 import net.badbird5907.aetheriacore.bungee.listeners.events;
@@ -104,6 +106,8 @@ public final class AetheriaCoreBungee extends Plugin {
         try{
             jda = JDABuilder
                     .createDefault(conf1.getString("Discord.token"))
+                    .addEventListeners(new SCListener())
+                    .addEventListeners(new ACListener())
                     .build();
         }catch (LoginException e){
             e.printStackTrace();

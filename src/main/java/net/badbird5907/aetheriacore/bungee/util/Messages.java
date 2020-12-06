@@ -38,6 +38,9 @@ public class Messages {
                     config.set("Messages.clearchat-bypass", "&aChat was cleared by %player% but you're immune");
                     config.set("Messages.clearchat", "&aChat was cleared globally by %player%");
 
+                    config.set("Messages.discordsc", "&6&lDiscordSC&r&8 »&r%user%: %message%");
+                    config.set("Messages.discordac", "&c&lDiscordAC&r&8 »&r%user%: %message%");
+
                     config.set("Messages.global-lockdown", "A &c&lGLOBAL&r lockdown has been called by %player%. &r All non staff players have been kicked.");
                     config.set("Messages.already-lockdown", "&cNetwork is already under lockdown. do /bungeeendlockdown to end it.");
 

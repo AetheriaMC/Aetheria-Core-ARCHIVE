@@ -51,4 +51,14 @@ public class SendAdminChatMessage {
         }
         sendmsg.sendmsg(message, conf.getString("Discord.adminchat"));
     }
+    public static void DiscordSend(String sender, String message){
+        Configuration config = Messages.getConfig("bungeemessages");
+        for(ProxiedPlayer staff : BungeeCord.getInstance().getPlayers()){
+            TextComponent textComponent = new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.discordac")
+                    .replaceAll("%user%", sender)
+                    .replaceAll("%message%", message)
+            ));
+            staff.sendMessage(textComponent);
+        }
+    }
 }

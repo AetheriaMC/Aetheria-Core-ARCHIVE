@@ -1,6 +1,7 @@
 package net.badbird5907.aetheriacore.bungee.commands.staff;
 
 import net.badbird5907.aetheriacore.bungee.AetheriaCoreBungee;
+import net.badbird5907.aetheriacore.bungee.api.SendStaffChatMessage;
 import net.badbird5907.aetheriacore.bungee.util.Messages;
 import net.badbird5907.aetheriacore.bungee.util.Permission;
 import net.badbird5907.aetheriacore.bungee.util.PlayerHandler;
@@ -44,12 +45,7 @@ public class StaffChat extends Command {
                 String msg = "";
                 for (int i = 0; i < args.length; i++)
                     msg = msg + args[i] + " ";
-                for (ProxiedPlayer staff : BungeeCord.getInstance().getPlayers()) {
-                    if (staff.hasPermission(Permission.STAFF_CHAT.node)) {
-                        BaseComponent[] cp = TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.sc-format").replaceAll("%message%", msg).replaceAll("%player%", PlayerHandler.playerwithrank(p)).replaceAll("%server%", p.getServer().getInfo().getName())));
-                        staff.sendMessage(cp);
-                    }
-                }
+                SendStaffChatMessage.Send(p, msg);
             } else {
                 p.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.no-permission"))));
             }

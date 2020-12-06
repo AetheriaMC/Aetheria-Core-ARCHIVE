@@ -23,6 +23,7 @@ public class Config {
                     config.set("Database.username", "USERNAME");
                     config.set("Database.port", "3306");
                     config.set("Database.name", "NAME_HERE");
+
                     config.set("Discord.staffchat", "784502009876578344L");
                     config.set("Discord.adminchat", "784502023650672640L");
                     config.set("Discord.reports", "784502051731406888L");

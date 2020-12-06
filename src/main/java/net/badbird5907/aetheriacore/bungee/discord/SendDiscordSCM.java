@@ -1,11 +1,9 @@
 package net.badbird5907.aetheriacore.bungee.discord;
 
 import net.badbird5907.aetheriacore.bungee.util.Config;
-import net.badbird5907.aetheriacore.bungee.util.Messages;
 import net.badbird5907.aetheriacore.bungee.util.PlayerHandler;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.config.Configuration;
-import org.bukkit.entity.Player;
 
 public class SendDiscordSCM {
     public static void send(ProxiedPlayer player ,String message){

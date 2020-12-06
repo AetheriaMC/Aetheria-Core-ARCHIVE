@@ -11,6 +11,7 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.config.Configuration;
+import org.w3c.dom.Text;
 
 public class SendStaffChatMessage {
     public static void Send(ProxiedPlayer p, String message){
@@ -26,7 +27,7 @@ public class SendStaffChatMessage {
         }
         SendDiscordSCM.send(p, message);
     }
-    public static void SendCustom(String sender,String server_null_if_none ,String message){
+    public static void SendCustom(String sender,String server_null_if_none ,String message, Boolean discord){
         Configuration config = Messages.getConfig("bungeemessages");
         for (ProxiedPlayer staff : BungeeCord.getInstance().getPlayers()) {
             if (staff.hasPermission(Permission.STAFF_CHAT.node)) {
@@ -34,7 +35,8 @@ public class SendStaffChatMessage {
                     TextComponent cp = new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.sc-format")
                             .replaceAll("%message%", message)
                             .replaceAll("%player%", sender)
-                            .replaceFirst("(%server%)", "")
+                            .replace("(%server%)", "")
+                            .replaceFirst("%server%", "")
                             .replaceAll("%server%", ""))
                     );
                     staff.sendMessage(cp);
@@ -49,6 +51,17 @@ public class SendStaffChatMessage {
             }
         }
         Configuration conf = Config.getData("bungeeconfig");
-        sendmsg.sendmsg(message, conf.getString("Discord.staffchat"));
+        if(discord)
+            sendmsg.sendmsg(message, conf.getString("Discord.staffchat"));
+    }
+    public static void DiscordSend(String sender, String message){
+        Configuration config = Messages.getConfig("bungeemessages");
+        for(ProxiedPlayer staff : BungeeCord.getInstance().getPlayers()){
+            TextComponent textComponent = new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.discordsc")
+                    .replaceAll("%user%", sender)
+                    .replaceAll("%message%", message)
+            ));
+            staff.sendMessage(textComponent);
+        }
     }
 }
