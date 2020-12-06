@@ -254,6 +254,11 @@ commands:
   69420:
     description: 69420
     usage: /<command>
+  punish:
+    description: Punish a player
+    permission: aetheriacore.punish
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    usage: /<command> <player>
 #  givegroup:
 #    description: Give Player a Group
 #    usage: /<command>
@@ -316,6 +321,7 @@ permissions:
       aetheriacore.loop: true
       aetheriacore.ping: true
       aetheriacore.pingwars: true
+      aetheriacore.punish: true
 
   aetheriacore.luckperms.*:
     description: All Aetheria Luckperms Commands
@@ -541,3 +547,6 @@ permissions:
   aetheriacore.pingwars:
     default: op
     description: PING WARS
+  aetheriacore.punish:
+    default: op
+    description: punish a player

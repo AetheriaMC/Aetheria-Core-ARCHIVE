@@ -1,6 +1,7 @@
 package net.badbird5907.aetheriacore.spigot.setup;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
+import net.badbird5907.aetheriacore.spigot.commands.staff.punish.PunishGUI;
 import net.badbird5907.aetheriacore.spigot.commands.utils.Player_death_event;
 import net.badbird5907.aetheriacore.spigot.events.*;
 import net.badbird5907.aetheriacore.spigot.util.inventories.ClickListener;
@@ -28,5 +29,6 @@ public class SetupEvents {
         Bukkit.getServer().getPluginManager().registerEvents(new GuiListener(), AetheriaCore.instance);
         Bukkit.getServer().getPluginManager().registerEvents(new Player_death_event(), AetheriaCore.instance);
         Bukkit.getServer().getPluginManager().registerEvents(new NoteblockListener(), AetheriaCore.instance);
+        Bukkit.getServer().getPluginManager().registerEvents(new PunishGUI(), AetheriaCore.instance);
     }
 }

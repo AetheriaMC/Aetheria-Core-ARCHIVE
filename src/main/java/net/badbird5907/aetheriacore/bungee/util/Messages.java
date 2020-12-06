@@ -1,7 +1,6 @@
 package net.badbird5907.aetheriacore.bungee.util;
 
 import net.badbird5907.aetheriacore.bungee.AetheriaCoreBungee;
-import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
@@ -19,7 +18,7 @@ public class Messages {
         if (!file.exists()) {
             try {
                 file.createNewFile();
-                if (fileName.equals("bungeeconfig")) {
+                if (fileName.equals("bungeemessages")) {
                     Configuration config = getConfig(fileName);
                     config.set("Config.enable-join-message", Boolean.valueOf(true));
                     config.set("Config.enable-leave-message", Boolean.valueOf(true));
@@ -86,7 +85,7 @@ public class Messages {
 
     public static void saveConfig(Configuration config, String fileName) {
         try {
-            ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, new File(AetheriaCore.getInstance().getDataFolder(), fileName + ".yml"));
+            ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, new File(AetheriaCoreBungee.getInstance().getDataFolder(), fileName + ".yml"));
         } catch (IOException e) {
             e.printStackTrace();
         }

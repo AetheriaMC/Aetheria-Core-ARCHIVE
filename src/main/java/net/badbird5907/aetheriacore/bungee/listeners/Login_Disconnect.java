@@ -1,6 +1,5 @@
 package net.badbird5907.aetheriacore.bungee.listeners;
 
-import net.badbird5907.aetheriacore.bungee.util.Database;
 import net.badbird5907.aetheriacore.bungee.util.Messages;
 import net.badbird5907.aetheriacore.bungee.util.Permission;
 import net.badbird5907.aetheriacore.bungee.util.PlayerHandler;
@@ -13,10 +12,6 @@ import net.md_5.bungee.api.event.PostLoginEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.event.EventHandler;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class Login_Disconnect implements Listener {
     @EventHandler
@@ -44,6 +39,7 @@ public class Login_Disconnect implements Listener {
                             .replaceAll("%player%", PlayerHandler.playerwithrank(p)))));
             }
         if(p.hasPermission(Permission.STAFF.node)){
+            /*
             try {
                 PreparedStatement ps = Database.getConnection().prepareStatement("SELECT * FROM AetheriaCoreBungee_Staff");
                 ResultSet rs = ps.executeQuery();
@@ -57,6 +53,7 @@ public class Login_Disconnect implements Listener {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
+             */
         }
     }
 }

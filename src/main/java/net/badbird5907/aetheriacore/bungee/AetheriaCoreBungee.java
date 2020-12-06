@@ -14,11 +14,12 @@ import net.badbird5907.aetheriacore.bungee.util.Config;
 import net.badbird5907.aetheriacore.bungee.util.DataFile;
 import net.badbird5907.aetheriacore.bungee.util.Database;
 import net.badbird5907.aetheriacore.bungee.util.Messages;
-import net.md_5.bungee.api.plugin.Listener;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 
-import java.sql.SQLException;
+import javax.security.auth.login.LoginException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -30,6 +31,8 @@ public final class AetheriaCoreBungee extends Plugin {
     public static List<UUID> Hush = new ArrayList<>();
     public static Boolean is_lockdown;
     private static AetheriaCoreBungee instance;
+    private JDA jda;
+    Configuration conf1 = Config.getData("bungeeconfig");
 
 
     public static AetheriaCoreBungee getInstance() {
@@ -74,12 +77,16 @@ public final class AetheriaCoreBungee extends Plugin {
         Configuration config = Messages.getConfig("bungeemessages");
         is_lockdown = config.getBoolean("Data.lockdown");
         log.Log("Connecting to database");
+        /*
         try {
             Database.SetupDB();
         } catch (SQLException throwables) {
             log.Warn("Could not connect to database!");
             throwables.printStackTrace();
         }
+         */
+        log.Log("Connecting to discord... Token:");
+        buildJDA();
         log.Log("Startup Finished. Took " + (System.currentTimeMillis() - start) + "ms.");
 
     }
@@ -94,6 +101,18 @@ public final class AetheriaCoreBungee extends Plugin {
         MongoDatabase database = mongoClient.getDatabase("users");
     }
 
+    private void buildJDA(){
+        try{
+            jda = JDABuilder
+                    .createDefault(conf1.getString("Discord.token"))
+                    .build();
+        }catch (LoginException e){
+            e.printStackTrace();
+        }
+    }
+    public static JDA getJDA() {
+        return AetheriaCoreBungee.getInstance().jda;
+    }
 }
 
 

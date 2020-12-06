@@ -1,5 +1,8 @@
 package net.badbird5907.aetheriacore.bungee.api;
 
+import net.badbird5907.aetheriacore.bungee.discord.SendDiscordSCM;
+import net.badbird5907.aetheriacore.bungee.discord.sendmsg;
+import net.badbird5907.aetheriacore.bungee.util.Config;
 import net.badbird5907.aetheriacore.bungee.util.Messages;
 import net.badbird5907.aetheriacore.bungee.util.Permission;
 import net.badbird5907.aetheriacore.bungee.util.PlayerHandler;
@@ -11,7 +14,7 @@ import net.md_5.bungee.config.Configuration;
 
 public class SendStaffChatMessage {
     public static void Send(ProxiedPlayer p, String message){
-        Configuration config = Messages.getConfig("bungeeconfig");
+        Configuration config = Messages.getConfig("bungeemessages");
         for (ProxiedPlayer staff : BungeeCord.getInstance().getPlayers()) {
             if (staff.hasPermission(Permission.STAFF_CHAT.node)) {
                 TextComponent cp = new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.sc-format")
@@ -21,9 +24,10 @@ public class SendStaffChatMessage {
                 staff.sendMessage(cp);
             }
         }
+        SendDiscordSCM.send(p, message);
     }
     public static void SendCustom(String sender,String server_null_if_none ,String message){
-        Configuration config = Messages.getConfig("bungeeconfig");
+        Configuration config = Messages.getConfig("bungeemessages");
         for (ProxiedPlayer staff : BungeeCord.getInstance().getPlayers()) {
             if (staff.hasPermission(Permission.STAFF_CHAT.node)) {
                 if(server_null_if_none == null){
@@ -44,5 +48,7 @@ public class SendStaffChatMessage {
                 }
             }
         }
+        Configuration conf = Config.getData("bungeeconfig");
+        sendmsg.sendmsg(message, conf.getString("Discord.staffchat"));
     }
 }
