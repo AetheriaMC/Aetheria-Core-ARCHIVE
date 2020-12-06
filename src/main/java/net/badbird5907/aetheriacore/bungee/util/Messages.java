@@ -24,7 +24,7 @@ public class Messages {
                     config.set("Config.enable-leave-message", Boolean.valueOf(true));
                     config.set("Config.enable-switch-messages", Boolean.valueOf(true));
                     config.set("Messages.sc-hover", "&8Player: %player%\nServer: %server%");
-                    config.set("Messages.sc-enabled", "&8[&6AEC&8]  &8&7Staff chat is now &aenabled&7.");
+                    config.set("Messages.sc-enabled", "&8[&6AEC&8] &8&7Staff chat is now &aenabled&7.");
                     config.set("Messages.sc-disabled", "&8[&6AEC&8] &8&7Staff chat is now &cdisabled&7.");
                     config.set("Messages.sc-format", "&6&lStaffChat&r&8 »&r&7 (%server%)&r %player%&r: %message%");
                     config.set("Messages.ac-enabled", "&8[&6AEC&8] &8&7Admin chat is now &aenabled&7.");

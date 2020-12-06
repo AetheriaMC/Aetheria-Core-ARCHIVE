@@ -24,6 +24,12 @@ public class StaffChat extends Command {
             Configuration config = Messages.getConfig("bungeemessages");
             if (args.length == 0) {
                 if (p.hasPermission(Permission.STAFF_CHAT.node)) {
+                    if(AetheriaCoreBungee.inAc.contains(p.getUniqueId())){
+                        AetheriaCoreBungee.inAc.remove(p.getUniqueId());
+                        p.sendMessage(new TextComponent(
+                                ChatColor.GREEN + "You were in Admin chat so Admin chat was toggled off"
+                        ));
+                    }
                     if (AetheriaCoreBungee.inSc.contains(p.getUniqueId())) {
                         p.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.sc-disabled"))));
                         AetheriaCoreBungee.inSc.remove(p.getUniqueId());
@@ -35,12 +41,6 @@ public class StaffChat extends Command {
                     p.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.no-permission"))));
                 }
             } else if (p.hasPermission(Permission.STAFF_CHAT.node)) {
-                if(AetheriaCoreBungee.inAc.contains(p.getUniqueId())){
-                    AetheriaCoreBungee.inAc.remove(p.getUniqueId());
-                    p.sendMessage(new TextComponent(
-                            ChatColor.GREEN + "You were in Admin chat so Admin chat was toggled off"
-                    ));
-                }
                 String msg = "";
                 for (int i = 0; i < args.length; i++)
                     msg = msg + args[i] + " ";
