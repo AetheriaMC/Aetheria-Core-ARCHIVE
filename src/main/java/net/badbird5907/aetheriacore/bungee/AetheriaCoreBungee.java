@@ -32,8 +32,6 @@ public final class AetheriaCoreBungee extends Plugin {
     public static Boolean is_lockdown;
     private static AetheriaCoreBungee instance;
     private JDA jda;
-    Configuration conf1 = Config.getData("bungeeconfig");
-
 
     public static AetheriaCoreBungee getInstance() {
         return instance;
@@ -62,7 +60,7 @@ public final class AetheriaCoreBungee extends Plugin {
         getProxy().getInstance().getPluginManager().registerCommand(this, new GlobalClearChat());
         getProxy().getInstance().getPluginManager().registerCommand(this, new StaffChat());
         getProxy().getInstance().getPluginManager().registerCommand(this, new staff());
-        getProxy().getInstance().getPluginManager().registerCommand(this, new StaffChatBeta());
+        //getProxy().getInstance().getPluginManager().registerCommand(this, new StaffChatBeta());
 
         log.Log("Registering Events...");
         getProxy().getPluginManager().registerListener(this, new events());
@@ -85,7 +83,7 @@ public final class AetheriaCoreBungee extends Plugin {
             throwables.printStackTrace();
         }
          */
-        log.Log("Connecting to discord... Token:");
+        log.Log("Connecting to discord...");
         buildJDA();
         log.Log("Startup Finished. Took " + (System.currentTimeMillis() - start) + "ms.");
 
@@ -102,6 +100,7 @@ public final class AetheriaCoreBungee extends Plugin {
     }
 
     private void buildJDA(){
+        Configuration conf1 = Config.getData("bungeeconfig");
         try{
             jda = JDABuilder
                     .createDefault(conf1.getString("Discord.token"))
