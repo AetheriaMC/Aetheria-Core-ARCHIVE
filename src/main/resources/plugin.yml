@@ -7,9 +7,9 @@ prefix: AetheriaCore
 authors: [Badbird5907]
 description: AetheriaCore By Badbird5907
 website: badbird5907.net
-softdepend: [PremiumVanish, AetheriaMinigames, AetheriaCheat, PlaceholderAPI, AetheriaItems, DiscordSRVx]
+softdepend: [PremiumVanish, AetheriaMinigames, AetheriaCheat, PlaceholderAPI, AetheriaItems, DiscordSRV]
 depend: [SuperVanish, AdvancedBan, ProtocolLib, LuckPerms, NoteBlockAPI]
-loadbefore: [DiscordSRV, AdvancedBan]
+loadbefore: [AdvancedBan]
 commands:
   test:
     usage: /<command>

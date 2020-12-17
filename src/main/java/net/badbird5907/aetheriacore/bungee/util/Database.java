@@ -1,9 +1,6 @@
 package net.badbird5907.aetheriacore.bungee.util;
 
-import com.mysql.cj.xdevapi.SqlStatement;
-import me.leoko.advancedban.utils.SQLQuery;
 import net.badbird5907.aetheriacore.bungee.manager.log;
-import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.md_5.bungee.config.Configuration;
 
 import java.sql.*;
@@ -15,7 +12,7 @@ public class Database {
     private static String password = config.getString("Database.password");
     private static String username = config.getString("Database.username");
     private static String port = config.getString("Database.port");
-    private static String database = config.getString("Database.database");
+    private static String database = config.getString("Database.name");
     // connect
     /*
     public static void connect() {

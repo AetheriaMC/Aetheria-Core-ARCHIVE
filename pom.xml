@@ -15,6 +15,7 @@
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <url>badbird5907.net</url>
 
@@ -41,17 +42,6 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
-                            <!--
-                            <archive>
-                                <manifestFile>src/main/META-INF/MANIFEST.MF</manifestFile>
-                                <manifest>
-                                    <addClasspath>true</addClasspath>
-                                </manifest>
-                                <manifestEntries>
-                                    <Built-By>Badbird5907</Built-By>
-                                </manifestEntries>
-                            </archive>
-                            -->
                         </configuration>
                     </execution>
                 </executions>
@@ -135,12 +125,14 @@
             <version>6.1.8</version>
             <scope>provided</scope>
         </dependency>
+        <!--
         <dependency>
             <groupId>com.discordsrv</groupId>
             <artifactId>discordsrv</artifactId>
             <version>1.19.1</version>
             <scope>provided</scope>
         </dependency>
+        -->
         <dependency>
             <groupId>net.luckperms</groupId>
             <artifactId>api</artifactId>

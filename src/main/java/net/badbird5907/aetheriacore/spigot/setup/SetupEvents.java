@@ -20,7 +20,6 @@ public class SetupEvents {
         }
         Bukkit.getServer().getPluginManager().registerEvents(new onChat(AetheriaCore.instance), AetheriaCore.instance);
         Bukkit.getServer().getPluginManager().registerEvents(new OnVanish(), AetheriaCore.instance);
-        Bukkit.getServer().getPluginManager().registerEvents(new OnPunish(), AetheriaCore.instance);
         Bukkit.getServer().getPluginManager().registerEvents(new onarrowhit(), AetheriaCore.instance);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerMoveEvent(), AetheriaCore.instance);
         Bukkit.getServer().getPluginManager().registerEvents(new BlockBreakEvent(), AetheriaCore.instance);

@@ -2,6 +2,7 @@ package net.badbird5907.aetheriacore.spigot;
 
 import com.xxmicloxx.NoteBlockAPI.NoteBlockAPI;
 //import github.scarsz.discordsrv.DiscordSRV;
+import net.badbird5907.aetheriacore.spigot.discord.Discord;
 import net.badbird5907.aetheriacore.spigot.events.*;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Placeholders;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
@@ -11,6 +12,7 @@ import net.badbird5907.aetheriacore.spigot.setup.SetupCommands;
 import net.badbird5907.aetheriacore.spigot.setup.SetupEvents;
 import net.badbird5907.aetheriacore.spigot.util.inventories.ClickListener;
 import net.badbird5907.aetheriacore.spigot.util.itemtypes;
+import net.dv8tion.jda.api.JDA;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -50,6 +52,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
     private String host, database, username, password;
     private int port;
     private final HashMap<Plugin, Boolean> dependentPlugins = new HashMap<>();
+    public JDA jda;
     //music-end
 
     //protocolib
@@ -83,14 +86,6 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
 
             warn("Startup: Starting...");
             doStuff();
-            /*
-            try {
-                UpdateCheck();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-             */
-
             //register commands
             log("Startup: initializing Commands");
             //this.setupCommands();
@@ -114,6 +109,8 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
 
             log("Setting Up Dependencies");
             setupDependencies();
+            log("Connecting to discord...");
+            //Discord.init(jda);
             //protocolManager = ProtocolLibrary.getProtocolManager();
             log("done!");
             log("Starting jukebox...");
@@ -168,7 +165,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
         }
         getServer().getPluginManager().registerEvents(new onChat(this), this);
         getServer().getPluginManager().registerEvents(new OnVanish(), this);
-        getServer().getPluginManager().registerEvents(new OnPunish(), this);
+        //getServer().getPluginManager().registerEvents(new OnPunish(), this);
         getServer().getPluginManager().registerEvents(new onarrowhit(), this);
         getServer().getPluginManager().registerEvents(new PlayerMoveEvent(), this);
         getServer().getPluginManager().registerEvents(new BlockBreakEvent(), this);

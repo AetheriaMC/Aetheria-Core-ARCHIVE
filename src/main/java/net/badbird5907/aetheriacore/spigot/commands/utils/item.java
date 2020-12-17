@@ -23,7 +23,7 @@ public class item implements CommandExecutor {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
                 if (Bukkit.getPluginManager().isPluginEnabled("AetheriaItems")) {
-                    player.chat("/aetheriaitems:item " + args);
+                    player.chat("/aetheriaitems:item " + args.toString());
                 } else {
                     if (args.length == 0)
                         sender.sendMessage(ChatColor.RED + "USAGE: /item <ITEM> <AMMOUNT> \n " + ChatColor.GREEN + "You can also do /itemmenu");

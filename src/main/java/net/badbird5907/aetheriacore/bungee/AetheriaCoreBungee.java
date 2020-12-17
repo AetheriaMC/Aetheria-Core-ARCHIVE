@@ -20,8 +20,10 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
+import org.apache.log4j.BasicConfigurator;
 
 import javax.security.auth.login.LoginException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -45,6 +47,7 @@ public final class AetheriaCoreBungee extends Plugin {
         // Plugin startup logic
         log.Log("Starting...");
         long start = System.currentTimeMillis();
+        BasicConfigurator.configure();
         //getProxy().registerChannel("aetheriacore:messaging");
         Messages.createFile("bungeemessages");
         DataFile.createFile("bungeedata");
@@ -74,7 +77,7 @@ public final class AetheriaCoreBungee extends Plugin {
         getProxy().getInstance().getPluginManager().registerListener(this, new OnDisconnect());
         getProxy().getInstance().getPluginManager().registerListener(this, new OnSwitch());
          */
-        Configuration config = Messages.getConfig("bungeemessages");
+        Configuration config = Config.getData("bungeeconfig");
         is_lockdown = config.getBoolean("Data.lockdown");
         log.Log("Connecting to database");
         /*

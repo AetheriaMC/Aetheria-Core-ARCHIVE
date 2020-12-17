@@ -76,7 +76,7 @@ public class SetupCommands {
         plugin.getCommand("shopkeeper").setExecutor(new GuiMaker());
         plugin.getCommand("loop").setExecutor(new Loop());
         plugin.getCommand("ping").setExecutor(new Ping());
-        plugin.getCommand("test").setExecutor(new test());
+        //plugin.getCommand("test").setExecutor(new test());
         plugin.getCommand("pingwars").setExecutor(new PingWars());
         plugin.getCommand("69420").setExecutor(new six_nine_four_twenty());
         plugin.getCommand("punish").setExecutor(new punish());
