@@ -2,6 +2,11 @@ package net.badbird5907.aetheriacore.spigot;
 
 import com.xxmicloxx.NoteBlockAPI.NoteBlockAPI;
 //import github.scarsz.discordsrv.DiscordSRV;
+import net.badbird5907.aetheriacore.spigot.auth.TwoFactorAuthentication;
+import net.badbird5907.aetheriacore.spigot.auth.handlers.AuthHandler;
+import net.badbird5907.aetheriacore.spigot.auth.handlers.BungeecordMessageHandler;
+import net.badbird5907.aetheriacore.spigot.auth.handlers.ConfigHandler;
+import net.badbird5907.aetheriacore.spigot.auth.handlers.MessageHandler;
 import net.badbird5907.aetheriacore.spigot.discord.Discord;
 import net.badbird5907.aetheriacore.spigot.events.*;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Placeholders;
@@ -87,6 +92,8 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
             warn("Startup: Starting...");
             doStuff();
             //register commands
+            //TwoFactorAuthentication auth = new TwoFactorAuthentication();
+            //TwoFactorAuthentication.getInstance().enable(this);
             log("Startup: initializing Commands");
             //this.setupCommands();
             SetupCommands.setupCommands(this);
@@ -97,7 +104,6 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
             SetupEvents.registerEvents(this);
             log("All Events Registered!");
             Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Lag(), 100L, 1L);
-
             //get config
             log("Startup: Loading Config...");
             Noteblock.DataFile();
@@ -355,6 +361,5 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
         if (Noteblock.vanillaMusicTask != null) Noteblock.vanillaMusicTask.cancel();
         HandlerList.unregisterAll((JavaPlugin) this);
     }
-
 
 }

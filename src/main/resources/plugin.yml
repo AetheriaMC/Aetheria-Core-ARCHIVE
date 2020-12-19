@@ -259,6 +259,10 @@ commands:
     permission: aetheriacore.punish
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
     usage: /<command> <player>
+  2fa:
+    description: Setup 2fa/enter code
+    aliases: [ auth ]
+
 #  givegroup:
 #    description: Give Player a Group
 #    usage: /<command>
@@ -550,3 +554,30 @@ permissions:
   aetheriacore.punish:
     default: op
     description: punish a player
+  aetheriacore.2fa.*:
+    description: Permissions to all 2FA commands
+    default: op
+    children:
+      aetheriacore.2fa.use: true
+      aetheriacore.2fa.setup: true
+      aetheriacore.2fa.remove: true
+      aetheriacore.2fa.remove.others: true
+      aetheriacore.2fa.reload: true
+  aetheriacore.2fa.use:
+    description: Permissions to use the /2FA command
+    default: op
+  aetheriacore.2fa.setup:
+    description: Permissions to set up 2FA
+    default: op
+  aetheriacore.2fa.remove:
+    description: Permissions to remove your own 2FA
+    default: op
+  aetheriacore.2fa.remove.others:
+    description: Admin permissions to remove other players' 2FA
+    default: op
+  aetheriacore.2fa.reload:
+    description: Admin permissions to reload the 2FA plugin
+    default: op
+  aetheriacore.2fa.demand:
+    description: A player with this permission must have 2FA linked to thier account
+    default: false

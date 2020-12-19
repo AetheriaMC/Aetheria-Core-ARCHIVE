@@ -1,6 +1,7 @@
 package net.badbird5907.aetheriacore.spigot.setup;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
+import net.badbird5907.aetheriacore.spigot.auth.commands.CommandHandler;
 import net.badbird5907.aetheriacore.spigot.commands.aetheriacore;
 import net.badbird5907.aetheriacore.spigot.commands.fun.PingWars;
 import net.badbird5907.aetheriacore.spigot.commands.management.togglePvp;
@@ -22,7 +23,7 @@ import java.lang.reflect.Field;
 
 public class SetupCommands {
     public static void setupCommands(AetheriaCore plugin) {
-        plugin.getCommand("aetheriacore").setExecutor(new aetheriacore(AetheriaCore.instance));
+        plugin.getCommand("aetheriacore").setExecutor(new aetheriacore(AetheriaCore.getInstance()));
         plugin.getCommand("aetheriacore").setTabCompleter(new TabComplete());
         plugin.getCommand("invis").setExecutor(new invis());
         plugin.getCommand("clearchat").setExecutor(new clearchat(plugin));
@@ -50,6 +51,7 @@ public class SetupCommands {
         plugin.getCommand("masssay").setExecutor(new MassSay());
         plugin.getCommand("getclientbrand").setExecutor(new GetClientBrand());
         plugin.getCommand("getviewdistance").setExecutor(new GetViewDist());
+        plugin.getCommand("2fa").setExecutor(CommandHandler.getInstance());
         if(!Bukkit.getPluginManager().isPluginEnabled("AetheriaItems")){
             plugin.getCommand("item").setExecutor(new item());
             plugin.getCommand("item").setTabCompleter(new TabComplete());

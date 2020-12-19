@@ -15,13 +15,13 @@ public class Database {
     private Connection connection;
 
     public Database(ConfigurationSection config) {
-        this.host = config.getString("host");
-        this.database = config.getString("database");
-        this.port = config.getInt("port");
+        this.host = config.getString("MySQL.credentials.host");
+        this.database = config.getString("MySQL.credentials.database");
+        this.port = config.getInt("MySQL.credentials.port");
 
         properties = new Properties();
-        properties.setProperty("user", config.getString("username"));
-        properties.setProperty("password", config.getString("password"));
+        properties.setProperty("user", config.getString("MySQL.auth.username"));
+        properties.setProperty("password", config.getString("MySQL.auth.password"));
         if (!config.getBoolean("ssl")) {
             properties.setProperty("verifyServerCertificate", "false");
             properties.setProperty("useSSL", "false");

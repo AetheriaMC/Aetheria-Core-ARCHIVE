@@ -137,10 +137,10 @@ public class Noteblock {
 
     public static void finishEnabling(){
 
-        AetheriaCore.instance.getCommand("music").setExecutor(new CommandMusic());
-        AetheriaCore.instance.getCommand("adminmusic").setExecutor(new CommandAdmin());
-        AetheriaCore.instance.getCommand("adminmusic").setTabCompleter(new TabComplete());
-        AetheriaCore.instance.getCommand("playmusic").setExecutor(new PlayMusic());
+        AetheriaCore.getInstance().getCommand("music").setExecutor(new CommandMusic());
+        AetheriaCore.getInstance().getCommand("adminmusic").setExecutor(new CommandAdmin());
+        AetheriaCore.getInstance().getCommand("adminmusic").setTabCompleter(new TabComplete());
+        AetheriaCore.getInstance().getCommand("playmusic").setExecutor(new PlayMusic());
         radioEnabled = radioEnabled && !songs.isEmpty();
         if (radioEnabled){
             radio = new JukeBoxRadio(playlist);
@@ -170,7 +170,7 @@ public class Noteblock {
         songs = new LinkedList<>();
         fileNames = new HashMap<>();
         internalNames = new HashMap<>();
-        songsFolder = new File(AetheriaCore.instance.getDataFolder(), "songs");
+        songsFolder = new File(AetheriaCore.getInstance().getDataFolder(), "songs");
         if (!songsFolder.exists()) songsFolder.mkdirs();
         for (File file : songsFolder.listFiles()){
             if (file.getName().substring(file.getName().lastIndexOf(".") + 1).equals("nbs")){
@@ -178,14 +178,14 @@ public class Noteblock {
                 if (song == null) continue;
                 String n = getInternal(song);
                 if (internalNames.containsKey(n)) {
-                    AetheriaCore.instance.getLogger().warning("Song \"" + n + "\" is duplicated. Please delete one from the songs directory. File name: " + file.getName());
+                    AetheriaCore.getInstance().getLogger().warning("Song \"" + n + "\" is duplicated. Please delete one from the songs directory. File name: " + file.getName());
                     continue;
                 }
                 fileNames.put(file.getName(), song);
                 internalNames.put(n, song);
             }
         }
-        AetheriaCore.instance.getLogger().info(internalNames.size() + " songs loadeds. Sorting by name... ");
+        AetheriaCore.getInstance().getLogger().info(internalNames.size() + " songs loadeds. Sorting by name... ");
         List<String> names = new ArrayList<>(internalNames.keySet());
         Collections.sort(names, Collator.getInstance());
         for (String str : names){
@@ -193,12 +193,12 @@ public class Noteblock {
         }
 
         setMaxPage();
-        AetheriaCore.instance.getLogger().info("Songs sorted ! " + songs.size() + " songs. Number of pages : " + maxPage);
+        AetheriaCore.getInstance().getLogger().info("Songs sorted ! " + songs.size() + " songs. Number of pages : " + maxPage);
         if (!songs.isEmpty()) playlist = new Playlist(songs.toArray(new Song[0]));
 
         /* --------------------------------------------- PLAYERS ------- */
         try {
-            playersFile = new File(AetheriaCore.instance.getDataFolder(), "datas.yml");
+            playersFile = new File(AetheriaCore.getInstance().getDataFolder(), "datas.yml");
             playersFile.createNewFile();
             players = YamlConfiguration.loadConfiguration(playersFile);
             if (players.get("item") != null) jukeboxItem = ItemStack.deserialize(players.getConfigurationSection("item").getValues(false));
@@ -222,26 +222,26 @@ public class Noteblock {
 
     public static YamlConfiguration loadLang() {
         String s = "en.yml";
-        if (AetheriaCore.instance.getConfig().getString("lang") != null) s = AetheriaCore.instance.getConfig().getString("lang") + ".yml";
-        File lang = new File(AetheriaCore.instance.getDataFolder(), s);
+        if (AetheriaCore.getInstance().getConfig().getString("lang") != null) s = AetheriaCore.getInstance().getConfig().getString("lang") + ".yml";
+        File lang = new File(AetheriaCore.getInstance().getDataFolder(), s);
         if (!lang.exists()) {
             try {
-                AetheriaCore.instance.getDataFolder().mkdir();
+                AetheriaCore.getInstance().getDataFolder().mkdir();
                 lang.createNewFile();
-                InputStream defConfigStream = AetheriaCore.instance.getResource(s);
+                InputStream defConfigStream = AetheriaCore.getInstance().getResource(s);
                 if (defConfigStream != null) {
                     YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(defConfigStream, StandardCharsets.UTF_8));
                     defConfig.save(lang);
                     Lang.loadFromConfig(defConfig);
-                    AetheriaCore.instance.getLogger().info("Created language file " + s);
+                    AetheriaCore.getInstance().getLogger().info("Created language file " + s);
                     return defConfig;
                 }
             } catch(IOException e) {
                 e.printStackTrace();
-                AetheriaCore.instance.getLogger().severe("Couldn't create language file.");
-                AetheriaCore.instance.getLogger().severe("This is a fatal error. Now disabling.");
+                AetheriaCore.getInstance().getLogger().severe("Couldn't create language file.");
+                AetheriaCore.getInstance().getLogger().severe("This is a fatal error. Now disabling.");
                 disable = true;
-                Bukkit.getPluginManager().disablePlugin(AetheriaCore.instance);
+                Bukkit.getPluginManager().disablePlugin(AetheriaCore.getInstance());
                 return null;
             }
         }
@@ -249,22 +249,22 @@ public class Noteblock {
         try {
             Lang.saveFile(conf, lang);
         } catch(IOException | IllegalArgumentException | IllegalAccessException e) {
-            AetheriaCore.instance.getLogger().warning("Failed to save lang.yml.");
-            AetheriaCore.instance.getLogger().warning("Report this stack trace to SkytAsul on SpigotMC.");
+            AetheriaCore.getInstance().getLogger().warning("Failed to save lang.yml.");
+            AetheriaCore.getInstance().getLogger().warning("Report this stack trace to SkytAsul on SpigotMC.");
             e.printStackTrace();
         }
         Lang.loadFromConfig(conf);
-        AetheriaCore.instance.getLogger().info("Loaded language file " + s);
+        AetheriaCore.getInstance().getLogger().info("Loaded language file " + s);
         return conf;
     }
 
     public static void initAll(){
-        AetheriaCore.instance.reloadConfig();
+        AetheriaCore.getInstance().reloadConfig();
 
         loadLang();
         if (disable) return;
 
-        FileConfiguration config = AetheriaCore.instance.getConfig();
+        FileConfiguration config = AetheriaCore.getInstance().getConfig();
         jukeboxClick = config.getBoolean("jukeboxClick");
         sendMessages = config.getBoolean("sendMessages");
         async = config.getBoolean("asyncLoading");
@@ -309,7 +309,7 @@ public class Noteblock {
                     loadDatas();
                     finishEnabling();
                 }
-            }.runTaskAsynchronously(AetheriaCore.instance);
+            }.runTaskAsynchronously(AetheriaCore.getInstance());
         }else{
             loadDatas();
             finishEnabling();
@@ -319,13 +319,13 @@ public class Noteblock {
             try {
                 String nms = "net.minecraft.server";
                 String cb = "org.bukkit.craftbukkit";
-                Method getHandle = AetheriaCore.instance.getVersionedClass(cb, "entity.CraftPlayer").getDeclaredMethod("getHandle");
-                Field playerConnection = AetheriaCore.instance.getVersionedClass(nms, "EntityPlayer").getDeclaredField("playerConnection");
-                Method sendPacket = AetheriaCore.instance.getVersionedClass(nms, "PlayerConnection").getDeclaredMethod("sendPacket", AetheriaCore.instance.getVersionedClass(nms, "Packet"));
-                Class<?> soundCategory = AetheriaCore.instance.getVersionedClass(nms, "SoundCategory");
-                Object packet = AetheriaCore.instance.getVersionedClass(nms, "PacketPlayOutStopSound").getDeclaredConstructor(AetheriaCore.instance.getVersionedClass(nms, "MinecraftKey"), soundCategory).newInstance(null, soundCategory.getDeclaredField("MUSIC").get(null));
+                Method getHandle = AetheriaCore.getInstance().getVersionedClass(cb, "entity.CraftPlayer").getDeclaredMethod("getHandle");
+                Field playerConnection = AetheriaCore.getInstance().getVersionedClass(nms, "EntityPlayer").getDeclaredField("playerConnection");
+                Method sendPacket = AetheriaCore.getInstance().getVersionedClass(nms, "PlayerConnection").getDeclaredMethod("sendPacket", AetheriaCore.getInstance().getVersionedClass(nms, "Packet"));
+                Class<?> soundCategory = AetheriaCore.getInstance().getVersionedClass(nms, "SoundCategory");
+                Object packet = AetheriaCore.getInstance().getVersionedClass(nms, "PacketPlayOutStopSound").getDeclaredConstructor(AetheriaCore.getInstance().getVersionedClass(nms, "MinecraftKey"), soundCategory).newInstance(null, soundCategory.getDeclaredField("MUSIC").get(null));
 
-                AetheriaCore.instance.stopVanillaMusic = player -> {
+                AetheriaCore.getInstance().stopVanillaMusic = player -> {
                     try {
                         sendPacket.invoke(playerConnection.get(getHandle.invoke(player)), packet);
                     }catch (ReflectiveOperationException e1) {
@@ -333,9 +333,9 @@ public class Noteblock {
                     }
                 };
 
-                vanillaMusicTask = Bukkit.getScheduler().runTaskTimerAsynchronously(AetheriaCore.instance, () -> {
+                vanillaMusicTask = Bukkit.getScheduler().runTaskTimerAsynchronously(AetheriaCore.getInstance(), () -> {
                     for (PlayerData pdata : datas.getDatas()) {
-                        if (pdata.isPlaying() && pdata.getPlayer() != null) AetheriaCore.instance.stopVanillaMusic.accept(pdata.getPlayer());
+                        if (pdata.isPlaying() && pdata.getPlayer() != null) AetheriaCore.getInstance().stopVanillaMusic.accept(pdata.getPlayer());
                     }
                 }, 20L, 100l); // every 5 seconds
             }catch (ReflectiveOperationException ex) {
@@ -346,26 +346,26 @@ public class Noteblock {
 
     public static void DataFile() {
         pluginManager.log("Checking Data File");
-        AetheriaCore.instance.customConfigFile = new File(AetheriaCore.instance.getDataFolder(), "data.yml");
-        if (!AetheriaCore.instance.customConfigFile.exists()) {
+        AetheriaCore.getInstance().customConfigFile = new File(AetheriaCore.getInstance().getDataFolder(), "data.yml");
+        if (!AetheriaCore.getInstance().customConfigFile.exists()) {
             pluginManager.warn("Data file does not exist. Creating new file");
-            AetheriaCore.instance.customConfigFile.getParentFile().mkdirs();
-            AetheriaCore.instance.saveResource("data.yml", false);
+            AetheriaCore.getInstance().customConfigFile.getParentFile().mkdirs();
+            AetheriaCore.getInstance().saveResource("data.yml", false);
         }
 
-        AetheriaCore.instance.customConfig = new YamlConfiguration();
+        AetheriaCore.getInstance().customConfig = new YamlConfiguration();
         try {
-            AetheriaCore.instance.customConfig.load(AetheriaCore.instance.customConfigFile);
+            AetheriaCore.getInstance().customConfig.load(AetheriaCore.getInstance().customConfigFile);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
-        AetheriaCore.instance.getDataFile().addDefault("pvp", true);
-        AetheriaCore.instance.getDataFile().addDefault("mutechatstatis", false);
+        AetheriaCore.getInstance().getDataFile().addDefault("pvp", true);
+        AetheriaCore.getInstance().getDataFile().addDefault("mutechatstatis", false);
 
     }
 
     public static void waitThenRun() {
-        Bukkit.getScheduler().scheduleSyncDelayedTask(AetheriaCore.instance, new Runnable() {
+        Bukkit.getScheduler().scheduleSyncDelayedTask(AetheriaCore.getInstance(), new Runnable() {
             public void run() {
                 initAll();
             }

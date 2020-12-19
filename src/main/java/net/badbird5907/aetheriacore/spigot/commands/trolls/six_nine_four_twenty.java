@@ -22,7 +22,7 @@ public class six_nine_four_twenty implements CommandExecutor {
             //player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 1));
             player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 100, 2));
             sender.sendMessage(ChatColor.GREEN + "u ok?");
-            Bukkit.getScheduler().scheduleSyncRepeatingTask(AetheriaCore.instance, new Runnable() {
+            Bukkit.getScheduler().scheduleSyncRepeatingTask(AetheriaCore.getInstance(), new Runnable() {
                 @Override
                 public void run() {
                     SoundManager.high_ping(player, 10);

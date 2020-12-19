@@ -178,7 +178,12 @@ public class CommandAdmin implements CommandExecutor {
                     for (Player p : Bukkit.getOnlinePlayers()){
                         sender.sendMessage(p.getName() + " : " + shuffle(p));
                     }
-                }else {
+                }else if (args[1].equals("everyone")){
+                    for (Player p : Bukkit.getOnlinePlayers()){
+                        sender.sendMessage(p.getName() + " : " + shuffle(p));
+                    }
+                }
+                else {
                     Player cp = Bukkit.getPlayer(args[1]);
                     if (cp == null){
                         sender.sendMessage("§cUnknown player.");
