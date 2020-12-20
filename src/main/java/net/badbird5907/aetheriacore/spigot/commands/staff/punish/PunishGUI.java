@@ -22,6 +22,7 @@ public class PunishGUI implements Listener {
         ItemStack punishButton = new ItemStack(Material.IRON_AXE);
         ItemStack History = new ItemStack(Material.WRITABLE_BOOK);
         //Create Inventory
+        //TODO look ingo 27 size
         gui = Bukkit.createInventory(null, 27, "Punish " + target.getName());
         //Create Meta
         ItemMeta punishButtonMeta = punishButton.getItemMeta();

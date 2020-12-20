@@ -1,0 +1,11 @@
+package net.badbird5907.aetheriacore.spigot.commands.timevote.subcommands;
+
+import net.badbird5907.aetheriacore.spigot.commands.timevote.TimeVote;
+import org.bukkit.entity.Player;
+
+public class Yes extends TimeVote {
+    @Override
+    public void onCommand(Player player, String[] args) {
+
+    }
+}
