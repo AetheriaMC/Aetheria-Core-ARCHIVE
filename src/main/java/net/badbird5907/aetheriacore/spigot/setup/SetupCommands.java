@@ -10,6 +10,7 @@ import net.badbird5907.aetheriacore.spigot.commands.staff.QuickChat;
 import net.badbird5907.aetheriacore.spigot.commands.staff.StaffMode;
 import net.badbird5907.aetheriacore.spigot.commands.staff.punish.punish;
 import net.badbird5907.aetheriacore.spigot.commands.staff.staffchat;
+import net.badbird5907.aetheriacore.spigot.commands.timevote.TimeVoteCommandManager;
 import net.badbird5907.aetheriacore.spigot.commands.trolls.*;
 import net.badbird5907.aetheriacore.spigot.commands.utils.*;
 import net.badbird5907.aetheriacore.spigot.test;
@@ -52,6 +53,7 @@ public class SetupCommands {
         plugin.getCommand("getclientbrand").setExecutor(new GetClientBrand());
         plugin.getCommand("getviewdistance").setExecutor(new GetViewDist());
         plugin.getCommand("2fa").setExecutor(CommandHandler.getInstance());
+        plugin.getCommand("timevote").setExecutor(new TimeVoteCommandManager());
         if(!Bukkit.getPluginManager().isPluginEnabled("AetheriaItems")){
             plugin.getCommand("item").setExecutor(new item());
             plugin.getCommand("item").setTabCompleter(new TabComplete());

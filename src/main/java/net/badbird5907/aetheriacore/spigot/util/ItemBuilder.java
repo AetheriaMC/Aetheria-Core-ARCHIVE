@@ -3,7 +3,6 @@ package net.badbird5907.aetheriacore.spigot.util;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -16,7 +15,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class ItemstackBuilder {
+/**
+ * @deprecated
+ */
+public class ItemBuilder {
 
     private final ItemStack item;
     private final ItemMeta itemM;
@@ -29,7 +31,7 @@ public class ItemstackBuilder {
      *
      * @since 1.0
      */
-    public ItemstackBuilder(final Material itemType){
+    public ItemBuilder(final Material itemType){
         item = new ItemStack(itemType);
         itemM = item.getItemMeta();
     }
@@ -42,7 +44,7 @@ public class ItemstackBuilder {
      *
      * @since 1.0
      */
-    public ItemstackBuilder(final ItemStack itemStack){
+    public ItemBuilder(final ItemStack itemStack){
         item = itemStack;
         itemM = item.getItemMeta();
     }
@@ -52,7 +54,7 @@ public class ItemstackBuilder {
      *
      * @since 1.0
      */
-    public ItemstackBuilder(){
+    public ItemBuilder(){
         item = new ItemStack(Material.AIR);
         itemM = item.getItemMeta();
     }
@@ -66,7 +68,7 @@ public class ItemstackBuilder {
      * @return the current instance for chainable application.
      * @since 1.0
      */
-    public ItemstackBuilder type(final Material material){
+    public ItemBuilder type(final Material material){
         build().setType(material);
         return this;
     }
@@ -80,7 +82,7 @@ public class ItemstackBuilder {
      * @return the current instance for chainable application.
      * @since 1.0
      */
-    public ItemstackBuilder material(final Material material){
+    public ItemBuilder material(final Material material){
         build().setType(material);
         return this;
     }
@@ -94,7 +96,7 @@ public class ItemstackBuilder {
      * @return the current instance for chainable application.
      * @since 1.0
      */
-    public ItemstackBuilder amount(final Integer itemAmt){
+    public ItemBuilder amount(final Integer itemAmt){
         build().setAmount(itemAmt);
         return this;
     }
@@ -108,7 +110,7 @@ public class ItemstackBuilder {
      * @return the current instance for chainable application.
      * @since 1.0
      */
-    public ItemstackBuilder name(final String name){
+    public ItemBuilder name(final String name){
         meta().setDisplayName(name);
         build().setItemMeta(meta());
         return this;
@@ -123,7 +125,7 @@ public class ItemstackBuilder {
      * @return the current instance for chainable application.
      * @since 1.0
      */
-    public ItemstackBuilder lore(final String lore){
+    public ItemBuilder lore(final String lore){
         List<String> lores = meta().getLore();
         if(lores == null){lores = new ArrayList<>();}
         lores.add(lore);
@@ -141,7 +143,7 @@ public class ItemstackBuilder {
      * @return the current instance for chainable application.
      * @since 1.0
      */
-    public ItemstackBuilder lores(final String[] lores){
+    public ItemBuilder lores(final String[] lores){
         List<String> loresList = meta().getLore();
         if(loresList == null){loresList = new ArrayList<>();}
         else{loresList.clear();}
@@ -149,7 +151,7 @@ public class ItemstackBuilder {
         meta().setLore(loresList);
         return this;
     }
-    public ItemstackBuilder lores(final List lores){
+    public ItemBuilder lores(final List lores){
         Collections.addAll(lores);
         meta().setLore(lores);
         return this;
@@ -164,7 +166,7 @@ public class ItemstackBuilder {
      * @return the current instance for chainable application.
      * @since 1.0
      */
-    public ItemstackBuilder durability(final int durability){
+    public ItemBuilder durability(final int durability){
         build().setDurability((short) durability);
         return this;
     }
@@ -179,7 +181,7 @@ public class ItemstackBuilder {
      * @since 1.0
      */
     @SuppressWarnings("deprecation")
-    public ItemstackBuilder data(final int data){
+    public ItemBuilder data(final int data){
         build().setData(new MaterialData(build().getType(), (byte)data));
         return this;
     }
@@ -196,7 +198,7 @@ public class ItemstackBuilder {
      * @return the current instance for chainable application.
      * @since 1.0
      */
-    public ItemstackBuilder enchantment(final Enchantment enchantment, final int level){
+    public ItemBuilder enchantment(final Enchantment enchantment, final int level){
         build().addUnsafeEnchantment(enchantment, level);
         return this;
     }
@@ -210,7 +212,7 @@ public class ItemstackBuilder {
      * @return the current instance for chainable application.
      * @since 1.0
      */
-    public ItemstackBuilder enchantment(final Enchantment enchantment){
+    public ItemBuilder enchantment(final Enchantment enchantment){
         build().addUnsafeEnchantment(enchantment, 1);
         return this;
     }
@@ -227,7 +229,7 @@ public class ItemstackBuilder {
      * @return the current instance for chainable application.
      * @since 1.0
      */
-    public ItemstackBuilder enchantments(final Enchantment[] enchantments, final int level){
+    public ItemBuilder enchantments(final Enchantment[] enchantments, final int level){
         build().getEnchantments().clear();
         for(Enchantment enchantment : enchantments){
             build().addUnsafeEnchantment(enchantment, level);
@@ -244,7 +246,7 @@ public class ItemstackBuilder {
      * @return the current instance for chainable application.
      * @since 1.0
      */
-    public ItemstackBuilder enchantments(final Enchantment[] enchantments){
+    public ItemBuilder enchantments(final Enchantment[] enchantments){
         build().getEnchantments().clear();
         for(Enchantment enchantment : enchantments){
             build().addUnsafeEnchantment(enchantment, 1);
@@ -261,7 +263,7 @@ public class ItemstackBuilder {
      * @return the current instance for chainable application.
      * @since 1.0
      */
-    public ItemstackBuilder clearEnchantment(final Enchantment enchantment){
+    public ItemBuilder clearEnchantment(final Enchantment enchantment){
         Map<Enchantment, Integer> itemEnchantments = build().getEnchantments();
         for(Enchantment enchantmentC : itemEnchantments.keySet()){
             if(enchantment == enchantmentC){
@@ -277,7 +279,7 @@ public class ItemstackBuilder {
      * @return the current instance for chainable application.
      * @since 1.0
      */
-    public ItemstackBuilder clearEnchantments(){
+    public ItemBuilder clearEnchantments(){
         build().getEnchantments().clear();
         return this;
     }
@@ -291,7 +293,7 @@ public class ItemstackBuilder {
      * @return the current instance for chainable application.
      * @since 1.0
      */
-    public ItemstackBuilder clearLore(final String lore){
+    public ItemBuilder clearLore(final String lore){
         if(meta().getLore().contains(lore)){
             meta().getLore().remove(lore);
         }
@@ -305,7 +307,7 @@ public class ItemstackBuilder {
      * @return the current instance for chainable application.
      * @since 1.0
      */
-    public ItemstackBuilder clearLores(){
+    public ItemBuilder clearLores(){
         meta().getLore().clear();
         build().setItemMeta(meta());
         return this;
@@ -320,7 +322,7 @@ public class ItemstackBuilder {
      * @return the current instance for chainable application.
      * @since 1.0
      */
-    public ItemstackBuilder color(final Color color){
+    public ItemBuilder color(final Color color){
         if(build().getType() == Material.LEATHER_HELMET
                 || build().getType() == Material.LEATHER_CHESTPLATE
                 || build().getType() == Material.LEATHER_LEGGINGS
@@ -338,7 +340,7 @@ public class ItemstackBuilder {
      * @return the current instance for chainable application.
      * @since 1.0
      */
-    public ItemstackBuilder clearColor(){
+    public ItemBuilder clearColor(){
         if(build().getType() == XMaterial.LEATHER_HELMET.parseMaterial()
                 || build().getType() == XMaterial.LEATHER_CHESTPLATE.parseMaterial()
                 || build().getType() == XMaterial.LEATHER_LEGGINGS.parseMaterial()
@@ -359,7 +361,7 @@ public class ItemstackBuilder {
      * @return the current instance for chainable application
      * @since 1.0
      */
-    public ItemstackBuilder skullOwner(final String name){
+    public ItemBuilder skullOwner(final String name){
         if(build().getType() == XMaterial.PLAYER_HEAD.parseMaterial() && build().getDurability() == (byte) 3){
             SkullMeta skullMeta = (SkullMeta) meta();
             skullMeta.setOwner(name);
@@ -372,7 +374,7 @@ public class ItemstackBuilder {
      * Returns the {@link ItemMeta} of the {@link ItemStack}
      * @return the current instance for chainable application
      */
-    public ItemstackBuilder hideAttributes(){
+    public ItemBuilder hideAttributes(){
         build().getItemMeta().addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         return this;
     }
@@ -381,7 +383,7 @@ public class ItemstackBuilder {
      * Returns the {@link ItemMeta} of the {@link ItemStack}
      * @return the current instance for chainable application
      */
-    public ItemstackBuilder setAttributes(ItemFlag iflag){
+    public ItemBuilder setAttributes(ItemFlag iflag){
         build().getItemMeta().addItemFlags(iflag);
         return this;
     }
@@ -395,7 +397,7 @@ public class ItemstackBuilder {
     }
 
     /**
-     * Returns the {@link ItemStack} of the {@link ItemstackBuilder} instance.
+     * Returns the {@link ItemStack} of the {@link ItemBuilder} instance.
      *
      * @return the ItemStack of the ItemstackBuilder instance.
      */

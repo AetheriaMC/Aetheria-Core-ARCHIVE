@@ -1,6 +1,7 @@
 package net.badbird5907.aetheriacore.spigot.commands.timevote;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
+import net.badbird5907.aetheriacore.spigot.commands.timevote.subcommands.No;
 import net.badbird5907.aetheriacore.spigot.commands.timevote.subcommands.Yes;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,6 +18,7 @@ public class TimeVoteCommandManager implements CommandExecutor{
     public TimeVoteCommandManager(){}
     private void setup(){
         TimeVoteCommands.put("yes", new Yes());
+        TimeVoteCommands.put("no", new No());
         TimeVoteCommands.forEach((k, v) -> {
             commands.add(v);
         });
