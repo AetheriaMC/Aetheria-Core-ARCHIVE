@@ -3,12 +3,6 @@ package net.badbird5907.aetheriacore.bungee;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
-import net.badbird5907.aetheriacore.bungee.auth.handlers.AuthHandler;
-import net.badbird5907.aetheriacore.bungee.auth.handlers.ConfigHandler;
-import net.badbird5907.aetheriacore.bungee.auth.handlers.MessageHandler;
-import net.badbird5907.aetheriacore.bungee.auth.listeners.DisabledEvents;
-import net.badbird5907.aetheriacore.bungee.auth.listeners.OnBungeePlayerConnections;
-import net.badbird5907.aetheriacore.bungee.auth.listeners.OnPluginMessage;
 import net.badbird5907.aetheriacore.bungee.commands.staff.*;
 import net.badbird5907.aetheriacore.bungee.commands.util.GlobalBroadcast;
 import net.badbird5907.aetheriacore.bungee.commands.warps.*;
@@ -41,9 +35,6 @@ public final class AetheriaCoreBungee extends Plugin {
     public static List<UUID> inCSpy = new ArrayList<>();
     public static List<UUID> Hush = new ArrayList<>();
     public static Boolean is_lockdown;
-    protected static MessageHandler messageHandler;
-    protected static ConfigHandler configHandler;
-    protected static AuthHandler authHandler;
     private static AetheriaCoreBungee instance;
     private JDA jda;
 
@@ -62,8 +53,6 @@ public final class AetheriaCoreBungee extends Plugin {
         Messages.createFile("bungeemessages");
         DataFile.createFile("bungeedata");
         Config.createFile("bungeeconfig");
-        //setupAuth(this);
-        setupListeners(this);
         log.Log("Registering Commands...");
         getProxy().getInstance().getPluginManager().registerCommand(this, new Hub());
         getProxy().getInstance().getPluginManager().registerCommand(this, new Beta());
@@ -128,22 +117,6 @@ public final class AetheriaCoreBungee extends Plugin {
             e.printStackTrace();
         }
     }
-    public static void setupAuth(AetheriaCoreBungee instance) {
-        messageHandler = new MessageHandler(instance);
-        configHandler = new ConfigHandler(instance);
-        authHandler = new AuthHandler();
-    }
-
-    public static void setupListeners(AetheriaCoreBungee instance) {
-        PluginManager pm = instance.getProxy().getPluginManager();
-        pm.registerListener(instance, new OnPluginMessage(instance));
-        pm.registerListener(instance, new OnBungeePlayerConnections(instance));
-        pm.registerListener(instance, new DisabledEvents(instance));
-        instance.getProxy().registerChannel(Constants.channelName);
-    }
-    public static MessageHandler getMessageHandler() { return AetheriaCoreBungee.messageHandler; }
-    public static ConfigHandler getConfigHandler() { return AetheriaCoreBungee.configHandler; }
-    public static AuthHandler getAuthHandler() { return AetheriaCoreBungee.authHandler; }
     public static JDA getJDA() {
         return AetheriaCoreBungee.getInstance().jda;
     }
