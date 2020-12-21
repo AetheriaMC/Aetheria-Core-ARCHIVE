@@ -10,7 +10,9 @@ import net.badbird5907.aetheriacore.spigot.commands.staff.QuickChat;
 import net.badbird5907.aetheriacore.spigot.commands.staff.StaffMode;
 import net.badbird5907.aetheriacore.spigot.commands.staff.punish.punish;
 import net.badbird5907.aetheriacore.spigot.commands.staff.staffchat;
+import net.badbird5907.aetheriacore.spigot.commands.timevote.TimeMgr;
 import net.badbird5907.aetheriacore.spigot.commands.timevote.TimeVoteCommandManager;
+import net.badbird5907.aetheriacore.spigot.commands.timevote.VoteMgr;
 import net.badbird5907.aetheriacore.spigot.commands.trolls.*;
 import net.badbird5907.aetheriacore.spigot.commands.utils.*;
 import net.badbird5907.aetheriacore.spigot.test;
@@ -21,6 +23,7 @@ import org.bukkit.command.CommandMap;
 import org.bukkit.craftbukkit.v1_16_R3.CraftServer;
 
 import java.lang.reflect.Field;
+import java.sql.Time;
 
 public class SetupCommands {
     public static void setupCommands(AetheriaCore plugin) {
@@ -54,6 +57,8 @@ public class SetupCommands {
         plugin.getCommand("getviewdistance").setExecutor(new GetViewDist());
         plugin.getCommand("2fa").setExecutor(CommandHandler.getInstance());
         plugin.getCommand("timevote").setExecutor(new TimeVoteCommandManager());
+        new TimeVoteCommandManager().setup();
+        TimeMgr.start();
         if(!Bukkit.getPluginManager().isPluginEnabled("AetheriaItems")){
             plugin.getCommand("item").setExecutor(new item());
             plugin.getCommand("item").setTabCompleter(new TabComplete());

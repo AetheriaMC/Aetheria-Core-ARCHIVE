@@ -15,13 +15,12 @@ public class ITimeVoteCmdManager {
         if(args.length == 0) {
             new TimeVoteGUI().open((Player) sender, "main");
         }
-        if(isValid(args[0])){
-            String[] arg = args.toString().replaceFirst(args[0], "").split(" ");
-            TimeVoteCommandManager.TimeVoteCommands.get(args[0]).execute((Player) sender, arg, page(args) ,AetheriaCore.getInstance());
+        if(args.length < 0){
+            if((TimeVoteCommandManager.commandstr.contains(args[0]))){
+                String[] arg = args.toString().replaceFirst(args[0], "").split(" ");
+                TimeVoteCommandManager.TimeVoteCommands.get(args[0]).execute((Player) sender, arg, page(args) ,AetheriaCore.getInstance());
+            }
         }
-    }
-    public static boolean isValid(String str){
-        return TimeVoteCommandManager.TimeVoteCommands.containsKey(str);
     }
     public static String page(String[] args){
         if(args[0].equalsIgnoreCase("vote"))

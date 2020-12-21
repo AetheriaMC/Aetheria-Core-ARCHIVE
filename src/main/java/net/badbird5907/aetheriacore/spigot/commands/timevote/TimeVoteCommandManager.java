@@ -12,15 +12,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TimeVoteCommandManager implements CommandExecutor{
-    private ArrayList<TimeVote> commands = new ArrayList<TimeVote>();
+    public static ArrayList<TimeVote> commands = new ArrayList<TimeVote>();
+    public static ArrayList<String> commandstr = new ArrayList<>();
     public static HashMap<String, TimeVote> TimeVoteCommands = new HashMap<>();
     private AetheriaCore plugin = AetheriaCore.getInstance();
     public TimeVoteCommandManager(){}
-    private void setup(){
+    public static void setup(){
         TimeVoteCommands.put("yes", new Yes());
         TimeVoteCommands.put("no", new No());
         TimeVoteCommands.forEach((k, v) -> {
             commands.add(v);
+            commandstr.add(k);
         });
     }
 
