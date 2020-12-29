@@ -30,5 +30,11 @@ public class pluginManager {
         Bukkit.getLogger().warning(pluginManager.prefix + string        );
     }
     public static String ServerType = Bukkit.getServer().getPluginManager().getPlugin("AetheriaCore").getConfig().getString("Server-Type");
+    public static boolean is16(){
+        return Bukkit.getBukkitVersion().contains("1.16");
+    }
+    public static boolean is8(){
+        return Bukkit.getBukkitVersion().contains("1.8");
+    }
 
 }

@@ -2,12 +2,6 @@ package net.badbird5907.aetheriacore.spigot;
 
 import com.xxmicloxx.NoteBlockAPI.NoteBlockAPI;
 //import github.scarsz.discordsrv.DiscordSRV;
-import net.badbird5907.aetheriacore.spigot.auth.TwoFactorAuthentication;
-import net.badbird5907.aetheriacore.spigot.auth.handlers.AuthHandler;
-import net.badbird5907.aetheriacore.spigot.auth.handlers.BungeecordMessageHandler;
-import net.badbird5907.aetheriacore.spigot.auth.handlers.ConfigHandler;
-import net.badbird5907.aetheriacore.spigot.auth.handlers.MessageHandler;
-import net.badbird5907.aetheriacore.spigot.discord.Discord;
 import net.badbird5907.aetheriacore.spigot.events.*;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Placeholders;
 import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
@@ -17,6 +11,7 @@ import net.badbird5907.aetheriacore.spigot.setup.SetupCommands;
 import net.badbird5907.aetheriacore.spigot.setup.SetupEvents;
 import net.badbird5907.aetheriacore.spigot.util.inventories.ClickListener;
 import net.badbird5907.aetheriacore.spigot.util.itemtypes;
+import net.badbird5907.aetheriacore.utils.spigui.SpiGUI;
 import net.dv8tion.jda.api.JDA;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
@@ -74,13 +69,14 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
     public static Class<?> getVersionedClass(String packageName, String className) throws ClassNotFoundException {
         return Class.forName(packageName + "." + Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3] + "." + className);
     }
-
+    public static SpiGUI spiGUI;
     @Override
     public void onEnable() {
         instance = this;
         long start = System.currentTimeMillis();
         if (getConfig().getBoolean("enable")) {
             //signGui = new SignGUI(this);
+            spiGUI = new SpiGUI(this);
             boolean mc1164 = Bukkit.getServer().getClass().getPackage().getName().contains("1.16.4");
             if (!mc1164)
                 warn("SERVER IS VERSION: " + Bukkit.getServer().getVersion() + "ONLY " + SUPPORTED_VERSIONS.toString() + " IS SUPPORTED.");

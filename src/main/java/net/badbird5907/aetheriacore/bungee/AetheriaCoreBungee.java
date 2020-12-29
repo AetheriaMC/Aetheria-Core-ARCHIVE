@@ -16,11 +16,9 @@ import net.badbird5907.aetheriacore.bungee.util.Config;
 import net.badbird5907.aetheriacore.bungee.util.DataFile;
 import net.badbird5907.aetheriacore.bungee.util.Database;
 import net.badbird5907.aetheriacore.bungee.util.Messages;
-import net.badbird5907.aetheriacore.shared.utils.Constants;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.md_5.bungee.api.plugin.Plugin;
-import net.md_5.bungee.api.plugin.PluginManager;
 import net.md_5.bungee.config.Configuration;
 import org.apache.log4j.BasicConfigurator;
 

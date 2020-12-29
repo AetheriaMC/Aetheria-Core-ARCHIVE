@@ -19,7 +19,8 @@ public class GuiUtils {
         gui.setItem(17, border);
         gui.setItem(26, border);
         gui.setItem(35, border);
-        gui.setItem(45, border);
+        gui.setItem(44, border);
+        gui.setItem(53, border);
         gui.setItem(9, border);
         //gui.setItem(54, border);
         return gui;
