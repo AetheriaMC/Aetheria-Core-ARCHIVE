@@ -1,15 +1,15 @@
 package net.badbird5907.aetheriacore.spigot.util;
 
-public class IsInt {
-    public static boolean Check (String s) {
+import static java.lang.Integer.*;
 
-        try{
-            // checking valid integer using parseInt() method
-            Integer.parseInt(s);
-            return true;
-        }
-        catch (NumberFormatException e) {
-            return false;
-        }
-    }
+public class IsInt {
+	public static boolean Check(String s) {
+		try {
+			// checking valid integer using parseInt() method
+			parseInt(s);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
 }

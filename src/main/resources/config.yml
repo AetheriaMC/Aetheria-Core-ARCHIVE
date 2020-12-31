@@ -80,7 +80,7 @@ sendMessages: true
 asyncLoading: false
 
 # list of worlds where music will be enabled (empty = all)
-enabledWorlds: []
+enabledWorlds: [ ]
 
 # note particles
 noteParticles: true

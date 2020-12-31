@@ -1,16 +1,14 @@
 package net.badbird5907.aetheriacore.spigot.util;
 
-import net.badbird5907.aetheriacore.spigot.manager.Permission;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import static net.badbird5907.aetheriacore.spigot.manager.Permission.STAFF;
+import static org.bukkit.Bukkit.getOnlinePlayers;
+
 public class KickAllNonStaff {
-    public static void KickAll(String reason){
-        for(Player p : Bukkit.getOnlinePlayers()){
-            if(!p.hasPermission(Permission.STAFF.node))
-                p.kickPlayer(reason);
-            else
-                break;
-        }
-    }
+	public static void KickAll(String reason) {
+		for (Player p : getOnlinePlayers())
+			if (!p.hasPermission(STAFF.node)) p.kickPlayer(reason);
+			else break;
+	}
 }

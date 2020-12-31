@@ -10,29 +10,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import static org.bukkit.Bukkit.*;
+
 public class itemtypes {
-    public static List<String> blocks = new ArrayList<>();
-    public static List<String> allitems = new ArrayList<>();
-    public static List<String> items = new ArrayList<>();
-    public static List<Material> blacklisted_items = new ArrayList<>();
-    public static HashMap CustomItems(){
-        if(Bukkit.getPluginManager().isPluginEnabled("AetheriaItems")){
-            return GetCustomItems.get();
-        }
-        else
-            return null;
-    }
-    public static List<String> alist = new ArrayList<>();
-    public static void addToAllItems() {
-        if(Bukkit.getPluginManager().isPluginEnabled("AetheriaItems")){
-            Set<String> keys = GetCustomItems.get().keySet();
-            int n = keys.size();
-            for(String x : keys){
-                allitems.add(x);
-                alist.add(x);
-            }
-            for (String x : alist)
-                DebugLogger.DebugLog(x);
-        }
-    }
+	public static List<String> blocks = new ArrayList<>();
+	public static List<String> allitems = new ArrayList<>();
+	public static List<String> items = new ArrayList<>();
+	public static List<Material> blacklisted_items = new ArrayList<>();
+	public static List<String> alist = new ArrayList<>();
+
+	public static HashMap CustomItems() {
+		if (getPluginManager().isPluginEnabled("AetheriaItems")) return GetCustomItems.get();
+		else return null;
+	}
+
+	public static void addToAllItems() {
+		if (getPluginManager().isPluginEnabled("AetheriaItems")) {
+			Set<String> keys = GetCustomItems.get().keySet();
+			int n = keys.size();
+			keys.forEach(x -> {
+				allitems.add(x);
+				alist.add(x);
+			});
+			alist.forEach(DebugLogger::DebugLog);
+		}
+	}
 }
