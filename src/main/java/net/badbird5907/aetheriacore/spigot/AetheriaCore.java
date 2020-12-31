@@ -18,6 +18,14 @@ import net.badbird5907.aetheriacore.spigot.jukebox.JukeBoxDatas;
 import net.badbird5907.aetheriacore.spigot.jukebox.PlayerData;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Database;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.JukeBoxRadio;
+import net.badbird5907.aetheriacore.spigot.jukebox.CommandAdmin;
+import net.badbird5907.aetheriacore.spigot.jukebox.CommandMusic;
+import net.badbird5907.aetheriacore.spigot.jukebox.JukeBoxDatas;
+import net.badbird5907.aetheriacore.spigot.jukebox.PlayerData;
+import net.badbird5907.aetheriacore.spigot.jukebox.utils.Database;
+import net.badbird5907.aetheriacore.spigot.jukebox.utils.JukeBoxRadio;
+import net.badbird5907.aetheriacore.spigot.jukebox.utils.Placeholders;
+import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
 import net.badbird5907.aetheriacore.spigot.setup.SetupCommands;
 import net.badbird5907.aetheriacore.spigot.util.TabComplete;
@@ -88,6 +96,27 @@ import static org.bukkit.event.block.Action.RIGHT_CLICK_AIR;
 import static org.bukkit.event.block.Action.RIGHT_CLICK_BLOCK;
 import static org.bukkit.inventory.ItemStack.deserialize;
 
+import static java.lang.Class.forName;
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.Objects.requireNonNull;
+import static java.util.stream.Collectors.joining;
+import static net.badbird5907.aetheriacore.spigot.jukebox.CommandMusic.open;
+import static net.badbird5907.aetheriacore.spigot.jukebox.JukeBoxInventory.discs13;
+import static net.badbird5907.aetheriacore.spigot.jukebox.JukeBoxInventory.discs8;
+import static net.badbird5907.aetheriacore.spigot.jukebox.PlayerData.deserialize;
+import static net.badbird5907.aetheriacore.spigot.jukebox.utils.Lang.loadFromConfig;
+import static net.badbird5907.aetheriacore.spigot.jukebox.utils.Lang.saveFile;
+import static net.badbird5907.aetheriacore.spigot.jukebox.utils.Playlists.PLAYLIST;
+import static net.badbird5907.aetheriacore.spigot.jukebox.utils.Playlists.RADIO;
+import static org.bukkit.Bukkit.*;
+import static org.bukkit.Material.JUKEBOX;
+import static org.bukkit.Material.matchMaterial;
+import static org.bukkit.configuration.file.YamlConfiguration.loadConfiguration;
+import static org.bukkit.event.HandlerList.unregisterAll;
+import static org.bukkit.event.block.Action.RIGHT_CLICK_AIR;
+import static org.bukkit.event.block.Action.RIGHT_CLICK_BLOCK;
+import static org.bukkit.inventory.ItemStack.deserialize;
+
 //import net.badbird5907.aetheriacore.spigot.util.SignGUI;
 
 public final class AetheriaCore extends JavaPlugin implements Listener {
@@ -134,6 +163,63 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
 	public ItemStack jukeboxItem;
 	public JukeBoxDatas datas;
 	public Consumer<Player> stopVanillaMusic = null;
+	//sql
+	private Connection connection;
+	private String host, database, username, password;
+	private int port;
+	private boolean disable = false;
+	private Database db;
+	private BukkitTask vanillaMusicTask = null;
+
+	public AetheriaCore() {
+		instance = this;
+	}
+	//music-end
+	public static final List<String> SUPPORTED_VERSIONS = new ArrayList<>();
+	//protocolib
+	//private ProtocolManager protocolManager;
+	//SignGUI signGui;
+	public static AetheriaCore instance;
+	//music
+	public static final int version = Integer.parseInt(Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3].split("_")[1]);
+	public static FileConfiguration players;
+	public static File songsFolder;
+	public static JukeBoxRadio radio = null;
+	public static Map<String, Song> internalNames;
+	public static int maxPage;
+	public static boolean jukeboxClick = false;
+	public static boolean sendMessages = true;
+	public static boolean async = false;
+	public static boolean autoJoin = false;
+	public static boolean radioEnabled = true;
+	public static boolean radioOnJoin = false;
+	public static boolean autoReload = true;
+	public static boolean preventVanillaMusic = false;
+	public static PlayerData defaultPlayer = null;
+	public static List<String> worldsEnabled;
+	public static boolean worlds;
+	public static boolean particles;
+	public static boolean actionBar;
+	public static Material songItem;
+	public static String itemFormat;
+	public static String itemFormatWithoutAuthor;
+	public static String itemFormatAdmin;
+	public static String itemFormatAdminWithoutAuthor;
+	public static String songFormat;
+	public static String songFormatWithoutAuthor;
+	public static boolean savePlayerDatas = true;
+	private static AetheriaCore plugin;
+	private static File playersFile;
+	private static LinkedList<Song> songs;
+	private static Map<String, Song> fileNames;
+	private static Playlist playlist;
+	private static final Random random = new Random();
+	public File customConfigFile;
+	public FileConfiguration customConfig;
+	public ItemStack jukeboxItem;
+	public JukeBoxDatas datas;
+	public Consumer<Player> stopVanillaMusic = null;
+	private final OnDiscordMessageRecieved discordsrvListener = new OnDiscordMessageRecieved(this);
 	//sql
 	private Connection connection;
 	private String host, database, username, password;
@@ -203,6 +289,79 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
 		if (sendMessages) {
 			if (actionBar) p.spigot().sendMessage(ACTION_BAR, fromLegacyText(msg));
 			else p.spigot().sendMessage(fromLegacyText(msg));
+			return true;
+		}
+		return false;
+	}
+	public static AetheriaCore getInstance() {
+		return instance;
+	}
+
+	public static Song randomSong() {
+		if (songs.isEmpty()) return null;
+		if (songs.size() == 1) return songs.get(0);
+		return songs.get(random.nextInt(songs.size() - 1));
+	}
+
+	public static Playlist getPlaylist() {
+		return playlist;
+	}
+
+	public static List<Song> getSongs() {
+		return songs;
+	}
+
+	public static Song getSongByFile(String fileName) {
+		if (fileName.contains(".nbs")) {
+			return fileNames.get(fileName);
+		}
+		if (fileName.contains(".NBS")) {
+			return fileNames.get(fileName);
+		}
+		return fileNames.get(fileName + ".nbs");
+	}
+
+	public static Song getSongByInternalName(String internalName) {
+		return internalNames.get(internalName);
+	}
+
+	public static String getInternal(Song s) {
+		if (s.getTitle() == null || s.getTitle().isEmpty()) return s.getPath().getName();
+		return s.getTitle();
+	}
+
+	public static String getItemName(Song s, Player p) {
+		boolean admin = p.hasPermission("aetheriacore.music.adminItem");
+		return format(admin ? itemFormatAdmin : itemFormat, admin ? itemFormatAdminWithoutAuthor : itemFormatWithoutAuthor, s);
+	}
+
+	public static String getSongName(Song song) {
+		return format(songFormat, songFormatWithoutAuthor, song);
+	}
+
+	private static String removeFileExtension(String path) {
+		int dot = path.lastIndexOf('.');
+		if (dot == -1) return path;
+		return path.substring(0, dot);
+	}
+
+	public static String format(String base, String noAuthorBase, Song song) {
+		String name = song.getTitle().isEmpty() ? removeFileExtension(song.getPath().getName()) : song.getTitle();
+		String author = song.getAuthor();
+		String id = String.valueOf(songs.indexOf(song));
+		if (author == null || author.isEmpty()) {
+			return noAuthorBase.replace("{NAME}", name).replace("{ID}", id);
+		}
+		return base.replace("{NAME}", name).replace("{AUTHOR}", author).replace("{ID}", id);
+	}
+
+	public static boolean sendMessage(Player p, String msg) {
+		if (AetheriaCore.sendMessages) {
+			if (AetheriaCore.actionBar) {
+				p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(msg));
+			} else {
+				p.spigot().sendMessage(TextComponent.fromLegacyText(msg));
+			}
 			return true;
 		}
 		return false;
@@ -628,7 +787,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
 				}
 				fileNames.put(file.getName(), song);
 				internalNames.put(n, song);
-			}
+
 		getLogger().info(internalNames.size() + " songs loadeds. Sorting by name... ");
 		List<String> names = new ArrayList<>(internalNames.keySet());
 		names.sort(Collator.getInstance());
