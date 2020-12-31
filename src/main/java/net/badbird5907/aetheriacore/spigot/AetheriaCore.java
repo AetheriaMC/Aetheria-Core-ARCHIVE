@@ -4,7 +4,7 @@ import com.xxmicloxx.NoteBlockAPI.NoteBlockAPI;
 //import github.scarsz.discordsrv.DiscordSRV;
 import net.badbird5907.aetheriacore.spigot.events.*;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Placeholders;
-import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
+import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
 import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import net.badbird5907.aetheriacore.spigot.setup.SetupCommands;
@@ -206,11 +206,11 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
     }
 
     private void log(final String string) {
-        Bukkit.getLogger().info(pluginManager.prefix + string);
+        Bukkit.getLogger().info(PluginManager.prefix + string);
     }
 
     private void warn(final String string) {
-        Bukkit.getLogger().warning(pluginManager.prefix + string);
+        Bukkit.getLogger().warning(PluginManager.prefix + string);
     }
 
     private void setupDependencies() {
@@ -283,7 +283,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
 
     public void SetupDatabase() {
         if (plugin.getConfig().getBoolean("enableDatabase", true)) {
-            pluginManager.log("Setting Up Database");
+            PluginManager.log("Setting Up Database");
             if (plugin.getConfig().getBoolean("Custom-DB-port"))
                 port = plugin.getConfig().getInt("Database-port");
             else

@@ -1,6 +1,6 @@
 package net.badbird5907.aetheriacore.spigot.commands.utils;
 
-import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
+import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -27,7 +27,7 @@ public class CreateNPC implements CommandExecutor {
                 player.sendMessage("NPC Created!");
             }
             else{
-                player.sendMessage(pluginManager.prefix + "Must use a name!");
+                player.sendMessage(PluginManager.prefix + "Must use a name!");
             }
         }
         return true;

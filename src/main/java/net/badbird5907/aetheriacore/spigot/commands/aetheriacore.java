@@ -3,7 +3,7 @@ package net.badbird5907.aetheriacore.spigot.commands;
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.manager.DebugLogger;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
-import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
+import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -59,8 +59,8 @@ public class aetheriacore implements CommandExecutor {
                         if (player.hasPermission(permissionManager.reload)) {
                             try {
                                 plugin.reloadConfig();
-                                player.sendMessage(pluginManager.prefix + ChatColor.GREEN + "Config Reloaded!");
-                                player.sendMessage(pluginManager.prefix + ChatColor.RED + "This is not supported. please restart the server when you can.");
+                                player.sendMessage(PluginManager.prefix + ChatColor.GREEN + "Config Reloaded!");
+                                player.sendMessage(PluginManager.prefix + ChatColor.RED + "This is not supported. please restart the server when you can.");
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 player.sendMessage(ChatColor.RED + "ERROR: See console for more details");
@@ -79,7 +79,7 @@ public class aetheriacore implements CommandExecutor {
                                         player.sendMessage(ChatColor.RED + "Error: Debug logging is already on!");
                                     else {
                                         DebugLogger.Debugplayers.add(uuid);
-                                        player.sendMessage(pluginManager.prefix + ChatColor.WHITE + "Debug Logging turned " + ChatColor.GREEN + "ON");
+                                        player.sendMessage(PluginManager.prefix + ChatColor.WHITE + "Debug Logging turned " + ChatColor.GREEN + "ON");
                                     }
                                 }
                                 if (args[1].equalsIgnoreCase("off")) {
@@ -87,15 +87,15 @@ public class aetheriacore implements CommandExecutor {
                                         player.sendMessage(ChatColor.RED + "Error: Debug logging is already off!");
                                     else {
                                         DebugLogger.Debugplayers.remove(uuid);
-                                        player.sendMessage(pluginManager.prefix + ChatColor.WHITE + "Debug Logging turned " + ChatColor.RED + "OFF");
+                                        player.sendMessage(PluginManager.prefix + ChatColor.WHITE + "Debug Logging turned " + ChatColor.RED + "OFF");
                                     }
                                 }
                             }
                         } else {
                             if (plugin.getConfig().getBoolean("Console-Debug-Default"))
-                                player.sendMessage(pluginManager.prefix + "Error: You may not turn on debug logging because it is on for console by default in the config.");
+                                player.sendMessage(PluginManager.prefix + "Error: You may not turn on debug logging because it is on for console by default in the config.");
                             else
-                                player.sendMessage(pluginManager.prefix + "Error: You may not turn on debug logging because it is off for console by default in the config.");
+                                player.sendMessage(PluginManager.prefix + "Error: You may not turn on debug logging because it is off for console by default in the config.");
                         }
                     }
                     if (args[0].equalsIgnoreCase("info")) {

@@ -1,10 +1,9 @@
 package net.badbird5907.aetheriacore.spigot.util.inventories;
 
-import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
+import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import net.badbird5907.aetheriacore.spigot.util.GuiUtils;
 import net.badbird5907.aetheriacore.spigot.util.ItemStackBuilder;
 import net.badbird5907.aetheriacore.spigot.util.XMaterial;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -27,7 +26,7 @@ public class itemmenuinv {
         ref1.setItemMeta(metaref1);
         inv1.setItem(10, ref1);
 
-        if(pluginManager.is16()){
+        if(PluginManager.is16()){
             ItemStack ref2 = new ItemStack(XMaterial.NETHERITE_CHESTPLATE.parseMaterial());
             ItemMeta metaref2 = ref2.getItemMeta();
             ArrayList<String> lore2= new ArrayList<String>();

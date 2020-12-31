@@ -3,7 +3,7 @@ package net.badbird5907.aetheriacore.spigot.commands.utils;
 import net.badbird5907.aetheriacore.spigot.commands.staff.StaffMode;
 import net.badbird5907.aetheriacore.spigot.commands.staff.staffchat;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
-import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
+import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -22,18 +22,18 @@ public class hush implements CommandExecutor {
             if(player.hasPermission(permissionManager.hush)){
                 if(hush.contains(((Player) player).getUniqueId())){
                     hush.remove(((Player) player).getUniqueId());
-                    player.sendMessage(pluginManager.prefix + ChatColor.GREEN + "You can now see the Staff Chat.");
+                    player.sendMessage(PluginManager.prefix + ChatColor.GREEN + "You can now see the Staff Chat.");
                     return true;
                 }
                 else{
                     if(StaffMode.StaffModeToggle.contains(((Player) player).getUniqueId())){
-                        player.sendMessage(pluginManager.prefix + ChatColor.RED + "Error: Staff Mode is active. do /sm to disable." + ChatColor.DARK_GRAY + " " + ChatColor.ITALIC + "STAFF_MODE_ON");
+                        player.sendMessage(PluginManager.prefix + ChatColor.RED + "Error: Staff Mode is active. do /sm to disable." + ChatColor.DARK_GRAY + " " + ChatColor.ITALIC + "STAFF_MODE_ON");
                         return true;
                     }
                     else{
                         hush.add(((Player) player).getUniqueId());
                         staffchat.staffchatToggle.remove(((Player) player).getUniqueId());
-                        player.sendMessage(pluginManager.prefix + ChatColor.GREEN + "StaffChat Ignored. Do /hush to turn back on or relog.");
+                        player.sendMessage(PluginManager.prefix + ChatColor.GREEN + "StaffChat Ignored. Do /hush to turn back on or relog.");
                         return true;
                     }
                 }

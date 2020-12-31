@@ -2,15 +2,14 @@ package net.badbird5907.aetheriacore.spigot.manager;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import org.bukkit.Bukkit;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class pluginManager {
+public class PluginManager {
     AetheriaCore plugin;
 
-    public pluginManager(AetheriaCore plugin) {
+    public PluginManager(AetheriaCore plugin) {
         this.plugin = plugin;
     }
 
@@ -20,14 +19,14 @@ public class pluginManager {
     public static String prefix = "§8[§6AEC§8] ";
     public static String Debugprefix = "§8[§cDEBUG§8] ";
     public static void log(final String string) {
-        Bukkit.getLogger().info(pluginManager.prefix + string);
+        Bukkit.getLogger().info(PluginManager.prefix + string);
     }
 
     public static void warn(final String string) {
-        Bukkit.getLogger().warning(pluginManager.prefix + string        );
+        Bukkit.getLogger().warning(PluginManager.prefix + string        );
     }
     public static void critical_error(final String string) {
-        Bukkit.getLogger().warning(pluginManager.prefix + string        );
+        Bukkit.getLogger().warning(PluginManager.prefix + string        );
     }
     public static String ServerType = Bukkit.getServer().getPluginManager().getPlugin("AetheriaCore").getConfig().getString("Server-Type");
     public static boolean is16(){

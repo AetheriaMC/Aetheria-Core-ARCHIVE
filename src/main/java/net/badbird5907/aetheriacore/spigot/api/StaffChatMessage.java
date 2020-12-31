@@ -2,7 +2,7 @@ package net.badbird5907.aetheriacore.spigot.api;
 
 import net.badbird5907.aetheriacore.spigot.commands.utils.hush;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
-import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
+import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -25,7 +25,7 @@ public class StaffChatMessage{
                 }
                 else{
                     player.sendMessage(ChatColor.GOLD + "StaffChat" + ChatColor.DARK_GRAY + " » " + ChatColor.RESET + sender +": " + message);
-                    pluginManager.log("StaffChat » " + sender + ": " + message);
+                    PluginManager.log("StaffChat » " + sender + ": " + message);
                 }
             }
             else {

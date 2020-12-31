@@ -5,7 +5,6 @@ import com.xxmicloxx.NoteBlockAPI.model.Song;
 import com.xxmicloxx.NoteBlockAPI.utils.NBSDecoder;
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.commands.utils.PlayMusic;
-import net.badbird5907.aetheriacore.spigot.events.NoteblockListener;
 import net.badbird5907.aetheriacore.spigot.jukebox.CommandAdmin;
 import net.badbird5907.aetheriacore.spigot.jukebox.CommandMusic;
 import net.badbird5907.aetheriacore.spigot.jukebox.JukeBoxDatas;
@@ -14,7 +13,7 @@ import net.badbird5907.aetheriacore.spigot.jukebox.utils.Database;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.JukeBoxRadio;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Lang;
 import net.badbird5907.aetheriacore.spigot.manager.Permission;
-import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
+import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import net.badbird5907.aetheriacore.spigot.util.TabComplete;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -197,7 +196,7 @@ public class Noteblock {
                 if(song == null) continue;
                 String n = getInternal(song);
                 if(hiddenNames.containsKey(n)) {
-                    pluginManager.warn("Error: song \"" + n + "\" is duplicated!");
+                    PluginManager.warn("Error: song \"" + n + "\" is duplicated!");
                     continue;
                 }
                 hiddenNames.put(file.getName(), song);
@@ -364,10 +363,10 @@ public class Noteblock {
     }
 
     public static void DataFile() {
-        pluginManager.log("Checking Data File");
+        PluginManager.log("Checking Data File");
         AetheriaCore.getInstance().customConfigFile = new File(AetheriaCore.getInstance().getDataFolder(), "data.yml");
         if (!AetheriaCore.getInstance().customConfigFile.exists()) {
-            pluginManager.warn("Data file does not exist. Creating new file");
+            PluginManager.warn("Data file does not exist. Creating new file");
             AetheriaCore.getInstance().customConfigFile.getParentFile().mkdirs();
             AetheriaCore.getInstance().saveResource("data.yml", false);
         }

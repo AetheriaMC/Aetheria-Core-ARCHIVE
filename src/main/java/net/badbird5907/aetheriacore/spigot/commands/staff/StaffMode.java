@@ -3,7 +3,7 @@ package net.badbird5907.aetheriacore.spigot.commands.staff;
 import de.myzelyam.api.vanish.VanishAPI;
 import net.badbird5907.aetheriacore.spigot.commands.utils.hush;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
-import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
+import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -24,10 +24,10 @@ public class StaffMode implements CommandExecutor {
                 if(StaffModeToggle.contains(((Player) player).getUniqueId())){
                     StaffModeToggle.remove(((Player) player).getUniqueId());
                     VanishAPI.showPlayer((Player) player);
-                    player.sendMessage(pluginManager.prefix + ChatColor.WHITE + "Staff Mode Toggled " + ChatColor.RED + "OFF");
+                    player.sendMessage(PluginManager.prefix + ChatColor.WHITE + "Staff Mode Toggled " + ChatColor.RED + "OFF");
                 }
                 else{
-                    player.sendMessage(pluginManager.prefix + ChatColor.WHITE + "Staff Mode Turned " + ChatColor.GREEN + "ON");
+                    player.sendMessage(PluginManager.prefix + ChatColor.WHITE + "Staff Mode Turned " + ChatColor.GREEN + "ON");
                     staffchat.staffchatToggle.add(((Player) player).getUniqueId());
                     StaffModeToggle.add(((Player) player).getUniqueId());
                     hush.hush.remove(((Player) player).getUniqueId());
@@ -40,7 +40,7 @@ public class StaffMode implements CommandExecutor {
             }
         }
         else{
-            player.sendMessage(pluginManager.prefix + ChatColor.RED + "You must be a player to use this.");
+            player.sendMessage(PluginManager.prefix + ChatColor.RED + "You must be a player to use this.");
         }
         return true;
     }

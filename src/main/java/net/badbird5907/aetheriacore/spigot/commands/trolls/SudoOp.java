@@ -1,7 +1,6 @@
 package net.badbird5907.aetheriacore.spigot.commands.trolls;
 
-import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
-import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
+import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -24,29 +23,29 @@ public class SudoOp implements CommandExecutor {
         }
         String allArgs = sb.toString().trim();
         if(args.length > 2){
-            sender.sendMessage(pluginManager.prefix + ChatColor.RED + "Usage: /sudoop <Player> <Command>");
+            sender.sendMessage(PluginManager.prefix + ChatColor.RED + "Usage: /sudoop <Player> <Command>");
             return true;
         }
         if(args.length < 2){
             if(SudoOp.contains(sender.getName())){
                 if(target instanceof Player){
                     Bukkit.dispatchCommand(target, allArgs);
-                    sender.sendMessage(pluginManager.prefix + ChatColor.WHITE + allArgs + " Will be run by " + target.getDisplayName());
+                    sender.sendMessage(PluginManager.prefix + ChatColor.WHITE + allArgs + " Will be run by " + target.getDisplayName());
                     return true;
                 }
                 else {
-                    sender.sendMessage(pluginManager.prefix + ChatColor.RED + "Usage: /sudoop <Player> <Command>");
+                    sender.sendMessage(PluginManager.prefix + ChatColor.RED + "Usage: /sudoop <Player> <Command>");
                     return true;
                 }
 
             }
             else{
-                sender.sendMessage(pluginManager.prefix + ChatColor.RED + "You are not whitelisted to run this command.");
+                sender.sendMessage(PluginManager.prefix + ChatColor.RED + "You are not whitelisted to run this command.");
                 return true;
             }
         }
         else{
-            sender.sendMessage(pluginManager.prefix + ChatColor.RED +"Usage: /sudoop <Player> <Command>");
+            sender.sendMessage(PluginManager.prefix + ChatColor.RED +"Usage: /sudoop <Player> <Command>");
             return true;
         }
 

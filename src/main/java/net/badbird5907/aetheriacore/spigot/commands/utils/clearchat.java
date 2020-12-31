@@ -3,7 +3,7 @@ package net.badbird5907.aetheriacore.spigot.commands.utils;
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 
-import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
+import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -40,7 +40,7 @@ public class clearchat implements CommandExecutor {
                         }
                     } else {
                         sender.sendMessage(permissionManager.PermissionMessage);
-                        pluginManager.log(sender.getName() + " Was denied access to the command.");
+                        PluginManager.log(sender.getName() + " Was denied access to the command.");
                     }
                 } else {
                     if (sender.hasPermission(permissionManager.ClearChat)) {
