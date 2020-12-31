@@ -1,6 +1,6 @@
 package net.badbird5907.aetheriacore.spigot.commands.utils;
 
-import net.badbird5907.aetheriacore.spigot.api.StaffChatMessage;
+import net.badbird5907.aetheriacore.spigot.manager.DebugLogger;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -42,13 +42,14 @@ public class freezePlayer implements CommandExecutor{
                                 double playerLocY = player.getLocation().getY();
                                 double playerLocZ = player.getLocation().getZ();
                                 if(player.getLocation().getBlock().getRelative(BlockFace.DOWN).getType() == Material.AIR) {
-                                    StaffChatMessage.sendMessage("DEBUG", "works");
+                                    DebugLogger.DebugLog("works");
                                 }
                                 frozen.add(target.getUniqueId());
                                 sender.sendMessage(ChatColor.GREEN + target.getDisplayName() + "Is now frozen!");
                                 sender.sendMessage(ChatColor.DARK_GRAY + "The player will be messaged that they are frozen");
                                 sender.sendMessage(ChatColor.DARK_GRAY + "If they are in the air, they will be spammed.");
-                                StaffChatMessage.sendMessage("Aetheria Core ", ((Player) sender).getDisplayName() + " Has frozen " + target.getDisplayName() + " at coords: X: " + target.getLocation().getX() + " Y: " + target.getLocation().getY() + " Z: " + target.getLocation().getZ());
+                                //TODO write new alert class
+                                //StaffChatMessage.sendMessage("Aetheria Core ", ((Player) sender).getDisplayName() + " Has frozen " + target.getDisplayName() + " at coords: X: " + target.getLocation().getX() + " Y: " + target.getLocation().getY() + " Z: " + target.getLocation().getZ());
                                 return true;
                             }
                         }
@@ -80,7 +81,8 @@ public class freezePlayer implements CommandExecutor{
                             sender.sendMessage(ChatColor.GREEN + target.getDisplayName() + "Is now frozen!");
                             sender.sendMessage(ChatColor.DARK_GRAY + "The player will be messaged that they are frozen");
                             sender.sendMessage(ChatColor.DARK_GRAY + "If they are in the air, they will be spammed.");
-                            StaffChatMessage.sendMessage("Aetheria Core ", ("CONSOLE" + " Has frozen " + target.getDisplayName() + " at coords: X: " + target.getLocation().getX() + " Y: " + target.getLocation().getY() + " Z: " + target.getLocation().getZ()));
+                            //TODO here
+                            //StaffChatMessage.sendMessage("Aetheria Core ", ("CONSOLE" + " Has frozen " + target.getDisplayName() + " at coords: X: " + target.getLocation().getX() + " Y: " + target.getLocation().getY() + " Z: " + target.getLocation().getZ()));
                             return true;
                         }
                     }

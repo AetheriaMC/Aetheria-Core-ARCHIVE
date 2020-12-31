@@ -1,7 +1,6 @@
 package net.badbird5907.aetheriacore.spigot.commands.staff;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
-import net.badbird5907.aetheriacore.spigot.api.StaffChatMessage;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -21,7 +20,7 @@ public class QuickChat implements CommandExecutor {
         }
         String allArgs = sb.toString().trim();
         if(player.hasPermission(permissionManager.staffchat)){
-            StaffChatMessage.sendMessage(player.getName(), allArgs);
+            //StaffChatMessage.sendMessage(player.getName(), allArgs);
         }
         else{
             player.sendMessage(permissionManager.PermissionMessage);

@@ -1,6 +1,5 @@
 package net.badbird5907.aetheriacore.spigot.commands.utils;
 
-import net.badbird5907.aetheriacore.spigot.api.StaffChatMessage;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -27,7 +26,8 @@ public class Unfreeze implements CommandExecutor{
                             return true;
                         } else {
                             freezePlayer.frozen.remove(target.getUniqueId());
-                            StaffChatMessage.sendMessage("Aetheria Core ", ((Player) sender).getDisplayName() + " Has un-frozen " + target.getDisplayName() + " at coords: X: " + target.getLocation().getX() + " Y: " + target.getLocation().getY() + " Z: " + target.getLocation().getZ());
+                            //TODO new alert system
+                            //StaffChatMessage.sendMessage("Aetheria Core ", ((Player) sender).getDisplayName() + " Has un-frozen " + target.getDisplayName() + " at coords: X: " + target.getLocation().getX() + " Y: " + target.getLocation().getY() + " Z: " + target.getLocation().getZ());
                             return true;
                         }
                     } else {
@@ -50,7 +50,8 @@ public class Unfreeze implements CommandExecutor{
                         return true;
                     } else {
                         freezePlayer.frozen.remove(target.getUniqueId());
-                        StaffChatMessage.sendMessage("Aetheria Core ", ("CONSOLE" + " Has un-frozen " + target.getDisplayName() + " at coords: X: " + target.getLocation().getX() + " Y: " + target.getLocation().getY() + " Z: " + target.getLocation().getZ()));
+                        //TODO here
+                        //StaffChatMessage.sendMessage("Aetheria Core ", ("CONSOLE" + " Has un-frozen " + target.getDisplayName() + " at coords: X: " + target.getLocation().getX() + " Y: " + target.getLocation().getY() + " Z: " + target.getLocation().getZ()));
                         return true;
                     }
                 } else {
