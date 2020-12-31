@@ -3,10 +3,8 @@ package net.badbird5907.aetheriacore.spigot.events;
 import de.myzelyam.api.vanish.VanishAPI;
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
-import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
+import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import net.badbird5907.aetheriacore.spigot.util.NPC;
-import net.md_5.bungee.protocol.packet.Chat;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -32,17 +30,17 @@ public class PlayerJoinEvent implements Listener {
             NPC.addJoinPacket(event.getPlayer());
         }
         if(VanishAPI.getAllInvisiblePlayers().contains(player)){
-            if(pluginManager.OnlineVisiblePlayers.contains(event.getPlayer().getName())){
-                pluginManager.warn(pluginManager.prefix + "Array List \"OnlineVisiblePlayers\" already contains " + event.getPlayer().getDisplayName() + "please report this to Badbird.");
+            if(PluginManager.OnlineVisiblePlayers.contains(event.getPlayer().getName())){
+                PluginManager.warn(PluginManager.prefix + "Array List \"OnlineVisiblePlayers\" already contains " + event.getPlayer().getDisplayName() + "please report this to Badbird.");
             }
             else{
-                pluginManager.OnlineVisiblePlayers.add(event.getPlayer().getName());
+                PluginManager.OnlineVisiblePlayers.add(event.getPlayer().getName());
             }
         }
         else{
-            pluginManager.VanishedPlayers.add(player.getName());
-            pluginManager.OnlinePlayers.add(player.getName());
-            pluginManager.warn(player.getDisplayName() + " is vanished.");
+            PluginManager.VanishedPlayers.add(player.getName());
+            PluginManager.OnlinePlayers.add(player.getName());
+            PluginManager.warn(player.getDisplayName() + " is vanished.");
         }
         int Visible_Players = plugin.getServer().getOnlinePlayers().toArray().length-VanishAPI.getInvisiblePlayers().toArray().length;
         player.sendMessage(ChatColor.WHITE + "-----------------------------------");

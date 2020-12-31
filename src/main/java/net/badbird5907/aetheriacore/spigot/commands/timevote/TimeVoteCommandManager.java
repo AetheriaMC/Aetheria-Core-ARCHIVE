@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.function.Consumer;
 
 public class TimeVoteCommandManager implements CommandExecutor{
     public static ArrayList<TimeVote> commands = new ArrayList<TimeVote>();

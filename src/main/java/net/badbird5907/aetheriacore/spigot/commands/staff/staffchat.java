@@ -1,7 +1,7 @@
 package net.badbird5907.aetheriacore.spigot.commands.staff;
 
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
-import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
+import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -19,20 +19,20 @@ public class staffchat implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender player, Command command, String label, String[] args) {
         if(!(player instanceof Player)){
-            player.sendMessage(pluginManager.prefix + ChatColor.RED + "You must be a player to toggle this. use /qc <text> instead.");
+            player.sendMessage(PluginManager.prefix + ChatColor.RED + "You must be a player to toggle this. use /qc <text> instead.");
         }
         else {
             if (player.hasPermission(permissionManager.staffchat)) {
                 if (staffchatToggle.contains(((Player) player).getUniqueId())) {
                     if (!StaffMode.StaffModeToggle.contains(((Player) player).getUniqueId())) {
-                        player.sendMessage(pluginManager.prefix + ChatColor.WHITE + "StaffChat turned " + ChatColor.RED + "OFF");
+                        player.sendMessage(PluginManager.prefix + ChatColor.WHITE + "StaffChat turned " + ChatColor.RED + "OFF");
                         staffchatToggle.remove(((Player) player).getUniqueId());
                     } else {
-                        player.sendMessage(pluginManager.prefix + ChatColor.RED + "Error: Staff Mode is active. do /sm to disable." + ChatColor.DARK_GRAY + " " + ChatColor.ITALIC + "STAFF_MODE_ON");
+                        player.sendMessage(PluginManager.prefix + ChatColor.RED + "Error: Staff Mode is active. do /sm to disable." + ChatColor.DARK_GRAY + " " + ChatColor.ITALIC + "STAFF_MODE_ON");
                     }
 
                 } else {
-                    player.sendMessage(pluginManager.prefix + ChatColor.WHITE + "StaffChat turned " + ChatColor.GREEN + "ON");
+                    player.sendMessage(PluginManager.prefix + ChatColor.WHITE + "StaffChat turned " + ChatColor.GREEN + "ON");
                     staffchatToggle.add(((Player) player).getUniqueId());
                 }
             } else {

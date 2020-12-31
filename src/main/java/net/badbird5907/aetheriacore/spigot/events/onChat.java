@@ -3,7 +3,7 @@ package net.badbird5907.aetheriacore.spigot.events;
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.commands.staff.staffchat;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
-import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
+import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import net.badbird5907.aetheriacore.spigot.commands.utils.hush;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -30,7 +30,7 @@ public class onChat implements Listener {
                     }
                     else{
                         player.sendMessage(ChatColor.GOLD + "StaffChat" + ChatColor.DARK_GRAY + " » " + ChatColor.RESET + event.getPlayer().getDisplayName() + ": " + event.getMessage());
-                        pluginManager.log("StaffChat » " + event.getPlayer().getDisplayName() + ": " + event.getMessage());
+                        PluginManager.log("StaffChat » " + event.getPlayer().getDisplayName() + ": " + event.getMessage());
                     }
                 }
                 else {

@@ -1,6 +1,6 @@
 package net.badbird5907.aetheriacore.spigot.jukebox.utils;
 
-import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
+import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -73,7 +73,7 @@ public class Lang{
                 if (Noteblock.version >= 16) str = translateHexColorCodes("(&|§)#", "", str);
                 Lang.class.getDeclaredField(key).set(key, str);
             }catch (Exception e) {
-                pluginManager.warn("Error when loading language value \"" + key + "\".");
+                PluginManager.warn("Error when loading language value \"" + key + "\".");
                 e.printStackTrace();
                 continue;
             }

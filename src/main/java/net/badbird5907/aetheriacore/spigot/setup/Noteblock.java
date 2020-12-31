@@ -5,7 +5,6 @@ import com.xxmicloxx.NoteBlockAPI.model.Song;
 import com.xxmicloxx.NoteBlockAPI.utils.NBSDecoder;
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.commands.utils.PlayMusic;
-import net.badbird5907.aetheriacore.spigot.events.NoteblockListener;
 import net.badbird5907.aetheriacore.spigot.jukebox.CommandAdmin;
 import net.badbird5907.aetheriacore.spigot.jukebox.CommandMusic;
 import net.badbird5907.aetheriacore.spigot.jukebox.JukeBoxDatas;
@@ -13,7 +12,8 @@ import net.badbird5907.aetheriacore.spigot.jukebox.PlayerData;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Database;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.JukeBoxRadio;
 import net.badbird5907.aetheriacore.spigot.jukebox.utils.Lang;
-import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
+import net.badbird5907.aetheriacore.spigot.manager.Permission;
+import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import net.badbird5907.aetheriacore.spigot.util.TabComplete;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -44,6 +44,7 @@ public class Noteblock {
     public static LinkedList<Song> songs;
     public static Map<String, Song> fileNames;
     public static Map<String, Song> internalNames;
+    public static Map<String, Song> hiddenNames;
     public static Playlist playlist;
     public static int maxPage;
     public static boolean jukeboxClick = false;
@@ -73,6 +74,7 @@ public class Noteblock {
     public static File playersFile;
     public static FileConfiguration players;
     public static File songsFolder;
+    public static File hiddenFolder;
     public static ItemStack jukeboxItem;
     public static BukkitTask vanillaMusicTask = null;
     public static Database db;
@@ -99,7 +101,7 @@ public class Noteblock {
     }
 
     public static String getItemName(Song s, Player p) {
-        boolean admin = p.hasPermission("aetheriacore.music.adminItem");
+        boolean admin = p.hasPermission(Permission.MUSIC_ADMIN_ITEM.node);
         return format(admin ? itemFormatAdmin : itemFormat, admin ? itemFormatAdminWithoutAuthor : itemFormatWithoutAuthor, s);
     }
 
@@ -182,6 +184,22 @@ public class Noteblock {
                     continue;
                 }
                 fileNames.put(file.getName(), song);
+                internalNames.put(n, song);
+            }
+        }
+        //TODO make sure this works
+        hiddenFolder = new File(AetheriaCore.getInstance().getDataFolder(), "hiddensongs");
+        if(!hiddenFolder.exists()) hiddenFolder.mkdirs();
+        for(File file : hiddenFolder.listFiles()){
+            if(file.getName().substring(file.getName().lastIndexOf(".") + 1).equals("nbs")){
+                Song song = NBSDecoder.parse(file);
+                if(song == null) continue;
+                String n = getInternal(song);
+                if(hiddenNames.containsKey(n)) {
+                    PluginManager.warn("Error: song \"" + n + "\" is duplicated!");
+                    continue;
+                }
+                hiddenNames.put(file.getName(), song);
                 internalNames.put(n, song);
             }
         }
@@ -345,10 +363,10 @@ public class Noteblock {
     }
 
     public static void DataFile() {
-        pluginManager.log("Checking Data File");
+        PluginManager.log("Checking Data File");
         AetheriaCore.getInstance().customConfigFile = new File(AetheriaCore.getInstance().getDataFolder(), "data.yml");
         if (!AetheriaCore.getInstance().customConfigFile.exists()) {
-            pluginManager.warn("Data file does not exist. Creating new file");
+            PluginManager.warn("Data file does not exist. Creating new file");
             AetheriaCore.getInstance().customConfigFile.getParentFile().mkdirs();
             AetheriaCore.getInstance().saveResource("data.yml", false);
         }

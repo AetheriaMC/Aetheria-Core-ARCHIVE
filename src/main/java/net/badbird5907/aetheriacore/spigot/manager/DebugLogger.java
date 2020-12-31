@@ -17,13 +17,13 @@ public class DebugLogger {
     public static void DebugLog(String string){
         for(Player p : Bukkit.getOnlinePlayers()){
             if(Debugplayers.contains(p.getUniqueId())){
-                p.sendMessage(pluginManager.Debugprefix + string);
+                p.sendMessage(PluginManager.Debugprefix + string);
             }
             else{
                 break;
             }
         }
-        pluginManager.log(pluginManager.Debugprefix + string);
+        PluginManager.log(PluginManager.Debugprefix + string);
     }
 
 }

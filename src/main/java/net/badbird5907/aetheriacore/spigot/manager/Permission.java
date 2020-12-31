@@ -40,7 +40,10 @@ public enum Permission {
     ITEM("item"),
 
     BYPASS_ITEM_BLACKLIST("bypass.itemblacklist"),
-    PUNISH("punish")
+    PUNISH("punish"),
+
+    PLAY_INTERNAL_SONG("music.playinternal"),
+    MUSIC_ADMIN_ITEM("music.adminitem")
     ;
 
     public final String node;

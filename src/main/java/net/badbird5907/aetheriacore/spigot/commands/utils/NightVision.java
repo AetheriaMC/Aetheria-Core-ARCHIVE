@@ -1,7 +1,7 @@
 package net.badbird5907.aetheriacore.spigot.commands.utils;
 
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
-import net.badbird5907.aetheriacore.spigot.manager.pluginManager;
+import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -29,7 +29,7 @@ public class NightVision implements CommandExecutor {
 
         }
         else{
-            sender.sendMessage(pluginManager.prefix + ChatColor.RED +  "You Must be a player to do this!");
+            sender.sendMessage(PluginManager.prefix + ChatColor.RED +  "You Must be a player to do this!");
         }
 
         return true;
