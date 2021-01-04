@@ -42,7 +42,6 @@ public class StaffChat extends Command {
 				String msg = "";
 				for (int i = 0; i < args.length; i++)
 					msg = msg + args[i] + " ";
-				SendStaffChatMessage.Send(p, msg);
 			} else {
 				p.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.no-permission"))));
 			}

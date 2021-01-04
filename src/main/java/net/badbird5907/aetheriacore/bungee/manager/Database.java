@@ -11,11 +11,13 @@ public class Database {
     private static Connection connection;
     public static MySQL connect(){
         Configuration config = Config.getData("bungeeconfig");
-        db = new MySQL(config.getString("Database.uri"), config.getString("Database.name"), config.getString("Database.username"), config.getString("Database.password") ,config.getInt("Database.port"), /*config.getBoolean("MySql.ssl")*/ true);
-        if(db.openConnection()){
-            log.Log("Connected to database!");
-        }else log.Warn("An error occurred while connecting to the database!");
-        connection = db.getConnection();
+
+        //db = new MySQL(config.getString("Database.uri"), config.getString("Database.name"), config.getString("Database.username"), config.getString("Database.password") ,config.getInt("Database.port"), /*config.getBoolean("MySql.ssl")*/ true);
+        //if(db.openConnection()){
+        //    log.Log("Connected to database!");
+        //}else log.Warn("An error occurred while connecting to the database!");
+        //connection = db.getConnection();
+        //if(db.connect())
         return null;
     }
     public static boolean isConnected() {

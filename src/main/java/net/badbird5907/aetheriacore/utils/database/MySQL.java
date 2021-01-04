@@ -6,16 +6,19 @@ import java.sql.*;
 import java.util.Properties;
 
 public class MySQL {
-    private String host, database;
-    private int port;
+    private String host, database, username, password;
+    private String port;
     private Boolean ssl;
     private Connection connection;
     private Properties properties;
-    public MySQL(String host, String database, String username, String password, int port, boolean ssl){
-        this.host = host;
+    public MySQL(String uri,String  database,String  username,String  password,String  port,Boolean ssl){
         this.database = database;
         this.port = port;
         this.ssl = ssl;
+        this.username = username;
+        this.password = password;
+        this.host = uri;
+        /*
         properties = new Properties();
         properties.setProperty("user", username);
         properties.setProperty("password", password);
@@ -23,8 +26,30 @@ public class MySQL {
             properties.setProperty("verifyServerCertificate", "false");
             properties.setProperty("useSSL", "false");
         }
+         */
     }
     public String getDatabase(){return database;}
+
+    public boolean connect() throws SQLException, ClassNotFoundException{
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://"
+                            + host+ ":" + port + "/" + database,
+                    username, password);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+    /**
+     * @deprecated dont use, wont work.
+     * @see
+     */
     public boolean openConnection() {
         if (!isClosed()) return false;
 
@@ -90,7 +115,6 @@ public class MySQL {
             this.statement = statement;
             this.returnGeneratedKeys = returnGeneratedKeys;
         }
-
         public PreparedStatement getStatement() throws SQLException {
             if (prepared == null || prepared.isClosed() || !prepared.getConnection().isValid(0)) {
                 openConnection();

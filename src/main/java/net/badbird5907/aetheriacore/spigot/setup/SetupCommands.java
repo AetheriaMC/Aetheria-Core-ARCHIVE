@@ -80,10 +80,7 @@ public class SetupCommands {
         //plugin.getCommand("test").setExecutor(new test());
         plugin.getCommand("pingwars").setExecutor(new PingWars());
         plugin.getCommand("69420").setExecutor(new six_nine_four_twenty());
-        plugin.getCommand("punish").setExecutor(new punish());
-        //plugin.getCommand("nick").setExecutor(new nick());
-        //plugin.instance.getCommand("addgroup").setExecutor(new addGroup(plugin.instance, plugin.instance.luckPerms));
-        //plugin.instance.getCommand("systeminfo").setExecutor(new SystemInfo(plugin.instance));
+        //plugin.getCommand("punish").setExecutor(new punish());
         SudoOp.SudoOp.add("Badbird5907");
         SudoOp.SudoOp.add("tuckMCWizard");
         SudoOp.SudoOp.add("Pylons");

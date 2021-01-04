@@ -1,6 +1,7 @@
 package net.badbird5907.aetheriacore.bungee.util;
 
 import net.badbird5907.aetheriacore.bungee.manager.log;
+import net.badbird5907.aetheriacore.utils.database.MySQL;
 import net.md_5.bungee.config.Configuration;
 
 import java.sql.*;
@@ -13,6 +14,9 @@ public class Database {
     private static String username = config.getString("Database.username");
     private static String port = config.getString("Database.port");
     private static String database = config.getString("Database.name");
+
+    private static MySQL db;
+
     // connect
     /*
     public static void connect() {
@@ -29,11 +33,21 @@ public class Database {
     }
      */
     public static void connect() throws SQLException, ClassNotFoundException{
+        /*
         Class.forName("com.mysql.jdbc.Driver");
         connection = DriverManager.getConnection("jdbc:mysql://"
                         + uri+ ":" + port + "/" + database,
                 username, password);
         log.Log("Connecting to jdbc:mysql://" + uri + ":" + port + "/" + database + " " + username + " " + password);
+        */
+        db = new MySQL(uri, database, username, password, port, true);
+        if(db.connect()){
+            connection = db.getConnection();
+            log.Log("Connected to database!");
+        }
+        else{
+            log.Warn("ERROR: Could not connect to database!");
+        }
     }
     public static void disconnect(){
         if(isConnected()){
@@ -77,5 +91,8 @@ public class Database {
             throwables.printStackTrace();
             return null;
         }
+    }
+    public static MySQL getDb(){
+        return db;
     }
 }
