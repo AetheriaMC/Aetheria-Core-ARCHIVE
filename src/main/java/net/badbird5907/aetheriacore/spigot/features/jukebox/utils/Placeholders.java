@@ -1,9 +1,9 @@
-package net.badbird5907.aetheriacore.spigot.jukebox.utils;
+package net.badbird5907.aetheriacore.spigot.features.jukebox.utils;
 
 import com.xxmicloxx.NoteBlockAPI.model.Song;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
-import net.badbird5907.aetheriacore.spigot.jukebox.PlayerData;
+import net.badbird5907.aetheriacore.spigot.features.jukebox.PlayerData;
 import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import org.bukkit.OfflinePlayer;
 

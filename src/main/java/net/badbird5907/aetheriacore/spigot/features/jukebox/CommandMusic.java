@@ -1,6 +1,6 @@
-package net.badbird5907.aetheriacore.spigot.jukebox;
+package net.badbird5907.aetheriacore.spigot.features.jukebox;
 
-import net.badbird5907.aetheriacore.spigot.jukebox.utils.Lang;
+import net.badbird5907.aetheriacore.spigot.features.jukebox.utils.Lang;
 import net.badbird5907.aetheriacore.spigot.manager.DebugLogger;
 import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import org.bukkit.command.Command;

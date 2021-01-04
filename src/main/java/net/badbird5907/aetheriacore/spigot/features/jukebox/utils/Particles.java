@@ -1,4 +1,4 @@
-package net.badbird5907.aetheriacore.spigot.jukebox.utils;
+package net.badbird5907.aetheriacore.spigot.features.jukebox.utils;
 
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;

@@ -3,7 +3,7 @@ package net.badbird5907.aetheriacore.spigot;
 import com.xxmicloxx.NoteBlockAPI.NoteBlockAPI;
 //import github.scarsz.discordsrv.DiscordSRV;
 import net.badbird5907.aetheriacore.spigot.events.*;
-import net.badbird5907.aetheriacore.spigot.jukebox.utils.Placeholders;
+import net.badbird5907.aetheriacore.spigot.features.jukebox.utils.Placeholders;
 import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
 import net.badbird5907.aetheriacore.spigot.setup.Noteblock;

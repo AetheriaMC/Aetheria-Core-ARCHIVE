@@ -1,9 +1,9 @@
 package net.badbird5907.aetheriacore.spigot.commands.utils;
 
 import com.xxmicloxx.NoteBlockAPI.model.Song;
-import net.badbird5907.aetheriacore.spigot.jukebox.PlayerData;
-import net.badbird5907.aetheriacore.spigot.jukebox.utils.Lang;
-import net.badbird5907.aetheriacore.spigot.jukebox.utils.Playlists;
+import net.badbird5907.aetheriacore.spigot.features.jukebox.PlayerData;
+import net.badbird5907.aetheriacore.spigot.features.jukebox.utils.Lang;
+import net.badbird5907.aetheriacore.spigot.features.jukebox.utils.Playlists;
 import net.badbird5907.aetheriacore.spigot.manager.DebugLogger;
 import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import org.bukkit.Bukkit;

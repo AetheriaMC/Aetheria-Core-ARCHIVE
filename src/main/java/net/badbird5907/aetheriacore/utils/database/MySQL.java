@@ -1,57 +1,48 @@
-package net.badbird5907.aetheriacore.spigot.jukebox.utils;
+package net.badbird5907.aetheriacore.utils.database;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
-import org.bukkit.configuration.ConfigurationSection;
 
 import java.sql.*;
 import java.util.Properties;
 
-public class Database {
-
-    private Properties properties;
+public class MySQL {
     private String host, database;
     private int port;
-
+    private Boolean ssl;
     private Connection connection;
-
-    public Database(ConfigurationSection config) {
-        this.host = config.getString("MySQL.credentials.host");
-        this.database = config.getString("MySQL.credentials.database");
-        this.port = config.getInt("MySQL.credentials.port");
-
+    private Properties properties;
+    public MySQL(String host, String database, String username, String password, int port, boolean ssl){
+        this.host = host;
+        this.database = database;
+        this.port = port;
+        this.ssl = ssl;
         properties = new Properties();
-        properties.setProperty("user", config.getString("MySQL.auth.username"));
-        properties.setProperty("password", config.getString("MySQL.auth.password"));
-        if (!config.getBoolean("ssl")) {
+        properties.setProperty("user", username);
+        properties.setProperty("password", password);
+        if(!ssl){
             properties.setProperty("verifyServerCertificate", "false");
             properties.setProperty("useSSL", "false");
         }
     }
-
-    public String getDatabase() {
-        return database;
-    }
-
+    public String getDatabase(){return database;}
     public boolean openConnection() {
         if (!isClosed()) return false;
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
         }catch (ClassNotFoundException e) {
-            AetheriaCore.getInstance().getLogger().severe("Database driver not found.");
+            e.printStackTrace();
             return false;
         }
 
         try {
             connection = DriverManager.getConnection("jdbc:mysql://" + this.host + ":" + this.port + "/" + this.getDatabase(), properties);
         }catch (SQLException ex) {
-            AetheriaCore.getInstance().getLogger().severe("An exception occurred when connecting to the database.");
             ex.printStackTrace();
             return false;
         }
         return true;
     }
-
     public boolean isClosed() {
         try {
             return connection == null || connection.isClosed() || !connection.isValid(0);
@@ -112,5 +103,4 @@ public class Database {
             return statement;
         }
     }
-
 }

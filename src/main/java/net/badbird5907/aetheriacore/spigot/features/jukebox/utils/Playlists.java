@@ -1,15 +1,11 @@
-package net.badbird5907.aetheriacore.spigot.jukebox.utils;
+package net.badbird5907.aetheriacore.spigot.features.jukebox.utils;
 
-import net.badbird5907.aetheriacore.spigot.jukebox.JukeBoxInventory;
+import net.badbird5907.aetheriacore.spigot.features.jukebox.JukeBoxInventory;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.stream.IntStream;
-
 import static java.util.stream.IntStream.*;
-import static net.badbird5907.aetheriacore.spigot.jukebox.JukeBoxInventory.radioItem;
-import static net.badbird5907.aetheriacore.spigot.jukebox.utils.Lang.CHANGE_PLAYLIST;
-import static net.badbird5907.aetheriacore.spigot.jukebox.utils.Lang.CHANGE_PLAYLIST_LORE;
+import static net.badbird5907.aetheriacore.spigot.features.jukebox.JukeBoxInventory.radioItem;
 import static org.bukkit.Material.JUKEBOX;
 import static org.bukkit.Material.NOTE_BLOCK;
 
@@ -30,7 +26,7 @@ public enum Playlists {
 	}
 
 	public static ItemStack item(Material material, String name) {
-		return JukeBoxInventory.item(material, CHANGE_PLAYLIST + name, CHANGE_PLAYLIST_LORE.split("\n"));
+		return JukeBoxInventory.item(material, Lang.CHANGE_PLAYLIST + name, Lang.CHANGE_PLAYLIST_LORE.split("\n"));
 	}
 
 }
