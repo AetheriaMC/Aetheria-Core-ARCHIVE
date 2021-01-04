@@ -1,8 +1,5 @@
 package net.badbird5907.aetheriacore.bungee;
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoDatabase;
 import net.badbird5907.aetheriacore.bungee.commands.staff.*;
 import net.badbird5907.aetheriacore.bungee.commands.util.GlobalBroadcast;
 import net.badbird5907.aetheriacore.bungee.commands.warps.*;
@@ -11,6 +8,7 @@ import net.badbird5907.aetheriacore.bungee.discord.listeners.SCListener;
 import net.badbird5907.aetheriacore.bungee.listeners.LockdownListener;
 import net.badbird5907.aetheriacore.bungee.listeners.Login_Disconnect;
 import net.badbird5907.aetheriacore.bungee.listeners.events;
+import net.badbird5907.aetheriacore.bungee.manager.DatabaseUtils;
 import net.badbird5907.aetheriacore.bungee.manager.log;
 import net.badbird5907.aetheriacore.bungee.util.Config;
 import net.badbird5907.aetheriacore.bungee.util.DataFile;
@@ -23,6 +21,7 @@ import net.md_5.bungee.config.Configuration;
 import org.apache.log4j.BasicConfigurator;
 
 import javax.security.auth.login.LoginException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -64,6 +63,7 @@ public final class AetheriaCoreBungee extends Plugin {
         getProxy().getInstance().getPluginManager().registerCommand(this, new GlobalClearChat());
         getProxy().getInstance().getPluginManager().registerCommand(this, new StaffChat());
         getProxy().getInstance().getPluginManager().registerCommand(this, new staff());
+        getProxy().getInstance().getPluginManager().registerCommand(this, new StaffChatBeta());
         //getProxy().getInstance().getPluginManager().registerCommand(this, new StaffChatBeta());
 
         log.Log("Registering Events...");
@@ -87,6 +87,7 @@ public final class AetheriaCoreBungee extends Plugin {
             throwables.printStackTrace();
         }
          */
+        setupDatabase();
         log.Log("Connecting to discord...");
         buildJDA();
         log.Log("Startup Finished. Took " + (System.currentTimeMillis() - start) + "ms.");
@@ -98,9 +99,16 @@ public final class AetheriaCoreBungee extends Plugin {
     }
 
     private void setupDatabase() {
-        MongoClient mongoClient = MongoClients.create("mongodb+srv://AetheriaCorePlugin:AetheriaCorePlugin@aetheriacore-db1.jyi3w.gcp.mongodb.net/AetheriaCore-DB1?retryWrites=true&w=majority");
-        //MongoCollection<Document> toggles = mongoClient.getDatabase("AetheriaCore-DB1").getCollection("toggles");
-        MongoDatabase database = mongoClient.getDatabase("users");
+        try {
+            Database.connect();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        //net.badbird5907.aetheriacore.bungee.manager.Database.connect();
+        new DatabaseUtils().createTable("StaffChat", "uuid varchar(36), enable TINYINT(1)");
+        new DatabaseUtils().createTable("AdminChat", "uuid varchar(36), enable TINYINT(1)");
     }
 
     private void buildJDA(){

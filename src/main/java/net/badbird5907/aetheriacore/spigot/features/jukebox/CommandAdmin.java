@@ -1,10 +1,10 @@
-package net.badbird5907.aetheriacore.spigot.jukebox;
+package net.badbird5907.aetheriacore.spigot.features.jukebox;
 
 import com.xxmicloxx.NoteBlockAPI.model.Song;
 import com.xxmicloxx.NoteBlockAPI.utils.NBSDecoder;
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
-import net.badbird5907.aetheriacore.spigot.jukebox.utils.Lang;
-import net.badbird5907.aetheriacore.spigot.jukebox.utils.Playlists;
+import net.badbird5907.aetheriacore.spigot.features.jukebox.utils.Lang;
+import net.badbird5907.aetheriacore.spigot.features.jukebox.utils.Playlists;
 import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

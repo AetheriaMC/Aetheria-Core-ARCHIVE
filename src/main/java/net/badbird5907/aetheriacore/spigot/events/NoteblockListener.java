@@ -1,9 +1,9 @@
 package net.badbird5907.aetheriacore.spigot.events;
 
-import net.badbird5907.aetheriacore.spigot.jukebox.CommandMusic;
-import net.badbird5907.aetheriacore.spigot.jukebox.JukeBoxInventory;
-import net.badbird5907.aetheriacore.spigot.jukebox.PlayerData;
-import net.badbird5907.aetheriacore.spigot.jukebox.utils.Playlists;
+import net.badbird5907.aetheriacore.spigot.features.jukebox.CommandMusic;
+import net.badbird5907.aetheriacore.spigot.features.jukebox.JukeBoxInventory;
+import net.badbird5907.aetheriacore.spigot.features.jukebox.PlayerData;
+import net.badbird5907.aetheriacore.spigot.features.jukebox.utils.Playlists;
 import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;

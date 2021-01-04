@@ -33,7 +33,7 @@ public class Database {
         connection = DriverManager.getConnection("jdbc:mysql://"
                         + uri+ ":" + port + "/" + database,
                 username, password);
-        log.Log("Connecting to jdbc:mysql://" + uri + ":" + port + "/" + database + "" + username + "" + password);
+        log.Log("Connecting to jdbc:mysql://" + uri + ":" + port + "/" + database + " " + username + " " + password);
     }
     public static void disconnect(){
         if(isConnected()){
@@ -54,25 +54,18 @@ public class Database {
     public static Connection getConnection() {
         return connection;
     }
-    public static void SetupDB() throws SQLException {
+    public static boolean TableExists(String name) {
         try {
-            connect();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        PreparedStatement staff = Database.getConnection().prepareStatement( "CREATE TABLE IF NOT EXISTS AetheriaCoreBungee_Staff (uuid varchar(36), sc BOOLEAN, ac BOOLEAN, cspy BOOLEAN, hush BOOLEAN);");
-        staff.executeUpdate();
-        PreparedStatement players = Database.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS AetheriaCoreBungee_PlayerData (uuid varchar(36), name varchar(16), last_seen varchar(8), online BOOLEAN);");
-        players.executeUpdate();
-    }
-    public static boolean TableExists(String name) throws SQLException {
-        DatabaseMetaData dbm = connection.getMetaData();
-        ResultSet tables = dbm.getTables(null, null, name, null);
-        if (tables.next()) {
-            return true;
-        }
-        else {
-
+            DatabaseMetaData dbm = connection.getMetaData();
+            ResultSet tables = dbm.getTables(null, null, name, null);
+            if (tables.next()) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
             return false;
         }
     }

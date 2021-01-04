@@ -1,4 +1,4 @@
-package net.badbird5907.aetheriacore.spigot.jukebox;
+package net.badbird5907.aetheriacore.spigot.features.jukebox;
 
 import net.badbird5907.aetheriacore.spigot.manager.Permission;
 import org.bukkit.command.Command;

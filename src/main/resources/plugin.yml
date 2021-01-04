@@ -216,7 +216,6 @@ commands:
     usage: /<command> <reason>
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
     permission: aetheriacore.kickall
-
   shopkeeper:
     description: a scuffed shopkeeper made by DigitalDragon
   loop:
@@ -265,12 +264,12 @@ commands:
   timevote:
     description: Vote for time
     aliases: [tv, vt, votetime]
+    permission: aetheriacore.timevote
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
     usage: /<command>
-#  givegroup:
-#    description: Give Player a Group
-#    usage: /<command>
-#    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
-#    permission: aetheriacore.luckperms.givegroup
+  69420:
+    description: reeeee
+    usage: /<command>
 permissions:
   aetheriacore.*:
     description: All AetheriaCore Commands
@@ -329,6 +328,7 @@ permissions:
       aetheriacore.ping: true
       aetheriacore.pingwars: true
       aetheriacore.punish: true
+      aetheriacore.timevote: true
 
   aetheriacore.luckperms.*:
     description: All Aetheria Luckperms Commands
@@ -584,3 +584,5 @@ permissions:
   aetheriacore.2fa.demand:
     description: A player with this permission must have 2FA linked to thier account
     default: false
+  aetheriacore.timevote:
+    description: vote for time!

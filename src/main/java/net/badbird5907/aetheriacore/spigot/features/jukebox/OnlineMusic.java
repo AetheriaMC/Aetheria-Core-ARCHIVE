@@ -1,7 +1,4 @@
-package net.badbird5907.aetheriacore.spigot.jukebox;
-
-import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
+package net.badbird5907.aetheriacore.spigot.features.jukebox;
 
 public class OnlineMusic {
     public static void play (String url, Mode mode){
