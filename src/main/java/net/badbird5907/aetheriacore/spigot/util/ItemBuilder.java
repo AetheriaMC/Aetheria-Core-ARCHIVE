@@ -140,7 +140,7 @@ public class ItemBuilder {
 		return this;
 	}
 
-	public ItemBuilder lores(final List lores) {
+	public ItemBuilder lores(final List<String> lores) {
 		addAll(lores);
 		meta().setLore(lores);
 		return this;
@@ -165,7 +165,6 @@ public class ItemBuilder {
 	 * @return the current instance for chainable application.
 	 * @since 1.0
 	 */
-	@SuppressWarnings("deprecation")
 	public ItemBuilder data(final int data) {
 		build().setData(new MaterialData(build().getType(), (byte) data));
 		return this;

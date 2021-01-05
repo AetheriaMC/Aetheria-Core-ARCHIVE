@@ -7,24 +7,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static java.util.Objects.requireNonNull;
+import static java.util.UUID.fromString;
+import static net.badbird5907.aetheriacore.bungee.util.DataFile.getData;
+
 public class PlayerManager {
-    public static List<UUID> current_sc_players = new ArrayList<>();
-    private static Configuration data = net.badbird5907.aetheriacore.bungee.util.DataFile.getData("bungeedata");
-    public static boolean IsOnSc(ProxiedPlayer player){
-        if(data.contains("Data." + player.getUniqueId())){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-    public static void PutInSc(ProxiedPlayer player){
-        //get list of current sc players
-        current_sc_players.clear();
-        List<String> current_players1 = data.getStringList("StaffChat");
-        for (String n : current_players1) {
-            current_sc_players.add(UUID.fromString(n));
-        }
-        data.set("StaffChat", current_sc_players);
-    }
+	private static final Configuration data = getData("bungeedata");
+	public static List<UUID> current_sc_players = new ArrayList<>();
+
+	public static boolean IsOnSc(ProxiedPlayer player) {
+		return requireNonNull(data).contains("Data." + player.getUniqueId());
+	}
+
+	public static void PutInSc(ProxiedPlayer player) {
+		//get list of current sc players
+		current_sc_players.clear();
+		List<String> current_players1 = requireNonNull(data).getStringList("StaffChat");
+		current_players1.forEach(n -> current_sc_players.add(fromString(n)));
+		data.set("StaffChat", current_sc_players);
+	}
 }

@@ -1,13 +1,13 @@
 package net.badbird5907.aetheriacore.bungee.commands.warps;
 
 import net.md_5.bungee.api.CommandSender;
-import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
 import static net.md_5.bungee.api.ChatColor.RED;
+import static net.md_5.bungee.api.ProxyServer.getInstance;
 
 public class Survival extends Command {
 	public Survival() {
@@ -25,8 +25,7 @@ public class Survival extends Command {
 			player.sendMessage(new ComponentBuilder("You are already connected to Survival!").color(RED).create());
 			return;
 		}
-		ServerInfo target = ProxyServer.getInstance().getServerInfo("Survival");
+		ServerInfo target = getInstance().getServerInfo("Survival");
 		player.connect(target);
 	}
-
 }

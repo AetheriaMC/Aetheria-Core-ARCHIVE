@@ -1,99 +1,85 @@
 package net.badbird5907.aetheriacore.spigot.commands.utils;
 
 import com.xxmicloxx.NoteBlockAPI.model.Song;
-import net.badbird5907.aetheriacore.spigot.jukebox.PlayerData;
-import net.badbird5907.aetheriacore.spigot.jukebox.utils.Lang;
-import net.badbird5907.aetheriacore.spigot.jukebox.utils.Playlists;
-import net.badbird5907.aetheriacore.spigot.manager.DebugLogger;
-import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import net.badbird5907.aetheriacore.spigot.features.jukebox.PlayerData;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class PlayMusic implements CommandExecutor {
-    @Override
-    public boolean onCommand( CommandSender sender,  Command command,  String s,  String[] args) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 2; i < args.length; i++){
-            sb.append(args[i]).append(" ");
-        }
-        String allArgs = sb.toString().trim();
-        if(args.length == 2){
-            if(args[0].equalsIgnoreCase("BROADCAST")){
-                String msg;
-                for(Player p:Bukkit.getOnlinePlayers()) {
-                    msg = play(p.getName(), args[1]);
-                    if (!msg.isEmpty()) sender.sendMessage(msg);
-                }
-            }
-            if(args[0].equalsIgnoreCase("local")){
-                String msg = play(sender.getName(), allArgs);
-                if(!msg.isEmpty()) sender.sendMessage(msg);
-            }
-            if(args[0].equalsIgnoreCase("player")){
-                try{
-                    StringBuilder sb1 = new StringBuilder();
-                    for (int i = 2; i < args.length; i++){
-                        sb1.append(args[i]).append(" ");
-                    }
-                    String Allargs2 = sb.toString().trim();
-                    Player target = Bukkit.getPlayerExact(args[1]);
-                    String msg = play(target.getName(), Allargs2);
-                    if(!msg.isEmpty()) sender.sendMessage(msg);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    sender.sendMessage(ChatColor.RED + args[1] + " is not an player.");
-                }
-            }
-            if(!args[0].equalsIgnoreCase("player") && args[0].equalsIgnoreCase("local") && args[0].equalsIgnoreCase("broadcast"))
-                sender.sendMessage(ChatColor.RED + "Error: Usage: /playmusic <BROADCAST/LOCAL/PLAYER> <Player if PLAYER> <ID/FileName>");
-        }
-        else{
-            sender.sendMessage(ChatColor.RED + "Error: Usage: /playmusic <BROADCAST/LOCAL/PLAYER> <Player if PLAYER> <ID/FileName>");
-        }
-        return true;
-    }
+import static java.lang.Integer.parseInt;
+import static java.util.Objects.requireNonNull;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.IntStream.range;
+import static net.badbird5907.aetheriacore.spigot.features.jukebox.utils.Lang.INVALID_NUMBER;
+import static net.badbird5907.aetheriacore.spigot.features.jukebox.utils.Playlists.PLAYLIST;
+import static net.badbird5907.aetheriacore.spigot.manager.DebugLogger.DebugLog;
+import static net.badbird5907.aetheriacore.spigot.setup.Noteblock.*;
+import static org.bukkit.Bukkit.*;
+import static org.bukkit.ChatColor.GREEN;
+import static org.bukkit.ChatColor.RED;
 
-    /**
-     *
-     * @param who,id1
-     * @return String
-     *
-     */
-    public static String play(String who, String id1){
-        Player cp = Bukkit.getPlayer(who);
-        if (cp == null) return "§cUnknown player.";
-        Song song;
-        try{
-            //get by id
-            int id = Integer.parseInt(id1);
-            try{
-                DebugLogger.DebugLog("Attempting to get " + id1 + " By ID.");
-                song = Noteblock.getSongs().get(id);
-            }catch (IndexOutOfBoundsException ex){
-                DebugLogger.DebugLog(id1 + " Was not found.");
-                return "§cError on §l" + id + " §r§c(inexistant)";
-            }
-        }catch (NumberFormatException ex){
-            //get by file name
-            DebugLogger.DebugLog("Attempting to get " + id1 + " By file.");
-            song = Noteblock.getSongByFile(id1);
-            if (song == null) {
-                DebugLogger.DebugLog(id1 + " Was not found.");
-                return Lang.INVALID_NUMBER;
-            }
-        }
-        DebugLogger.DebugLog("a1");
-        PlayerData pdata = Noteblock.datas.getDatas(cp);
-        DebugLogger.DebugLog("a2");
-        pdata.setPlaylist(Playlists.PLAYLIST, false);
-        DebugLogger.DebugLog("a3");
-        pdata.playSong(song);
-        DebugLogger.DebugLog("a4");
-        pdata.songPlayer.adminPlayed = true;
-        return ChatColor.GREEN + "Playing...";
-    }
+public class PlayMusic implements CommandExecutor {
+	/**
+	 * @param who,id1
+	 * @return String
+	 */
+	public static String play(String who, String id1) {
+		Player cp = getPlayer(who);
+		if (cp == null) return "§cUnknown player.";
+		Song song;
+		try {
+			//get by id
+			int id = parseInt(id1);
+			try {
+				DebugLog("Attempting to get " + id1 + " By ID.");
+				song = getSongs().get(id);
+			} catch (IndexOutOfBoundsException ex) {
+				DebugLog(id1 + " Was not found.");
+				return "§cError on §l" + id + " §r§c(inexistant)";
+			}
+		} catch (NumberFormatException ex) {
+			//get by file name
+			DebugLog("Attempting to get " + id1 + " By file.");
+			song = getSongByFile(id1);
+			if (song == null) {
+				DebugLog(id1 + " Was not found.");
+				return INVALID_NUMBER;
+			}
+		}
+		DebugLog("a1");
+		PlayerData pdata = datas.getDatas(cp);
+		DebugLog("a2");
+		pdata.setPlaylist(PLAYLIST, false);
+		DebugLog("a3");
+		pdata.playSong(song);
+		DebugLog("a4");
+		pdata.songPlayer.adminPlayed = true;
+		return GREEN + "Playing...";
+	}
+
+	@Override
+	public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
+		if (args.length == 2) {
+			if (args[0].equalsIgnoreCase("BROADCAST")) {
+				for (Player p : getOnlinePlayers()) {
+					String msg = play(p.getName(), args[1]);
+					if (!msg.isEmpty()) sender.sendMessage(msg);
+				}
+			}
+			if (args[0].equalsIgnoreCase("local")) {
+				String msg = play(sender.getName(), range(2, args.length).mapToObj(i -> args[i] + " ").collect(joining()).trim());
+				if (!msg.isEmpty()) sender.sendMessage(msg);
+			}
+			if (args[0].equalsIgnoreCase("player")) try {
+				String msg = play(requireNonNull(getPlayerExact(args[1])).getName(), range(2, args.length).mapToObj(i -> args[i] + " ").collect(joining()).trim());
+				if (!msg.isEmpty()) sender.sendMessage(msg);
+			} catch (Exception e) {
+				e.printStackTrace();
+				sender.sendMessage(RED + args[1] + " is not an player.");
+			}
+		} else
+			sender.sendMessage(RED + "Error: Usage: /playmusic <BROADCAST/LOCAL/PLAYER> <Player if PLAYER> <ID/FileName>");
+		return true;
+	}
 }

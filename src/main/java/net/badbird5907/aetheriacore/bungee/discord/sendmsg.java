@@ -1,16 +1,11 @@
 package net.badbird5907.aetheriacore.bungee.discord;
 
-import net.badbird5907.aetheriacore.bungee.AetheriaCoreBungee;
-import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.entities.TextChannel;
+import static java.lang.Long.parseLong;
+import static java.util.Objects.requireNonNull;
+import static net.badbird5907.aetheriacore.bungee.AetheriaCoreBungee.getJDA;
 
-public class sendmsg{
-    private static JDA jda;
-    public static void sendmsg(String message, String channelID){
-        long id = Long.parseLong(channelID.replaceAll("L", ""));
-        jda = AetheriaCoreBungee.getJDA();
-        TextChannel channel = jda.getTextChannelById(id);
-        channel.sendMessage(message).queue();
-    }
-
+public class sendmsg {
+	public static void sendmsg(String message, String channelID) {
+		requireNonNull(getJDA().getTextChannelById(parseLong(channelID.replaceAll("L", "")))).sendMessage(message).queue();
+	}
 }

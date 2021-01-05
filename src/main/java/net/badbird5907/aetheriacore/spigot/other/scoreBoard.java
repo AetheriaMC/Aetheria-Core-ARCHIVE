@@ -6,11 +6,12 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 
+import static java.util.Objects.requireNonNull;
+
 
 public class scoreBoard {
-    ScoreboardManager manager = Bukkit.getScoreboardManager();
-    Scoreboard board = manager.getNewScoreboard();
-    Team team = board.registerNewTeam("AetheriaCoreScoreboard");
-    Objective objective = board.registerNewObjective("Aetheria", "dummy", "");
-
+	ScoreboardManager manager = Bukkit.getScoreboardManager();
+	Scoreboard board = requireNonNull(manager).getNewScoreboard();
+	Team team = board.registerNewTeam("AetheriaCoreScoreboard");
+	Objective objective = board.registerNewObjective("Aetheria", "dummy", "");
 }

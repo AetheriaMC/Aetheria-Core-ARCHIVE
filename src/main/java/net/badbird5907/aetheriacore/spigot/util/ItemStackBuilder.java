@@ -24,6 +24,7 @@ import static java.util.Objects.requireNonNull;
 import static java.util.stream.Stream.of;
 import static net.badbird5907.aetheriacore.spigot.AetheriaCore.getInstance;
 import static org.bukkit.Bukkit.getPluginManager;
+import static org.bukkit.Material.*;
 
 /**
  * This is a chainable builder for {@link ItemStack}s in {@link Bukkit}
@@ -99,7 +100,7 @@ public class ItemStackBuilder implements Listener {
 		final ItemMeta meta = is.getItemMeta();
 		assert meta != null;
 		List<String> lore = meta.getLore();
-		if (lore == null) lore = new ArrayList<String>();
+		if (lore == null) lore = new ArrayList<>();
 		lore.add(name);
 		meta.setLore(lore);
 		is.setItemMeta(meta);
@@ -202,7 +203,7 @@ public class ItemStackBuilder implements Listener {
 	 * @since 1.1
 	 */
 	public ItemStackBuilder color(Color color) {
-		if (of(Material.LEATHER_BOOTS, Material.LEATHER_CHESTPLATE, Material.LEATHER_HELMET, Material.LEATHER_LEGGINGS).anyMatch(material -> is.getType() == material)) {
+		if (of(LEATHER_BOOTS, LEATHER_CHESTPLATE, LEATHER_HELMET, LEATHER_LEGGINGS).anyMatch(material -> is.getType() == material)) {
 			LeatherArmorMeta meta = (LeatherArmorMeta) is.getItemMeta();
 			assert meta != null;
 			meta.setColor(color);
@@ -304,5 +305,4 @@ public class ItemStackBuilder implements Listener {
 	public void onItemApply(InventoryClickEvent e) {
 		// TODO add effects when item is applied
 	}
-
 }

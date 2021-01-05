@@ -1,31 +1,26 @@
 package net.badbird5907.aetheriacore.spigot.commands.utils;
 
-import net.badbird5907.aetheriacore.spigot.manager.Permission;
-import net.badbird5907.aetheriacore.spigot.util.GetPlayerPing;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class Ping implements CommandExecutor {
-    @Override
-    public boolean onCommand( CommandSender sender,  Command command,  String s,  String[] args) {
-        if(sender instanceof Player){
-            if(args.length == 0){
-                int ping = GetPlayerPing.getPing((Player) sender);
-                sender.sendMessage(ChatColor.GREEN + "Your ping is: " + ping + "ms");
-            }
-        }
-        if(args.length == 1){
-            Player target = Bukkit.getPlayerExact(args[0]);
-            if(sender.hasPermission(Permission.PING.node)){
-                int ping = GetPlayerPing.getPing(target);
-                sender.sendMessage(ChatColor.GREEN + target.getName() + "'s ping is: " + ping);
-            }
-        }
+import static java.util.Objects.requireNonNull;
+import static net.badbird5907.aetheriacore.spigot.manager.Permission.PING;
+import static net.badbird5907.aetheriacore.spigot.util.GetPlayerPing.getPing;
+import static org.bukkit.Bukkit.getPlayerExact;
+import static org.bukkit.ChatColor.GREEN;
 
-        return true;
-    }
+public class Ping implements CommandExecutor {
+	@Override
+	public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
+		if ((sender instanceof Player) && (args.length == 0))
+			sender.sendMessage(GREEN + "Your ping is: " + getPing((Player) sender) + "ms");
+		if (args.length == 1) {
+			Player target = getPlayerExact(args[0]);
+			if (sender.hasPermission(PING.node))
+				sender.sendMessage(GREEN + requireNonNull(target).getName() + "'s ping is: " + getPing(target));
+		}
+		return true;
+	}
 }

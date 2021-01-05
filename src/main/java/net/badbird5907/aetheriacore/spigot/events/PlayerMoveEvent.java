@@ -1,20 +1,21 @@
 package net.badbird5907.aetheriacore.spigot.events;
 
-import net.badbird5907.aetheriacore.spigot.commands.utils.freezePlayer;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
+import static net.badbird5907.aetheriacore.spigot.commands.utils.freezePlayer.frozen;
+import static org.bukkit.ChatColor.RED;
+
 public class PlayerMoveEvent implements Listener {
 
-    @EventHandler
-    public void playerFrozen(org.bukkit.event.player.PlayerMoveEvent event) {
-        Player player = event.getPlayer();
-        if (freezePlayer.frozen.contains(player.getUniqueId())) {
-            event.setCancelled(true);
-            player.sendMessage(ChatColor.RED + "You are currently frozen by a staff member.");
-        }
+	@EventHandler
+	public void playerFrozen(org.bukkit.event.player.PlayerMoveEvent event) {
+		Player player = event.getPlayer();
+		if (frozen.contains(player.getUniqueId())) {
+			event.setCancelled(true);
+			player.sendMessage(RED + "You are currently frozen by a staff member.");
+		}
         /*
         Material[] bannedItems = {Material.COMMAND_BLOCK, Material.COMMAND_BLOCK_MINECART, Material.CHAIN_COMMAND_BLOCK, Material.REPEATING_COMMAND_BLOCK, Material.BEDROCK, Material.BARRIER, Material.STRUCTURE_BLOCK, Material.SPAWNER, Material.DEBUG_STICK, Material.JIGSAW};
         for (Material m : bannedItems) { //Loop thru all elements
@@ -39,5 +40,5 @@ public class PlayerMoveEvent implements Listener {
         }
 
          */
-    }
+	}
 }

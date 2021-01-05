@@ -1,6 +1,6 @@
 package net.badbird5907.aetheriacore.spigot.util;
 
-import static java.lang.Integer.*;
+import static java.lang.Integer.parseInt;
 
 public class IsInt {
 	public static boolean Check(String s) {

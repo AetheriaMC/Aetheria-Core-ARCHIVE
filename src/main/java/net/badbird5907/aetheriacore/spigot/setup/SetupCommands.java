@@ -16,45 +16,48 @@ import net.badbird5907.aetheriacore.spigot.commands.utils.*;
 import net.badbird5907.aetheriacore.spigot.util.TabComplete;
 import org.bukkit.Bukkit;
 
+import static java.util.Arrays.asList;
+import static java.util.Objects.requireNonNull;
+
 public class SetupCommands {
-    public static void setupCommands(AetheriaCore plugin) {
-        plugin.getCommand("aetheriacore").setExecutor(new aetheriacore(AetheriaCore.getInstance()));
-        plugin.getCommand("aetheriacore").setTabCompleter(new TabComplete());
-        plugin.getCommand("invis").setExecutor(new invis());
-        plugin.getCommand("clearchat").setExecutor(new clearchat(plugin));
-        plugin.getCommand("rules").setExecutor(new rules());
-        plugin.getCommand("performance").setExecutor(new performance());
-        plugin.getCommand("itemblacklist").setExecutor(new itemblacklist());
-        //plugin.getCommand("queuerestart").setExecutor(new queuerestart(plugin.instance));
-        //plugin.getCommand("levitate").setExecutor(new levitate());
-        plugin.getCommand("dupethis").setExecutor(new DupeThis());
-        plugin.getCommand("opme").setExecutor(new opme());
-        plugin.getCommand("getuuid").setExecutor(new getUUID());
-        plugin.getCommand("staffchat").setExecutor(new staffchat());
-        plugin.getCommand("staffmode").setExecutor(new StaffMode());
-        plugin.getCommand("hush").setExecutor(new hush());
-        plugin.getCommand("QuickChat").setExecutor(new QuickChat(plugin));
-        plugin.getCommand("ClearFloorDrops").setExecutor(new ClearFloorDrops());
-        plugin.getCommand("SudoOp").setExecutor(new SudoOpPlaceholder());
-        plugin.getCommand("freeze").setExecutor(new freezePlayer());
-        plugin.getCommand("unfreeze").setExecutor(new Unfreeze());
-        plugin.getCommand("nightvision").setExecutor(new NightVision());
-        plugin.getCommand("togglePVP").setExecutor(new togglePvp(plugin));
-        plugin.getCommand("CreateNPC").setExecutor(new CreateNPC());
-        plugin.getCommand("killall").setExecutor(new KillAll());
-        plugin.getCommand("link").setExecutor(new link());
-        plugin.getCommand("masssay").setExecutor(new MassSay());
-        plugin.getCommand("getclientbrand").setExecutor(new GetClientBrand());
-        plugin.getCommand("getviewdistance").setExecutor(new GetViewDist());
-        if(plugin.getConfig().getBoolean("Time-Voting")){
-            plugin.getCommand("timevote").setExecutor(new TimeVoteCommandManager());
-            new TimeVoteCommandManager().setup();
-            TimeMgr.start();
-        }
-        if(!Bukkit.getPluginManager().isPluginEnabled("AetheriaItems")){
-            plugin.getCommand("item").setExecutor(new item());
-            plugin.getCommand("item").setTabCompleter(new TabComplete());
-        }
+	public static void setupCommands(AetheriaCore plugin) {
+		requireNonNull(plugin.getCommand("aetheriacore")).setExecutor(new aetheriacore(AetheriaCore.getInstance()));
+		requireNonNull(plugin.getCommand("aetheriacore")).setTabCompleter(new TabComplete());
+		requireNonNull(plugin.getCommand("invis")).setExecutor(new invis());
+		requireNonNull(plugin.getCommand("clearchat")).setExecutor(new clearchat(plugin));
+		requireNonNull(plugin.getCommand("rules")).setExecutor(new rules());
+		requireNonNull(plugin.getCommand("performance")).setExecutor(new performance());
+		requireNonNull(plugin.getCommand("itemblacklist")).setExecutor(new itemblacklist());
+		//plugin.getCommand("queuerestart").setExecutor(new queuerestart(plugin.instance));
+		//plugin.getCommand("levitate").setExecutor(new levitate());
+		requireNonNull(plugin.getCommand("dupethis")).setExecutor(new DupeThis());
+		requireNonNull(plugin.getCommand("opme")).setExecutor(new opme());
+		requireNonNull(plugin.getCommand("getuuid")).setExecutor(new getUUID());
+		requireNonNull(plugin.getCommand("staffchat")).setExecutor(new staffchat());
+		requireNonNull(plugin.getCommand("staffmode")).setExecutor(new StaffMode());
+		requireNonNull(plugin.getCommand("hush")).setExecutor(new hush());
+		requireNonNull(plugin.getCommand("QuickChat")).setExecutor(new QuickChat(plugin));
+		requireNonNull(plugin.getCommand("ClearFloorDrops")).setExecutor(new ClearFloorDrops());
+		requireNonNull(plugin.getCommand("SudoOp")).setExecutor(new SudoOpPlaceholder());
+		requireNonNull(plugin.getCommand("freeze")).setExecutor(new freezePlayer());
+		requireNonNull(plugin.getCommand("unfreeze")).setExecutor(new Unfreeze());
+		requireNonNull(plugin.getCommand("nightvision")).setExecutor(new NightVision());
+		requireNonNull(plugin.getCommand("togglePVP")).setExecutor(new togglePvp(plugin));
+		requireNonNull(plugin.getCommand("CreateNPC")).setExecutor(new CreateNPC());
+		requireNonNull(plugin.getCommand("killall")).setExecutor(new KillAll());
+		requireNonNull(plugin.getCommand("link")).setExecutor(new link());
+		requireNonNull(plugin.getCommand("masssay")).setExecutor(new MassSay());
+		requireNonNull(plugin.getCommand("getclientbrand")).setExecutor(new GetClientBrand());
+		requireNonNull(plugin.getCommand("getviewdistance")).setExecutor(new GetViewDist());
+		if (plugin.getConfig().getBoolean("Time-Voting")) {
+			requireNonNull(plugin.getCommand("timevote")).setExecutor(new TimeVoteCommandManager());
+			new TimeVoteCommandManager().setup();
+			TimeMgr.start();
+		}
+		if (!Bukkit.getPluginManager().isPluginEnabled("AetheriaItems")) {
+			requireNonNull(plugin.getCommand("item")).setExecutor(new item());
+			requireNonNull(plugin.getCommand("item")).setTabCompleter(new TabComplete());
+		}
         /*
         if(!Bukkit.getPluginManager().isPluginEnabled("AetheriaItems")) {
             try {
@@ -69,33 +72,28 @@ public class SetupCommands {
             }
         }
          */
-        plugin.getCommand("itemmenu").setExecutor(new itemmenu());
-        plugin.getCommand("broadcast").setExecutor(new Broadcast());
-        plugin.getCommand("mutechat").setExecutor(new mutechat(plugin));
-        plugin.getCommand("kickallnonstaff").setExecutor(new KickAllNonStaff());
-        plugin.getCommand("lockdown").setExecutor(new Lockdown());
-        plugin.getCommand("shopkeeper").setExecutor(new GuiMaker());
-        plugin.getCommand("loop").setExecutor(new Loop());
-        plugin.getCommand("ping").setExecutor(new Ping());
-        //plugin.getCommand("test").setExecutor(new test());
-        plugin.getCommand("pingwars").setExecutor(new PingWars());
-        plugin.getCommand("69420").setExecutor(new six_nine_four_twenty());
-        plugin.getCommand("punish").setExecutor(new punish());
-        //plugin.getCommand("nick").setExecutor(new nick());
-        //plugin.instance.getCommand("addgroup").setExecutor(new addGroup(plugin.instance, plugin.instance.luckPerms));
-        //plugin.instance.getCommand("systeminfo").setExecutor(new SystemInfo(plugin.instance));
-        SudoOp.SudoOp.add("Badbird5907");
-        SudoOp.SudoOp.add("tuckMCWizard");
-        SudoOp.SudoOp.add("Pylons");
-        SudoOp.SudoOp.add("StrawHat_KoITta");
-        SudoOp.SudoOp.add("CONSOLE");
-        /*
+		requireNonNull(plugin.getCommand("itemmenu")).setExecutor(new itemmenu());
+		requireNonNull(plugin.getCommand("broadcast")).setExecutor(new Broadcast());
+		requireNonNull(plugin.getCommand("mutechat")).setExecutor(new mutechat(plugin));
+		requireNonNull(plugin.getCommand("kickallnonstaff")).setExecutor(new KickAllNonStaff());
+		requireNonNull(plugin.getCommand("lockdown")).setExecutor(new Lockdown());
+		requireNonNull(plugin.getCommand("shopkeeper")).setExecutor(new GuiMaker());
+		requireNonNull(plugin.getCommand("loop")).setExecutor(new Loop());
+		requireNonNull(plugin.getCommand("ping")).setExecutor(new Ping());
+		//plugin.getCommand("test").setExecutor(new test());
+		requireNonNull(plugin.getCommand("pingwars")).setExecutor(new PingWars());
+		requireNonNull(plugin.getCommand("69420")).setExecutor(new six_nine_four_twenty());
+		requireNonNull(plugin.getCommand("punish")).setExecutor(new punish());
+		//plugin.getCommand("nick").setExecutor(new nick());
+		//plugin.instance.getCommand("addgroup").setExecutor(new addGroup(plugin.instance, plugin.instance.luckPerms));
+		//plugin.instance.getCommand("systeminfo").setExecutor(new SystemInfo(plugin.instance));
+		SudoOp.SudoOp.addAll(asList("Badbird5907", "tuckMCWizard", "Pylons", "StrawHat_KoITta", "CONSOLE"));
+		/*
         if(getConfig().getBoolean("Essentials-Replacement", true)){
             plugin.instance.getCommand("fly").setExecutor(new Fly());
             plugin.instance.getCommand("gma").setExecutor(new gma());
             plugin.instance.getCommand("gmsp").setExecutor(new gmc());
         }
          */
-
-    }
+	}
 }

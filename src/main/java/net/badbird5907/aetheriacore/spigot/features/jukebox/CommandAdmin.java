@@ -1,10 +1,9 @@
-package net.badbird5907.aetheriacore.spigot.jukebox;
+package net.badbird5907.aetheriacore.spigot.features.jukebox;
 
 import com.xxmicloxx.NoteBlockAPI.model.Song;
 import com.xxmicloxx.NoteBlockAPI.utils.NBSDecoder;
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
-import net.badbird5907.aetheriacore.spigot.jukebox.utils.Lang;
-import net.badbird5907.aetheriacore.spigot.jukebox.utils.Playlists;
+import net.badbird5907.aetheriacore.spigot.features.jukebox.utils.Playlists;
 import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -19,6 +18,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.net.URL;
 import java.nio.file.Files;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static net.badbird5907.aetheriacore.spigot.features.jukebox.utils.Lang.*;
 
 public class CommandAdmin implements CommandExecutor {
 
@@ -31,14 +34,14 @@ public class CommandAdmin implements CommandExecutor {
 		Player p = (Player) sender;*/
 
         if (args.length == 0){
-            sender.sendMessage(Lang.INCORRECT_SYNTAX);
+            sender.sendMessage(INCORRECT_SYNTAX);
             return true;
         }
 
         switch (args[0]){
 
             case "reload":
-                sender.sendMessage(Lang.RELOAD_LAUNCH);
+                sender.sendMessage(RELOAD_LAUNCH);
                 try{
                     AetheriaCore.getInstance().disableAll();
                     Noteblock.initAll();
@@ -46,12 +49,12 @@ public class CommandAdmin implements CommandExecutor {
                     sender.sendMessage("§cError while reloading. Please check the console   .");
                     ex.printStackTrace();
                 }
-                sender.sendMessage(Lang.RELOAD_FINISH);
+                sender.sendMessage(RELOAD_FINISH);
                 break;
 
             case "player":
                 if (args.length < 2){
-                    sender.sendMessage(Lang.INCORRECT_SYNTAX);
+                    sender.sendMessage(INCORRECT_SYNTAX);
                     return true;
                 }
                 OfflinePlayer pp = Bukkit.getOfflinePlayer(args[1]);
@@ -60,7 +63,7 @@ public class CommandAdmin implements CommandExecutor {
                     return true;
                 }
                 PlayerData pdata = Noteblock.datas.getDatas(pp.getUniqueId());
-                String s = Lang.MUSIC_PLAYING + " ";
+                String s = MUSIC_PLAYING + " ";
                 if (pdata == null){
                     s = s + "§cx";
                 }else {
@@ -76,7 +79,7 @@ public class CommandAdmin implements CommandExecutor {
 
             case "play":
                 if (args.length < 3){
-                    sender.sendMessage(Lang.INCORRECT_SYNTAX);
+                    sender.sendMessage(INCORRECT_SYNTAX);
                     return true;
                 }
                 if (args[1].equals("@a")){
@@ -93,7 +96,7 @@ public class CommandAdmin implements CommandExecutor {
 
             case "stop":
                 if (args.length < 2){
-                    sender.sendMessage(Lang.INCORRECT_SYNTAX);
+                    sender.sendMessage(INCORRECT_SYNTAX);
                     return true;
                 }
                 if (args[1].equals("@a")){
@@ -112,7 +115,7 @@ public class CommandAdmin implements CommandExecutor {
 
             case "toggle":
                 if (args.length < 2) {
-                    sender.sendMessage(Lang.INCORRECT_SYNTAX);
+                    sender.sendMessage(INCORRECT_SYNTAX);
                     return true;
                 }
                 if (args[1].equals("@a")) {
@@ -143,7 +146,7 @@ public class CommandAdmin implements CommandExecutor {
 
             case "download":
                 if (args.length < 3){
-                    sender.sendMessage(Lang.INCORRECT_SYNTAX);
+                    sender.sendMessage(INCORRECT_SYNTAX);
                     return true;
                 }
                 try {
@@ -171,7 +174,7 @@ public class CommandAdmin implements CommandExecutor {
 
             case "shuffle":
                 if (args.length < 2){
-                    sender.sendMessage(Lang.INCORRECT_SYNTAX);
+                    sender.sendMessage(INCORRECT_SYNTAX);
                     return true;
                 }
                 if (args[1].equals("@a")){
@@ -195,7 +198,7 @@ public class CommandAdmin implements CommandExecutor {
 
             case "particles":
                 if (args.length < 2){
-                    sender.sendMessage(Lang.INCORRECT_SYNTAX);
+                    sender.sendMessage(INCORRECT_SYNTAX);
                     return true;
                 }
                 if (args[1].equals("@a")){
@@ -214,7 +217,7 @@ public class CommandAdmin implements CommandExecutor {
 
             case "join":
                 if (args.length < 2){
-                    sender.sendMessage(Lang.INCORRECT_SYNTAX);
+                    sender.sendMessage(INCORRECT_SYNTAX);
                     return true;
                 }
                 if (args[1].equals("@a")){
@@ -233,7 +236,7 @@ public class CommandAdmin implements CommandExecutor {
 
             case "random":
                 if (args.length < 2){
-                    sender.sendMessage(Lang.INCORRECT_SYNTAX);
+                    sender.sendMessage(INCORRECT_SYNTAX);
                     return true;
                 }
                 if (args[1].equals("@a")){
@@ -252,7 +255,7 @@ public class CommandAdmin implements CommandExecutor {
 
             case "volume":
                 if (args.length < 3){
-                    sender.sendMessage(Lang.INCORRECT_SYNTAX);
+                    sender.sendMessage(INCORRECT_SYNTAX);
                     return true;
                 }
                 Player cp = Bukkit.getPlayer(args[1]);
@@ -271,13 +274,13 @@ public class CommandAdmin implements CommandExecutor {
                     pdata.setVolume(volume);
                     sender.sendMessage("§aVolume : " + pdata.getVolume());
                 }catch (NumberFormatException ex){
-                    sender.sendMessage(Lang.INVALID_NUMBER);
+                    sender.sendMessage(INVALID_NUMBER);
                 }
                 break;
 
             case "loop":
                 if (args.length < 2){
-                    sender.sendMessage(Lang.INCORRECT_SYNTAX);
+                    sender.sendMessage(INCORRECT_SYNTAX);
                     return true;
                 }
                 if (args[1].equals("@a")){
@@ -296,7 +299,7 @@ public class CommandAdmin implements CommandExecutor {
 
             case "next":
                 if (args.length < 2) {
-                    sender.sendMessage(Lang.INCORRECT_SYNTAX);
+                    sender.sendMessage(INCORRECT_SYNTAX);
                     return true;
                 }
                 if (args[1].equals("@a")) {
@@ -318,7 +321,7 @@ public class CommandAdmin implements CommandExecutor {
                 break;
 
             default:
-                sender.sendMessage(Lang.AVAILABLE_COMMANDS + " <reload|player|play|stop|toggle|setitem|download|shuffle|particles|join|random|volume|loop|next> ...");
+                sender.sendMessage(AVAILABLE_COMMANDS + " <reload|player|play|stop|toggle|setitem|download|shuffle|particles|join|random|volume|loop|next> ...");
                 break;
 
         }
@@ -338,13 +341,9 @@ public class CommandAdmin implements CommandExecutor {
             }catch (IndexOutOfBoundsException ex){
                 return "§cError on §l" + id + " §r§c(inexistant)";
             }
-        }catch (NumberFormatException ex){
-            String fileName = args[2];
-            for (int i = 3; i < args.length; i++){
-                fileName = fileName + args[i] + (i == args.length-1 ? "" : " ");
-            }
-            song = Noteblock.getSongByFile(fileName);
-            if (song == null) return Lang.INVALID_NUMBER;
+        }catch (NumberFormatException ex) {
+            song = Noteblock.getSongByFile(IntStream.range(3, args.length).mapToObj(i -> args[i] + (i == args.length - 1 ? "" : " ")).collect(Collectors.joining("", args[2], "")));
+            if (song == null) return INVALID_NUMBER;
         }
         PlayerData pdata = Noteblock.datas.getDatas(cp);
         pdata.setPlaylist(Playlists.PLAYLIST, false);
@@ -356,7 +355,7 @@ public class CommandAdmin implements CommandExecutor {
     private String stop(Player cp){
         PlayerData pdata = Noteblock.datas.getDatas(cp);
         pdata.stopPlaying(true);
-        return Lang.PLAYER_MUSIC_STOPPED + cp.getName();
+        return PLAYER_MUSIC_STOPPED + cp.getName();
     }
 
     private void toggle(Player cp){

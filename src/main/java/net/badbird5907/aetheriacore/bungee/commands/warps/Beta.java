@@ -1,13 +1,13 @@
 package net.badbird5907.aetheriacore.bungee.commands.warps;
 
 import net.md_5.bungee.api.CommandSender;
-import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
 import static net.md_5.bungee.api.ChatColor.RED;
+import static net.md_5.bungee.api.ProxyServer.getInstance;
 
 public class Beta extends Command {
 	public Beta() {
@@ -25,8 +25,7 @@ public class Beta extends Command {
 			player.sendMessage(new ComponentBuilder("You are already connected to the Hub!").color(RED).create());
 			return;
 		}
-		ServerInfo target = ProxyServer.getInstance().getServerInfo("Hub");
+		ServerInfo target = getInstance().getServerInfo("Hub");
 		player.connect(target);
 	}
-
 }

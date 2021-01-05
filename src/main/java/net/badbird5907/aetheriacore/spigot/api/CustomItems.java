@@ -1,11 +1,9 @@
 package net.badbird5907.aetheriacore.spigot.api;
 
 import net.badbird5907.aetheriacore.spigot.util.itemtypes;
-import net.badbird5907.aetheriaitems.api.GetCustomItems;
-import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
+import static java.util.Objects.requireNonNull;
 
 public class CustomItems {
     /*
@@ -15,10 +13,8 @@ public class CustomItems {
     }
      */
 
-    public void put(String str, ItemStack itemStack){
-        itemtypes.CustomItems().put(str, itemStack);
-        itemtypes.allitems.add(str);
-    }
-
-
+	public void put(String str, ItemStack itemStack) {
+		requireNonNull(itemtypes.CustomItems()).put(str, itemStack);
+		itemtypes.allitems.add(str);
+	}
 }

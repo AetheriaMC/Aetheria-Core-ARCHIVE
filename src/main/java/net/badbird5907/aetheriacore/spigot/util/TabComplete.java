@@ -8,9 +8,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
 import static net.badbird5907.aetheriacore.spigot.manager.permissionManager.reload;
 import static net.badbird5907.aetheriacore.spigot.util.itemtypes.allitems;
 
@@ -32,7 +32,7 @@ public class TabComplete implements TabCompleter {
 		}
 		if (cmd.getName().equalsIgnoreCase("item")) {
 			if (args.length == 1) {
-				l = allitems.stream().filter(a -> a.toUpperCase().startsWith(args[0].toUpperCase())).collect(Collectors.toList());
+				l = allitems.stream().filter(a -> a.toUpperCase().startsWith(args[0].toUpperCase())).collect(toList());
 				return l;
 			}
 			if (args.length == 1) return allitems;

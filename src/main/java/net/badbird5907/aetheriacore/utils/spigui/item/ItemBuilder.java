@@ -8,10 +8,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
+
+import static java.util.Arrays.asList;
+import static java.util.Objects.requireNonNull;
+import static java.util.stream.IntStream.range;
+import static org.bukkit.ChatColor.translateAlternateColorCodes;
 
 /**
  * A helper class for creating or modifying ItemStacks.
@@ -29,7 +33,6 @@ import java.util.function.Predicate;
  * @see ItemStack
  */
 public class ItemBuilder {
-
     private final ItemStack stack;
 
     /* CONSTRUCT */
@@ -84,8 +87,8 @@ public class ItemBuilder {
      */
     public ItemBuilder name(String name) {
         ItemMeta stackMeta = stack.getItemMeta();
-        stackMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
-        stack.setItemMeta(stackMeta);
+	    requireNonNull(stackMeta).setDisplayName(translateAlternateColorCodes('&', name));
+	    stack.setItemMeta(stackMeta);
         return this;
     }
 
@@ -103,8 +106,7 @@ public class ItemBuilder {
      * @return The item's display name as returned from its {@link ItemMeta}.
      */
     public String getName() {
-        if (!stack.hasItemMeta() || !stack.getItemMeta().hasDisplayName()) return null;
-        return stack.getItemMeta().getDisplayName();
+	    return (!stack.hasItemMeta() || !requireNonNull(stack.getItemMeta()).hasDisplayName()) ? null : stack.getItemMeta().getDisplayName();
     }
 
     /**
@@ -135,7 +137,7 @@ public class ItemBuilder {
      * @return The {@link ItemBuilder} instance.
      */
     public ItemBuilder lore(String... lore) {
-        return lore(Arrays.asList(lore));
+	    return lore(asList(lore));
     }
 
     /**
@@ -150,13 +152,11 @@ public class ItemBuilder {
      * @return The {@link ItemBuilder} instance.
      */
     public ItemBuilder lore(List<String> lore) {
-        for(int i = 0; i < lore.size(); i++){
-            lore.set(i, ChatColor.translateAlternateColorCodes('&', lore.get(i)));
-        }
+	    range(0, lore.size()).forEach(i -> lore.set(i, translateAlternateColorCodes('&', lore.get(i))));
 
         ItemMeta stackMeta = stack.getItemMeta();
-        stackMeta.setLore(lore);
-        stack.setItemMeta(stackMeta);
+	    requireNonNull(stackMeta).setLore(lore);
+	    stack.setItemMeta(stackMeta);
         return this;
     }
 
@@ -170,8 +170,7 @@ public class ItemBuilder {
      * @return The lore of the item.
      */
     public List<String> getLore() {
-        if (!stack.hasItemMeta() || !stack.getItemMeta().hasLore()) return null;
-        return stack.getItemMeta().getLore();
+	    return (!stack.hasItemMeta() || !requireNonNull(stack.getItemMeta()).hasLore()) ? null : stack.getItemMeta().getLore();
     }
 
     /**
@@ -265,8 +264,8 @@ public class ItemBuilder {
      */
     public ItemBuilder flag(ItemFlag ...flag) {
         ItemMeta meta = stack.getItemMeta();
-        meta.addItemFlags(flag);
-        stack.setItemMeta(meta);
+	    requireNonNull(meta).addItemFlags(flag);
+	    stack.setItemMeta(meta);
         return this;
     }
 
@@ -278,8 +277,8 @@ public class ItemBuilder {
      */
     public ItemBuilder deflag(ItemFlag ...flag) {
         ItemMeta meta = stack.getItemMeta();
-        meta.removeItemFlags(flag);
-        stack.setItemMeta(meta);
+	    requireNonNull(meta).removeItemFlags(flag);
+	    stack.setItemMeta(meta);
         return this;
     }
 
@@ -295,12 +294,10 @@ public class ItemBuilder {
      */
     public ItemBuilder skullOwner(String name) {
         if (!(stack.getItemMeta() instanceof SkullMeta)) return this;
-
         stack.setDurability((byte) 3);
         SkullMeta meta = (SkullMeta) stack.getItemMeta();
         meta.setOwner(name);
         stack.setItemMeta(meta);
-
         return this;
     }
 
@@ -323,9 +320,7 @@ public class ItemBuilder {
      * @return The {@link ItemBuilder} instance.
      */
     public ItemBuilder ifThen(Predicate<ItemBuilder> ifTrue, Function<ItemBuilder, Object> then) {
-        if (ifTrue.test(this))
-            then.apply(this);
-
+	    if (ifTrue.test(this)) then.apply(this);
         return this;
     }
 
@@ -350,5 +345,4 @@ public class ItemBuilder {
     public ItemStack get() {
         return stack;
     }
-
 }

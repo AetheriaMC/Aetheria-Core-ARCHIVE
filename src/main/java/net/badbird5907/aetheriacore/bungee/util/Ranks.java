@@ -1,49 +1,33 @@
 package net.badbird5907.aetheriacore.bungee.util;
 
-import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
+import static net.badbird5907.aetheriacore.bungee.util.Permission.*;
+import static net.md_5.bungee.api.ChatColor.*;
+
 public enum Ranks {
-    OWNER(ChatColor.DARK_RED + "" + ChatColor.BOLD +"[Owner]" + ChatColor.RESET + "" + ChatColor.DARK_RED + " "),
-    ADMIN(ChatColor.RED + "" + ChatColor.BOLD + "[Admin]" + ChatColor.RESET + "" + ChatColor.RED + " "),
-    MOD(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD +  "[Mod]" + ChatColor.RESET + "" + ChatColor.DARK_PURPLE + " "),
-    HELPER(ChatColor.BLUE + "" + ChatColor.BOLD +"[Helper]" + ChatColor.RESET + "" + ChatColor.BLUE + " "),
-    DEV(ChatColor.GOLD + "" + ChatColor.BOLD +"[Dev]" + ChatColor.RESET + "" + ChatColor.GOLD + " "),
-    BUILDER(ChatColor.YELLOW + "" + ChatColor.BOLD + "[Builder]" + ChatColor.RESET + "" + ChatColor.YELLOW + " "),
-    LM(ChatColor.YELLOW + "" + ChatColor.BOLD + "[LoreMaster]" + ChatColor.RESET + "" + ChatColor.YELLOW + " "),
-    TRIAL_DEV(ChatColor.GOLD + "" + ChatColor.BOLD +  "[Trial-Dev]" + ChatColor.RESET + "" + ChatColor.GOLD + " "),
-    TRIAL_BUILDER(ChatColor.YELLOW + "" + ChatColor.BOLD + "[Trial-Builder]" + ChatColor.RESET + "" + ChatColor.YELLOW + " "),
-    TRIAL_LM(ChatColor.YELLOW + "" + ChatColor.BOLD + "[Trial-LoreMaster]" + ChatColor.RESET + "" + ChatColor.YELLOW + " ");
-    //ChatColor.translateAlternateColorCodes('&', rank);
-    public String rank;
-    Ranks(String rank) {
-        this.rank = rank;
-    }
-    public String getString() {
-        return rank;
-    }
-    private String playerwithrank(ProxiedPlayer player) {
-        if(player.hasPermission(Permission.STAFF_OWNER.node))
-            return Ranks.OWNER + player.getName();
-        if(player.hasPermission(Permission.STAFF_ADMIN.node))
-            return Ranks.ADMIN + player.getName();
-        if(player.hasPermission(Permission.STAFF_MOD.node))
-            return Ranks.MOD + player.getName();
-        if(player.hasPermission(Permission.STAFF_HELPER.node))
-            return Ranks.HELPER + player.getName();
-        if(player.hasPermission(Permission.STAFF_DEV.node))
-            return Ranks.DEV + player.getName();
-        if(player.hasPermission(Permission.STAFF_BUILDER.node))
-            return Ranks.BUILDER + player.getName();
-        if(player.hasPermission(Permission.STAFF_LM.node))
-            return Ranks.LM + player.getName();
-        if(player.hasPermission(Permission.STAFF_TRIAL_DEV.node))
-            return Ranks.TRIAL_DEV + player.getName();
-        if(player.hasPermission(Permission.STAFF_TRIAL_BUILDER.node))
-            return Ranks.TRIAL_BUILDER + player.getName();
-        if(player.hasPermission(Permission.STAFF_TRIAL_LM.node))
-            return Ranks.TRIAL_LM + player.getName();
-        else
-            return player.getName();
-    }
+	OWNER(DARK_RED + "" + BOLD + "[Owner]" + RESET + "" + DARK_RED + " "),
+	ADMIN(RED + "" + BOLD + "[Admin]" + RESET + "" + RED + " "),
+	MOD(DARK_PURPLE + "" + BOLD + "[Mod]" + RESET + "" + DARK_PURPLE + " "),
+	HELPER(BLUE + "" + BOLD + "[Helper]" + RESET + "" + BLUE + " "),
+	DEV(GOLD + "" + BOLD + "[Dev]" + RESET + "" + GOLD + " "),
+	BUILDER(YELLOW + "" + BOLD + "[Builder]" + RESET + "" + YELLOW + " "),
+	LM(YELLOW + "" + BOLD + "[LoreMaster]" + RESET + "" + YELLOW + " "),
+	TRIAL_DEV(GOLD + "" + BOLD + "[Trial-Dev]" + RESET + "" + GOLD + " "),
+	TRIAL_BUILDER(YELLOW + "" + BOLD + "[Trial-Builder]" + RESET + "" + YELLOW + " "),
+	TRIAL_LM(YELLOW + "" + BOLD + "[Trial-LoreMaster]" + RESET + "" + YELLOW + " ");
+	//ChatColor.translateAlternateColorCodes('&', rank);
+	public String rank;
+
+	Ranks(String rank) {
+		this.rank = rank;
+	}
+
+	public String getString() {
+		return rank;
+	}
+
+	private String playerwithrank(ProxiedPlayer player) {
+		return player.hasPermission(STAFF_OWNER.node) ? (OWNER + player.getName()) : (player.hasPermission(STAFF_ADMIN.node) ? (ADMIN + player.getName()) : (player.hasPermission(STAFF_MOD.node) ? (MOD + player.getName()) : (player.hasPermission(STAFF_HELPER.node) ? (HELPER + player.getName()) : (player.hasPermission(STAFF_DEV.node) ? (DEV + player.getName()) : (player.hasPermission(STAFF_BUILDER.node) ? (BUILDER + player.getName()) : (player.hasPermission(STAFF_LM.node) ? (LM + player.getName()) : (player.hasPermission(STAFF_TRIAL_DEV.node) ? (TRIAL_DEV + player.getName()) : (player.hasPermission(STAFF_TRIAL_BUILDER.node) ? (TRIAL_BUILDER + player.getName()) : (player.hasPermission(STAFF_TRIAL_LM.node) ? (TRIAL_LM + player.getName()) : player.getName())))))))));
+	}
 }
