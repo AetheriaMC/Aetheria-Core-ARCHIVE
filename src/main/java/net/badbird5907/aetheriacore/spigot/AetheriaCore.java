@@ -1,9 +1,10 @@
 package net.badbird5907.aetheriacore.spigot;
 
+import com.google.gson.Gson;
 import com.xxmicloxx.NoteBlockAPI.NoteBlockAPI;
-//import github.scarsz.discordsrv.DiscordSRV;
 import net.badbird5907.aetheriacore.spigot.events.*;
 import net.badbird5907.aetheriacore.spigot.features.jukebox.utils.Placeholders;
+import net.badbird5907.aetheriacore.spigot.manager.GsonManager;
 import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
 import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
@@ -28,17 +29,19 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
-//import net.badbird5907.aetheriacore.spigot.util.SignGUI;
-
 public final class AetheriaCore extends JavaPlugin implements Listener {
+    Gson gson = new Gson();
+
     public static AetheriaCore instance;
     public static List<String> SUPPORTED_VERSIONS = new ArrayList<String>();
     private static AetheriaCore plugin;
@@ -46,7 +49,6 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
     public FileConfiguration customConfig;
     public Consumer<Player> stopVanillaMusic = null;
     private LuckPerms luckPerms;
-    //private final OnDiscordMessageRecieved discordsrvListener = new OnDiscordMessageRecieved(this);
     //sql
     private Connection connection;
     private String host, database, username, password;
@@ -54,10 +56,6 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
     private final HashMap<Plugin, Boolean> dependentPlugins = new HashMap<>();
     public JDA jda;
     //music-end
-
-    //protocolib
-    //private ProtocolManager protocolManager;
-    //SignGUI signGui;
     public AetheriaCore() {
         instance = this;
     }
@@ -75,21 +73,40 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
         instance = this;
         long start = System.currentTimeMillis();
         if (getConfig().getBoolean("enable")) {
-            //signGui = new SignGUI(this);
             spiGUI = new SpiGUI(this);
+            PluginManager.initLogger();
             boolean mc1164 = Bukkit.getServer().getClass().getPackage().getName().contains("1.16.4");
             if (!mc1164)
                 warn("SERVER IS VERSION: " + Bukkit.getServer().getVersion() + "ONLY " + SUPPORTED_VERSIONS.toString() + " IS SUPPORTED.");
             else
                 log("Server is version " + Bukkit.getServer().getVersion() + " is supported!");
-            //DiscordSRV.api.subscribe(discordsrvListener);
             plugin = this;
 
             warn("Startup: Starting...");
             doStuff();
+            log("Attempting write");
+            if(!GsonManager.dirExists("data/")){
+                log("1");
+                GsonManager.createDir("data");
+                log("2");
+                if(!GsonManager.fileExists("data/lol.json")){
+                    log("3");
+                    GsonManager.createFile("data", "lol.json");
+                    log("4");
+                    Map<String, Boolean> does_it_work = new HashMap<>();
+                    does_it_work.put("does-it-work", true);
+                    log("5");
+                    try {
+                        FileWriter fileWriter = new FileWriter(getDataFolder().getAbsolutePath() + "/data/lol.json");
+                        Gson gson = new Gson();
+                        gson.toJson(does_it_work, fileWriter);
+                        log("6");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
             //register commands
-            //TwoFactorAuthentication auth = new TwoFactorAuthentication();
-            //TwoFactorAuthentication.getInstance().enable(this);
             log("Startup: initializing Commands");
             //this.setupCommands();
             SetupCommands.setupCommands(this);
@@ -326,8 +343,11 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
             itemtypes.allitems.add(material.name());
             if (material.isBlock())
                 itemtypes.blocks.add(material.name());
-            if (material.isItem())
-                itemtypes.items.add(material.name());
+            if(PluginManager.is16()){
+                if (material.isItem())
+                    itemtypes.items.add(material.name());
+            }
+            else itemtypes.items.add(material.name());
             if (material.toString().contains("SPAWN_EGG"))
                 itemtypes.blacklisted_items.add(material);
         }
@@ -336,7 +356,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
                 dependentPlugins.put(pl, false);
             }
         }
-        this.getServer().getMessenger().registerOutgoingPluginChannel(this, "aetheriacore:messaging");
+        //this.getServer().getMessenger().registerOutgoingPluginChannel(this, "aec");
     }
 
     public void disableAll() {

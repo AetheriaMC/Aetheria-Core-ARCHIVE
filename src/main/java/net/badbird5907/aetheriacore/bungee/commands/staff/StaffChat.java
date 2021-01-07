@@ -1,7 +1,6 @@
 package net.badbird5907.aetheriacore.bungee.commands.staff;
 
 import net.badbird5907.aetheriacore.bungee.AetheriaCoreBungee;
-import net.badbird5907.aetheriacore.bungee.api.SendStaffChatMessage;
 import net.badbird5907.aetheriacore.bungee.util.Messages;
 import net.badbird5907.aetheriacore.bungee.util.Permission;
 import net.md_5.bungee.api.ChatColor;

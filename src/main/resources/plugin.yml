@@ -8,8 +8,8 @@ authors: [ Badbird5907 ]
 description: AetheriaCore By Badbird5907
 website: badbird5907.net
 softdepend: [ PremiumVanish, AetheriaMinigames, AetheriaCheat, PlaceholderAPI, AetheriaItems ]
-depend: [ DiscordSRV, SuperVanish, AdvancedBan, ProtocolLib, LuckPerms, NoteBlockAPI ]
-loadbefore: [ DiscordSRV, AdvancedBan ]
+depend: [SuperVanish, AdvancedBan, ProtocolLib, LuckPerms, NoteBlockAPI ]
+loadbefore: [AdvancedBan ]
 commands:
   test:
     usage: /<command>
