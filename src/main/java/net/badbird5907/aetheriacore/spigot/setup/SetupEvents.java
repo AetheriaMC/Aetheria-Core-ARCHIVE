@@ -29,6 +29,7 @@ public class SetupEvents {
         Bukkit.getServer().getPluginManager().registerEvents(new Player_death_event(), plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new NoteblockListener(), plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new PunishGUI(), plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerLeaveEvent(), plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new net.badbird5907.aetheriacore.spigot.commands.timevote.GUIListener(), plugin);
     }
 }

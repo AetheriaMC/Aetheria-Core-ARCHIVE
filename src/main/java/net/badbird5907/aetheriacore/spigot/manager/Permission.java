@@ -43,7 +43,15 @@ public enum Permission {
     PUNISH("punish"),
 
     PLAY_INTERNAL_SONG("music.playinternal"),
-    MUSIC_ADMIN_ITEM("music.adminitem")
+    MUSIC_ADMIN_ITEM("music.adminitem"),
+
+    WIPE("wipe"),
+    RESTORE("unwipe"),
+
+    STAFF_MENU("staffmenu.open"),
+    STAFF_MENU_ONLINE_PLAYERS("staffmenu.onlineplayers"),
+    STAFF_MENU_SERVER_CONTROL("staffmenu.servercontrol"),
+    STAFF_MENU_STAFF_CONTROL("staffmenu.staffcontrol")
     ;
 
     public final String node;

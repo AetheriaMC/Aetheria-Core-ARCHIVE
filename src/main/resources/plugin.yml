@@ -13,7 +13,6 @@ loadbefore: [AdvancedBan ]
 commands:
   test:
     usage: /<command>
-
   aetheriacore:
     description: Main AetheriaCore Command
     aliases: [ aec ]
@@ -24,12 +23,6 @@ commands:
     permission: aetheriacore.clearchat
     usage: /<command> <args>
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
-  #
-  #  discord:
-  #    description: Discord Link
-  #    permission: aetheriacore.discord
-  #    usage: /<command>
-  #    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   DupeThis:
     description: Dupe item in hand
     permission: aetheriacore.dupethis
@@ -108,22 +101,6 @@ commands:
     permission: aetheriacore.fly
     usage: /<command> <args>
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
-  #  gma:
-  #    description: Adventure Mode
-  #    permission: aetheriacore.gamemode.adventure
-  #    usage: /<command> <args>
-  #  gmc:
-  #    description: Creative Mode! Be Creative :D
-  #    permission: aetheriacore.gamemode.creative
-  #    usage: /<command> <args>
-  #  gmsp:
-  #    description: Spectator Mode
-  #    permission: aetheriacre.gamemode.spectator
-  #    usage: /<command> <args>
-  #  gms:
-  #    description: Survival Mode
-  #    permission: aetheriacore.gamemode.survival
-  #    usage: /<command> <args>
   god:
     description: Be a god (And A NERD)
     permission: aetheriacore.god
@@ -224,13 +201,11 @@ commands:
     usage: /<command> <reason>
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
     permission: aetheriacore.loop
-
   music:
     description: Main command for musics
     aliases: [ jukebox ]
     permission: aetheriacore.music
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
-  #    usage: /<command>
   adminmusic:
     description: Admin command for musics
     aliases: [ amusic ]
@@ -259,6 +234,17 @@ commands:
   69420:
     description: reeeee
     usage: /<command>
+  wipe:
+    description: Wipe a player
+    usage: /<command> <player> <--force>
+    permission: aetheriacore.wipe
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+  unwipe:
+    description: unwipe a player
+    aliases: [ restore ]
+    usage: /<command> <player>
+    permission: aetheriacore.unwipe
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
 #  givegroup:
 #    description: Give Player a Group
 #    usage: /<command>
@@ -322,6 +308,9 @@ permissions:
       aetheriacore.ping: true
       aetheriacore.pingwars: true
       aetheriacore.timevote: true
+      aetheriacore.wipe: true
+      aetheriacore.unwipe: true
+
 
   aetheriacore.luckperms.*:
     description: All Aetheria Luckperms Commands
@@ -549,3 +538,9 @@ permissions:
     description: PING WARS
   aetheriacore.timevote:
     description: vote for time!
+  aetheriacore.wipe:
+    description: Wipe a player's data
+    default: op
+  aetheriacore.unwipe:
+    description: Unwipe a player
+    default: op

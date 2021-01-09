@@ -46,6 +46,7 @@ public final class AetheriaCoreBungee extends Plugin {
         log.Log("Starting...");
         long start = System.currentTimeMillis();
         BasicConfigurator.configure();
+        getProxy().registerChannel("bangui");
         //getProxy().registerChannel("aetheriacore:messaging");
         Messages.createFile("bungeemessages");
         DataFile.createFile("bungeedata");

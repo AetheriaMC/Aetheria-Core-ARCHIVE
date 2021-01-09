@@ -16,7 +16,7 @@ public class punish implements CommandExecutor{
             Player player = (Player) sender;
             if(sender.hasPermission(Permission.PUNISH.node)){
                 if(args.length == 1){
-                    OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
+                    OfflinePlayer target = Bukkit.getOfflinePlayerIfCached(args[0]);
                     punishGUI.PunishGUI(player, target);
                 }
             }
