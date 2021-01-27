@@ -1,12 +1,8 @@
 package net.badbird5907.aetheriacore.spigot.commands.utils;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import net.badbird5907.aetheriacore.spigot.error.NoPermsError;
-import net.badbird5907.aetheriacore.spigot.manager.DebugLogger;
 import net.badbird5907.aetheriacore.spigot.manager.Permission;
-import net.badbird5907.aetheriacore.spigot.util.IsInt;
 import net.badbird5907.aetheriacore.utils.StringUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

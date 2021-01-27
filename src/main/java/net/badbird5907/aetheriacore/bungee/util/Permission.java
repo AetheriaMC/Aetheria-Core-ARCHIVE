@@ -20,8 +20,6 @@ public enum Permission {
     STAFF_LEAD_DEV("staff.lead.dev"),
     STAFF_LEAD_LM("staff.lead.lm"),
 
-
-
     STAFF_CHAT("staffchat"),
     ADMIN_CHAT("adminchat"),
     HUSH("hush"),
@@ -40,7 +38,10 @@ public enum Permission {
     GLOBAL_BROADCAST("global.broadcast"),
     GLOBAL_LOCKDOWN("global.lockdown"),
     SEE_SERVER_PLUGINS("view.plugis"),
-    SEE_DEFAULT_HELP("view.defaulthelp")
+    SEE_DEFAULT_HELP("view.defaulthelp"),
+    GOTO("goto"),
+    SEND_REPORT("report.send"),
+    SEE_REPORT("report.view")
 
     ;
     public final String node;

@@ -1,9 +1,10 @@
 package net.badbird5907.aetheriacore.spigot.setup;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
-import net.badbird5907.aetheriacore.spigot.commands.staff.punish.PunishGUI;
+import net.badbird5907.aetheriacore.spigot.commands.staff.wipe.ConfGuiListener;
 import net.badbird5907.aetheriacore.spigot.commands.utils.Player_death_event;
 import net.badbird5907.aetheriacore.spigot.events.*;
+import net.badbird5907.aetheriacore.spigot.features.timevote.TimeVoteGUIListener;
 import net.badbird5907.aetheriacore.spigot.util.inventories.ClickListener;
 import org.bukkit.Bukkit;
 
@@ -28,8 +29,9 @@ public class SetupEvents {
         Bukkit.getServer().getPluginManager().registerEvents(new GuiListener(), plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new Player_death_event(), plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new NoteblockListener(), plugin);
-        Bukkit.getServer().getPluginManager().registerEvents(new PunishGUI(), plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerLeaveEvent(), plugin);
-        Bukkit.getServer().getPluginManager().registerEvents(new net.badbird5907.aetheriacore.spigot.commands.timevote.GUIListener(), plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new TimeVoteGUIListener(), plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new CloseButtonListener(), plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new ConfGuiListener(), plugin);
     }
 }

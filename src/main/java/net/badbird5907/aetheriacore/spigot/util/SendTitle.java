@@ -1,6 +1,6 @@
 package net.badbird5907.aetheriacore.spigot.util;
 
-import net.badbird5907.aetheriacore.spigot.NMSHandeler.Reflection;
+import net.badbird5907.aetheriacore.spigot.versionutils.Reflection;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.Constructor;

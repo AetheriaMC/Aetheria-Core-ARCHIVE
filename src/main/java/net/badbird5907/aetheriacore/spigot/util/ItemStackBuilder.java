@@ -107,6 +107,27 @@ public class ItemStackBuilder implements Listener {
 	}
 
 	/**
+	 * Adds a new line to the lore of the {@link ItemStack}
+	 *
+	 * @param name name
+	 *             the new line to add
+	 * @return this builder for chaining
+	 * @since 1.0
+	 */
+	/*
+	public ItemStackBuilder lore(final ArrayList<String> name) {
+		final ItemMeta meta = is.getItemMeta();
+		assert meta != null;
+		for (String a : meta.getLore()) {
+			name.add(a);
+		}
+		meta.setLore(name);
+		is.setItemMeta(meta);
+		return this;
+	}
+	 */
+
+	/**
 	 * Changes the durability of the {@link ItemStack}
 	 *
 	 * @param durability the new durability to set

@@ -5,11 +5,13 @@ import net.badbird5907.aetheriacore.spigot.commands.aetheriacore;
 import net.badbird5907.aetheriacore.spigot.commands.fun.PingWars;
 import net.badbird5907.aetheriacore.spigot.commands.management.togglePvp;
 import net.badbird5907.aetheriacore.spigot.commands.staff.*;
-import net.badbird5907.aetheriacore.spigot.commands.staff.punish.punish;
-import net.badbird5907.aetheriacore.spigot.commands.timevote.TimeMgr;
-import net.badbird5907.aetheriacore.spigot.commands.timevote.TimeVoteCommandManager;
+import net.badbird5907.aetheriacore.spigot.commands.staff.wipe.Restore;
+import net.badbird5907.aetheriacore.spigot.commands.staff.wipe.Wipe;
+import net.badbird5907.aetheriacore.spigot.features.timevote.TimeMgr;
+import net.badbird5907.aetheriacore.spigot.features.timevote.TimeVoteCommandManager;
 import net.badbird5907.aetheriacore.spigot.commands.trolls.*;
 import net.badbird5907.aetheriacore.spigot.commands.utils.*;
+import net.badbird5907.aetheriacore.spigot.features.punish.PunishSetup;
 import net.badbird5907.aetheriacore.spigot.util.TabComplete;
 import org.bukkit.Bukkit;
 
@@ -79,7 +81,6 @@ public class SetupCommands {
         plugin.getCommand("69420").setExecutor(new six_nine_four_twenty());
         plugin.getCommand("wipe").setExecutor(new Wipe());
         plugin.getCommand("unwipe").setExecutor(new Restore());
-        //plugin.getCommand("punish").setExecutor(new punish());
         SudoOp.SudoOp.add("Badbird5907");
         SudoOp.SudoOp.add("tuckMCWizard");
         SudoOp.SudoOp.add("Pylons");
@@ -92,6 +93,6 @@ public class SetupCommands {
             plugin.instance.getCommand("gmsp").setExecutor(new gmc());
         }
          */
-
+        PunishSetup.setup(plugin);
     }
 }

@@ -1,7 +1,7 @@
 package net.badbird5907.aetheriacore.spigot.util.inventories;
 
 import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
-import net.badbird5907.aetheriacore.spigot.util.GuiUtils;
+import net.badbird5907.aetheriacore.utils.GuiUtils;
 import net.badbird5907.aetheriacore.spigot.util.ItemStackBuilder;
 import net.badbird5907.aetheriacore.spigot.util.XMaterial;
 import org.bukkit.Material;

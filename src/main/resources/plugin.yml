@@ -245,6 +245,11 @@ commands:
     usage: /<command> <player>
     permission: aetheriacore.unwipe
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+  punish:
+    description: Punish a player
+    usage: /<command> <player>
+    permission: aetheriacore.punish
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
 #  givegroup:
 #    description: Give Player a Group
 #    usage: /<command>
@@ -310,7 +315,7 @@ permissions:
       aetheriacore.timevote: true
       aetheriacore.wipe: true
       aetheriacore.unwipe: true
-
+      aetheriacore.punish: true
 
   aetheriacore.luckperms.*:
     description: All Aetheria Luckperms Commands
@@ -543,4 +548,7 @@ permissions:
     default: op
   aetheriacore.unwipe:
     description: Unwipe a player
+    default: op
+  aetheriacore.punish:
+    description: Punish a player
     default: op

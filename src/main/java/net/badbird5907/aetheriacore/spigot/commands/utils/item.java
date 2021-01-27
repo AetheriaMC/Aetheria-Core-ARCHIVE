@@ -2,7 +2,7 @@ package net.badbird5907.aetheriacore.spigot.commands.utils;
 
 import net.badbird5907.aetheriacore.spigot.manager.DebugLogger;
 import net.badbird5907.aetheriacore.spigot.manager.Permission;
-import net.badbird5907.aetheriacore.spigot.util.IsInt;
+import net.badbird5907.aetheriacore.utils.IsInt;
 import net.badbird5907.aetheriacore.spigot.util.itemtypes;
 import net.badbird5907.aetheriaitems.api.GetCustomItems;
 import org.bukkit.Bukkit;

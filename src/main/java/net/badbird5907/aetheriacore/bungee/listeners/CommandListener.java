@@ -53,5 +53,10 @@ public class CommandListener implements Listener {
             sender.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', datafile.getString("Messages.plugins"))
             ));
         }
+        if(e.getMessage().equalsIgnoreCase("/help") || e.getMessage().equalsIgnoreCase("/?") || e.getMessage().equalsIgnoreCase("/bukkit:help") || e.getMessage().equalsIgnoreCase("/bukkit:?")){
+            ProxiedPlayer sender = (ProxiedPlayer) e.getSender();
+            sender.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', datafile.getString("Messages.help"))
+            ));
+        }
     }
 }

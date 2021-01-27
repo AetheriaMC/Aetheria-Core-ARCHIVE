@@ -73,7 +73,7 @@ public class events implements Listener {
             for (ProxiedPlayer staff : BungeeCord.getInstance().getPlayers()) {
                 if (staff.hasPermission(Permission.STAFF_CHAT.node) &&
                         e.getFrom() != null) {
-                    String sserver = e.getFrom().getName().toString();
+                    String sserver = e.getFrom().getName();
                     String dserver = e.getPlayer().getServer().getInfo().getName();
                     staff.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', config.getString("Messages.staff-switch-server")
                             .replaceAll("%from%", sserver)

@@ -44,19 +44,20 @@ public class Messages {
                     config.set("Messages.global-lockdown", "A &c&lGLOBAL&r lockdown has been called by %player%. &r All non staff players have been kicked.");
                     config.set("Messages.already-lockdown", "&cNetwork is already under lockdown. do /bungeeendlockdown to end it.");
 
-                    config.set("Messages.plugins", "&bPlugins we use:\n&aAetheriaCore&r, &aAetheriaItems&r, &aAetheria-Anti-Cheat");
+                    config.set("Messages.plugins", "&bPlugins we use:\n&aAetheriaCore&r, &aAetheriaItems&r, &aAetheria-Anti-Cheat&r, &aAetheria-Minigames&r, &aAetheria-Abilites ");
+                    config.set("Messages.help", "&8-----------------------------------\n&r&cThis is a WIP.\n&8-----------------------------------");
 
                     List<String> list = new ArrayList<>();
-                    list.add("&7&m-----------------------------------");
-                    list.add("&7----&r&9&lReport&r&7----");
-                    list.add("&9Reporter: &e%reporter% &7(%reporter-server%)");
-                    list.add("&9Reported: &e%reported% &7(%reported-server%)");
+                    list.add("&8&l---------&r&c&lReport&r&8&l---------");
+                    list.add("&9Reporter: &e%sender% &7(%sender-server%)");
+                    list.add("&9Reported: &e%target% &7(%target-server%)");
                     list.add("&9Reason: &e%reason%");
-                    list.add("&7&m-----------------------------------");
-                    config.set("Messages.report-to-staff-message", list);
-                    config.set("Messages.report-to-player-message", "&8[&6AEC&8] &8&aYou have reported: &e%player%&a, &afor &athe &areason: &e%reason%&7.");
-                    config.set("Messages.report-incorrect-format", "&8[&6AEC&8] &cUsage: /report <player> <reason>");
-                    config.set("Messages.report-offline-player", "&8[&6AEC&8] &8&cThat player is currently offline.");
+                    list.add("&a&lClick here to go to them!");
+                    list.add("&8&l------------------------");
+                    config.set("Messages.report", list);
+                    config.set("Messages.report-to-player-message", "&cYou have reported: &e%player%&a, &afor &athe &areason: &e%reason%&7.");
+                    config.set("Messages.report-incorrect-format", "&cUsage: /report <player> <reason>");
+                    config.set("Messages.report-offline-player", "&8&cThat player is currently offline.");
                     config.set("Messages.staff-join-network", "&aStaff &8» &f%player% &aConnected");
                     config.set("Messages.staff-leave-network", "&aStaff &8» &f%player% &cDisconnected");
                     config.set("Messages.staff-switch-server", "&aStaff &8 » &f%player% &aSwitched from %from% to %to%");

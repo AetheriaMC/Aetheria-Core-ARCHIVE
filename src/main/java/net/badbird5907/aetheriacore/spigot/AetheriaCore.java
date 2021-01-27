@@ -2,6 +2,7 @@ package net.badbird5907.aetheriacore.spigot;
 
 import com.google.gson.Gson;
 import com.xxmicloxx.NoteBlockAPI.NoteBlockAPI;
+import net.badbird5907.aetheriacore.spigot.bungeeutil.MessageRecieved;
 import net.badbird5907.aetheriacore.spigot.events.*;
 import net.badbird5907.aetheriacore.spigot.features.jukebox.utils.Placeholders;
 import net.badbird5907.aetheriacore.spigot.manager.GsonManager;
@@ -84,28 +85,9 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
 
             warn("Startup: Starting...");
             doStuff();
-            log("Attempting write");
-            if(!GsonManager.dirExists("data/")){
-                log("1");
-                GsonManager.createDir("data");
-                log("2");
-                if(!GsonManager.fileExists("data/lol.json")){
-                    log("3");
-                    GsonManager.createFile("data", "lol.json");
-                    log("4");
-                    Map<String, Boolean> does_it_work = new HashMap<>();
-                    does_it_work.put("does-it-work", true);
-                    log("5");
-                    try {
-                        FileWriter fileWriter = new FileWriter(getDataFolder().getAbsolutePath() + "/data/lol.json");
-                        Gson gson = new Gson();
-                        gson.toJson(does_it_work, fileWriter);
-                        log("6");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
+            getServer().getMessenger().registerIncomingPluginChannel( this, "aec:1", new MessageRecieved());
+            getServer().getMessenger().registerOutgoingPluginChannel( this, "aec:2");
+            log("Attempting write");;
             //register commands
             log("Startup: initializing Commands");
             //this.setupCommands();

@@ -2,6 +2,7 @@ package net.badbird5907.aetheriacore.bungee;
 
 import net.badbird5907.aetheriacore.bungee.commands.staff.*;
 import net.badbird5907.aetheriacore.bungee.commands.util.GlobalBroadcast;
+import net.badbird5907.aetheriacore.bungee.commands.util.Report;
 import net.badbird5907.aetheriacore.bungee.commands.warps.*;
 import net.badbird5907.aetheriacore.bungee.discord.listeners.ACListener;
 import net.badbird5907.aetheriacore.bungee.discord.listeners.SCListener;
@@ -46,7 +47,8 @@ public final class AetheriaCoreBungee extends Plugin {
         log.Log("Starting...");
         long start = System.currentTimeMillis();
         BasicConfigurator.configure();
-        getProxy().registerChannel("bangui");
+        getProxy().registerChannel("aec:1");
+        getProxy().registerChannel("anticheat");
         //getProxy().registerChannel("aetheriacore:messaging");
         Messages.createFile("bungeemessages");
         DataFile.createFile("bungeedata");
@@ -54,10 +56,7 @@ public final class AetheriaCoreBungee extends Plugin {
         log.Log("Registering Commands...");
         getProxy().getInstance().getPluginManager().registerCommand(this, new Hub());
         getProxy().getInstance().getPluginManager().registerCommand(this, new Beta());
-        getProxy().getInstance().getPluginManager().registerCommand(this, new Creative());
         getProxy().getInstance().getPluginManager().registerCommand(this, new Survival());
-        getProxy().getInstance().getPluginManager().registerCommand(this, new Vanilla());
-
         getProxy().getInstance().getPluginManager().registerCommand(this, new AdminChat());
         getProxy().getInstance().getPluginManager().registerCommand(this, new CSpy());
         getProxy().getInstance().getPluginManager().registerCommand(this, new GlobalBroadcast());
@@ -65,6 +64,8 @@ public final class AetheriaCoreBungee extends Plugin {
         getProxy().getInstance().getPluginManager().registerCommand(this, new StaffChat());
         getProxy().getInstance().getPluginManager().registerCommand(this, new staff());
         getProxy().getInstance().getPluginManager().registerCommand(this, new StaffChatBeta());
+        getProxy().getInstance().getPluginManager().registerCommand(this, new GoTo());
+        getProxy().getInstance().getPluginManager().registerCommand(this, new Report());
         //getProxy().getInstance().getPluginManager().registerCommand(this, new StaffChatBeta());
 
         log.Log("Registering Events...");
