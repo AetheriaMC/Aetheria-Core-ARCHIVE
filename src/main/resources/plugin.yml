@@ -7,8 +7,8 @@ prefix: AetheriaCore
 authors: [ Badbird5907 ]
 description: AetheriaCore By Badbird5907
 website: badbird5907.net
-softdepend: [ PremiumVanish, AetheriaMinigames, AetheriaCheat, PlaceholderAPI, AetheriaItems ]
-depend: [SuperVanish, AdvancedBan, ProtocolLib, LuckPerms, NoteBlockAPI ]
+softdepend: [ PremiumVanish, AetheriaMinigames, AetheriaCheat, PlaceholderAPI, AetheriaItems,AdvancedBan,LiteBans ]
+depend: [SuperVanish, ProtocolLib, LuckPerms, NoteBlockAPI ]
 loadbefore: [AdvancedBan ]
 commands:
   test:
@@ -250,6 +250,30 @@ commands:
     usage: /<command> <player>
     permission: aetheriacore.punish
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+  gmc:
+    description: Creative
+    usage: /<command> <player>
+    aliases: [ creative ]
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    permission: aetheriacore.gamemode.creative
+  gms:
+    description: Survival
+    aliases: [ survival ]
+    usage: /<command> <player>
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    permission: aetheriacore.gamemode.survival
+  gma:
+    description: Adventure
+    aliases: [ adventure ]
+    usage: /<command> <player>
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    permission: aetheriacore.gamemode.adventure
+  gmsp:
+    description: Spectator
+    aliases: [spectator]
+    usage: /<command> <player>
+    permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
+    permission: aetheriacore.gamemode.survival
 #  givegroup:
 #    description: Give Player a Group
 #    usage: /<command>

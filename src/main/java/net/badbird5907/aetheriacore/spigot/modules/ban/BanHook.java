@@ -1,5 +1,6 @@
 package net.badbird5907.aetheriacore.spigot.modules.ban;
 
+import me.leoko.advancedban.utils.Punishment;
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
 import net.badbird5907.aetheriacore.spigot.modules.AbstractModule;
 
@@ -13,18 +14,17 @@ public abstract class BanHook extends AbstractModule {
     public void enable() { }
     @Override
     public void disable() { }
-    public void ban(UUID player) {
-        ban(player, null);
-    }
-    public void ban(UUID player, String reason) {
-        ban(player, reason, -1);
-    }
-    public void warn(UUID player, String reason, String sender, long time, boolean silent){internalwarn(player, reason, sender, time, silent);}
-
-//    public abstract void internalwarn(UUID player, String reason, String sender, long time, boolean silent);
-
-    public abstract void unban(UUID player, String reason);
-    public abstract void ban(UUID player, String reason, long time);
-    public abstract int bans(UUID player);
-    public abstract int warns(UUID player);
+    public abstract void ban(UUID player, String operator, String reason, long time, boolean silent);
+    public abstract void warn(UUID player, String operator, String reason, long time, boolean silent);
+    public abstract void mute(UUID player, String operator, String reason, long time, boolean silent);
+    public abstract void kick(UUID player, String operator, String reason, boolean silent);
+    public abstract boolean isBanned(UUID player);
+    public abstract boolean isMuted(UUID player);
+    public abstract String[] getNotes(UUID player);
+    public abstract int getInfractions(UUID player);
+    public abstract int getBans(UUID player);
+    public abstract int getWarns(UUID player);
+    public abstract int getMutes(UUID player);
+    public abstract Punishment getCurrentBan(UUID player);
+    public abstract Punishment getCurrentMute(UUID player);
 }

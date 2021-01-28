@@ -7,6 +7,8 @@ import net.badbird5907.aetheriacore.spigot.events.*;
 import net.badbird5907.aetheriacore.spigot.features.jukebox.utils.Placeholders;
 import net.badbird5907.aetheriacore.spigot.manager.GsonManager;
 import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
+import net.badbird5907.aetheriacore.spigot.modules.ban.AdvancedBanHook;
+import net.badbird5907.aetheriacore.spigot.modules.ban.BanHook;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
 import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import net.badbird5907.aetheriacore.spigot.setup.SetupCommands;
@@ -358,6 +360,16 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
         }
         if (Noteblock.vanillaMusicTask != null) Noteblock.vanillaMusicTask.cancel();
         HandlerList.unregisterAll((JavaPlugin) this);
+    }
+    private BanHook hookBans(){
+        if(Bukkit.getPluginManager().isPluginEnabled("AdvancedBan")){
+            log("Hooked into AdvancedBan!");
+            return new AdvancedBanHook(this);
+        }else if(Bukkit.getPluginManager().isPluginEnabled("LiteBans")){
+            log("Hooked into LiteBans!");
+            return null;
+        }
+        return null;
     }
 
 }

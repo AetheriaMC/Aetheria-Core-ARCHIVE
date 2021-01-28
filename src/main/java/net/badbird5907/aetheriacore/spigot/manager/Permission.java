@@ -51,7 +51,7 @@ public enum Permission {
     STAFF_MENU("staffmenu.open"),
     STAFF_MENU_ONLINE_PLAYERS("staffmenu.onlineplayers"),
     STAFF_MENU_SERVER_CONTROL("staffmenu.servercontrol"),
-    STAFF_MENU_STAFF_CONTROL("staffmenu.staffcontrol")
+    STAFF_MENU_STAFF_CONTROL("staffmenu.staffcontrol"),
     ;
 
     public final String node;
