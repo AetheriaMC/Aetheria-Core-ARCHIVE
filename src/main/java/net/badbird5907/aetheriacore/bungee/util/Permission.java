@@ -42,7 +42,6 @@ public enum Permission {
     GOTO("goto"),
     SEND_REPORT("report.send"),
     SEE_REPORT("report.view")
-
     ;
     public final String node;
 

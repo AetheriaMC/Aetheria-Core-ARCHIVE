@@ -9,6 +9,7 @@ import net.badbird5907.aetheriacore.spigot.manager.GsonManager;
 import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import net.badbird5907.aetheriacore.spigot.modules.ban.AdvancedBanHook;
 import net.badbird5907.aetheriacore.spigot.modules.ban.BanHook;
+import net.badbird5907.aetheriacore.spigot.modules.ban.LiteBansHook;
 import net.badbird5907.aetheriacore.spigot.other.Lag;
 import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import net.badbird5907.aetheriacore.spigot.setup.SetupCommands;
@@ -44,10 +45,10 @@ import java.util.function.Consumer;
 
 public final class AetheriaCore extends JavaPlugin implements Listener {
     Gson gson = new Gson();
-
     public static AetheriaCore instance;
     public static List<String> SUPPORTED_VERSIONS = new ArrayList<String>();
     private static AetheriaCore plugin;
+    public static BanHook banHook;
     public File customConfigFile;
     public FileConfiguration customConfig;
     public Consumer<Player> stopVanillaMusic = null;
@@ -78,23 +79,18 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
         if (getConfig().getBoolean("enable")) {
             spiGUI = new SpiGUI(this);
             PluginManager.initLogger();
-            boolean mc1164 = Bukkit.getServer().getClass().getPackage().getName().contains("1.16.4");
-            if (!mc1164)
-                warn("SERVER IS VERSION: " + Bukkit.getServer().getVersion() + "ONLY " + SUPPORTED_VERSIONS.toString() + " IS SUPPORTED.");
-            else
-                log("Server is version " + Bukkit.getServer().getVersion() + " is supported!");
+            if (!PluginManager.is16()) warn("SERVER IS VERSION: " + Bukkit.getServer().getVersion() + "ONLY " + SUPPORTED_VERSIONS.toString() + " IS SUPPORTED.");
+            else log("Server is version " + Bukkit.getServer().getVersion() + " is supported!");
             plugin = this;
-
             warn("Startup: Starting...");
             doStuff();
             getServer().getMessenger().registerIncomingPluginChannel( this, "aec:1", new MessageRecieved());
             getServer().getMessenger().registerOutgoingPluginChannel( this, "aec:2");
-            log("Attempting write");;
+            log("Attempting write");
             //register commands
             log("Startup: initializing Commands");
             //this.setupCommands();
             SetupCommands.setupCommands(this);
-
             //register events
             log("Startup: Registering Events...");
             //this.setupEvents();
@@ -106,18 +102,13 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
             Noteblock.DataFile();
             this.setupConfig();
             log("Startup: Config Loaded!!");
-
-            //load DB
             SetupDatabase();
-
             log("Setting Up Dependencies");
             setupDependencies();
-            log("Connecting to discord...");
-            //Discord.init(jda);
-            //protocolManager = ProtocolLibrary.getProtocolManager();
-            log("done!");
+            log("Hooking ban plugins");
+            BanHook banHook = hookBans();
+            banHook.enable();
             log("Starting jukebox...");
-            //initAll();
             if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) Placeholders.registerPlaceholders();
             getLogger().info("This JukeBox version requires NoteBlockAPI version 1.5.0 or more. Please ensure you have the right version before using JukeBox (you are using NBAPI ver. " + getPlugin(NoteBlockAPI.class).getDescription().getVersion() + ")");
             saveDefaultConfig();
@@ -140,10 +131,8 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
         // Iterate through every world on the server
         int removed_entities = 0;
         for (World w : Bukkit.getWorlds()) {
-
             // Iterate through every entity in that world
             for (Entity e : w.getEntities()) {
-
                 //If Entity has custom Hostile AI as defined by MetaData, remove
                 if (e.hasMetadata("Hostile_AI")) {
                     removed_entities++;
@@ -154,27 +143,6 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
         log(removed_entities + " Custom Hostile Entites Removed.");
         log("Plugin Disabled.");
         warn("Baiwoo!!!");
-    }
-    private void setupEvents() {
-        //unused rn. check the class SetupEvents
-        if (getConfig().getBoolean("enablelegacyblacklistitems", true)) {
-            getServer().getPluginManager().registerEvents(new InventoryOpenEvent(), this);
-        }
-        if (getConfig().getBoolean("enablechatfilter")) {
-
-        }
-        if (getConfig().getBoolean("disable-enderman-pickup", true)) {
-            getServer().getPluginManager().registerEvents(new onEndermanPickup(this), this);
-        }
-        getServer().getPluginManager().registerEvents(new onChat(this), this);
-        getServer().getPluginManager().registerEvents(new OnVanish(), this);
-        //getServer().getPluginManager().registerEvents(new OnPunish(), this);
-        getServer().getPluginManager().registerEvents(new onarrowhit(), this);
-        getServer().getPluginManager().registerEvents(new PlayerMoveEvent(), this);
-        getServer().getPluginManager().registerEvents(new BlockBreakEvent(), this);
-        getServer().getPluginManager().registerEvents(new BlockPlaceEvent(), this);
-        getServer().getPluginManager().registerEvents(new ClickListener(), this);
-        getServer().getPluginManager().registerEvents(new GuiListener(), this);
     }
 
     private void setupConfig() {
@@ -367,7 +335,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
             return new AdvancedBanHook(this);
         }else if(Bukkit.getPluginManager().isPluginEnabled("LiteBans")){
             log("Hooked into LiteBans!");
-            return null;
+            return new LiteBansHook(this);
         }
         return null;
     }

@@ -212,7 +212,7 @@ commands:
     permission: aetheriacore.music.admin
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
   playmusic:
-    description: Admin command for musics
+    description: Admin command for music
     permission: aetheriacore.music.admin
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
     usage: /<command>

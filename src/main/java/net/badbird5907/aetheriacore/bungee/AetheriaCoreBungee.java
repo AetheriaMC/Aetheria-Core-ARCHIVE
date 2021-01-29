@@ -111,6 +111,7 @@ public final class AetheriaCoreBungee extends Plugin {
         //net.badbird5907.aetheriacore.bungee.manager.Database.connect();
         new DatabaseUtils().createTable("StaffChat", "uuid varchar(36), enable TINYINT(1)");
         new DatabaseUtils().createTable("AdminChat", "uuid varchar(36), enable TINYINT(1)");
+        new DatabaseUtils().createTable("IgnoredPlayers", "player varchar(36), target varchar(36)");
     }
 
     private void buildJDA(){
