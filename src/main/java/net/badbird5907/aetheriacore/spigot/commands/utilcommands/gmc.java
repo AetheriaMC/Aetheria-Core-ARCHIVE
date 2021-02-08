@@ -1,7 +1,9 @@
 package net.badbird5907.aetheriacore.spigot.commands.utilcommands;
 
+import net.badbird5907.aetheriacore.spigot.error.NoPermsError;
 import net.badbird5907.aetheriacore.spigot.manager.Permission;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
+import net.badbird5907.aetheriacore.spigot.util.Gamemode;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -17,11 +19,10 @@ public class gmc implements CommandExecutor {
         if(args.length == 0){
             if(sender.hasPermission(Permission.GMC.node)){
                 if(sender instanceof Player){
-                    ((Player) sender).setGameMode(GameMode.CREATIVE);
-                    sender.sendMessage(ChatColor.GREEN + "Set your game mode to:" + ChatColor.AQUA + " Creative");
+                    Gamemode.setGameMode((Player) sender, GameMode.CREATIVE);
                     return true;
                 }
-            }else sender.sendMessage(permissionManager.PermissionMessage);
+            }else throw new NoPermsError((Player) sender, "gmc");
         }else if(args.length == 1){
             if(sender.hasPermission(Permission.GMC.node)){
                 Player target = null;
@@ -33,12 +34,11 @@ public class gmc implements CommandExecutor {
                     pass = false;
                 }
                 if(pass){
-                    target.setGameMode(GameMode.CREATIVE);
+                    Gamemode.setGameMode(target, GameMode.CREATIVE);
                     sender.sendMessage(ChatColor.GREEN + "Set " + target.getDisplayName() + "'s game mode to:" + ChatColor.AQUA + " Creative");
-                    target.sendMessage(ChatColor.GREEN + "Set your game mode to:" + ChatColor.AQUA + " Creative");
                     return true;
                 }
-            }else sender.sendMessage(permissionManager.PermissionMessage);
+            }else throw new NoPermsError((Player) sender, "gmc");
         }
         return true;
     }

@@ -1,8 +1,10 @@
 package net.badbird5907.aetheriacore.spigot.commands.utilcommands;
 
+import net.badbird5907.aetheriacore.spigot.error.NoPermsError;
 import net.badbird5907.aetheriacore.spigot.manager.Permission;
 import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
+import net.badbird5907.aetheriacore.spigot.util.Gamemode;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -16,15 +18,14 @@ public class gmsp implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if(args.length == 0){
-            if(sender.hasPermission(Permission.GMSP.node)){
+            if(sender.hasPermission(Permission.GMC.node)){
                 if(sender instanceof Player){
-                    ((Player) sender).setGameMode(GameMode.SPECTATOR);
-                    sender.sendMessage(ChatColor.GREEN + "Set your game mode to:" + ChatColor.AQUA + " Spectator");
+                    Gamemode.setGameMode((Player) sender, GameMode.SPECTATOR);
                     return true;
                 }
-            }else sender.sendMessage(permissionManager.PermissionMessage);
+            }else throw new NoPermsError((Player) sender, "gmsp");
         }else if(args.length == 1){
-            if(sender.hasPermission(Permission.GMSP.node)){
+            if(sender.hasPermission(Permission.GMC.node)){
                 Player target = null;
                 boolean pass;
                 try{
@@ -34,12 +35,11 @@ public class gmsp implements CommandExecutor {
                     pass = false;
                 }
                 if(pass){
-                    target.setGameMode(GameMode.SPECTATOR);
+                    Gamemode.setGameMode(target, GameMode.SPECTATOR);
                     sender.sendMessage(ChatColor.GREEN + "Set " + target.getDisplayName() + "'s game mode to:" + ChatColor.AQUA + " Spectator");
-                    target.sendMessage(ChatColor.GREEN + "Set your game mode to:" + ChatColor.AQUA + " Spectator");
                     return true;
                 }
-            }else sender.sendMessage(permissionManager.PermissionMessage);
+            }else throw new NoPermsError((Player) sender, "gmsp");
         }
         return true;
     }

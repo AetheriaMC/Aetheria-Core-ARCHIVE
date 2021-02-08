@@ -41,7 +41,10 @@ public enum Permission {
     SEE_DEFAULT_HELP("view.defaulthelp"),
     GOTO("goto"),
     SEND_REPORT("report.send"),
-    SEE_REPORT("report.view")
+    SEE_REPORT("report.view"),
+
+    MSG("message"),
+    MSG_COLORS("message.colors")
     ;
     public final String node;
 

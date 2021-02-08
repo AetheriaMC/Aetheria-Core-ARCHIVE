@@ -4,6 +4,7 @@ import net.badbird5907.aetheriacore.spigot.manager.DebugLogger;
 import net.badbird5907.aetheriacore.spigot.manager.Permission;
 import net.badbird5907.aetheriacore.utils.IsInt;
 import net.badbird5907.aetheriacore.spigot.util.itemtypes;
+import net.badbird5907.aetheriacore.utils.StringUtils;
 import net.badbird5907.aetheriaitems.api.GetCustomItems;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -15,6 +16,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+
 public class item implements CommandExecutor {
 
     @Override
@@ -23,7 +26,7 @@ public class item implements CommandExecutor {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
                 if (Bukkit.getPluginManager().isPluginEnabled("AetheriaItems")) {
-                    player.chat("/aetheriaitems:item " + args.toString());
+                    player.chat("/aetheriaitems:item " + StringUtils.arraytoString(args));
                 } else {
                     if (args.length == 0)
                         sender.sendMessage(ChatColor.RED + "USAGE: /item <ITEM> <AMMOUNT> \n " + ChatColor.GREEN + "You can also do /itemmenu");

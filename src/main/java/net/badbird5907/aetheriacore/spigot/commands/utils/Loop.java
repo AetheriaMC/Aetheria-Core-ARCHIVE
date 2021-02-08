@@ -13,7 +13,7 @@ public class Loop implements CommandExecutor {
     @Override
     public boolean onCommand( CommandSender sender,  Command command,  String s,  String[] args) {
         if(sender.hasPermission(Permission.LOOP.node)){
-            if(args.length < 2){
+            if(args.length < 1){
                 String argsstr = StringUtils.arraytoString(args).replace(args[0], "");
                 int looptimes = 0;
                 Boolean success;
@@ -26,12 +26,16 @@ public class Loop implements CommandExecutor {
                 }
                 if(success){
                     if(argsstr.startsWith("c:")){
+                        sender.sendMessage(ChatColor.GREEN + "Looping \"" + argsstr + "\" " + looptimes + " times.");
                         for(int i = 0; i < looptimes; ++i)
                             ((Player) sender).chat(ChatColor.translateAlternateColorCodes('&', argsstr.replaceFirst("c:", "")));
                     }
                     else{
-                        for(int i = 0; i < looptimes; ++i)
+                        sender.sendMessage(ChatColor.GREEN + "Looping \"" + argsstr + "\" " + looptimes + " times.");
+                        for(int i = 0; i < looptimes; ++i) {
+                            sender.sendMessage(ChatColor.GREEN + "Executing /" + argsstr);
                             ((Player) sender).chat("/" + argsstr);
+                        }
                     }
                 }
             }

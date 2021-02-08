@@ -1,7 +1,9 @@
 package net.badbird5907.aetheriacore.spigot.commands.utilcommands;
 
+import net.badbird5907.aetheriacore.spigot.error.NoPermsError;
 import net.badbird5907.aetheriacore.spigot.manager.Permission;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
+import net.badbird5907.aetheriacore.spigot.util.Gamemode;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -15,14 +17,14 @@ public class gms implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if(args.length == 0){
-            if(sender.hasPermission(Permission.GMS.node)){
+            if(sender.hasPermission(Permission.GMC.node)){
                 if(sender instanceof Player){
-                    ((Player) sender).setGameMode(GameMode.SURVIVAL);
-                    sender.sendMessage(ChatColor.GREEN + "Set your game mode to:" + ChatColor.AQUA + " Survival");
+                    Gamemode.setGameMode((Player) sender, GameMode.SURVIVAL);
+                    return true;
                 }
-            }else sender.sendMessage(permissionManager.PermissionMessage);
+            }else throw new NoPermsError((Player) sender, "gms");
         }else if(args.length == 1){
-            if(sender.hasPermission(Permission.GMS.node)){
+            if(sender.hasPermission(Permission.GMC.node)){
                 Player target = null;
                 boolean pass;
                 try{
@@ -32,12 +34,11 @@ public class gms implements CommandExecutor {
                     pass = false;
                 }
                 if(pass){
-                    target.setGameMode(GameMode.SURVIVAL);
+                    Gamemode.setGameMode(target, GameMode.SURVIVAL);
                     sender.sendMessage(ChatColor.GREEN + "Set " + target.getDisplayName() + "'s game mode to:" + ChatColor.AQUA + " Survival");
-                    target.sendMessage(ChatColor.GREEN + "Set your game mode to:" + ChatColor.AQUA + " Survival");
                     return true;
                 }
-            }else sender.sendMessage(permissionManager.PermissionMessage);
+            }else throw new NoPermsError((Player) sender, "gms");
         }
         return true;
     }

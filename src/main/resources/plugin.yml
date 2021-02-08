@@ -274,6 +274,10 @@ commands:
     usage: /<command> <player>
     permission-message: §cYou do not have permissions to do this!§8 §oNO_PERMISSIONS
     permission: aetheriacore.gamemode.survival
+  gm:
+    description: gamemode
+    aliases: [gamemode]
+    usage: /<command> <gamemode> [target]
 #  givegroup:
 #    description: Give Player a Group
 #    usage: /<command>

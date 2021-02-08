@@ -39,7 +39,8 @@ public final class AetheriaCoreBungee extends Plugin {
     public static AetheriaCoreBungee getInstance() {
         return instance;
     }
-
+    @Override
+    public void onLoad(){ }
     @Override
     public void onEnable() {
         instance = this;

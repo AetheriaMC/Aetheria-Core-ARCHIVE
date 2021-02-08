@@ -53,7 +53,7 @@ public enum Permission {
     STAFF_MENU_SERVER_CONTROL("staffmenu.servercontrol"),
     STAFF_MENU_STAFF_CONTROL("staffmenu.staffcontrol"),
 
-    MSG("message")
+    MSG("message"),
     ;
 
     public final String node;

@@ -1,7 +1,9 @@
 package net.badbird5907.aetheriacore.spigot.commands.utilcommands;
 
+import net.badbird5907.aetheriacore.spigot.error.NoPermsError;
 import net.badbird5907.aetheriacore.spigot.manager.Permission;
 import net.badbird5907.aetheriacore.spigot.manager.permissionManager;
+import net.badbird5907.aetheriacore.spigot.util.Gamemode;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -15,15 +17,14 @@ public class gma implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if(args.length == 0){
-            if(sender.hasPermission(Permission.GMA.node)){
+            if(sender.hasPermission(Permission.GMC.node)){
                 if(sender instanceof Player){
-                    ((Player) sender).setGameMode(GameMode.ADVENTURE);
-                    sender.sendMessage(ChatColor.GREEN + "Set your game mode to:" + ChatColor.AQUA + " Adventure");
+                    Gamemode.setGameMode((Player) sender, GameMode.ADVENTURE);
                     return true;
                 }
-            }else sender.sendMessage(permissionManager.PermissionMessage);
+            }else throw new NoPermsError((Player) sender, "gma");
         }else if(args.length == 1){
-            if(sender.hasPermission(Permission.GMA.node)){
+            if(sender.hasPermission(Permission.GMC.node)){
                 Player target = null;
                 boolean pass;
                 try{
@@ -33,12 +34,11 @@ public class gma implements CommandExecutor {
                     pass = false;
                 }
                 if(pass){
-                    target.setGameMode(GameMode.ADVENTURE);
-                    sender.sendMessage(ChatColor.GREEN + "Set " + target.getDisplayName() + "'s game mode to:" + ChatColor.AQUA + " Adventure");
-                    target.sendMessage(ChatColor.GREEN + "Set your game mode to:" + ChatColor.AQUA + " Adventure");
+                    Gamemode.setGameMode(target, GameMode.ADVENTURE);
+                    sender.sendMessage(ChatColor.GREEN + "Set " + target.getDisplayName() + "'s game mode to:" + ChatColor.AQUA + " Creative");
                     return true;
                 }
-            }else sender.sendMessage(permissionManager.PermissionMessage);
+            }else throw new NoPermsError((Player) sender, "gma");
         }
         return true;
     }

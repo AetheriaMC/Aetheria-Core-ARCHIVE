@@ -3,18 +3,14 @@ package net.badbird5907.aetheriacore.spigot;
 import com.google.gson.Gson;
 import com.xxmicloxx.NoteBlockAPI.NoteBlockAPI;
 import net.badbird5907.aetheriacore.spigot.bungeeutil.MessageRecieved;
-import net.badbird5907.aetheriacore.spigot.events.*;
 import net.badbird5907.aetheriacore.spigot.features.jukebox.utils.Placeholders;
-import net.badbird5907.aetheriacore.spigot.manager.GsonManager;
 import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import net.badbird5907.aetheriacore.spigot.modules.ban.AdvancedBanHook;
 import net.badbird5907.aetheriacore.spigot.modules.ban.BanHook;
 import net.badbird5907.aetheriacore.spigot.modules.ban.LiteBansHook;
-import net.badbird5907.aetheriacore.spigot.other.Lag;
 import net.badbird5907.aetheriacore.spigot.setup.Noteblock;
 import net.badbird5907.aetheriacore.spigot.setup.SetupCommands;
 import net.badbird5907.aetheriacore.spigot.setup.SetupEvents;
-import net.badbird5907.aetheriacore.spigot.util.inventories.ClickListener;
 import net.badbird5907.aetheriacore.spigot.util.itemtypes;
 import net.badbird5907.aetheriacore.utils.spigui.SpiGUI;
 import net.dv8tion.jda.api.JDA;
@@ -33,14 +29,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
 
 public final class AetheriaCore extends JavaPlugin implements Listener {
@@ -96,7 +90,6 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
             //this.setupEvents();
             SetupEvents.registerEvents(this);
             log("All Events Registered!");
-            Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Lag(), 100L, 1L);
             //get config
             log("Startup: Loading Config...");
             Noteblock.DataFile();
@@ -106,8 +99,9 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
             log("Setting Up Dependencies");
             setupDependencies();
             log("Hooking ban plugins");
-            BanHook banHook = hookBans();
-            banHook.enable();
+            banHook = hookBans();
+            //FIXME hook bans
+            //banHook.enable();
             log("Starting jukebox...");
             if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) Placeholders.registerPlaceholders();
             getLogger().info("This JukeBox version requires NoteBlockAPI version 1.5.0 or more. Please ensure you have the right version before using JukeBox (you are using NBAPI ver. " + getPlugin(NoteBlockAPI.class).getDescription().getVersion() + ")");
@@ -146,28 +140,29 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
     }
 
     private void setupConfig() {
-        getConfig().addDefault("enable", true);
-        getConfig().addDefault("enablelegacyblacklistitems", false);
-        getConfig().addDefault("enablechatfilter", true);
-        getConfig().addDefault("disable-enderman-pickup", true);
-        getConfig().addDefault("enableDatabase", true);
-        getConfig().addDefault("Database-Username", ""); //AetheriaCorePlugin
-        getConfig().addDefault("Database-Password", ""); //AetheriaCorePlugin
-        getConfig().addDefault("Database-Url", "");
-        getConfig().addDefault("Database-port", "");
-        getConfig().addDefault("Custom-DB-port", false);
-        getConfig().addDefault("Database-Name", "");
-//        getConfig().addDefault("discord-link", "");
-        getConfig().addDefault("StaffChat-Channel", "");
-        getConfig().addDefault("Server-Type", "NOT-SET");
-        getConfig().addDefault("pvp", true);
-        getConfig().addDefault("version", 1.0);
-        getConfig().addDefault("Console-Debug-Default", true);
+        FileConfiguration config = getConfig();
+        config.addDefault("enable", true);
+        config.addDefault("enablelegacyblacklistitems", false);
+        config.addDefault("enablechatfilter", true);
+        config.addDefault("disable-enderman-pickup", true);
+        config.addDefault("enableDatabase", true);
+        config.addDefault("Database-Username", ""); //AetheriaCorePlugin
+        config.addDefault("Database-Password", ""); //AetheriaCorePlugin
+        config.addDefault("Database-Url", "");
+        config.addDefault("Database-port", "");
+        config.addDefault("Custom-DB-port", false);
+        config.addDefault("Database-Name", "");
+//        config.addDefault("discord-link", "");
+        config.addDefault("StaffChat-Channel", "");
+        config.addDefault("Server-Type", "NOT-SET");
+        config.addDefault("pvp", true);
+        config.addDefault("version", 1.0);
+        config.addDefault("Console-Debug-Default", true);
         /*
-        getConfig().addDefault("check-for-updates", true);
-        getConfig().addDefault("version", 2.0);
+        config.addDefault("check-for-updates", true);
+        config.addDefault("version", 2.0);
          */
-        getConfig().options().copyDefaults();
+        config.options().copyDefaults();
         saveDefaultConfig();
 
         //FileConfiguration data = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "vars.yml"));
