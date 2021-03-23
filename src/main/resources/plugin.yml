@@ -9,7 +9,7 @@ description: AetheriaCore By Badbird5907
 website: badbird5907.net
 softdepend: [ PremiumVanish, AetheriaMinigames, AetheriaCheat, PlaceholderAPI, AetheriaItems,AdvancedBan,LiteBans ]
 depend: [SuperVanish, ProtocolLib, LuckPerms, NoteBlockAPI ]
-loadbefore: [AdvancedBan ]
+loadbefore: [AdvancedBan]
 commands:
   test:
     usage: /<command>

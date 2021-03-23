@@ -1,7 +1,7 @@
 package net.badbird5907.aetheriacore.spigot.events;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
-import net.badbird5907.aetheriacore.spigot.commands.utils.hush;
+import net.badbird5907.aetheriacore.spigot.commands.impl.utils.hush;
 import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import net.badbird5907.aetheriacore.spigot.util.Backup;
 import org.bukkit.entity.Player;

@@ -93,7 +93,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
             //get config
             log("Startup: Loading Config...");
             Noteblock.DataFile();
-            this.setupConfig();
+                this.setupConfig();
             log("Startup: Config Loaded!!");
             SetupDatabase();
             log("Setting Up Dependencies");

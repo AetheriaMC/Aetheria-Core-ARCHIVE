@@ -1,6 +1,9 @@
 package net.badbird5907.aetheriacore.spigot.manager;
 
+import lombok.Getter;
+
 public enum Permission {
+    NOTHING(""),
     //super staff role (all staff should have)
     STAFF("staff"),
     //staff roles
@@ -55,12 +58,13 @@ public enum Permission {
 
     MSG("message"),
     ;
-
+    @Getter
     public final String node;
 
     Permission(final String node) {
         this.node = "aetheriacore." + node;
     }
+
 
     /*
     public boolean has(CommandSender sender, boolean informSenderIfNot) {

@@ -1,8 +1,8 @@
 package net.badbird5907.aetheriacore.spigot.setup;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
-import net.badbird5907.aetheriacore.spigot.commands.staff.wipe.ConfGuiListener;
-import net.badbird5907.aetheriacore.spigot.commands.utils.Player_death_event;
+import net.badbird5907.aetheriacore.spigot.commands.impl.staff.wipe.ConfGuiListener;
+import net.badbird5907.aetheriacore.spigot.commands.impl.utils.Player_death_event;
 import net.badbird5907.aetheriacore.spigot.events.*;
 import net.badbird5907.aetheriacore.spigot.features.timevote.TimeVoteGUIListener;
 import net.badbird5907.aetheriacore.spigot.util.inventories.ClickListener;

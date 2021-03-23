@@ -1,17 +1,13 @@
 package net.badbird5907.aetheriacore.spigot.setup;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
-import net.badbird5907.aetheriacore.spigot.commands.aetheriacore;
-import net.badbird5907.aetheriacore.spigot.commands.fun.PingWars;
-import net.badbird5907.aetheriacore.spigot.commands.management.togglePvp;
-import net.badbird5907.aetheriacore.spigot.commands.staff.*;
-import net.badbird5907.aetheriacore.spigot.commands.staff.wipe.Restore;
-import net.badbird5907.aetheriacore.spigot.commands.staff.wipe.Wipe;
-import net.badbird5907.aetheriacore.spigot.commands.utilcommands.*;
+import net.badbird5907.aetheriacore.spigot.commands.impl.aetheriacore;
+import net.badbird5907.aetheriacore.spigot.commands.impl.fun.PingWars;
+import net.badbird5907.aetheriacore.spigot.commands.impl.management.togglePvp;
+import net.badbird5907.aetheriacore.spigot.commands.impl.staff.wipe.Restore;
+import net.badbird5907.aetheriacore.spigot.commands.impl.staff.wipe.Wipe;
 import net.badbird5907.aetheriacore.spigot.features.timevote.TimeMgr;
 import net.badbird5907.aetheriacore.spigot.features.timevote.TimeVoteCommandManager;
-import net.badbird5907.aetheriacore.spigot.commands.trolls.*;
-import net.badbird5907.aetheriacore.spigot.commands.utils.*;
 import net.badbird5907.aetheriacore.spigot.features.punish.PunishSetup;
 import net.badbird5907.aetheriacore.spigot.util.TabComplete;
 import org.bukkit.Bukkit;
