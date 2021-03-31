@@ -1,19 +1,27 @@
 package net.badbird5907.aetheriacore.spigot.setup;
 
 import net.badbird5907.aetheriacore.spigot.AetheriaCore;
+import net.badbird5907.aetheriacore.spigot.commands.CommandFramework;
 import net.badbird5907.aetheriacore.spigot.commands.impl.aetheriacore;
-import net.badbird5907.aetheriacore.spigot.commands.impl.fun.PingWars;
-import net.badbird5907.aetheriacore.spigot.commands.impl.management.togglePvp;
 import net.badbird5907.aetheriacore.spigot.commands.impl.staff.wipe.Restore;
 import net.badbird5907.aetheriacore.spigot.commands.impl.staff.wipe.Wipe;
 import net.badbird5907.aetheriacore.spigot.features.timevote.TimeMgr;
 import net.badbird5907.aetheriacore.spigot.features.timevote.TimeVoteCommandManager;
 import net.badbird5907.aetheriacore.spigot.features.punish.PunishSetup;
-import net.badbird5907.aetheriacore.spigot.util.TabComplete;
+import net.badbird5907.aetheriacore.spigot.util.*;
+import net.badbird5907.aetheriacore.spigot.commands.impl.utils.*;
+import net.badbird5907.aetheriacore.spigot.commands.impl.staff.*;
+import net.badbird5907.aetheriacore.spigot.commands.impl.fun.*;
+import net.badbird5907.aetheriacore.spigot.commands.impl.management.*;
+import net.badbird5907.aetheriacore.spigot.commands.impl.trolls.*;
+import net.badbird5907.aetheriacore.spigot.commands.impl.utilcommands.*;
 import org.bukkit.Bukkit;
 
 public class SetupCommands {
     public static void setupCommands(AetheriaCore plugin) {
+        CommandFramework framework = AetheriaCore.instance.getCommandFramework();
+        framework.registerCommands(new DoesThisWorkCommand());
+        framework.registerCommands(new InvseeCommand());
         plugin.getCommand("aetheriacore").setExecutor(new aetheriacore(AetheriaCore.getInstance()));
         plugin.getCommand("aetheriacore").setTabCompleter(new TabComplete());
         plugin.getCommand("invis").setExecutor(new invis());
@@ -68,7 +76,7 @@ public class SetupCommands {
         plugin.getCommand("itemmenu").setExecutor(new itemmenu());
         plugin.getCommand("broadcast").setExecutor(new Broadcast());
         plugin.getCommand("mutechat").setExecutor(new mutechat(plugin));
-        plugin.getCommand("kickallnonstaff").setExecutor(new KickAllNonStaff());
+        plugin.getCommand("kickallnonstaff").setExecutor(new net.badbird5907.aetheriacore.spigot.commands.impl.utils.KickAllNonStaff());
         plugin.getCommand("lockdown").setExecutor(new Lockdown());
         plugin.getCommand("shopkeeper").setExecutor(new GuiMaker());
         plugin.getCommand("loop").setExecutor(new Loop());

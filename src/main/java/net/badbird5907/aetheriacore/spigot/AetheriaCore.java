@@ -2,7 +2,10 @@ package net.badbird5907.aetheriacore.spigot;
 
 import com.google.gson.Gson;
 import com.xxmicloxx.NoteBlockAPI.NoteBlockAPI;
+import lombok.Getter;
+import net.badbird5907.aetheriacore.commons.LuckPermsManager;
 import net.badbird5907.aetheriacore.spigot.bungeeutil.MessageRecieved;
+import net.badbird5907.aetheriacore.spigot.commands.CommandFramework;
 import net.badbird5907.aetheriacore.spigot.features.jukebox.utils.Placeholders;
 import net.badbird5907.aetheriacore.spigot.manager.PluginManager;
 import net.badbird5907.aetheriacore.spigot.modules.ban.AdvancedBanHook;
@@ -46,7 +49,6 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
     public File customConfigFile;
     public FileConfiguration customConfig;
     public Consumer<Player> stopVanillaMusic = null;
-    private LuckPerms luckPerms;
     //sql
     private Connection connection;
     private String host, database, username, password;
@@ -54,6 +56,8 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
     private final HashMap<Plugin, Boolean> dependentPlugins = new HashMap<>();
     public JDA jda;
     //music-end
+    @Getter
+    CommandFramework commandFramework;
     public AetheriaCore() {
         instance = this;
     }
@@ -77,6 +81,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
             else log("Server is version " + Bukkit.getServer().getVersion() + " is supported!");
             plugin = this;
             warn("Startup: Starting...");
+            commandFramework = new CommandFramework(this);
             doStuff();
             getServer().getMessenger().registerIncomingPluginChannel( this, "aec:1", new MessageRecieved());
             getServer().getMessenger().registerOutgoingPluginChannel( this, "aec:2");
@@ -97,6 +102,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
             log("Startup: Config Loaded!!");
             SetupDatabase();
             log("Setting Up Dependencies");
+            LuckPermsManager.init();
             setupDependencies();
             log("Hooking ban plugins");
             banHook = hookBans();
@@ -178,7 +184,6 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
     }
 
     private void setupDependencies() {
-
         if (Bukkit.getPluginManager().isPluginEnabled("SuperVanish")) {
             log("SuperVanish Detected! Hooking into it.");
         }
@@ -191,8 +196,6 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
         if (Bukkit.getPluginManager().isPluginEnabled("AetheriaCheat")) {
             log("AetheriaAntiCheat Is Running On This Server!");
         }
-        this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
-
     }
 
     public void DB() {

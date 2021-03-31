@@ -57,6 +57,7 @@ public enum Permission {
     STAFF_MENU_STAFF_CONTROL("staffmenu.staffcontrol"),
 
     MSG("message"),
+    INVSEE("invsee")
     ;
     @Getter
     public final String node;
