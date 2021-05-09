@@ -9,7 +9,7 @@ import net.md_5.bungee.config.Configuration;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class DatabaseManager {
+public class DatabaseManager implements Manager {
     private static MySQL db;
     private static Connection connection;
     public static void connect(){
@@ -33,5 +33,15 @@ public class DatabaseManager {
     }
     public static MySQL getDB(){
         return db;
+    }
+
+    @Override
+    public void onEnable(AetheriaCore plugin) {
+
+    }
+
+    @Override
+    public void onDisable(AetheriaCore plugin) {
+
     }
 }

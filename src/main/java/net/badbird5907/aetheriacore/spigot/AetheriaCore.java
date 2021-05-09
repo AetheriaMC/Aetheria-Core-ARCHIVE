@@ -93,7 +93,7 @@ public final class AetheriaCore extends JavaPlugin implements Listener {
             //register events
             log("Startup: Registering Events...");
             //this.setupEvents();
-            SetupEvents.registerEvents(this);
+            new SetupEvents().onEnable(this);
             log("All Events Registered!");
             //get config
             log("Startup: Loading Config...");
